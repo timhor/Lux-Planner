@@ -1,0 +1,16 @@
+<!doctype HTML>
+<html>
+    <head><title>Registered Users</title></head>
+
+    <body>
+        <h1>Registered Users</h1>
+        <h3>Hello {{admin}}</h3>
+        <br>
+        
+        {% for user in users %}
+        <div><p>{{user.name}} is {{user.age}} years old and likes {{user.fav_fish}}</p></div>
+        {% endfor %}
+        
+
+    </body>
+</html>
