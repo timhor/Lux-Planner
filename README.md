@@ -19,7 +19,7 @@ sudo apt-get install python3
 ```
 or something
 
-## Installing Python Virtual Environment (and Wrapper) **OPTIONAL**
+## Installing Python Virtual Environment (and Wrapper) OPTIONAL
 Reason: Working in virtual environments helps you manage dependencies. Not so important here if you're not gonna be a _snek_ programmer like me, but extremely important once you are going to use it in the future. Dependency management keeps things clean, so porting to someone else's computer isn't a pain, just simply have a _requirements.txt_ to handle it.
 For more info see [Official venvwrapper page](http://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 1. Enter the following lines on your terminal:
@@ -44,11 +44,11 @@ workon flask-pack
 ```
 Installing this is a pain on multiple platforms, so hit Michael up if you need a hand. (Vintony was able to get it working on Windows)
 
-## Installing Flask
+## Installing stuff
 If you do have _venvwrapper_ then _workon_ it first.
-1. Time to download stuff. (This list of things to download will increase over time once we add in more packages. For now, it is barebones)
+1. At the base folder, where this _README.md_ is, type:
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
 ## Running the Web App Server
