@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search.component';
-import { FriendComponent } from './friend.component';
+import { DestinationComponent } from './destination.component';
 
-import { FriendService } from './friend.service';
+import { DestinationService } from './destination.service';
 
 @NgModule({
   declarations: [
     AppComponent,
    	SearchComponent,
-   	FriendComponent
+   	DestinationComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [FriendService],
+  providers: [DestinationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
