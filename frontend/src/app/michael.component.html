@@ -1,13 +1,17 @@
 <div align="center">
-    <h2>EVEN COOLER Search Box from {{componentName}}! And result is {{result}}</h2>
+    <h2>EVEN COOLER Search Box from {{componentName}}!</h2>
     <div id="custom-search-input">
         <div class="input-group col-md-6">
             <input type="text" class="  search-query form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" (click)="getData()">
-                    <!--<span class=" glyphicon glyphicon-search"></span>-->HAHAHAHAHA
+                    <!--<span class=" glyphicon glyphicon-search"></span>-->Click this for a good time ;)
                 </button>
             </span>
+        </div>
+        <h2>Hello from the {{componentName}}!</h2>
+        <div *ngFor="let r of result">
+        <h3> Name : {{r.name}} </h3> <h4>Age: {{r.age}}</h4> <h4>Fav Fish: {{r.fav_fish}}</h4> 
         </div>
     </div>
 </div>

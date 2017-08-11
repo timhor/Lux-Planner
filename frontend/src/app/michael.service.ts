@@ -20,8 +20,6 @@ export class MichaelService {
         console.log("Hello from service");
         this.string = this.server + "api/hello";
         console.log(this.string);
-        this.httpPoint.get(this.string).subscribe(response => this.result = response.json());
-        console.log(this.result);
-        //console.log(this.people);
+        return this.httpPoint.get(this.string);
     }
 }

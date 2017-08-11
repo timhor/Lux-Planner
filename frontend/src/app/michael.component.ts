@@ -10,6 +10,7 @@ export class MichaelComponent {
     public componentName = 'MichaelComponent';
     public destinations;
     private mService;
+    private result;
 
     constructor(_michaelService: MichaelService) {
         this.mService = _michaelService;
@@ -17,7 +18,7 @@ export class MichaelComponent {
 
     public getData() {
         console.log("Hello from component");
-        this.mService.getServiceData();
-        //_michaelService.getServiceData();
+        this.mService.getServiceData().subscribe(res => this.result = res.json());
+
     }
 }
