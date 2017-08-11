@@ -5,13 +5,16 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './search.component';
 import { DestinationComponent } from './destination.component';
 
+import { MichaelComponent} from './michael.component';
+
 import { DestinationService } from './destination.service';
 
 @NgModule({
   declarations: [
     AppComponent,
    	SearchComponent,
-   	DestinationComponent
+   	DestinationComponent,
+    MichaelComponent
   ],
   imports: [
     BrowserModule
