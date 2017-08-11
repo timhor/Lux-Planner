@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search.component';
 import { DestinationComponent } from './destination.component';
-
-import { MichaelComponent} from './michael.component';
+import { MichaelComponent } from './michael.component';
 
 import { DestinationService } from './destination.service';
+import { MichaelService } from './michael.service';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { DestinationService } from './destination.service';
   imports: [
     BrowserModule
   ],
-  providers: [DestinationService],
+  providers: [DestinationService, MichaelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
