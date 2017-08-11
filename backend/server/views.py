@@ -1,5 +1,6 @@
 from server import app
-from flask import render_template
+from flask import render_template, Response
+import json
 
 @app.route('/')
 @app.route('/index')
@@ -31,3 +32,23 @@ def registered_users():
 		}
 	]
 	return render_template('registered-users.html', admin=admin_name, users=fake_regi)
+
+@app.route('/api/hello', methods=['POST'])
+def hello():
+	fake_regi = [
+		{'name': 'James',
+		'age': '17',
+		'fav_fish': 'Salmon'
+		},
+		{'name': 'Kevin',
+		'age': '91',
+		'fav_fish': 'Tuna'
+		},
+		{'name': 'Blake',
+		'age': '45',
+		'fav_fish': 'I\'m a vegan goddammit'
+		}
+	]
+	data = json.dumps(fake_regi)
+	return Response(data)
+
