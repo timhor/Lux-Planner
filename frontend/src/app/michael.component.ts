@@ -21,11 +21,12 @@ export class MichaelComponent {
         console.log("Hello from component");
         this.messages.push("Hello from component");
         this.mService.getServiceData("api/hello").subscribe(res => this.result = res);
+        this.getPublic();
     }
 
 
     public getPublic() {
-
+        this.mService.getServiceData("api/insecure").subscribe(res => this.messages.push(res.message));
     }
 
     public getPrivate() {
