@@ -22,4 +22,26 @@ export class MichaelService {
         console.log(this.string);
         return this.httpPoint.get(this.string).map(response => response.json());
     }
+
+    login() {
+        let options: RequestOptions = new RequestOptions({
+            headers: new Headers({'Content-Type': 'application/json'})
+        });
+        this.httpPoint.post(this.server + 'auth', JSON.stringify({'username': 'bob', 'password': 'smith'}),
+            options)
+        .map((res: Response) => res.json())
+        .subscribe(
+            (data) => {
+                let token = data.access_token;
+                localStorage.setItem('id_token', token);
+                console.log("Token saved successfully?");
+
+                let jwtHelper: JwtHelper = new JwtHelper();
+                console.log(`expiration: ${jwtHelper.getTokenExpirationDate(token)}`);
+                console.log(`is expired: ${jwtHelper.isTokenExpired(token)}`);
+                console.log(`decoded: ${JSON.stringify(jwtHelper.decodeToken(token))}`);
+            },
+            (error) => console.log(`Sumting wong: ${error}`)
+        )
+    }
 }

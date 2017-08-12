@@ -7,14 +7,39 @@ from flask_jwt import JWT, jwt_required, current_identity
 
 CORS(app)
 
+class Dummy:
+	def __init__(self, id, username, password):
+		self.id = id
+		self.username = username
+		self.password = password
+	def __str__(self):
+		return "User(id='%s')" % self.id
+
+user = Dummy(id=1, username='bob', password='smith')
+
+
 def authenticate(username, password):
 	if username == user.username and password == user.password:
+	# if True:
+		print("AUTHENTICATED!!!")
 		return user
 
 def identity(payload):
 	return user
 
 jwt = JWT(app, authenticate, identity)
+
+'''
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    if request.method == 'OPTIONS':
+        response.headers['Access-Control-Allow-Methods'] = 'DELETE, GET, POST, PUT'
+        headers = request.headers.get('Access-Control-Request-Headers')
+        if headers:
+            response.headers['Access-Control-Allow-Headers'] = headers
+    return response
+'''
 
 @app.route('/')
 @app.route('/index')
@@ -72,7 +97,7 @@ def hello():
 @app.route('/api/insecure')
 def insecure():
 	return jsonify({
-		'message': 'How are you access me so insecurely!!'
+		'message': 'How dare you access me so insecurely!!'
 		})
 
 @app.route('/api/secure')
@@ -82,3 +107,10 @@ def secure():
 		'message': 'I am secured!',
 		'identity': str(current_identity)
 		})
+
+'''
+@app.route('/auth', methods=['POST'])
+def login():
+	print("Hello there.")
+	return "Hello"
+'''

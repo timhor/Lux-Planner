@@ -26,10 +26,19 @@ export class MichaelComponent {
 
 
     public getPublic() {
-        this.mService.getServiceData("api/insecure").subscribe(res => this.messages.push(res.message));
+        this.mService.getServiceData("api/insecure").subscribe(
+            (data) =>  {this.messages.push(`Hello world with message: ${data.message}`);
+                       this.mService.login();
+                        },
+            (error) => this.messages.push(error)
+            );
     }
 
     public getPrivate() {
+
+    }
+
+    public login() {
 
     }
 }
