@@ -11,6 +11,18 @@ import { MichaelComponent } from './michael.component';
 import { DestinationService } from './destination.service';
 import { MichaelService } from './michael.service';
 
+export function test() {
+  return {
+      headerPrefix: 'JWT'
+    }
+}
+
+export const serviceProviders = [
+  DestinationService, MichaelService,
+  provideAuth({
+      headerPrefix: 'JWT'
+    })
+];
 
 @NgModule({
   declarations: [
@@ -23,11 +35,9 @@ import { MichaelService } from './michael.service';
     BrowserModule,
     HttpModule
   ],
-  providers: [DestinationService, MichaelService,
-    provideAuth({
-      headerPrefix: 'JWT'
-    })
-  ],
+  providers:
+    serviceProviders
+  ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

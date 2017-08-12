@@ -12,7 +12,7 @@ export class MichaelService {
         private result: Array<any>;
 
     destinations:Array<any>;
-    constructor(private http: Http) {
+    constructor(private http: Http, private authHttp: AuthHttp) {
         this.httpPoint = http;
     }
 
@@ -21,6 +21,13 @@ export class MichaelService {
         this.string = this.server + endpoint;
         console.log(this.string);
         return this.httpPoint.get(this.string).map(response => response.json());
+    }
+
+    getProtectedData(endpoint: String) {
+        console.log("Hello from service");
+        this.string = this.server + endpoint;
+        console.log(this.string);
+        return this.authHttp.get(this.string).map(response => response.json());
     }
 
     login() {

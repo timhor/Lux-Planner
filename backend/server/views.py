@@ -1,5 +1,5 @@
 from server import app
-from flask import render_template, Response, jsonify
+from flask import render_template, Response, jsonify, request
 import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity
@@ -17,7 +17,6 @@ class Dummy:
 
 user = Dummy(id=1, username='bob', password='smith')
 
-
 def authenticate(username, password):
 	if username == user.username and password == user.password:
 	# if True:
@@ -28,18 +27,6 @@ def identity(payload):
 	return user
 
 jwt = JWT(app, authenticate, identity)
-
-'''
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    if request.method == 'OPTIONS':
-        response.headers['Access-Control-Allow-Methods'] = 'DELETE, GET, POST, PUT'
-        headers = request.headers.get('Access-Control-Request-Headers')
-        if headers:
-            response.headers['Access-Control-Allow-Headers'] = headers
-    return response
-'''
 
 @app.route('/')
 @app.route('/index')
@@ -101,16 +88,12 @@ def insecure():
 		})
 
 @app.route('/api/secure')
-@jwt_required
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
 def secure():
+	print("Secured?")
 	return jsonify({
-		'message': 'I am secured!',
+		'message': 'I am secured! My ID is ' + str(current_identity),
 		'identity': str(current_identity)
 		})
 
-'''
-@app.route('/auth', methods=['POST'])
-def login():
-	print("Hello there.")
-	return "Hello"
-'''
