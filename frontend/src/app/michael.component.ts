@@ -11,6 +11,7 @@ export class MichaelComponent {
     public destinations;
     private mService;
     private result;
+    private messages: Array<String> = [];
 
     constructor(_michaelService: MichaelService) {
         this.mService = _michaelService;
@@ -18,7 +19,16 @@ export class MichaelComponent {
 
     public getData() {
         console.log("Hello from component");
-        this.mService.getServiceData().subscribe(res => this.result = res.json());
+        this.messages.push("Hello from component");
+        this.mService.getServiceData("api/hello").subscribe(res => this.result = res);
+    }
+
+
+    public getPublic() {
+
+    }
+
+    public getPrivate() {
 
     }
 }

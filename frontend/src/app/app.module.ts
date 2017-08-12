@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { provideAuth } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search.component';
@@ -22,7 +23,11 @@ import { MichaelService } from './michael.service';
     BrowserModule,
     HttpModule
   ],
-  providers: [DestinationService, MichaelService],
+  providers: [DestinationService, MichaelService,
+    provideAuth({
+      headerPrefix: 'JWT'
+    })
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
