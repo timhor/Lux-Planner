@@ -52,6 +52,6 @@ export class MichaelComponent {
     public logout() {
         console.log(localStorage);
         this.messages.push(localStorage['id_token']);
-        localStorage.clear();
+        localStorage.removeItem('id_token');
     }
 }
