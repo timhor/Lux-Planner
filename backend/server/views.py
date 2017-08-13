@@ -2,7 +2,7 @@ from server import app
 from flask import render_template, Response, jsonify, request
 import json
 from flask_cors import CORS, cross_origin
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 
 
 CORS(app)
@@ -24,9 +24,18 @@ def authenticate(username, password):
 		return user
 
 def identity(payload):
+	print(payload)
+	# return user
 	return user
 
+
+
 jwt = JWT(app, authenticate, identity)
+'''
+@jwt.payload_handler
+def make_payload(identity):
+    return {'user_id': "HELLLOOOOOOO"}
+'''
 
 @app.route('/')
 @app.route('/index')

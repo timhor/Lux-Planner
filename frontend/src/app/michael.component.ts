@@ -48,4 +48,10 @@ export class MichaelComponent {
     public login() {
 
     }
+
+    public logout() {
+        console.log(localStorage);
+        this.messages.push(localStorage['id_token']);
+        localStorage.clear();
+    }
 }
