@@ -21,7 +21,7 @@ export class MichaelComponent {
         console.log("Hello from component");
         this.messages.push("Hello from component");
         this.mService.getServiceData("api/hello").subscribe(res => this.result = res);
-        this.mService.login();
+        // this.mService.login();
         // this.getPublic();
         this.getPrivate();
     }
@@ -46,6 +46,7 @@ export class MichaelComponent {
     }
 
     public login() {
+        this.mService.login();
 
     }
 
