@@ -47,4 +47,5 @@ export const serviceProviders = [
   ,
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
