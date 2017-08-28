@@ -9,5 +9,5 @@ import { DestinationComponent } from './destination.component'
   entryComponents: [SearchComponent, DestinationComponent]
 })
 export class AppComponent {
-  title = 'Holiday Planner';
+  title = 'LUX: Holiday Planner';
 }
