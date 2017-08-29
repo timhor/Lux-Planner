@@ -6,7 +6,6 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
 
-
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search.component';
 import { DestinationComponent } from './destination.component';
@@ -14,6 +13,10 @@ import { MichaelComponent } from './michael.component';
 
 import { DestinationService } from './destination.service';
 import { MichaelService } from './michael.service';
+
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -34,18 +37,20 @@ export const serviceProviders = [
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    LoginComponent,
    	SearchComponent,
    	DestinationComponent,
     MichaelComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers:
     serviceProviders
   ,
   bootstrap: [AppComponent]
 })
-
-export class AppModule { }
+export class AppModule {}
