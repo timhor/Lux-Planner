@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DestinationService } from 'app/destination.service';
+import { DestinationService } from './destination.service';
 
 @Component({
     selector: 'my-destinations',
@@ -8,7 +8,7 @@ import { DestinationService } from 'app/destination.service';
     template: `
         <h2>Hello from the {{componentName}}!</h2>
         <div *ngFor="let d of destinations">
-        <h4> Location : {{d.location}} </h4> <h4>Cost: \${{d.cost}}</h4> 
+            <h4> Location : {{d.location}} </h4> <h4>Cost: \${{d.cost}}</h4> 
         </div>
     `
 })

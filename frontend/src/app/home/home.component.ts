@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SearchComponent } from '../search.component'
-import { DestinationComponent } from '../destination.component'
+import { SearchComponent } from '../search/search.component'
+import { DestinationComponent } from '../destination/destination.component'
 
 @Component({
   selector: 'app-home',
