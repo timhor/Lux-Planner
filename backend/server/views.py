@@ -3,6 +3,7 @@ from flask import render_template, Response, jsonify, request
 import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
+from server import api_handler
 
 
 CORS(app)
@@ -67,6 +68,13 @@ def registered_users():
 		}
 	]
 	return render_template('registered-users.html', admin=admin_name, users=fake_regi)
+
+
+@app.route('/api/flickr')
+def flickr():
+	# return jsonify({'hello': 'world'})
+	return jsonify(api_handler.search_flickr("Paris"))
+
 
 @app.route('/api/hello', methods=['GET'])
 def hello():
