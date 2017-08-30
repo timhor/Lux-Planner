@@ -9,13 +9,18 @@ import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
 import { DestinationComponent } from './destination/destination.component';
+<<<<<<< HEAD
 import { SignupComponent } from './signup/signup.component';
 import { MichaelComponent } from './michael/michael.component';
+=======
+import { ConnectionComponent } from './connection/connection.component';
+>>>>>>> a4465375c9033453190f127ce311147be06b07e0
 
 import { DestinationService } from './destination/destination.service';
-import { MichaelService } from './michael/michael.service';
+import { ConnectionService } from './connection/connection.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -32,7 +37,7 @@ export const authProvider = {
 };
 
 export const serviceProviders = [
-  DestinationService, MichaelService, authProvider
+  DestinationService, ConnectionService, authProvider
 ];
 
 @NgModule({
@@ -42,7 +47,11 @@ export const serviceProviders = [
     LoginComponent,
    	SearchComponent,
    	DestinationComponent,
+<<<<<<< HEAD
     MichaelComponent,
+=======
+    ConnectionComponent,
+>>>>>>> a4465375c9033453190f127ce311147be06b07e0
     SignupComponent
   ],
   imports: [

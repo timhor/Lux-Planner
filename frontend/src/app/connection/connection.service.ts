@@ -4,12 +4,11 @@ import 'rxjs/add/operator/map';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
-export class MichaelService {
-
-        private server = 'http://127.0.0.1:5000/';
-        private httpPoint;
-        private string;
-        private result: Array<any>;
+export class ConnectionService {
+    private server = 'http://127.0.0.1:5000/';
+    private httpPoint;
+    private string;
+    private result: Array<any>;
 
     destinations:Array<any>;
     constructor(private http: Http, private authHttp: AuthHttp) {

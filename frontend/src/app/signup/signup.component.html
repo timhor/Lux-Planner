@@ -1,32 +1,34 @@
+<h3>Sign up for a new account</h3>
+
+<form ng-submit="submit()" ng-controller="SignUpCtrl">
+  <div class="form-group">
+    <label for="username"><b>Username</b></label>
+    <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
+  </div>
+  <div class="form-group">
+    <label for="password"><b>Password</b></label>
+    <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password1" required>
+  </div>
+  <div class="form-group">
+    <label for="confirmedPassword"><b>Confirm Password</b></label>
+    <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password2" pw-check='password1' required>
+  </div>
+  <div class="form-group">
+    <label for="email"><b>Email</b></label>
+    <input class="form-control" type="email" placeholder="Enter email" name="email" ng-model="email" required>
+  </div>
+  <div class="form-group">
+    <label for="diet"><b>Diet</b></label><br>
+    <label><input type="checkbox" ng-model="checkboxModel.value1" ng-true-value="'Vegetarian'" ng-false-value="false"> Vegetarian</label><br/>
+    <label><input type="checkbox" ng-model="checkboxModel.value2" ng-true-value="'Vegan'" ng-false-value="false"> Vegan</label>
+    <br/>
+    <label><input type="checkbox" ng-model="checkboxModel.value3" ng-true-value="'Halal'" ng-false-value="false"> Halal</label>
+    <br/>
+    <label><input type="checkbox" ng-model="checkboxModel.value4" ng-true-value="'Gluten Free'" ng-false-value="false"> Gluten Free</label>
+    <br/>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-success">Create Account</button>
+  </div>
+</form>
 <br>
-
-<div id="signUpHead">
-  <h3>Sign up for a new account</h3>
-</div>
-
-<br><br>
-
-<div id="signUpForm">
-  <form ng-submit="submit()" ng-controller="SignUpCtrl">
-      <div class="form-group">
-        <label for="username"><b>Username</b></label>
-        <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password"><b>Password</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password1" required>
-      </div>
-      <div class="form-group">
-        <label for="confirmedPassword"><b>Confirm Password</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password2" pw-check='password1' required>
-      </div>
-      <div class="form-group">
-        <label for="email"><b>Email</b></label>
-        <input class="form-control" type="email" placeholder="Enter email" name="email" ng-model="email" required>
-      </div>
-      <br>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Create Account</button>
-      </div>
-  </form>
-</div>
