@@ -8,6 +8,4 @@ import { DestinationComponent } from '../destination/destination.component'
   styleUrls: ['./home.component.css'],
   entryComponents: [SearchComponent, DestinationComponent]
 })
-export class HomeComponent {
-  title = 'LUX: Holiday Planner';
-}
+export class HomeComponent {}
