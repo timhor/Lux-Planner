@@ -21,7 +21,7 @@ h4 {
     font-style: italic;
 }
 #lowerBorder{
-    border-color: darkblue;
+    border-color: black;
     border-width: 1px;
     background-color: #fafafa;
 }
@@ -29,7 +29,7 @@ h4 {
 #mainBorder{
     border-color: black;
     border-width: 2px;
-    background-color:  rgb(255, 0, 141);
+    background-color:  rgb(255, 155, 215);
     
 }
 

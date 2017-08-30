@@ -1,29 +1,32 @@
-<div class="row" style="padding-right: 15px;">
-  <div class="col-sm-4 well" id="mainBorder">
-    <div class="well" id="lowerBorder">
-      <h2 style="font-weight: bolder;">{{currDestination}}</h2>
-      <img src="http://via.placeholder.com/250x250" alt="temporary" align="middle">
+<div class="container">
+  <br>
+  <div class="row" style="padding-right: 15px;">
+    <div class="col-sm-4 well" id="mainBorder">
+      <div class="well" id="lowerBorder">
+        <h2 style="font-weight: bolder;">{{currDestination}}</h2>
+        <img src="http://via.placeholder.com/250x250" alt="temporary" align="middle">
+      </div>
+      <div class="well" align="left" id="lowerBorder">
+        <h2>About</h2>
+        <p>INFO HERE...</p>
+      </div>
+      <div align="center">
+        <button class="btn form-control" type="button" routerLink=''>HOME</button>
+      </div>
     </div>
-    <div class="well" align="left" id="lowerBorder">
-      <h2>About</h2>
-      <p>INFO HERE...</p>
-    </div>
-    <div align="center">
-      <button class="btn" type="button" routerLink=''>HOME</button>
-    </div>
-  </div>
-  <div class="col-sm-8">
-    <div class="col-sm-12">
-        <div class="item">
-          <img src="http://via.placeholder.com/750x300">
-        </div>
-        <br>
-        <div class="well" align="left" id="lowerBorder">
-          <h2>Hello from the {{componentName}}!</h2>
-          <div *ngFor="let d of destinations" id="box">
-              <h4> Location : {{d.location}} </h4> <h4>Cost: \${{d.cost}}</h4> 
+    <div class="col-sm-8">
+      <div class="col-sm-12">
+          <div class="well" id="lowerBorder">
+            <img src="http://via.placeholder.com/650x300">
+          </div>
+          <br>
+          <div class="well" align="left" id="lowerBorder">
+            <h2>Hello from the {{componentName}}!</h2>
+            <div *ngFor="let d of destinations" id="box">
+                <h4> Location : {{d.location}} </h4> <h4>Cost: \${{d.cost}}</h4> 
+            </div>
           </div>
         </div>
-      </div>
+    </div>
   </div>
 </div>
