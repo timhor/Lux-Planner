@@ -2,26 +2,35 @@
   <strong>Error:</strong> Incorrect username or password.
 </div> -->
 
-<h3>Log in to personalise your search</h3>
+<br>
 
-<form ng-submit="submit()" ng-controller="LoginCtrl">
-  <div class="form-group">
-    <label for="username"><b>Username</b></label>
-    <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
-  </div>
-  <div class="form-group">
-    <label for="password"><b>Password</b></label>
-    <input class="form-control" type="password" placeholder="Enter password" name="password" ng-model="password" required>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-success">LOG IN</button>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10">
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
-    <div class="col-xs-12 col-sm-2">
-        <a href="/login">Forgot password?</a>
-    </div>
-  </div>
-</form>
+<div id="loginHead">
+  <h3>Log in to personalise your search</h3>
+</div>
+
+<br><br>
+
+<div id="loginForm">
+  <form ng-submit="submit()" ng-controller="LoginCtrl">
+      <div class="form-group">
+        <label for="username"><b>Username</b></label>
+        <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password"><b>Password</b></label>
+        <input class="form-control" type="password" placeholder="Enter password" name="password" ng-model="password" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">LOG IN</button>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-10">
+          <input type="checkbox" checked="checked"> Remember me
+        </div>
+        <div class="col-xs-12 col-sm-2">
+            <a href="/login">Forgot password?</a>
+        </div>
+      </div>
+    </form>
+</div>

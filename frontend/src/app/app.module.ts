@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
 import { DestinationComponent } from './destination/destination.component';
+import { SignupComponent } from './signup/signup.component';
 import { MichaelComponent } from './michael/michael.component';
 
 import { DestinationService } from './destination/destination.service';
@@ -41,7 +42,8 @@ export const serviceProviders = [
     LoginComponent,
    	SearchComponent,
    	DestinationComponent,
-    MichaelComponent
+    MichaelComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

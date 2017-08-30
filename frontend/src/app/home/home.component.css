@@ -3,17 +3,6 @@
     margin-bottom: 35px;
 }
 
-#navbar-main{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 18px;
-    text-align: center;
-    background-color: #000037;
-}
-
-.grow{
-transition: all 0.2s ease-in-out;
-}
-
-.grow:hover{
-transform: scale(1.05);
+.navbar-main{
+    height: 200px;
 }
