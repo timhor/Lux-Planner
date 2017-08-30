@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import { MichaelService } from './michael.service';
+import { ConnectionService } from './connection.service';
 
 @Component({
-    selector: 'michael-test',
-    providers : [MichaelService],
-    templateUrl: './michael.component.html',
+    selector: 'connection-test',
+    providers : [ConnectionService],
+    templateUrl: './connection.component.html',
 })
-export class MichaelComponent {
-    public componentName = 'MichaelComponent';
+export class ConnectionComponent {
+    public componentName = 'ConnectionComponent';
     public destinations;
     private mService;
     private result;
     private messages: Array<String> = [];
 
-    constructor(_michaelService: MichaelService) {
-        this.mService = _michaelService;
+    constructor(_connectionService: ConnectionService) {
+        this.mService = _connectionService;
     }
 
     public getData() {
