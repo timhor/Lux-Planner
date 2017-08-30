@@ -5,15 +5,11 @@ import { DestinationService } from './destination.service';
     selector: 'my-destinations',
     providers : [DestinationService],
     styleUrls: ['./destination.component.css'],
-    template: `
-        <h2>Hello from the {{componentName}}!</h2>
-        <div *ngFor="let d of destinations">
-            <h4> Location : {{d.location}} </h4> <h4>Cost: \${{d.cost}}</h4> 
-        </div>
-    `
+    templateUrl: './destination.component.html',
 })
 export class DestinationComponent {
     public componentName = 'DestinationComponent';
+    public currDestination = 'Paris';
     public destinations;
 
     // Inject DestinationService and assign it to _destinationService
