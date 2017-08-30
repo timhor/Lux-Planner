@@ -1,7 +1,18 @@
 h3, form {
-    margin: 35px;
+   margin: 0;
+   padding: 0;
 }
 
 button {
-    width: 100%;
+   width: 100%;
+}
+
+#signUpHead{
+   margin: 0 auto;
+   text-align: left;
+   width: 50%;
+}
+#signUpForm{
+   margin: 0 auto;
+   width: 50%;
 }
