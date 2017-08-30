@@ -12,12 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
 import { DestinationComponent } from './destination/destination.component';
-<<<<<<< HEAD
-import { SignupComponent } from './signup/signup.component';
-import { MichaelComponent } from './michael/michael.component';
-=======
 import { ConnectionComponent } from './connection/connection.component';
->>>>>>> a4465375c9033453190f127ce311147be06b07e0
 
 import { DestinationService } from './destination/destination.service';
 import { ConnectionService } from './connection/connection.service';
@@ -47,11 +42,7 @@ export const serviceProviders = [
     LoginComponent,
    	SearchComponent,
    	DestinationComponent,
-<<<<<<< HEAD
-    MichaelComponent,
-=======
     ConnectionComponent,
->>>>>>> a4465375c9033453190f127ce311147be06b07e0
     SignupComponent
   ],
   imports: [
