@@ -12,6 +12,9 @@
 
 <div id="loginForm">
   <form ng-submit="submit()" ng-controller="LoginCtrl">
+    <div align="right">
+        <a routerLink="/signup" align="right">Create a new account</a>
+      </div>
       <div class="form-group">
         <label for="username"><b>Username</b></label>
         <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
