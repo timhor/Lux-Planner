@@ -4,3 +4,5 @@
 a.active{
     color: white !important;
 }
+
+img { cursor: pointer; cursor: hand; outline: none; }
