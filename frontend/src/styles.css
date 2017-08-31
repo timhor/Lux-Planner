@@ -13,3 +13,7 @@
 .grow:hover {
     transform: scale(1.05);
 }
+
+html {
+    overflow-y: scroll;
+}
