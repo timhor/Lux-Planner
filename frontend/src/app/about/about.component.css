@@ -1,0 +1,16 @@
+h3, form {
+   margin: 0;
+   padding: 0;
+}
+
+#contactUsHead{
+   margin: 0 auto;
+   text-align: left;
+   width: 50%;
+}
+
+#paragraph{
+   margin: 0 auto;
+   text-align: justify;
+   width: 50%
+}

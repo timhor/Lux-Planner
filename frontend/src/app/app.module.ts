@@ -18,6 +18,8 @@ import { DestinationService } from './destination/destination.service';
 import { ConnectionService } from './connection/connection.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AboutComponent } from './about/about.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -43,7 +45,9 @@ export const serviceProviders = [
    	SearchComponent,
    	DestinationComponent,
     ConnectionComponent,
-    SignupComponent
+    SignupComponent,
+    AboutComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
