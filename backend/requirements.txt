@@ -3,3 +3,4 @@ flask-SQLAlchemy
 flask-cors
 flask-jwt
 flickrapi
+sqlalchemy-migrate
