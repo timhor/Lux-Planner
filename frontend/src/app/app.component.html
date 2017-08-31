@@ -5,10 +5,10 @@
             <!-- <li><a routerLink="/"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;&nbsp;{{ title }}</a></li> -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="grow" routerLink="/">About</a></li>
-            <li><a class="grow" routerLink="/">Contact us</a></li>
-            <li><a class="grow" routerLink="/signup"><i class="fa fa-user-plus"></i>&nbsp;Sign up</a></li>
-            <li><a class="grow" routerLink="/login"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log in</a></li>
+            <li><a class="grow" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a></li>
+            <li><a class="grow" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact us</a></li>
+            <li><a class="grow" routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-plus"></i>&nbsp;Sign up</a></li>
+            <li><a class="grow" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log in</a></li>
         </ul>
     </div>
 </nav>
