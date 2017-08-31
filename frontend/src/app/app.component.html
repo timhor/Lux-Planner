@@ -1,0 +1,15 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a routerLink="/"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;&nbsp;{{ title }}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a class="grow" routerLink="/">About</a></li>
+            <li><a class="grow" routerLink="/">Contact us</a></li>
+            <li><a class="grow" routerLink="/signup"><i class="fa fa-user-plus"></i>&nbsp;Sign up</a></li>
+            <li><a class="grow" routerLink="/login"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log in</a></li>
+        </ul>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>
