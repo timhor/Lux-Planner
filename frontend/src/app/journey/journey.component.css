@@ -42,15 +42,21 @@ h3, form {
    text-align: center;
    text-transform: uppercase;
    font: bold 14px/normal 'Titillium Web','Trebuchet MS',Tahoma,sans-serif;
-   color: #1b365d;
-   background: #bed600;
+   color: #3EB000;
+   background: #FFFFFF;
+   border-color: #3EB000;
    cursor: pointer;
    -webkit-transition: background .1s ease-out,border-color .1s ease-out;
    transition: background .1s ease-out,border-color .1s ease-out;
    height: 50px;
-   border: 0;
+   border: 1;
+   border-style: solid;
+   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
    display: inline-block;
    letter-spacing: .15em;
    font-size: 15px;
 }
-.button_primary:hover { background: #E2FF00; }
+.button_primary:hover { 
+   background: #3EB000; 
+   color: white;
+}
