@@ -15,7 +15,7 @@ h3, form {
    width: 50%;
 }
 
-/* #stop-label{
+#stop-label{
    margin: 0 auto;
    text-align: left;
    width: 50%;
@@ -25,7 +25,7 @@ h3, form {
    margin: 0 auto;
    text-align: left;
    width: 50%;
-} */
+}
 
 #stop-input{
    height: 30px;
