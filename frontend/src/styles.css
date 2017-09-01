@@ -17,3 +17,8 @@
 html {
     overflow-y: scroll;
 }
+
+body{
+    background-size: 100%;
+    background-image: url("/assets/Road_Background.png");
+}
