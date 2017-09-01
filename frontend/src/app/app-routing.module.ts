@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { DestinationComponent } from "./destination/destination.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
+import { JourneyComponent } from "./journey/journey.component";
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
     {
         path: 'about',
         component: AboutComponent
+    },
+    {
+        path: 'journey',
+        component: JourneyComponent
     },
 ];
 
