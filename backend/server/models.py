@@ -5,23 +5,51 @@ class User(db.Model):
 	name = db.Column(db.String(128), index=True)
 	age = db.Column(db.Integer, index=True)
 	email = db.Column(db.String(128), index=True)
-	fav_fish = db.Column(db.String(64), index=True)
 	username = db.Column(db.String(64), index=True, unique=True)
-	password = db.Column(db.String(64), index=True, unique=True)
-	trips = db.Column(db.String(128), index=True)
+	password = db.Column(db.String(64), index=True)
+	journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
 	def __repr__(self):	
-		return "ID: {} | Name: {} | Age: {} | Email: {} | Favourite Fish: {} | username: {} | password: {} | trips: {}".format(self.id, self.name, self.age, self.email, self.fav_fish, self.username, self.password, self.trips)
+		return "ID: {} | Name: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.name, self.age, self.email, self.username, self.password)
 
-class Location(db.Model):
+class Journey(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	place_name = db.Column(db.String(128), index=True)
-	rating = db.Column(db.Float, index=True)
-	popular_points = db.Column(db.String, index=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	start_date = db.Column(db.DateTime)
+	end_date = db.Column(db.DateTime)
+	cost = db.Column(db.Float, index=True)
+	stops = db.relationship('Stop', backref='author', lazy='dynamic')	
 
 	def __repr__(self):
-		return "ID: {} | Place: {} | Rating: {} | Popular Points: {}".format(self.id, self.place_name, self.rating, self.popular_points)
+		return "ID: {} | User ID: {} | Start Date: {} | End Date: {} | Cost: {}".format(self.id, self.user_id, self.start_date, self.end_date, self.cost)
 
+class Stop(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	journey_id = db.Column(db.Integer, db.ForeignKey('journey.id'))
+	stop_name = db.Column(db.String(128), index=True)
+	stop_rating = db.Column(db.Float, index=True)
+	itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
+
+	def __repr__(self):
+		return "ID: {} | Stop: {} | Rating: {}".format(self.id, self.stop_name, self.stop_rating)
+
+class Itinerary(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	stop_id = db.Column(db.Integer, db.ForeignKey('stop.id'))
+	day_of_event = db.Column(db.DateTime)
+	places = db.relationship('Place', backref='author', lazy='dynamic')
+
+	def __repr__(self):
+		return "ID: {} | Stop ID: {} | Day Of Event: {}".format(self.id, self.stop_id, self.day_of_event)
+
+class Place(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	itinerary_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'))
+	place_name = db.Column(db.String(128), index=True)
+	place_rating = db.Column(db.Float, index=True)
+
+	def __repr__(self):
+		return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
 
 """
 To add stuff:
