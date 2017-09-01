@@ -70,10 +70,39 @@ def registered_users():
 	return render_template('registered-users.html', admin=admin_name, users=fake_regi)
 
 
-@app.route('/api/flickr')
+# @app.route('/api/flickr/<search>')
+# def flickr(search):
+# 	return jsonify(api_handler.search_flickr("Paris"))
+
+
+@app.route('/api/flickr/', methods=['GET'])
 def flickr():
-	# return jsonify({'hello': 'world'})
-	return jsonify(api_handler.search_flickr("Paris"))
+	search = request.args.get('search', 'Paris')
+	results = request.args.get('results', None)
+	try:
+		data = api_handler.search_flickr(search)
+		if results is None:
+			return jsonify(data)
+
+		# TODO handle multiple results as a return of list of urls
+		photo = data['photos']['photo'][int(results)]
+		# https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+		farm_id = photo['farm']
+		server_id = photo['server']
+		photo_id = photo['id']
+		secret_id = photo['secret']
+		url = "https://farm{}.staticflickr.com/{}/{}_{}.jpg".format(farm_id, server_id, photo_id, secret_id)
+		return jsonify({"image" : url})
+		# return url
+	except:
+		return "Error"
+
+
+# @app.route('/api/flickr/paris')
+# def flickr_paris():
+# 	data = flickr()
+# 	print(data)
+# 	return "hello"
 
 
 @app.route('/api/hello', methods=['GET'])

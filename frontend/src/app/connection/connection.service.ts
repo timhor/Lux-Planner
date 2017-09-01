@@ -5,7 +5,7 @@ import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class ConnectionService {
-    private server = 'http://127.0.0.1:5000/';
+    private server = 'http://localhost:5000/';
     private httpPoint;
     private string;
     private result: Array<any>;
@@ -49,5 +49,14 @@ export class ConnectionService {
             },
             (error) => console.log(`Sumting wong: ${error}`)
         )
+    }
+
+
+    flickrSearch() {
+        this.string = this.server.concat("api/flickr?search=Paris&results=1");
+        console.log(this.string);
+        var stuff = this.httpPoint.get(this.string);
+        console.log(stuff);
+        return stuff;
     }
 }
