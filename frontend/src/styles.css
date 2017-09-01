@@ -19,6 +19,10 @@ html {
 }
 
 body{
-    background-size: 100%;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
     background-image: url("/assets/Road_Background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
