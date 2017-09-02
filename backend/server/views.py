@@ -1,5 +1,10 @@
+"""
+Defines all the endpoints of the backend.
+SENG2021 s2 2017
+"""
+
 from server import app, api_handler
-from flask import render_template, Response, jsonify, request
+from flask import render_template, jsonify, request
 # import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
@@ -32,7 +37,7 @@ def authenticate(username, password):
         return user
 
 def identity(payload):
-    """ TODO What this do idk, just need it """
+    """ TODO What this do idk"""
     print(payload)
     return user
 
@@ -52,7 +57,6 @@ def index():
     return render_template('index.html')
 
 
-@DeprecationWarning
 @app.route('/user/<auth>')
 def auth_route(auth):
     """ User page """
@@ -97,7 +101,6 @@ def flickr(): # REST params: ([search], [results])
         if results is None:
             return jsonify(data)
 
-        # TODO handle multiple results as a return of list of urls
         urls = []
         if '-' in results:
             start, end = results.split('-')
@@ -114,7 +117,8 @@ def flickr(): # REST params: ([search], [results])
             server_id = photo['server']
             photo_id = photo['id']
             secret_id = photo['secret']
-            url = "https://farm{}.staticflickr.com/{}/{}_{}.jpg".format(farm_id, server_id, photo_id, secret_id)
+            url = "https://farm{}.staticflickr.com/{}/{}_{}.jpg".format(
+                farm_id, server_id, photo_id, secret_id)
             urls.append(url)
         return jsonify({"images" : urls})
     except:
