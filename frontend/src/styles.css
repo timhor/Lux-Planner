@@ -18,11 +18,92 @@ html {
     overflow-y: scroll;
 }
 
-body{
+/* body{
     background-size: cover;
     background-position-x: center;
     background-position-y: center;
     background-image: url("/assets/Sky_Background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
+} */
+
+/*
+    Slideshow Template was obtainted from the website below and modified according to our needs
+    https://tympanus.net/codrops/2012/01/02/fullscreen-background-image-slideshow-with-css3/
+*/
+.cb-slideshow,
+.cb-slideshow:after { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: -1; 
+}
+.cb-slideshow:after { 
+    content: '';
+    background-color: black;
+    background: transparent repeat top left; 
+}
+
+.cb-slideshow li span { 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: none;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 18s linear infinite 0s; 
+}
+
+.cb-slideshow li div { 
+    z-index: 1000;
+    position: absolute;
+    bottom: 30px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+    animation: titleAnimation 18s linear infinite 0s; 
+}
+
+.cb-slideshow li:nth-child(1) span { 
+    background-image: url(assets/Sky_Background.png) 
+}
+.cb-slideshow li:nth-child(2) span { 
+    background-image: url(assets/Runway_Background.png);
+    animation-delay: 10s; 
+}
+.cb-slideshow li:nth-child(3) span { 
+    background-image: url(assets/Road_Background.png);
+    animation-delay: 20s; 
+}
+.cb-slideshow li:nth-child(1) div { 
+    animation-delay: 10s; 
+}
+.cb-slideshow li:nth-child(2) div { 
+    animation-delay: 20s; 
+}
+@keyframes imageAnimation { 
+    0% { opacity: 0; }
+    8% { opacity: 1; }
+    17% { opacity: 1; animation-timing-function: ease-in;}
+    25% { opacity: 1; animation-timing-function: ease-out;}
+    100% { opacity: 0 }
+}
+
+.no-cssanimations .cb-slideshow li span{
+	opacity: 1;
+}
+@media screen and (max-width: 1140px) { 
+    .cb-slideshow li div h3 { font-size: 140px }
+}
+@media screen and (max-width: 600px) { 
+    .cb-slideshow li div h3 { font-size: 80px }
 }
