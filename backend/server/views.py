@@ -158,3 +158,12 @@ def secure():
         'message': 'I am secured! My ID is ' + str(current_identity),
         'identity': str(current_identity)
         })
+
+
+@app.route('/api/new_user', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+def new_user():
+    print(request)
+    # username = request.form['username']
+    # password = request.form['password']
+    return None
