@@ -25,9 +25,7 @@ export class DestinationComponent {
 
     getBannerPhoto() {
         // this.bannerPhoto = this.connService.flickrSearch();
-        // var json;
-        this.connService.getServiceData('api/flickr/?search=Paris&results=3').subscribe(res => this.bannerPhoto = res.image);
-        // this.bannerPhoto = this.connService.getServiceData('/api/hello');
+        this.connService.getServiceData('api/flickr/?search=Paris&results=3').subscribe(res => this.bannerPhoto = res.images[0]);
         
         
         console.log("Hello with " + this.bannerPhoto);
