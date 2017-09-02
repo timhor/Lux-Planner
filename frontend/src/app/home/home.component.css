@@ -1,7 +1,7 @@
 .title {
     text-align:center;
 }
-#mainText{
+#mainText {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-weight: bold;
     font-size: 3.5vw;
@@ -9,7 +9,7 @@
     margin-bottom: 5%;    
 }
 
-#mainBlurb{
+#mainBlurb {
     text-align:center;    
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.7vw;
@@ -39,7 +39,7 @@
     background: #E2FF00;
 }
 
-.jumbotron{
+.jumbotron {
     width:50vw;
     height: 25%;
     margin: 0 auto;
@@ -50,4 +50,41 @@
     border: 0.2vw;
     border-color: #bed600;
     border-style:solid; 
+    margin-bottom: 2%;
+}
+
+#rowColor {
+    background-color: rgba(255, 255, 255, 0.75);
+    padding-bottom: 2.5vh;
+    padding-top: 2.5vh;
+    margin-bottom: 2%
+}
+
+#subText {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
+    font-weight: bold;
+    font-style: italic;
+    font-size: 2.5vw; 
+}
+
+#subHeading {
+    text-align: center;    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2vw;  
+}
+
+.subtitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
+    font-style: italic;
+    font-size: 1.5vw; 
+    text-align: center;
+}
+
+#imgBorder {
+    border: 0.2vw;
+    border-color: #bed600;
+    border-style:solid; 
+    border-radius: 5vh;
+    margin-bottom: 5%;
+    margin-top: 5%
 }
