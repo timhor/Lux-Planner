@@ -60,3 +60,6 @@ h3, form {
    background: #3EB000; 
    color: white;
 }
+body{
+   background-color: rgba(255, 255, 255, 0.75) !important;   
+}

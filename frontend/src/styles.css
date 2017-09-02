@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .navbar {
    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-   font-size: 18px;
+   font-size: 2vh;
    text-align: center;
    background-color: #000037;
 }
@@ -22,7 +22,7 @@ body{
     background-size: cover;
     background-position-x: center;
     background-position-y: center;
-    background-image: url("/assets/Road_Background.png");
+    background-image: url("/assets/Sky_Background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
