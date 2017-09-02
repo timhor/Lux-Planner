@@ -8,6 +8,8 @@ from server import api_handler
 
 CORS(app)
 
+
+# TODO REMOVE WHEN CONNECTED TO DATABASE
 class Dummy:
 	def __init__(self, id, username, password):
 		self.id = id
@@ -17,6 +19,7 @@ class Dummy:
 		return "User(id='%s')" % self.id
 
 user = Dummy(id=1, username='bob', password='smith')
+# End Test data
 
 def authenticate(username, password):
 	if username == user.username and password == user.password:
