@@ -4,7 +4,7 @@
     <h2>New Journey</h2>
   </div>
 
-  <br><br>
+  <br>
   
   <form [formGroup]="myJourneys" (ngSubmit)="submit()">
       <fieldset formArrayName="destinations">
@@ -28,6 +28,7 @@
                     (click)="myJourneys.get('destinations').removeAt(i)">-</button>
           </div>
         </div>
+        <br>
       </fieldset>
       <div class="form-group row">
         <div class="col-sm-1">
@@ -36,6 +37,7 @@
         </div>
       </div>
       <hr>
+      <br>
       <div class="form-group" id="customiseStopsBtn">
           <h1><button type="submit" class="button_primary"
             value="Submit" [disabled]="myJourneys?.invalid" routerLink="/stop">Customise Stops&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button></h1>
