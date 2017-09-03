@@ -4,7 +4,8 @@
 #mainText {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-weight: bold;
-    font-size: 3.5vw;
+    font-size:calc(10px + 3vw);    
+    /* font-size: 3.5vw; */
     padding-bottom: 1vh;
     margin-bottom: 5%;    
 }
@@ -12,7 +13,8 @@
 #mainBlurb {
     text-align:center;    
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 1.7vw;
+    font-size:calc(5px + 1.7vw);        
+    /* font-size: 1.7vw; */
     padding-bottom: 1vh; 
     margin-bottom: 5%;    
 }
@@ -32,8 +34,9 @@
     border: 0;
     display: inline-block;
     letter-spacing: .3vw;
-    font-size: 2vw;
+    font-size:calc(5px + 1.7vw);        
     width: 30vw;
+    min-width: 175px;    
 }
 .button_primary:hover { 
     background: #E2FF00;
@@ -41,6 +44,7 @@
 
 .jumbotron {
     width:50vw;
+    min-width: 300px;
     height: 25%;
     margin: 0 auto;
     margin-top: inherit;
@@ -63,20 +67,23 @@
 #subText {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-style: italic;
-    font-size: 2.5vw; 
+    font-size:calc(5px + 2.5vw);            
+    /* font-size: 2.5vw;  */
 }
 
 #subHeading {
     text-align: center;    
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    font-size: 2vw;  
+    font-size:calc(5px + 2vw);                
+    /* font-size: 2vw;   */
 }
 
 .subtitle {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-style: italic;
-    font-size: 1.5vw; 
+    font-size:calc(5px + 1vw);                
+    /* font-size: 1.5vw;  */
     text-align: center;
 }
 
@@ -86,5 +93,11 @@
     border-style:solid; 
     border-radius: 5vh;
     margin-bottom: 5%;
-    margin-top: 5%
+    margin-top: 5%;
+    max-width: 250px;
+    width: 50vw;
+}
+
+.col-sm-4{
+    padding-bottom: 5vh;
 }
