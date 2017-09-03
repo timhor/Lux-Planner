@@ -12,12 +12,12 @@
         <div class="form-group row"
              *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
              [formGroup]="item">
-          <div class="col-sm-8">
+          <div class="col-sm-6">
             <label id="stop-label" [attr.for]="'location'+i">Starting Location</label>
             <input type="search" placeholder="Location" id="stop-input"
               class="form-control" [attr.id]="'location'+i" formControlName="location">
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <label id="date-label" [attr.for]="'date'+i">Starting Date</label>
             <input type="date" placeholder="Date" id="date-input" 
               class="form-control" [attr.id]="'date'+i" formControlName="date">
