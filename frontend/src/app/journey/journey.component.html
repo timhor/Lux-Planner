@@ -24,7 +24,7 @@
           </div>
           <div class="col-sm-1">
             <br>
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btn-danger" *ngIf="myJourneys.get('destinations').length != 1"
                     (click)="myJourneys.get('destinations').removeAt(i)">-</button>
           </div>
         </div>
