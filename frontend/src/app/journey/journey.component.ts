@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormControl,
+  FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-journey',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JourneyComponent implements OnInit {
 
-  constructor() { }
+
+  myJourneys: FormGroup;
+  
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+    // build the form model
+    this.myJourneys = this.fb.group({
+      destinations: this.fb.array(
+        [this.buildItem('')]
+      )
+    })
+  }
+
+  submit() {
+    console.log("Reactive Form submitted: ", this.myJourneys)
+  }
+
+  buildItem(val: string) {
+    return new FormGroup({
+      location: new FormControl(val, Validators.required),
+      date: new FormControl()
+    })
   }
 
 }

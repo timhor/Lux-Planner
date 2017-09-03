@@ -5,6 +5,7 @@ import { provideAuth } from 'angular2-jwt';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -54,7 +55,9 @@ export const serviceProviders = [
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers:
     serviceProviders
