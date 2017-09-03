@@ -17,11 +17,12 @@ h3, form {
 
  #body_div{
     background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 2vh;
-    padding-bottom: 2vh;  
-    padding-right: 2vw;
-    padding-left: 2vw; 
-    margin-left: 25%;
-    margin-right: 25%;
+    padding-top: 5vh;
+    padding-bottom: 5vh;  
+    padding-right: 5vw;
+    padding-left: 5vw; 
+    width: 50vw;
+    min-width: 300px;   
+    margin: 0 auto;
     border-radius: 5vh;
  }
