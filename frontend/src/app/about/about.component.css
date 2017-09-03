@@ -6,11 +6,20 @@ h3, form {
 #contactUsHead{
    margin: 0 auto;
    text-align: left;
-   width: 50%;
 }
 
 #paragraph{
    margin: 0 auto;
    text-align: justify;
-   width: 50%
+}
+
+#body_div{
+   background-color: rgba(255, 255, 255, 0.8);
+   padding-top: 2vh;
+   padding-bottom: 2vh;  
+   padding-right: 2vw;
+   padding-left: 2vw; 
+   margin-left: 25%;
+   margin-right: 25%;
+   border-radius: 5vh;
 }

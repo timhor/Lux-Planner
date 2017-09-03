@@ -6,30 +6,24 @@ h3, form {
 #journeyHead{
    margin: 0 auto;
    text-align: left;
-   width: 50%;
 }
 
 #stops-form{
    margin: 0 auto;
    text-align: left;
-   width: 50%;
 }
 
 #stop-label{
    margin: 0 auto;
    text-align: left;
-   width: 50%;
 }
 
 #date-label{
    margin: 0 auto;
    text-align: left;
-   width: 50%;
 }
 
 #stop-input{
-   height: 30px;
-   margin-left: 5%;
    padding-left: 30px;
 }
 
@@ -60,6 +54,14 @@ h3, form {
    background: #3EB000; 
    color: white;
 }
-body{
-   background-color: rgba(255, 255, 255, 0.75) !important;   
+
+#body_div{
+   background-color: rgba(255, 255, 255, 0.8);
+   padding-top: 2vh;
+   padding-bottom: 2vh;  
+   padding-right: 2vw;
+   padding-left: 2vw; 
+   margin-left: 25%;
+   margin-right: 25%;
+   border-radius: 5vh;
 }

@@ -78,24 +78,27 @@ html {
 }
 .cb-slideshow li:nth-child(2) span { 
     background-image: url(assets/Runway_Background.png);
-    animation-delay: 10s; 
+    animation-delay: 20s; 
 }
 .cb-slideshow li:nth-child(3) span { 
     background-image: url(assets/Road_Background.png);
-    animation-delay: 20s; 
+    animation-delay: 30s; 
 }
 .cb-slideshow li:nth-child(1) div { 
-    animation-delay: 10s; 
+    animation-delay: 20s; 
 }
 .cb-slideshow li:nth-child(2) div { 
-    animation-delay: 20s; 
+    animation-delay: 30s; 
 }
 @keyframes imageAnimation { 
     0% { opacity: 0; }
-    8% { opacity: 1; }
-    17% { opacity: 1; animation-timing-function: ease-in;}
-    25% { opacity: 1; animation-timing-function: ease-out;}
-    100% { opacity: 0 }
+    8% { opacity: 0.3; }
+    17% { opacity: 0.6;}
+    25% { opacity: 1;}
+    75% { opacity: 1;}
+    83% { opacity: 0.6; animation-timing-function: ease-in;}
+    92% { opacity: 0.3; animation-timing-function: ease-out;}
+    100% { opacity: 0}
 }
 
 .no-cssanimations .cb-slideshow li span{
