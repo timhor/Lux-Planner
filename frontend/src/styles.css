@@ -18,20 +18,20 @@ html {
     overflow-y: scroll;
 }
 
-/* body{
+body{
     background-size: cover;
     background-position-x: center;
     background-position-y: center;
     background-image: url("/assets/Sky_Background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-} */
+}
 
 /*
     Slideshow Template was obtainted from the website below and modified according to our needs
     https://tympanus.net/codrops/2012/01/02/fullscreen-background-image-slideshow-with-css3/
 */
-.cb-slideshow,
+/* .cb-slideshow,
 .cb-slideshow:after { 
     position: fixed;
     width: 100%;
@@ -105,4 +105,4 @@ html {
 
 #back_text{
     color: transparent;
-}
+} */
