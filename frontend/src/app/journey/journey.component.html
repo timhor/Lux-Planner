@@ -4,44 +4,53 @@
     <h2>New Journey</h2>
   </div>
 
-  <br>
-  
   <form [formGroup]="myJourneys" (ngSubmit)="submit()">
-      <fieldset formArrayName="destinations">
-        <hr>
-        <div class="form-group row"
-             *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
-             [formGroup]="item">
-          <div class="col-sm-6">
-            <label id="stop-label" [attr.for]="'location'+i">Starting Location</label>
-            <input type="search" placeholder="Location" id="stop-input"
-              class="form-control" [attr.id]="'location'+i" formControlName="location">
-          </div>
-          <div class="col-sm-4">
-            <label id="date-label" [attr.for]="'date'+i">Starting Date</label>
-            <input type="date" placeholder="Date" id="date-input" 
-              class="form-control" [attr.id]="'date'+i" formControlName="date">
-          </div>
-          <div class="col-sm-1">
-            <br>
-            <button type="button" class="btn btn-danger" *ngIf="myJourneys.get('destinations').length != 1"
-                    (click)="myJourneys.get('destinations').removeAt(i)">-</button>
-          </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6">
+        <label id="stop-label">Starting Location</label>
+        <input type="search" placeholder="Location" class="form-control">
+      </div>
+      <div class="col-sm-4">
+        <label id="date-label">Departure Date</label>
+        <input type="date" placeholder="Date" class="form-control">
+      </div>
+    </div>
+    <hr>
+    <fieldset formArrayName="destinations">
+      <div class="form-group row"
+            *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
+            [formGroup]="item">
+        <div class="col-sm-6">
+          <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
+          <input type="search" placeholder="Location" class="form-control" 
+            [attr.id]="'location'+i" formControlName="location">
         </div>
-        <br>
-      </fieldset>
-      <div class="form-group row">
+        <div class="col-sm-4">
+          <label id="date-label" [attr.for]="'date'+i">Departure Date</label>
+          <input type="date" placeholder="Date" class="form-control"
+            [attr.id]="'date'+i" formControlName="date">
+        </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-primary"
-                  (click)="myJourneys.get('destinations').push(buildItem(''))">Add Stop</button>
+          <br>
+          <button type="button" class="btn btn-danger" *ngIf="myJourneys.get('destinations').length != 1"
+                  (click)="myJourneys.get('destinations').removeAt(i)">-</button>
         </div>
       </div>
-      <hr>
       <br>
-      <div class="form-group" id="customiseStopsBtn">
-          <h1><button type="submit" class="button_primary"
-            value="Submit" [disabled]="myJourneys?.invalid" routerLink="/stop">Customise Stops&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button></h1>
+    </fieldset>
+    <div class="form-group row">
+      <div class="col-sm-1">
+        <button type="button" class="btn btn-primary"
+                (click)="myJourneys.get('destinations').push(buildItem(''))">Add Stop</button>
       </div>
+    </div>
+    <hr>
+    <br>
+    <div class="form-group" id="customiseStopsBtn">
+        <h1><button type="submit" class="button_primary"
+          value="Submit" [disabled]="myJourneys?.invalid" routerLink="/stop">Customise Stops&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button></h1>
+    </div>
     </form>
     <!-- <h6 class="mt-3">FormGroup Model (<code>myJourneys.value</code>)</h6>
     <div><pre><code>{{ myJourneys?.value | json }}</code></pre></div> -->
