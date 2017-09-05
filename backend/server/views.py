@@ -24,6 +24,8 @@ class Dummy:
         return "User(id='%s')" % self.id
 
 user = Dummy(id=1, username='bob', password='smith')
+fake = Dummy(id=10000, username='aaron', password='james')
+
 # End Test data
 
 def authenticate(username, password):
@@ -35,23 +37,29 @@ def authenticate(username, password):
     """
     if username == user.username and password == user.password:
         print("AUTHENTICATED!!!")
-        return user
+        return user  # TODO return the user object
 
 def identity(payload):
     """ TODO What this do idk"""
     # print(payload)
     print(payload['identity'])
-    return user
+    # TODO read in payload, confirm identity, the return whatever you want as current identity
+    return [100, 'kevin']  # TODO add proper identity payload => current_identity
 
 jwt = JWT(app, authenticate, identity)
 
 # TODO change this based on identity
 @jwt.jwt_payload_handler
 def make_payload(identity):
+    """ Creates a payload to return to user after authenticating
+
+    """
     iat = datetime.utcnow()
     exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
-    identity = getattr(identity, 'id') or identity['id']
+    identity = getattr(identity, 'id') or identity['id']  # Create the identity payload here
+    # identity = [identity.id, 'HELLO']
+    
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
     # return {'Hello': 'world'}
 
