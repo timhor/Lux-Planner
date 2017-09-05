@@ -39,7 +39,7 @@ export class ConnectionService {
         .subscribe(
             (data) => {
                 let token = data.access_token;
-                localStorage.setItem('id_token', token);
+                localStorage.setItem('id_token', token);  // 'id_token' is the default location AuthHTTP looks for
                 console.log("Token saved successfully?");
 
                 let jwtHelper: JwtHelper = new JwtHelper();
