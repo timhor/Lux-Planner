@@ -4,10 +4,11 @@ SENG2021 s2 2017
 """
 
 from server import app, api_handler
-from flask import render_template, jsonify, request
-# import json
+from flask import render_template, jsonify, request, current_app
+import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
+from datetime import datetime, timedelta
 
 
 CORS(app)
@@ -38,17 +39,21 @@ def authenticate(username, password):
 
 def identity(payload):
     """ TODO What this do idk"""
-    print(payload)
+    # print(payload)
+    print(payload['identity'])
     return user
 
-
-
 jwt = JWT(app, authenticate, identity)
-'''
-@jwt.payload_handler
+
+# TODO change this based on identity
+@jwt.jwt_payload_handler
 def make_payload(identity):
-    return {'user_id': "HELLLOOOOOOO"}
-'''
+    iat = datetime.utcnow()
+    exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
+    nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
+    identity = getattr(identity, 'id') or identity['id']
+    return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
+    # return {'Hello': 'world'}
 
 @app.route('/')
 @app.route('/index')
