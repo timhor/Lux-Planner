@@ -8,6 +8,7 @@ import { DestinationComponent } from "./destination/destination.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
+import { DashboardComponent } from "./dashboard/dashboard.component"
 
 const routes: Routes = [
     {
@@ -28,10 +29,6 @@ const routes: Routes = [
         component: DestinationComponent
     },
     {
-        path: 'signup',
-        component: SignupComponent
-    },
-    {
         path: 'contact-us',
         component: ContactUsComponent
     },
@@ -42,6 +39,10 @@ const routes: Routes = [
     {
         path: 'journey',
         component: JourneyComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
     },
 ];
 
