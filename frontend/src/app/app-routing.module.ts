@@ -10,6 +10,8 @@ import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ItineraryComponent } from "./itinerary/itinerary.component";
+import { FaqComponent } from "./faq/faq.component";
+import { HelpComponent } from "./help/help.component";
 
 const routes: Routes = [
     {
@@ -48,6 +50,14 @@ const routes: Routes = [
     {
         path: 'itinerary',
         component: ItineraryComponent
+    },
+    {
+        path: 'faq',
+        component: FaqComponent
+    },
+    {
+        path: 'help',
+        component: HelpComponent
     },
 ];
 
