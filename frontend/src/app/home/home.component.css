@@ -101,3 +101,11 @@
 .col-sm-4{
     padding-bottom: 5vh;
 }
+
+#mainSearch{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    width: 35vw;
+    height: 5vh;
+    min-width: 175px;  
+}
