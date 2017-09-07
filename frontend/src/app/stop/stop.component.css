@@ -38,3 +38,30 @@ h4 {
     cursor: default;
 }
 
+#body_div{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-top: 5vh;
+    padding-bottom: 5vh;  
+    padding-right: 5vw;
+    padding-left: 5vw; 
+    min-width: 300px;   
+    margin: 0 auto;
+    border-radius: 5vh;
+ }
+
+ #myCarousel{
+    width: 100%;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: left;
+}
+
+#subtitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
+    font-style: italic;
+    font-size:calc(5px + 1vw);                
+    /* font-size: 1.5vw;  */
+    text-align: center;
+}
