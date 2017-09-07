@@ -26,6 +26,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
 import { FaqComponent } from './faq/faq.component';
 import { HelpComponent } from './help/help.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -58,7 +59,8 @@ export const serviceProviders = [
     DashboardComponent,
     ItineraryComponent,
     FaqComponent,
-    HelpComponent
+    HelpComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
