@@ -106,6 +106,9 @@
     padding-top: 2vh;
     padding-bottom: 2vh;
     width: 35vw;
-    height: 5vh;
-    min-width: 175px;  
+    height: 6vh;
+    min-width: 175px;
+    border-width: 2px;
+    border-color: #bed600;
+    font-size:calc(5px + 1vw);            
 }

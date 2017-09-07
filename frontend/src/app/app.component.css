@@ -6,3 +6,13 @@ a.active{
 }
 
 img { cursor: pointer; cursor: hand; outline: none; }
+
+#subText {
+    font-size: 1.5vh;
+}
+
+.footer {
+    position:static;
+    bottom:0;
+    width: 100%;
+}

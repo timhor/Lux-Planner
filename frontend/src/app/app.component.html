@@ -5,12 +5,26 @@
             <!-- <li><a routerLink="/"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;&nbsp;{{ title }}</a></li> -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="grow" routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a></li>
-            <li><a class="grow" routerLink="/contact-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact us</a></li>
+            <li><a class="grow" routerLink="/journey" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-plus"></i>&nbsp;New Journey</a></li>
             <li><a class="grow" routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-plus"></i>&nbsp;Sign up</a></li>
             <li><a class="grow" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log in</a></li>
         </ul>
     </div>
 </nav>
-
-<router-outlet></router-outlet>
+<div id="wrap">
+    <div id="main">
+        <router-outlet></router-outlet>            
+    </div>
+</div>
+<div class="footer">
+    <br>
+    <div class="row" align="center">
+        <a class="grow" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color:white">&nbsp;Home&nbsp;</a> |             
+        <a class="grow" routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color:white">&nbsp;About&nbsp;</a> | 
+        <a class="grow" routerLink="/contact-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color:white">&nbsp;Contact Us&nbsp;</a>
+    </div>
+    <div class="row" id="subText">
+            <br><i class="fa fa-copyright" aria-hidden="true"></i> &lt;group id="2021"> - SENG2021 17s2
+    </div>
+    <br>
+</div>
