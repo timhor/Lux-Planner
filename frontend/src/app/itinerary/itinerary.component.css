@@ -1,0 +1,12 @@
+.well {
+   background-color: rgba(255, 255, 255, 0.75);
+   border-radius: 2.5vh;
+   text-align: left;
+}
+
+#stopHeading {
+   padding-left: 10px;
+   font-size: 20px; 
+   font-weight: bold;
+   text-decoration: underline;
+}

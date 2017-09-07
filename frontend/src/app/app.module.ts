@@ -23,6 +23,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { JourneyComponent } from './journey/journey.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ItineraryComponent } from './itinerary/itinerary.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -52,7 +53,8 @@ export const serviceProviders = [
     AboutComponent,
     ContactUsComponent,
     JourneyComponent,
-    DashboardComponent
+    DashboardComponent,
+    ItineraryComponent
   ],
   imports: [
     BrowserModule,

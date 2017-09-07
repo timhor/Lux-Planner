@@ -8,7 +8,8 @@ import { StopComponent } from "./stop/stop.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
-import { DashboardComponent } from "./dashboard/dashboard.component"
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { ItineraryComponent } from "./itinerary/itinerary.component";
 
 const routes: Routes = [
     {
@@ -43,6 +44,10 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+    {
+        path: 'itinerary',
+        component: ItineraryComponent
     },
 ];
 
