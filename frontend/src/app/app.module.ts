@@ -28,6 +28,7 @@ import { FaqComponent } from './faq/faq.component';
 import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -62,7 +63,8 @@ export const serviceProviders = [
     FaqComponent,
     HelpComponent,
     ProfileComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    MyJourneysComponent
   ],
   imports: [
     BrowserModule,
