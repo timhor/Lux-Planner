@@ -5,11 +5,14 @@
 }
 
 button {
-   width: 100%;
    border: 0.1vw;
    border-color: #000000;
    border-style:solid; 
    margin: 0.5px;
+}
+
+#fillButton {
+   width: 100%;
 }
 
 img {
