@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { DestinationComponent } from "./destination/destination.component";
+import { StopComponent } from "./stop/stop.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
@@ -25,8 +25,8 @@ const routes: Routes = [
         component: SignupComponent
     },
     {
-        path: 'destination',
-        component: DestinationComponent
+        path: 'stop',
+        component: StopComponent
     },
     {
         path: 'contact-us',

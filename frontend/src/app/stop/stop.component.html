@@ -3,7 +3,7 @@
   <div class="row" style="padding-right: 15px;">
     <div class="col-sm-4 well" id="mainBorder">
       <div class="well" id="lowerBorder">
-        <h2 style="font-weight: bolder;">{{currDestination}}</h2>
+        <h2 style="font-weight: bolder;">{{currStop}}</h2>
         <img src="https://dummyimage.com/250x250/000/fff" alt="temporary" align="middle">
       </div>
       <div class="well" align="left" id="lowerBorder">
@@ -23,8 +23,8 @@
           <br>
           <div class="well" align="left" id="lowerBorder">
             <h2>Hello from the {{componentName}}!</h2>
-            <div *ngFor="let d of destinations" id="box">
-                <h4> Location : {{d.location}} </h4> <h4>Cost: ${{d.cost}}</h4> 
+            <div *ngFor="let s of stops" id="box">
+                <h4> Location : {{s.location}} </h4> <h4>Cost: ${{s.cost}}</h4> 
             </div>
           </div>
         </div>

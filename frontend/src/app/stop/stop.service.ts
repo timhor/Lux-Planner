@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 
-export class DestinationService { 
+export class StopService { 
 
-    destinations:Array<any>;
+    stop:Array<any>;
     constructor() {
-        this.destinations = [
+        this.stop = [
             { cost: 2000, location: 'China' },
             { cost: 3000, location: 'Japan' },
             { cost: 4000, location: 'France' },
@@ -16,7 +16,7 @@ export class DestinationService {
         ];
     }
 
-    getDestinations() {
-        return this.destinations;
+    getStops() {
+        return this.stop;
     }
 }

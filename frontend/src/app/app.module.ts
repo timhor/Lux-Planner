@@ -12,10 +12,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
-import { DestinationComponent } from './destination/destination.component';
+import { StopComponent } from './stop/stop.component';
 import { ConnectionComponent } from './connection/connection.component';
 
-import { DestinationService } from './destination/destination.service';
+import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +37,7 @@ export const authProvider = {
 };
 
 export const serviceProviders = [
-  DestinationService, ConnectionService, authProvider
+  StopService, ConnectionService, authProvider
 ];
 
 @NgModule({
@@ -46,7 +46,7 @@ export const serviceProviders = [
     HomeComponent,
     LoginComponent,
    	SearchComponent,
-   	DestinationComponent,
+   	StopComponent,
     ConnectionComponent,
     SignupComponent,
     AboutComponent,
