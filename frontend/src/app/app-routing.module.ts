@@ -13,6 +13,7 @@ import { ItineraryComponent } from "./itinerary/itinerary.component";
 import { FaqComponent } from "./faq/faq.component";
 import { HelpComponent } from "./help/help.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 
 const routes: Routes = [
     {
@@ -63,6 +64,10 @@ const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent
+    },
+    {
+        path: 'account-settings',
+        component: AccountSettingsComponent
     },
 ];
 
