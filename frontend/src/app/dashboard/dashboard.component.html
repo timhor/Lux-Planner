@@ -9,8 +9,8 @@
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" *ngIf="i!=0">{{stop}}</button>
-          <button type="button" class="btn btn-default btn-md active" *ngIf="i==0">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md" id="fillButton" *ngIf="i!=0">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md active" id="fillButton" *ngIf="i==0">{{stop}}</button>
         </div>
       </div>
       <div class="well">
@@ -21,7 +21,7 @@
             nulla. Ut sagittis lobortis lorem at volutpat</p>
       </div>
       <div class="well">
-        <button type="button" class="btn btn-default btn-lg" routerLink="/itinerary">Itinerary</button>
+        <button type="button" class="btn btn-default btn-lg" id="fillButton" routerLink="/itinerary">Itinerary</button>
       </div>
       <div class="well">
         <p id="subHeading">Calendar</p>
@@ -116,7 +116,8 @@
             nulla. Ut sagittis lobortis lorem at volutpat</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
             nulla. Ut sagittis lobortis lorem at volutpat</p>
-          <button type="button" class="btn btn-default btn-lg" routerLink="/destination">Visit Page</button>
+          <button type="button" class="btn btn-default btn-md pull-right" routerLink="/destination" width="100px">More Info</button>
+          <br><br>
         </div>
       </div>
     </div>
