@@ -6,7 +6,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li *ngIf="isLoggedIn()"><a class="grow" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-address-card"></i>&nbsp;Dashboard</a></li>
-            <li><a class="grow" routerLink="/journey" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-plus"></i>&nbsp;New Journey</a></li>
+            <li *ngIf="router.url != '/'"><a class="grow" routerLink="/journey" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-plus"></i>&nbsp;New Journey</a></li>
             <li *ngIf="isLoggedIn()"><a class="grow" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-plane"></i>&nbsp;My Journeys</a></li>
             <li *ngIf="isLoggedIn()"><a class="grow" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-circle"></i>&nbsp;Username&nbsp;<i class="fa fa-caret-down"></i></a></li>
             <li *ngIf="!isLoggedIn()"><a class="grow" routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-plus"></i>&nbsp;Sign up</a></li>
