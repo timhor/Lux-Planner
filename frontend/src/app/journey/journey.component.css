@@ -23,10 +23,6 @@ h3, form {
    text-align: left;
 }
 
-#customiseStopsBtn{
-   text-align:center;
-}
-
 .button_primary {
    padding-top: 2vh;
    padding-bottom: 2vh;
@@ -46,7 +42,7 @@ h3, form {
    display: inline-block;
    letter-spacing: .15em;
    font-size:calc(10px + 0.5vw);        
-   width: 30vw;
+   width: 20vw;
    min-width: 200px; 
 }
 .button_primary:hover { 
@@ -79,5 +75,6 @@ h3, form {
    border-width: 1px;
    border-color:#FFFFFF;
    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   cursor: pointer; cursor: hand; outline: none;  
+   cursor: pointer; cursor: hand; outline: none;
+   min-width: 3em; 
 }
