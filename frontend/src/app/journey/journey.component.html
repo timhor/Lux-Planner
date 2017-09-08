@@ -42,7 +42,7 @@
         <div class="col-sm-1">
           <br>
           <button type="button" id="btnFormat" class="btn btn-danger" *ngIf="myJourneys.get('destinations').length != 1"
-                  (click)="myJourneys.get('destinations').removeAt(i)">-</button>
+                  (click)="myJourneys.get('destinations').removeAt(i)"><i class="fa fa-trash" aria-hidden="true"></i></button>
         </div>
       </div>
       <br>
@@ -50,7 +50,7 @@
     <div class="form-group row">
       <div class="col-sm-1">
         <button type="button" id="btnFormat" class="btn btn-primary"
-                (click)="myJourneys.get('destinations').push(buildItem(''))">Add Stop</button>
+                (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
       </div>
     </div>
     <hr>
