@@ -3,13 +3,12 @@ Defines all the endpoints of the backend.
 SENG2021 s2 2017
 """
 
-from server import app, api_handler, models
+from server import app, api_handler, models, db
 from flask import render_template, jsonify, request, current_app
 import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 from datetime import datetime, timedelta
-
 
 CORS(app)
 
@@ -40,7 +39,6 @@ jwt = JWT(app, authenticate, identity)
 @jwt.jwt_payload_handler
 def make_payload(identity):
     """ Creates a payload to return to user after authenticating
-
     """
     iat = datetime.utcnow()
     exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
@@ -51,32 +49,6 @@ def make_payload(identity):
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
     # return {'Hello': 'world'}
 
-@app.route('/')
-@app.route('/index')
-def index():
-    """ Front page of the backend """
-    return render_template('index.html')
-
-
-@app.route('/admin/registered-users')
-def registered_users():
-    """ Registered user page """
-    admin_name = 'adminny'
-    fake_regi = [
-        {'name': 'James',
-         'age': '17',
-         'fav_fish': 'Salmon'
-        },
-        {'name': 'Kevin',
-         'age': '91',
-         'fav_fish': 'Tuna'
-        },
-        {'name': 'Blake',
-         'age': '45',
-         'fav_fish': 'I\'m a vegan goddammit'
-        }
-    ]
-    return render_template('registered-users.html', admin=admin_name, users=fake_regi)
 
 
 @app.route('/api/flickr/', methods=['GET'])
@@ -162,6 +134,45 @@ def secure():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
     print(request)
-    # username = request.form['username']
-    # password = request.form['password']
-    return None
+    username = request.form['username']
+    search_username = models.User.query.filter_by(username=username).first()
+    if search_username:
+        return jsonify({
+                'message': username + " is taken."
+            })
+    
+    password = request.form['password']
+    email = request.form['email']
+    created_user = models.User(username=username, password=password, email=email)
+    db.session.add(created_user)
+    db.session.commit()
+    return authenticate(username, password)
+
+
+################ Old stuff ####################
+@app.route('/')
+@app.route('/index')
+def index():
+    """ Front page of the backend """
+    return render_template('index.html')
+
+
+@app.route('/admin/registered-users')
+def registered_users():
+    """ Registered user page """
+    admin_name = 'adminny'
+    fake_regi = [
+        {'name': 'James',
+         'age': '17',
+         'fav_fish': 'Salmon'
+        },
+        {'name': 'Kevin',
+         'age': '91',
+         'fav_fish': 'Tuna'
+        },
+        {'name': 'Blake',
+         'age': '45',
+         'fav_fish': 'I\'m a vegan goddammit'
+        }
+    ]
+    return render_template('registered-users.html', admin=admin_name, users=fake_regi)
