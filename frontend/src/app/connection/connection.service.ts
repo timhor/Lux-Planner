@@ -33,7 +33,7 @@ export class ConnectionService {
         let options: RequestOptions = new RequestOptions({
             headers: new Headers({'Content-Type': 'application/json'})
         });
-        this.httpPoint.post(this.server + 'auth', JSON.stringify({'username': 'bob', 'password': 'smith'}),
+        this.httpPoint.post(this.server + 'auth', JSON.stringify({'username': 'admin', 'password': 'admin'}),
             options)
         .map((res: Response) => res.json())
         .subscribe(

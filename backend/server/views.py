@@ -3,7 +3,7 @@ Defines all the endpoints of the backend.
 SENG2021 s2 2017
 """
 
-from server import app, api_handler
+from server import app, api_handler, models
 from flask import render_template, jsonify, request, current_app
 import json
 from flask_cors import CORS, cross_origin
@@ -13,21 +13,6 @@ from datetime import datetime, timedelta
 
 CORS(app)
 
-
-# TODO REMOVE WHEN CONNECTED TO DATABASE
-class Dummy:
-    def __init__(self, id, username, password):
-        self.id = id
-        self.username = username
-        self.password = password
-    def __str__(self):
-        return "User(id='%s')" % self.id
-
-user = Dummy(id=1, username='bob', password='smith')
-fake = Dummy(id=10000, username='aaron', password='james')
-
-# End Test data
-
 def authenticate(username, password):
     """ Used to authenticate the user based on the database
         @param username: Username given
@@ -35,15 +20,18 @@ def authenticate(username, password):
         @return: the user that matches both username and password
             else return None
     """
-    if username == user.username and password == user.password:
-        print("AUTHENTICATED!!!")
-        return user  # TODO return the user object
+    user = models.User.query.filter_by(username=username).first()
+    try:
+        print(user)
+        if user.password == password:
+            return user
+    except AttributeError:
+        return None
+
 
 def identity(payload):
     """ TODO What this do idk"""
-    # print(payload)
     print(payload['identity'])
-    # TODO read in payload, confirm identity, the return whatever you want as current identity
     return [100, 'kevin']  # TODO add proper identity payload => current_identity
 
 jwt = JWT(app, authenticate, identity)
@@ -69,13 +57,6 @@ def index():
     """ Front page of the backend """
     return render_template('index.html')
 
-
-@app.route('/user/<auth>')
-def auth_route(auth):
-    """ User page """
-    if auth != 'favicon.ico':
-        print(auth)
-    return render_template('user.html', name=auth)
 
 @app.route('/admin/registered-users')
 def registered_users():
