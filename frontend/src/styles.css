@@ -6,14 +6,6 @@
    background-color: #000037;
 }
 
-.footer {
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    font-size: 2.5vh;
-    text-align: center;
-    color: white;
-    background-color: #000037;
- } 
-
 .grow {
     transition: all 0.2s ease-in-out;
 }
@@ -27,6 +19,28 @@ html {
     overflow-x: hidden;
 }
 
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-size: 2.5vh;
+    text-align: center;
+    color: white;
+    background-color: #000037;
+ } 
+
+ .main-container {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
+}
+
 body{
     background-size: cover;
     background-position-x: center;
@@ -35,83 +49,3 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-
-/*
-    Slideshow Template was obtainted from the website below and modified according to our needs
-    https://tympanus.net/codrops/2012/01/02/fullscreen-background-image-slideshow-with-css3/
-*/
-/* .cb-slideshow,
-.cb-slideshow:after { 
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: -1; 
-}
-.cb-slideshow:after { 
-    content: '';
-    background-color: black;
-    background: transparent repeat top left; 
-}
-
-.cb-slideshow li span { 
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    color: transparent;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: none;
-    opacity: 0;
-    z-index: 0;
-    animation-name: imageAnimation;
-    animation-duration: 30s;
-    animation-play-state: running;
-    animation-direction: normal;
-    animation-iteration-count: infinite;
-}
-
-.cb-slideshow li:nth-child(1) span { 
-    background-image: url(assets/Sky_Background.png);
-    animation-delay: 0s;
-    animation-duration: 10s;
-    animation-iteration-count: initial;    
-}
-.cb-slideshow li:nth-child(2) span { 
-    background-image: url(assets/Runway_Background.png);
-    animation-delay: 10s;
-    animation-duration: 10s;
-    animation-iteration-count: initial;    
-}
-.cb-slideshow li:nth-child(3) span { 
-    background-image: url(assets/Road_Background.png);
-    animation-delay: 20s;
-    animation-duration: 10s;
-    animation-iteration-count: initial;    
-}
-
-@keyframes imageAnimation { 
-    0% { opacity: 0; animation-timing-function: ease;}
-    20% { opacity: 1;}
-    30% { opacity: 1;}
-    60% { opacity: 1;}
-    80% { opacity: 1;}
-    100% { opacity: 0; animation-timing-function: ease;}
-}
-
-.no-cssanimations .cb-slideshow li span{
-	opacity: 1;
-}
-@media screen and (max-width: 1140px) { 
-    .cb-slideshow li div h3 { font-size: 140px }
-}
-@media screen and (max-width: 600px) { 
-    .cb-slideshow li div h3 { font-size: 80px }
-}
-
-#back_text{
-    color: transparent;
-} */

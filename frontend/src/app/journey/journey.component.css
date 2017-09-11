@@ -78,3 +78,18 @@ h3, form {
    cursor: pointer; cursor: hand; outline: none;
    min-width: 3em; 
 }
+
+#saveJourneyBtn{
+    color: #FF7B00;
+    border-width: 2px;
+    border-color:#FF7B00;
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    cursor: pointer; cursor: hand; outline: none;
+    min-width: 3em;
+    
+}
+
+#saveJourneyBtn:hover{
+    background: #FF7B00; 
+    color: white;
+}
