@@ -31,6 +31,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
+import { DropdownModule } from "ng2-dropdown";
+
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     headerPrefix: 'JWT'
@@ -72,7 +74,8 @@ export const serviceProviders = [
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule
   ],
   providers:
     serviceProviders
