@@ -5,31 +5,50 @@
   </div>
 
   <br><br>
+  <!-- For Debugging -->
+  <!-- <code>{{diagnostic}}</code> -->
 
   <div id="signUpForm">
-    <form ng-submit="submit()" ng-controller="SignUpCtrl">
-      <div align="right">
-        <a routerLink="/login" align="right"> Already have an account?</a>
+    <form (ngSubmit)="onSubmit()">
+      <div class="alert alert-danger" [hidden]="(username.valid || username.pristine)
+        && (password.valid || password.pristine) && (email.valid || email.pristine)
+        && ((account.password === account.confirmPassword) || confirmPassword.pristine)">
+        <div [hidden]="username.valid || username.pristine">
+          Username is required
+        </div>
+        <div [hidden]="password.valid || password.pristine">
+          Password is required. Min. 8 characters
+        </div>
+        <div [hidden]="(account.password === account.confirmPassword) || confirmPassword.pristine">
+          Passwords do not match
+        </div>
+        <div [hidden]="email.valid || email.pristine">
+          Email is required
+        </div>
       </div>
       <div class="form-group">
         <label for="username"><b>Username</b></label>
-        <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
+        <input class="form-control" type="text" placeholder="Enter username" id="username" required
+          [(ngModel)]="account.username" name="username" #username="ngModel">
       </div>
       <div class="form-group">
         <label for="password"><b>Password</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password1" required>
+        <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="password" required 
+          [(ngModel)]="account.password" name="password" #password="ngModel">
       </div>
       <div class="form-group">
         <label for="confirmedPassword"><b>Confirm Password</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" name="password" ng-model="password2" pw-check='password1' required>
+        <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="confirmPassword" required
+          [(ngModel)]="account.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" pw-check='password'>
       </div>
       <div class="form-group">
         <label for="email"><b>Email</b></label>
-        <input class="form-control" type="email" placeholder="Enter email" name="email" ng-model="email" required>
+        <input class="form-control" type="email" placeholder="Enter email" id="email" required
+          [(ngModel)]="account.email" name="email" #email="ngModel">
       </div>
       <br>
       <div class="form-group">
-        <button type="submit" class="btn btn-success" routerLink="/login">Create Account</button>
+        <button type="submit" class="btn btn-success">Create Account</button>
       </div>
     </form>
   </div>
