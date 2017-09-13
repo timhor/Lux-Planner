@@ -1,4 +1,4 @@
-export class Account {
+export class NewAccount {
    
    constructor(
       public username: string,

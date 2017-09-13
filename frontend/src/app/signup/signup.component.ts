@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Account } from '../account';
+import { NewAccount } from './newaccount';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +7,7 @@ import { Account } from '../account';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  account = new Account('','','','');
+  account = new NewAccount('','','','');
 
   submitted = false;
 
