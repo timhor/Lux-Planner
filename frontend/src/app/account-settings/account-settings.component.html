@@ -10,6 +10,7 @@
     </div>
     <div class="col-sm-6">
       <img [src]="avatar" height="75">
+      <br><br>
       <form action="/action_page.php">
         <input  *ngIf="editAvatar" type="file" accept="image/*" class="form-control">
       </form>
@@ -33,7 +34,6 @@
     </div>
     <div class="col-sm-6">
       <label *ngIf="!editPassword">{{password}}</label>
-      <br>
       <input  *ngIf="editPassword" type="password" placeholder="Enter new password" class="form-control">
     </div>
     <div class="col-sm-2">
