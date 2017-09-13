@@ -6,21 +6,37 @@
   <br>
   <div class="row" id="text">
     <div class="col-sm-4">
+      Avatar:
+    </div>
+    <div class="col-sm-6">
+      <img [src]="avatar" height="75">
+      <form action="/action_page.php">
+        <input  *ngIf="editAvatar" type="file" accept="image/*" class="form-control">
+      </form>
+    </div>
+    <div class="col-sm-2">
+        <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editAvatar" (click)="updateAvatar()"></i>
+        <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editAvatar" (click)="updateAvatar()"></i>
+      </div>
+  </div>
+  <div class="row" id="text">
+    <div class="col-sm-4">
       Username:
     </div>
     <div class="col-sm-8">
-      <label>Username</label>
+      <label>{{username}}</label>
     </div>
   </div>
   <div class="row" id="text">
     <div class="col-sm-4">
       Password:
     </div>
-    <div class="col-sm-5">
-      <label *ngIf="!editPassword">********</label>
+    <div class="col-sm-6">
+      <label *ngIf="!editPassword">{{password}}</label>
+      <br>
       <input  *ngIf="editPassword" type="password" placeholder="Enter new password" class="form-control">
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editPassword" (click)="updatePassword()"></i>
       <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editPassword" (click)="updatePassword()"></i>
     </div>
@@ -29,7 +45,7 @@
     <div class="col-sm-4">
       Confirm Password:
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <input type="password" placeholder="Repeat new password" class="form-control">
     </div>
   </div>
@@ -37,17 +53,17 @@
     <div class="col-sm-4">
       E-mail:
     </div>
-    <div class="col-sm-5">
-      <label *ngIf="!editEmail">userEmail@gmail.com</label>
+    <div class="col-sm-6">
+      <label *ngIf="!editEmail">{{email}}</label>
       <input  *ngIf="editEmail" type="email" placeholder="Enter new email" class="form-control">
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editEmail" (click)="updateEmail()"></i>
       <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editEmail" (click)="updateEmail()"></i>
     </div>
   </div>
   <br>
-  <button class="btn btn-primary" *ngIf="editPassword || editEmail">Confirm Changes</button>
+  <button class="btn btn-primary" *ngIf="editAvatar || editPassword || editEmail" (click)="onSubmit()">Confirm Changes</button>
 </div>
 
 <br><br>
