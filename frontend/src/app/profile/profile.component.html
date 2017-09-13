@@ -1,30 +1,28 @@
 <br>
 <div id="body_div" align="center">
-    <img src="https://dummyimage.com/250x250/000/fff">
+    <img [src]="avatar">
     <div id="headText">
-    <h2>Username</h2>
+      <h2>{{username}}</h2>
     </div>
+    
     <br>
+    
     <div id="subText">
       E-mail:
     </div>
-    <div id="text">
-      userEmail@gmail.com
-    </div>
+    <div id="text">{{email}}</div>
+    
     <div id="subText">
       Date Joined:
     </div>
-    <div id="text">
-      dd/mm/yyyy
-    </div>
+    <div id="text">{{dateJoined}}</div>
+    
     <div id="subText">
       Journeys:
     </div>
     <div id="text">
       <ul>
-          <li>Journey 1</li>
-          <li>Journey 2</li>
-          <li>Journey 3</li>
+          <li *ngFor="let journey of journeys" [value]="journey">{{journey}}</li>
       </ul>   
     </div>
 </div>
