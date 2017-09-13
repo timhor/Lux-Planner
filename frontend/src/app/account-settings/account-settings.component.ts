@@ -17,8 +17,8 @@ export class AccountSettingsComponent implements OnInit {
 
   public newAvatar;
   public newEmail;
-  public newPassword;
-  public newPasswordConfirm;
+  public newPassword = "";
+  public newPasswordConfirm = "";
 
   submitted = false;
 
@@ -51,4 +51,5 @@ export class AccountSettingsComponent implements OnInit {
     //Add stuff here to send account details to backend
     //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
   }
+  get diagnostic() { return("Email: " + this.newEmail + " Password: " + this.newPassword) + " Confirm: " + this.newPasswordConfirm }  
 }

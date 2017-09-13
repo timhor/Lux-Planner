@@ -10,7 +10,7 @@
 
   <div id="signUpForm">
     <form (ngSubmit)="onSubmit()">
-      <div class="alert alert-danger" [hidden]="(username.valid || username.pristine)
+      <div class="alert alert-warning" [hidden]="(username.valid || username.pristine)
         && (password.valid || password.pristine) && (email.valid || email.pristine)
         && ((account.password === account.confirmPassword) || confirmPassword.pristine)">
         <div [hidden]="username.valid || username.pristine">

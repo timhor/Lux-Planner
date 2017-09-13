@@ -4,6 +4,19 @@
   <h2>Account Settings</h2>
   </div>
   <br>
+  <code>{{diagnostic}}</code>
+  <div class="alert alert-warning" [hidden]="(password.valid || !password.touched) 
+    && (email.valid || !email.touched) && newPassword === newPasswordConfirm && (!editPassword || !editEmail)">
+    <div [hidden]="password.valid || !editPassword || !password.touched">
+      Password is required. Min. 8 characters
+    </div>
+    <div [hidden]="newPassword === newPasswordConfirm">
+      Passwords do not match
+    </div>
+    <div [hidden]="email.valid || !editEmail || !email.touched">
+      Email is required
+    </div>
+  </div>
   <div class="row" id="text">
     <div class="col-sm-4">
       Avatar:
@@ -12,7 +25,7 @@
       <img [src]="avatar" height="75">
       <br><br>
       <form action="/action_page.php">
-        <input  *ngIf="editAvatar" type="file" accept="image/*" class="form-control">
+        <input  *ngIf="editAvatar" type="file" accept="image/*" class="form-control"  [(ngModel)]="newAvatar" >
       </form>
     </div>
     <div class="col-sm-2">
@@ -34,7 +47,7 @@
     </div>
     <div class="col-sm-6">
       <label *ngIf="!editPassword">{{password}}</label>
-      <input  *ngIf="editPassword" type="password" placeholder="Enter new password" class="form-control">
+      <input  *ngIf="editPassword" type="password" placeholder="Enter new password" class="form-control" minlength="8" [(ngModel)]="newPassword" name="password" #password="ngModel" required>
     </div>
     <div class="col-sm-2">
       <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editPassword" (click)="updatePassword()"></i>
@@ -46,7 +59,7 @@
       Confirm Password:
     </div>
     <div class="col-sm-6">
-      <input type="password" placeholder="Repeat new password" class="form-control">
+      <input type="password" placeholder="Repeat new password" class="form-control" [(ngModel)]="newPasswordConfirm" name="confirmPassword" #confirmPassword="ngModel" required>
     </div>
   </div>
   <div class="row" id="text">
@@ -55,7 +68,7 @@
     </div>
     <div class="col-sm-6">
       <label *ngIf="!editEmail">{{email}}</label>
-      <input  *ngIf="editEmail" type="email" placeholder="Enter new email" class="form-control">
+      <input *ngIf="editEmail" type="email" placeholder="Enter new email" class="form-control" [(ngModel)]="newEmail" name="email" #email="ngModel" required>
     </div>
     <div class="col-sm-2">
       <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editEmail" (click)="updateEmail()"></i>
