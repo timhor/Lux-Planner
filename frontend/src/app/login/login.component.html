@@ -1,41 +1,36 @@
-<!-- <div ng-if="loginService.loginVars.incorrectCredentials" class="alert alert-warning alert-dismissible" role="alert">
-  <strong>Error:</strong> Incorrect username or password.
-</div> -->
-
 <br>
 <div id="body_div">
   <div id="loginHead">
     <h2>Log in to customise your journey</h2>
   </div>
-
-  <br><br>
-
+  <br>
+  <div [hidden]="!incorrectCredentials" class="alert alert-warning alert-dismissible" role="alert">
+    <strong>Error:</strong> Incorrect username or password.
+  </div>
+  <!-- <code>{{diagnostic}}</code> -->
   <div id="loginForm">
-    <form ng-submit="submit()" ng-controller="LoginCtrl">
-      <div align="right">
-          <a routerLink="/signup" align="right">Create a new account</a>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username"><b>Username</b></label>
+        <input class="form-control" type="text" placeholder="Enter username" name="username" [(ngModel)]="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password"><b>Password</b></label>
+        <input class="form-control" type="password" placeholder="Enter password" name="password" [(ngModel)]="password" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" routerLink="/journey" (click)="setLoggedIn()">LOG IN</button>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-10">
+          <input type="checkbox" [checked]="isChecked" (click)="setChecked()"> Remember me
         </div>
-        <div class="form-group">
-          <label for="username"><b>Username</b></label>
-          <input class="form-control" type="text" placeholder="Enter username" name="username" ng-model="username" required>
+        <div class="col-xs-12" align="right">
+            <a routerLink="/login">Forgot password?</a>
         </div>
-        <div class="form-group">
-          <label for="password"><b>Password</b></label>
-          <input class="form-control" type="password" placeholder="Enter password" name="password" ng-model="password" required>
-        </div>
-        <br>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success" routerLink="/journey" (click)="setLoggedIn()">LOG IN</button>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-10">
-            <input type="checkbox" checked="checked"> Remember me
-          </div>
-          <div class="col-xs-12" align="right">
-              <a routerLink="/login">Forgot password?</a>
-          </div>
-        </div>
-      </form>
+      </div>
+    </form>
   </div>
 </div>
 <br><br>
