@@ -139,12 +139,12 @@ def new_stop():
     db.session.add(created_stop)
     db.session.commit()
 
-#@app.route('/api/new_journey', methods=['POST'])
-#def new_journey():
-    #TO DO: get user_id from user
-    #created_journey = models.Journey(cost=0)
-    #db.session.add(created_stop)
-    #db.session.commit()
+@app.route('/api/new_journey', methods=['POST'])
+def new_journey():
+    user_id = current_identity
+    created_journey = models.Journey(user_id=user_id,cost=0)
+    db.session.add(created_stop)
+    db.session.commit()
 
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():
