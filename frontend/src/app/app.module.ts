@@ -6,6 +6,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -67,7 +68,8 @@ export const serviceProviders = [
     HelpComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    MyJourneysComponent
+    MyJourneysComponent,
+    SearchAutoCompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,11 @@ export const serviceProviders = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc',
+      libraries: ["places"]
+    })  
   ],
   providers:
     serviceProviders
