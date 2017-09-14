@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggedInService } from '../loggedIn.service';
+// import { ConnectionService } from '../connection/connection.service';
 
 @Component({
   selector: 'app-login',
@@ -20,22 +21,21 @@ export class LoginComponent {
   }
   onSubmit() {
     this.submitted = true;
-    console.log("HELLO WORLD");
     console.log(this.username);
     console.log(this.password);
-    
-    //Add stuff here to send account details to backend
-    //this.username, this.password, this.isChecked
-    //And redirect to --> routerLink="/dashboard OR /journey"
+    this.loggedInService.login(this.username, this.password);
+
+    // TODO should really redirect after confirming login...
     this.router.navigate(['/dashboard'])
 
   }
 
   constructor(private loggedInService: LoggedInService, public router: Router) {
+                // private connection: ConnectionService) {
   }
 
   setLoggedIn() {
-    this.loggedInService.loggedIn = true;
+    // this.loggedInService.loggedIn = true;
     console.log("Logged In=" + this.loggedInService.loggedIn);
   }
   get diagnostic() { return("Username: " + this.username + " Password: " + this.password + " Check: " + this.isChecked); }

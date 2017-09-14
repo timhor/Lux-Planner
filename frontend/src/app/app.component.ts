@@ -14,7 +14,13 @@ export class AppComponent {
   constructor(private loggedInService: LoggedInService, private router: Router) {
   }
 
-  isLoggedIn() {
-    return this.loggedInService.loggedIn;
+  public isLoggedIn() {
+    //  console.log(this.loggedInService.loggedIn());
+    return this.loggedInService.loggedIn();
+  }
+
+  public logout() {
+    localStorage.removeItem('id_token');
+    // this.loggedInService.loggedIn = false;
   }
 }
