@@ -18,6 +18,8 @@ export class LoggedInService {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
+
+    // TODO consider subscribing back on the login ts instead
     this.http.post(this.server + 'auth', JSON.stringify({'username': username, 'password': password}),
         options)
     .map((res: Response) => res.json())
@@ -25,12 +27,12 @@ export class LoggedInService {
         (data) => {
             let token = data.access_token;
             localStorage.setItem('id_token', token);  // 'id_token' is the default location AuthHTTP looks for
-            console.log("Token saved successfully?");
+            // console.log("Token saved successfully?");
 
-            let jwtHelper: JwtHelper = new JwtHelper();
-            console.log(`expiration: ${jwtHelper.getTokenExpirationDate(token)}`);
-            console.log(`is expired: ${jwtHelper.isTokenExpired(token)}`);
-            console.log(`decoded: ${JSON.stringify(jwtHelper.decodeToken(token))}`);
+            // let jwtHelper: JwtHelper = new JwtHelper();
+            // console.log(`expiration: ${jwtHelper.getTokenExpirationDate(token)}`);
+            // console.log(`is expired: ${jwtHelper.isTokenExpired(token)}`);
+            // console.log(`decoded: ${JSON.stringify(jwtHelper.decodeToken(token))}`);
         },
         (error) => console.log(`Sumting wong: ${error}`)
     )

@@ -47,7 +47,6 @@ def make_payload(identity):
     # identity = [identity.id, 'HELLO']
     
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
-    # return {'Hello': 'world'}
 
 
 
@@ -89,6 +88,10 @@ def flickr(): # REST params: ([search], [results])
         return jsonify({"images" : urls})
     except:
         return "Error"
+
+@app.route('/api/places', methods=['GET'])
+def google_places():
+    pass
 
 
 @app.route('/api/hello', methods=['GET'])
