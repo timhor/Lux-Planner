@@ -4,6 +4,10 @@ import { Injectable } from '@angular/core';
 export class LoggedInService {
   public loggedIn:boolean = false;
 
-  constructor() { }
+  constructor() {
+      if (localStorage['id_token']) {
+          this.loggedIn = true;
+      }
+  }
 
 }
