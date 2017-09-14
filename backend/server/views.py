@@ -31,11 +31,10 @@ def authenticate(username, password):
 def identity(payload):
     """ TODO What this do idk"""
     print(payload['identity'])
-    return [100, 'kevin']  # TODO add proper identity payload => current_identity
+    return payload  # identity payload => current_identity (global var)
 
 jwt = JWT(app, authenticate, identity)
 
-# TODO change this based on identity
 @jwt.jwt_payload_handler
 def make_payload(identity):
     """ Creates a payload to return to user after authenticating
@@ -43,10 +42,8 @@ def make_payload(identity):
     iat = datetime.utcnow()
     exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
-    identity = getattr(identity, 'id') or identity['id']  # Create the identity payload here
-    # identity = [identity.id, 'HELLO']
-    
-    return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
+    id_payload = getattr(identity, 'id') or identity['id']  # Create the identity payload here
+    return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': id_payload}
 
 
 
@@ -92,45 +89,6 @@ def flickr(): # REST params: ([search], [results])
 @app.route('/api/places', methods=['GET'])
 def google_places():
     pass
-
-
-@app.route('/api/hello', methods=['GET'])
-def hello():
-    fake_regi = [
-        {'name': 'James',
-         'age': '17',
-         'fav_fish': 'Salmon'
-        },
-        {'name': 'Kevin',
-         'age': '91',
-         'fav_fish': 'Tuna'
-        },
-        {'name': 'Blake',
-         'age': '45',
-         'fav_fish': 'I\'m a vegan goddammit'
-        }
-    ]
-    data = jsonify(fake_regi)
-    print("I am sending!")
-    print(data)
-    # return Response(data)
-    return data
-
-@app.route('/api/insecure')
-def insecure():
-    return jsonify({
-        'message': 'How dare you access me so insecurely!!'
-        })
-
-@app.route('/api/secure')
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def secure():
-    print("Secured?")
-    return jsonify({
-        'message': 'I am secured! My ID is ' + str(current_identity),
-        'identity': str(current_identity)
-        })
 
 
 @app.route('/api/new_user', methods=['POST'])
@@ -224,3 +182,41 @@ def registered_users():
         }
     ]
     return render_template('registered-users.html', admin=admin_name, users=fake_regi)
+
+
+@app.route('/api/hello', methods=['GET'])
+def hello():
+    fake_regi = [
+        {'name': 'James',
+         'age': '17',
+         'fav_fish': 'Salmon'
+        },
+        {'name': 'Kevin',
+         'age': '91',
+         'fav_fish': 'Tuna'
+        },
+        {'name': 'Blake',
+         'age': '45',
+         'fav_fish': 'I\'m a vegan goddammit'
+        }
+    ]
+    data = jsonify(fake_regi)
+    print("I am sending!")
+    print(data)
+    return data
+
+@app.route('/api/insecure')
+def insecure():
+    return jsonify({
+        'message': 'How dare you access me so insecurely!!'
+        })
+
+@app.route('/api/secure')
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def secure():
+    print("Secured?")
+    return jsonify({
+        'message': 'I am secured! My ID is ' + str(current_identity),
+        'identity': str(current_identity)
+        })
