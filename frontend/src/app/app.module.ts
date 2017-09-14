@@ -69,7 +69,6 @@ export const serviceProviders = [
     ProfileComponent,
     AccountSettingsComponent,
     MyJourneysComponent,
-    SearchAutoCompleteComponent
   ],
   imports: [
     BrowserModule,
