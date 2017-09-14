@@ -146,6 +146,13 @@ def new_stop():
     #db.session.add(created_stop)
     #db.session.commit()
 
+@app.route('/api/get_journey', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_journey():
+    pass
+
+
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():
     #TO DO: get stop_id from stop in journey
