@@ -138,8 +138,8 @@ def new_user():
     search_username = models.User.query.filter_by(username=username).first()
     if search_username:
         return jsonify({
-                'message': username + " is taken."
-            })
+            'message': username + " is taken."
+        })
     
     password = request.form['password']
     email = request.form['email']
@@ -148,6 +148,51 @@ def new_user():
     db.session.commit()
     return authenticate(username, password)
 
+@app.route('/api/new_place', methods=['POST'])
+def new_place():
+    print(request)
+    name = request.form['name']
+    search_name = models.Place.query.filter_by(place_name=name).first()
+    if search_name:
+        return jsonify({
+            'message': name + " already exists."
+        })
+
+    rating = request.form['rating']
+    created_place = models.Place(place_name=name, place_rating=rating)
+    db.session.add(created_place)
+    db.session.commit()
+
+@app.route('/api/new_stop', methods=['POST'])
+def new_stop():
+    print(request)
+    name = request.form['name']
+    search_name = models.Stop.query.filter_by(stop_name=name).first()
+    if search_name:
+        return jsonify({
+            'message': name + " already exists."
+        })
+
+    rating = request.form['rating']
+    created_stop = models.Stop(stop_name=name, stop_rating=rating)
+    db.session.add(created_stop)
+    db.session.commit()
+
+#@app.route('/api/new_journey', methods=['POST'])
+#def new_journey():
+    #TO DO: get user_id from user
+    #created_journey = models.Journey(cost=0)
+    #db.session.add(created_stop)
+    #db.session.commit()
+
+#@app.route('/api/new_itinerary', methods=['POST'])
+#def new_itinerary():
+    #TO DO: get stop_id from stop in journey
+    #print(request)
+    #eventDay = request.form['eventDay']
+    #created_itinerary = models.Itinerary(day_of_event=eventDay)
+    #db.session.add(created_itinerary)
+    #db.session.commit()
 
 ################ Old stuff ####################
 @app.route('/')
