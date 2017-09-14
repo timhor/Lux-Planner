@@ -143,7 +143,7 @@ def new_stop():
 def new_journey():
     user_id = current_identity
     created_journey = models.Journey(user_id=user_id,cost=0)
-    db.session.add(created_stop)
+    db.session.add(created_journey)
     db.session.commit()
 
 @app.route('/api/get_journey', methods=['GET'])
