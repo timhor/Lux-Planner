@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl,
   FormGroup, Validators } from '@angular/forms'
+import { MapsAPILoader } from '@agm/core';
+import {} from '@types/googlemaps';
+import { ViewChild, ElementRef, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-journey',
@@ -9,12 +12,16 @@ import { AbstractControl, FormArray, FormBuilder, FormControl,
 })
 export class JourneyComponent implements OnInit {
 
-
   myJourneys: FormGroup;
   
   constructor(
+    private mapsAPILoader: MapsAPILoader, 
+    private ngZone: NgZone,
     private fb: FormBuilder
   ) {}
+
+  // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
+  @ViewChild("search") public searchElement: ElementRef;
 
   ngOnInit() {
     // build the form model
@@ -23,8 +30,10 @@ export class JourneyComponent implements OnInit {
         [this.buildItem('')]
       )
     })
-  }
 
+    this.getAutocomplete();
+  }
+  
   submit() {
     console.log("Reactive Form submitted: ", this.myJourneys)
   }
@@ -36,4 +45,21 @@ export class JourneyComponent implements OnInit {
     })
   }
 
+
+  private getAutocomplete() {
+    this.mapsAPILoader.load().then(() => {
+      // let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement);
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {
+        types: ['(cities)']
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+        });
+      });
+    });
+  }
 }
