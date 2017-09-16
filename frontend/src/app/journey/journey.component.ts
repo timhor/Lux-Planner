@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl,
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
+import { StopComponent } from '../stop/stop.component';
 
 @Component({
   selector: 'app-journey',

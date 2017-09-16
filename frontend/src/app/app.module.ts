@@ -33,7 +33,6 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
 import { DropdownModule } from "ng2-dropdown";
-import { ModalComponent } from './modal/modal.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -69,8 +68,7 @@ export const serviceProviders = [
     HelpComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    MyJourneysComponent,
-    ModalComponent,
+    MyJourneysComponent
   ],
   imports: [
     BrowserModule,
