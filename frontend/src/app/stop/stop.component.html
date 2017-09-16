@@ -4,11 +4,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <ng-content select=".app-stop-header"></ng-content>
+        Stop Information
       </div>
       <div class="modal-body">
         <ng-content select=".app-stop-body"></ng-content>
         <div class="container" id="body_div">
-          <br>
           <div>
             <div>
               <h1 align="center">{{currStop}}</h1>
@@ -118,6 +118,7 @@
       </div>
       <div class="modal-footer">
         <ng-content select=".app-stop-footer"></ng-content>
+        <br>
       </div>
     </div>
   </div>

@@ -1,11 +1,10 @@
 <app-stop #stop>
   <div class="app-stop-header">
-    Stop Information
+    <button type="button" class="btn btn-danger pull-right" id="btnFormat" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
   </div>
   <div class="app-stop-body">
   </div>
   <div class="app-stop-footer">
-    <button type="button" class="btn btn-danger" id="btnFormat" (click)="stop.hide()">Close</button>
   </div>
 </app-stop>
 <div class="container">
