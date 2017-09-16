@@ -76,7 +76,7 @@ h3, form {
    border-color:#FFFFFF;
    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
    cursor: pointer; cursor: hand; outline: none;
-   min-width: 3em; 
+   min-width: 2em; 
 }
 
 #saveJourneyBtn{
