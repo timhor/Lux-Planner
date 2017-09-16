@@ -9,6 +9,7 @@ import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 from datetime import datetime, timedelta
+import wikipedia
 
 CORS(app)
 
@@ -227,3 +228,12 @@ def secure():
         'message': 'I am secured! My ID is ' + str(current_identity),
         'identity': str(current_identity)
         })
+
+@app.route('/api/new_user', methods=['POST'])
+
+@app.route('/api/stop_information', methods=['POST'])
+def wikipedia():
+    out = wikipedia.search("tokyo")
+    summary = wikipedia.summary(out[0])
+
+

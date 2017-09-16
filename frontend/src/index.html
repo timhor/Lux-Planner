@@ -1,25 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>LUX: Life's Unforgettable eXperiences</title>
-  <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css">  
-  
+<head>
+<meta charset="utf-8">
+<title>LUX: Life's Unforgettable eXperiences</title>
+<base href="/">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
 </head>
 
 <!-- <ul class="cb-slideshow">
-    <li id="back_text"><span>Sky</span></li>
-    <li id="back_text"><span>Runway</span></li>
-    <li id="back_text"><span>Road</span></li>
+<li id="back_text"><span>Sky</span></li>
+<li id="back_text"><span>Runway</span></li>
+<li id="back_text"><span>Road</span></li>
 </ul> -->
 
 <body class="main-container">
-  <app-root></app-root>
-  <br><br><br>
+<!-- <script>
+    $.ajax({
+        url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=Tokyo&callback=?',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            
+            var pages = data["query"]["pages"];
+            
+            for (var key in pages) {
+                if (pages.hasOwnProperty(key)) {
+                    // Here, 'key' is bound to an attribute
+                    // name so we can get the associated value like so:
+                    var value = pages[key];
+                    console.log(value.extract);
+                    document.getElementById("information").innerHTML = value.extract; // Give div "information", the contents of extract
+                }
+            }
+        }
+    });
+</script> -->
+<app-root></app-root>
+<br><br><br>
 </body>
+
 </html>
