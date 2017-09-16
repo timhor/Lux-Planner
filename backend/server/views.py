@@ -87,7 +87,7 @@ def flickr(): # REST params: ([search], [results])
     except:
         return "Error"
 
-@app.route('/api/stop_information', methods=['GET'])
+@app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
     stop = request.args.get('stop', 'toyko')
     info = api_handler.wikipedia_call(stop)

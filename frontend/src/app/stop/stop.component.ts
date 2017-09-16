@@ -24,10 +24,12 @@ export class StopComponent {
         this.connService = _connectionService;
         this.getBannerPhoto();
         // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=Tokyo&callback=?
-        this.aboutText = _connectionService.wikiSearch("Tokyo").subscribe(
-            (data) => console.log(data)
-        );
-        console.log(this.aboutText);
+        // this.aboutText = _connectionService.wikiSearch("Tokyo").subscribe(
+        //     (data) => console.log(data)
+        // );
+        // console.log(this.aboutText);
+        this.connService.getServiceData('api/stop_information/?stop=tokyo').subscribe(res => this.aboutText = res.info);
+        
     }
 
     getBannerPhoto() {
