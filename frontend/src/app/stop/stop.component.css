@@ -80,13 +80,11 @@ h2 {
 }
 
 #rowColor{
-    margin: 0 auto; 
     height: fit-content; 
 }
 
 #colColor{
     height: auto;
-    padding-bottom: 5vh; 
 }
 
 .modal {
@@ -104,3 +102,8 @@ h2 {
     overflow-y: auto;
     background-color: rgb(240,245,255)
 }
+
+/* table {
+    border-collapse: collapse;
+    border-spacing: 0;
+} */
