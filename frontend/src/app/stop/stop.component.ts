@@ -20,6 +20,8 @@ export class StopComponent {
     public attraction_names = [];
     public attraction_address = [];
     public attraction_ratings = [];
+    public visible = false;
+    public visibleAnimate = false;
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, _connectionService: ConnectionService) {
