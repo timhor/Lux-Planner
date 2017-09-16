@@ -43,33 +43,12 @@
     <br>
     <h2>About</h2>
     <br>
-        
-    
-    <!-- <script>
-        $.ajax({
-            url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=Tokyo&callback=?',
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                
-                var pages = data["query"]["pages"];
-                
-                for (var key in pages) {
-                    if (pages.hasOwnProperty(key)) {
-                        // Here, 'key' is bound to an attribute
-                        // name so we can get the associated value like so:
-                        var value = pages[key];
-                        console.log(value.extract);
-                        document.getElementById("information").innerHTML = value.extract; // Give div "information", the contents of extract
-                    }
-                }
-            }
-        });
-    </script> -->
     <div id="information">
             {{aboutText}}
     </div>
-    
+    <div id="fromWikipedia" align="right">
+            Information retrieved from Wikipedia.
+    </div>
 
     <br>
     <br>
@@ -79,7 +58,7 @@
       <div class="col-sm-4">
           <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
           <div id="subtitle" align="center">
-            Attraction 1
+            {{attraction_name}}
           </div>
       </div>
       <div class="col-sm-4">
@@ -100,19 +79,43 @@
       <div class="col-sm-4">
         <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
         <div id="subtitle" align="center">
-            Landmark 1
+            Attraction 4
         </div>
       </div>
       <div class="col-sm-4">
         <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
         <div id="subtitle" align="center">
-          Landmark 2
+          Attraction 5
         </div>
       </div>
       <div class="col-sm-4">
         <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
         <div id="subtitle" align="center">
-          Landmark 3
+            Attraction 6
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
+        <div id="subtitle" align="center">
+            Attraction 7
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
+        <div id="subtitle" align="center">
+            Attraction 8
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
+        <div id="subtitle" align="center">
+            Attraction 8
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="https://dummyimage.com/250x250/000/fff" id="imgBorder">
+        <div id="subtitle" align="center">
+            Attraction 10
         </div>
       </div>
     </div>
