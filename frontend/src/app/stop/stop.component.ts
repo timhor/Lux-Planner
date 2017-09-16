@@ -16,7 +16,7 @@ export class StopComponent {
     public bannerPhoto = "http://via.placeholder.com/650x300";
     public connService: ConnectionService;
     public aboutText = "Loading Information...";
-    public attractions_index = [0,3,6,9];
+    // public attractions_index = [0,3,6,9];
     public attractions_list;    
     public attraction_names = [];
     public attraction_address = [];
