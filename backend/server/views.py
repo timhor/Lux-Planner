@@ -9,7 +9,6 @@ import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 from datetime import datetime, timedelta
-# import wikipedia
 
 CORS(app)
 
