@@ -59,16 +59,18 @@ h2 {
 #attraction_heading {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
-    font-size:calc(5px + 1.5vw);                
-    /* font-size: 1.5vw;  */
+    font-size:calc(7px + 2vh);                
     text-align: center;
+    padding-left: 2vw;
+    padding-right: 2vw;   
 }
 
 #attraction_details {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-size:calc(7px + 1vh);                
-    /* font-size: 1.5vw;  */
     text-align: left;
+    padding-left: 2vw;
+    padding-right: 2vw;    
 }
 
 #fromWikipedia{
@@ -78,8 +80,13 @@ h2 {
 }
 
 #rowColor{
-    border-width: 2px;
-    border-color: green;
+    margin: 0 auto; 
+    height: fit-content; 
+}
+
+#colColor{
+    height: auto;
+    padding-bottom: 5vh; 
 }
 
 .modal {
