@@ -83,5 +83,5 @@ h2 {
 .modal-body {
     max-height: calc(100vh - 150px);
     overflow-y: auto;
-    background-color: rgb(240, 240, 240)
+    background-color: rgb(240,245,255)
 }

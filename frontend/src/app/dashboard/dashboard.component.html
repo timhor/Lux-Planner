@@ -1,3 +1,13 @@
+<app-stop #stop>
+  <div class="app-stop-header">
+    Stop Information
+  </div>
+  <div class="app-stop-body">
+  </div>
+  <div class="app-stop-footer">
+    <button type="button" class="btn btn-danger" id="btnFormat" (click)="stop.hide()">Close</button>
+  </div>
+</app-stop>
 <div class="container">
   <br>
   <div class="row">
@@ -9,8 +19,8 @@
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" id="fillButton" *ngIf="i!=0">{{stop}}</button>
-          <button type="button" class="btn btn-default btn-md active" id="fillButton" *ngIf="i==0">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!=0">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i==0">{{stop}}</button>
         </div>
       </div>
       <div class="well">
@@ -97,7 +107,7 @@
         </div>
       </div>
       <div class="well">
-        <button type="button" class="btn btn-default btn-lg" id="fillButton" routerLink="/itinerary">Itinerary</button>
+        <button type="button" class="btn btn-default btn-lg" id="btnFormat" style="width:100%" routerLink="/itinerary">Itinerary</button>
       </div>
     </div>
     <div class="col-sm-9">
@@ -116,7 +126,7 @@
             nulla. Ut sagittis lobortis lorem at volutpat</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
             nulla. Ut sagittis lobortis lorem at volutpat</p>
-          <button type="button" class="btn btn-default btn-md pull-right" width="100px" target="_blank" routerLink="/stop">More Info</button>
+          <button type="button" class="btn btn-default btn-md pull-right" id="btnFormat" width="100px" (click)="stop.show()">More Info</button>
           <br><br>
         </div>
       </div>
