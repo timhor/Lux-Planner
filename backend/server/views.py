@@ -29,7 +29,7 @@ def authenticate(username, password):
 
 
 def identity(payload):
-    """ TODO What this do idk"""
+    """ Provides an identity of the user """
     print(payload['identity'])
     return payload  # identity payload => current_identity (global var)
 
