@@ -15,7 +15,6 @@ import { SearchService } from '../search.service'
 export class JourneyComponent implements OnInit {
 
   myJourneys: FormGroup;
-  initialLoc: FormGroup;
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
@@ -24,8 +23,6 @@ export class JourneyComponent implements OnInit {
     private searchService: SearchService
   ) {}
 
-  startLoc = new FormControl(this.searchService.query)
-  
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
   @ViewChild("search") public searchElement: ElementRef;
 
