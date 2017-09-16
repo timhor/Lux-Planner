@@ -19,6 +19,7 @@ import { ConnectionComponent } from './connection/connection.component';
 import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
 import { LoggedInService } from './loggedIn.service';
+import { SearchService } from './search.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
@@ -47,7 +48,7 @@ export const authProvider = {
 };
 
 export const serviceProviders = [
-  StopService, ConnectionService, authProvider, LoggedInService
+  StopService, ConnectionService, authProvider, LoggedInService, SearchService
 ];
 
 @NgModule({

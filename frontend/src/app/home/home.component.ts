@@ -1,6 +1,7 @@
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { SearchService } from '../search.service'
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent {
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
   @ViewChild('search') public searchElement: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {}
+  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, 
+    private searchService: SearchService) {}
 
   ngOnInit() {
     this.mapsAPILoader.load().then(
@@ -33,6 +35,11 @@ export class HomeComponent {
         });
       }
     );
+  }
+
+  sendQuery() {
+    console.log((<HTMLInputElement>document.getElementById("mainSearch")).value);
+    this.searchService.query =(<HTMLInputElement>document.getElementById("mainSearch")).value;
   }
 }
 

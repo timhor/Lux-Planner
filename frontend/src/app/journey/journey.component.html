@@ -20,8 +20,7 @@
     <div class="row">
       <div class="col-sm-5">
         <label id="stop-label">Starting Location</label>
-        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search>
-        
+        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation">
       </div>
       <div class="col-sm-2">
         <br>
@@ -30,7 +29,7 @@
       </div>
       <div class="col-sm-4">
         <label id="date-label">Departure Date</label>
-        <input type="date" placeholder="Date" class="form-control">
+        <input type="date" placeholder="Date" class="form-control" formControlName="initialDate">
       </div>
     </div>
     <hr>
