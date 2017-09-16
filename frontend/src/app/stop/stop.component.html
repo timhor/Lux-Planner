@@ -62,36 +62,38 @@
             <br>
             <br>
             <h2>Popular Landmarks and Attractions</h2>
-            <div class="row" id="rowColor" align="center" *ngFor="let index of attractions_index">
-              <div class="col-sm-4">
-                <img src="https://dummyimage.com/250x250/000/fff">
-                <p id="attraction_heading">
-                  <b>{{attraction_names[index]}}</b>
-                </p>
-                <p id="attraction_details">
-                  <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[index]}} <br>
-                  <b>Address: </b> &nbsp; &nbsp; {{attraction_address[index]}}
-                </p>
-              </div>
-              <div class="col-sm-4">
-                <img src="https://dummyimage.com/250x250/000/fff">
-                <p id="attraction_heading">
-                  <b>{{attraction_names[index+1]}}</b>
-                </p>
-                <p id="attraction_details">
-                  <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[index+1]}} <br>
-                  <b>Address: </b> &nbsp; &nbsp; {{attraction_address[index+1]}}
-                </p>
-              </div>
-              <div class="col-sm-4">
-                <img src="https://dummyimage.com/250x250/000/fff">
-                <p id="attraction_heading">
-                  <b>{{attraction_names[index+2]}}</b>
-                </p>
-                <p id="attraction_details">
-                  <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[index+2]}} <br>
-                  <b>Address: </b> &nbsp; &nbsp; {{attraction_address[index+2]}}
-                </p>
+            <div *ngFor="let attraction of attraction_names;let i=index">
+              <div class="row" id="rowColor" align="center" *ngIf="i%3 === 0">
+                <div class="col-sm-4">
+                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <p id="attraction_heading">
+                    <b>{{attraction_names[i]}}</b>
+                  </p>
+                  <p id="attraction_details">
+                    <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[i]}} <br>
+                    <b>Address: </b> &nbsp; &nbsp; {{attraction_address[i]}}
+                  </p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <p id="attraction_heading">
+                    <b>{{attraction_names[i+1]}}</b>
+                  </p>
+                  <p id="attraction_details">
+                    <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[i+1]}} <br>
+                    <b>Address: </b> &nbsp; &nbsp; {{attraction_address[i+1]}}
+                  </p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <p id="attraction_heading">
+                    <b>{{attraction_names[i+2]}}</b>
+                  </p>
+                  <p id="attraction_details">
+                    <b>Ratings: </b> &nbsp; &nbsp; {{attraction_ratings[i+2]}} <br>
+                    <b>Address: </b> &nbsp; &nbsp; {{attraction_address[i+2]}}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
