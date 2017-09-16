@@ -1,18 +1,16 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&libraries=places"></script>
   
 <br>
-<app-modal #modal>
-  <div class="app-modal-header">
-    header
+<app-stop #stop>
+  <div class="app-stop-header">
+    Stop Information
   </div>
-  <div class="app-modal-body">
+  <div class="app-stop-body">
   </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+  <div class="app-stop-footer">
+    <button type="button" class="btn btn-danger" id="btnFormat" (click)="stop.hide()">Close</button>
   </div>
-</app-modal>
-<button type="button" (click)="modal.show()">test</button>
+</app-stop>
 <div id="body_div">
   <div id="journeyHead">
     <h2>New Journey</h2>
@@ -22,16 +20,16 @@
     <div class="row">
       <div class="col-sm-5">
         <label id="stop-label">Starting Location</label>
-        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search>
-        
+        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation">
       </div>
       <div class="col-sm-2">
         <br>
-        <a target="_blank" routerLink="/stop"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
+        <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
+        <a (click)="stop.show()"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
       <div class="col-sm-4">
         <label id="date-label">Departure Date</label>
-        <input type="date" placeholder="Date" class="form-control">
+        <input type="date" placeholder="Date" class="form-control" formControlName="initialDate">
       </div>
     </div>
     <hr>
@@ -46,7 +44,7 @@
         </div>
         <div class="col-sm-2">
           <br>
-          <a target="_blank" routerLink="/stop"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
+          <a (click)="stop.show()"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
         </div>
         <div class="col-sm-4">
           <label id="date-label" [attr.for]="'date'+i">Departure Date</label>

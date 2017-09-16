@@ -4,14 +4,14 @@ import { ConnectionService } from '../connection/connection.service';
 // import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 @Component({
-    selector: 'my-stops',
+    selector: 'app-stop',
     providers : [StopService, ConnectionService],
     styleUrls: ['./stop.component.css'],
     templateUrl: './stop.component.html',
 })
 export class StopComponent {
     public componentName = 'StopComponent';
-    public currStop = 'Paris';
+    public currStop = 'Tokyo';
     public stops;
     public bannerPhoto = "http://via.placeholder.com/650x300";
     public connService: ConnectionService;
@@ -77,8 +77,22 @@ export class StopComponent {
         // this.bannerPhoto = this.connService.flickrSearch();
         this.connService.getServiceData('api/flickr/?search=Paris%20Landmarks&results=1').subscribe(res => this.bannerPhoto = res.images[0]);
         
-        
         console.log("Hello with " + this.bannerPhoto);
+    }
 
+    public show(): void {
+      this.visible = true;
+      setTimeout(() => this.visibleAnimate = true, 100);
+    }
+  
+    public hide(): void {
+      this.visibleAnimate = false;
+      setTimeout(() => this.visible = false, 300);
+    }
+  
+    public onContainerClicked(event: MouseEvent): void {
+      if ((<HTMLElement>event.target).classList.contains('modal')) {
+        this.hide();
+      }
     }
 }

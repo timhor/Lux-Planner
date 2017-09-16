@@ -19,6 +19,7 @@ import { ConnectionComponent } from './connection/connection.component';
 import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
 import { LoggedInService } from './loggedIn.service';
+import { SearchService } from './search.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
@@ -33,7 +34,6 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
 import { DropdownModule } from "ng2-dropdown";
-import { ModalComponent } from './modal/modal.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -48,7 +48,7 @@ export const authProvider = {
 };
 
 export const serviceProviders = [
-  StopService, ConnectionService, authProvider, LoggedInService
+  StopService, ConnectionService, authProvider, LoggedInService, SearchService
 ];
 
 @NgModule({
@@ -69,8 +69,7 @@ export const serviceProviders = [
     HelpComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    MyJourneysComponent,
-    ModalComponent,
+    MyJourneysComponent
   ],
   imports: [
     BrowserModule,

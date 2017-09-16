@@ -39,14 +39,12 @@ h4 {
 }
 
 #body_div{
-    background-color: rgba(255, 255, 255, 0.8);
     padding-top: 5vh;
     padding-bottom: 5vh;  
     padding-right: 5vw;
     padding-left: 5vw; 
     min-width: 300px;   
     margin: 0 auto;
-    border-radius: 5vh;
  }
 
 #myCarousel{
@@ -82,4 +80,20 @@ h2 {
 #rowColor{
     border-width: 2px;
     border-color: green;
+}
+
+.modal {
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    height: 100%;
+}
+ 
+.modal-header {
+    font-size: 18px;
+}
+
+.modal-body {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    background-color: rgb(240,245,255)
 }

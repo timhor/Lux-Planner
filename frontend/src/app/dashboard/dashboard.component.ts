@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { StopComponent } from '../stop/stop.component'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
