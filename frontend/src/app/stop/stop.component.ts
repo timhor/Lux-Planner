@@ -16,8 +16,10 @@ export class StopComponent {
     public bannerPhoto = "http://via.placeholder.com/650x300";
     public connService: ConnectionService;
     public aboutText = "Loading Information...";
-    public attraction_name = "Loading attraction name...";
-    public attractions_list;
+    public attractions_list;    
+    public attraction_names = [];
+    public attraction_address = [];
+    public attraction_ratings = [];
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, _connectionService: ConnectionService) {
@@ -38,24 +40,28 @@ export class StopComponent {
             }        
         );
 
-        this.connService.getServiceData('api/places/?place=New York').subscribe(
+        this.connService.getServiceData('api/places/?place=Tokyo').subscribe(
             res => {
                 this.attractions_list = res.results; 
-                console.log("ATTRACTIONS INFORMATION IS: " + this.attractions_list);
-                this.attractions_list.sort(function(a, b) {
-                    return parseFloat(b.rating) - parseFloat(a.rating);
-                });
-                for (var i = 0; i < 10; i++) {
+                
+                // Comment Below is for SORT BY RATINGS
+                // this.attractions_list.sort(function(a, b) {
+                //     return parseFloat(b.rating) - parseFloat(a.rating);
+                // });
+
+                for (var i = 0; i < 12; i++) {
                     var obj = this.attractions_list[i];
                     var name = obj.name;
                     var address = obj.vicinity;
                     var ratings = obj.rating;
-                    if (name == null){  address = "Could not find attraction";  }
+                    if (name == null){  name = "Could not find attraction";  }
                     if (address == null){   address = "Address not known";  }
                     if (ratings == null){   ratings = "Unrated";    }
                     if (obj == null){   continue;   }
-                    console.log("Name is: " + name + "  --  Address is: " + address + "  --  Ratings : " + ratings);
-                    document.getElementById
+                    this.attraction_names.push(name);
+                    this.attraction_address.push(address);
+                    this.attraction_ratings.push(ratings);
+                    // console.log("Name is: " + name + "  --  Address is: " + address + "  --  Ratings : " + ratings);
                 }
             }        
         );
