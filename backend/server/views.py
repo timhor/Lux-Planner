@@ -9,7 +9,7 @@ import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 from datetime import datetime, timedelta
-import wikipedia
+# import wikipedia
 
 CORS(app)
 
@@ -86,6 +86,13 @@ def flickr(): # REST params: ([search], [results])
         return jsonify({"images" : urls})
     except:
         return "Error"
+
+@app.route('/api/stop_information', methods=['GET'])
+def wikipedia_search():
+    stop = request.args.get('stop', 'toyko')
+    info = api_handler.wikipedia_call(stop)
+    return jsonify({'info': info})
+
 
 @app.route('/api/places', methods=['GET'])
 def google_places():
@@ -229,11 +236,6 @@ def secure():
         'identity': str(current_identity)
         })
 
-@app.route('/api/new_user', methods=['POST'])
 
-@app.route('/api/stop_information', methods=['POST'])
-def wikipedia():
-    out = wikipedia.search("tokyo")
-    summary = wikipedia.summary(out[0])
 
 
