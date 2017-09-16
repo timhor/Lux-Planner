@@ -94,9 +94,10 @@ def wikipedia_search():
     return jsonify({'info': info})
 
 
-@app.route('/api/places', methods=['GET'])
+@app.route('/api/places/', methods=['GET'])
 def google_places():
-    pass
+    place = request.args.get('place', 'toyko')
+    return jsonify(api_handler.search_places(place))
 
 
 @app.route('/api/new_user', methods=['POST'])

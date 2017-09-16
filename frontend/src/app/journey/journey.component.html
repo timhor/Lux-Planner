@@ -1,11 +1,22 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&libraries=places"></script>
   
 <br>
+<app-modal #modal>
+  <div class="app-modal-header">
+    header
+  </div>
+  <div class="app-modal-body">
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</app-modal>
+<button type="button" (click)="modal.show()">test</button>
 <div id="body_div">
   <div id="journeyHead">
     <h2>New Journey</h2>
   </div>
-
   <form [formGroup]="myJourneys" (ngSubmit)="submit()">
     <hr>
     <div class="row">

@@ -4,6 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl,
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-journey',
@@ -44,7 +45,6 @@ export class JourneyComponent implements OnInit {
       date: new FormControl()
     })
   }
-
 
   private getAutocomplete() {
     this.mapsAPILoader.load().then(() => {

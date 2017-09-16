@@ -93,3 +93,12 @@ h3, form {
     background: #FF7B00; 
     color: white;
 }
+
+.app-modal-body {
+    font-size: 30px;
+}
+
+.app-modal {
+    width: 100vw;
+}
+
