@@ -50,20 +50,27 @@ export class JourneyComponent implements OnInit {
     })
   }
 
+  public autocomplete:any;
+
   private getAutocomplete() {
     this.mapsAPILoader.load().then(() => {
       // let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement);
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {
+      this.autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {
         types: ['(cities)']
       });
-      autocomplete.addListener("place_changed", () => {
+      this.autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          let place: google.maps.places.PlaceResult = this.autocomplete.getPlace();
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
         });
       });
     });
+  }
+
+  getPlace () {
+    console.log((<HTMLInputElement>document.getElementById('initialLocation')).value);
+    return (<HTMLInputElement>document.getElementById('initialLocation')).value;
   }
 }
