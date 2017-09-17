@@ -71,4 +71,3 @@ export class JourneyComponent implements OnInit {
     return (<HTMLInputElement>document.getElementById('initialLocation')).value;
   }
 }
-}
