@@ -66,4 +66,8 @@ export class JourneyComponent implements OnInit {
       });
     });
   }
+
+  getPlace () {
+    return (<HTMLInputElement>document.getElementById('initialLocation')).value;
+  }
 }
