@@ -8,6 +8,7 @@ import { StopComponent } from '../stop/stop.component'
 export class DashboardComponent implements OnInit {
   public currJourney = "Journey 1";
   public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore'];
+  public activeIndex = 0;
   constructor() {}
 
   ngOnInit() {
