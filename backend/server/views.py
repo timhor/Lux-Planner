@@ -7,7 +7,7 @@ from server import app, api_handler, models, db
 from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
-from datetime import timedelta
+from datetime import datetime
 
 CORS(app)
 
