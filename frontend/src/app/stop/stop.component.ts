@@ -84,7 +84,7 @@ export class StopComponent {
     }
 
     getBannerPhoto() {
-        this.connService.getServiceData('api/flickr/?search='+this.currStop+'%20Landmarks&results=0-4').subscribe(res => this.location_images = res.images);
+        this.connService.getServiceData('api/flickr/?search='+this.currStop+'%20Landmarks&results=0-9').subscribe(res => this.location_images = res.images);
         
         console.log("Hello with " + this.bannerPhoto);
     }
