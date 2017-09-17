@@ -10,12 +10,12 @@ import { ConnectionService } from '../connection/connection.service';
     templateUrl: './stop.component.html',
 })
 export class StopComponent {
-    public componentName = 'StopComponent';
+    public componentName: string = 'StopComponent';
     public currStop = 'Tokyo';
     public stops;
-    public bannerPhoto = "http://via.placeholder.com/650x300";
+    public bannerPhoto: string = "http://via.placeholder.com/650x300";
     public connService: ConnectionService;
-    public aboutText = "Loading Information...";
+    public aboutText: string = "Loading Information...";
     // public attractions_index = [0,3,6,9];
     public attractions_list;    
     public attraction_names = [];
@@ -45,27 +45,31 @@ export class StopComponent {
 
         this.connService.getServiceData('api/places/?place=Tokyo').subscribe(
             res => {
-                this.attractions_list = res.results; 
+                res.forEach(place => {
+                    console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
+                    
+                });
+                // this.attractions_list = res.results; 
                 
-                // Comment Below is for SORT BY RATINGS
-                // this.attractions_list.sort(function(a, b) {
-                //     return parseFloat(b.rating) - parseFloat(a.rating);
-                // });
+                // // Comment Below is for SORT BY RATINGS
+                // // this.attractions_list.sort(function(a, b) {
+                // //     return parseFloat(b.rating) - parseFloat(a.rating);
+                // // });
 
-                for (var i = 0; i < 12; i++) {
-                    var obj = this.attractions_list[i];
-                    var name = obj.name;
-                    var address = obj.vicinity;
-                    var ratings = obj.rating;
-                    if (name == null){  name = "Could not find attraction";  }
-                    if (address == null){   address = "Address not known";  }
-                    if (ratings == null){   ratings = "Unrated";    }
-                    if (obj == null){   continue;   }
-                    this.attraction_names.push(name);
-                    this.attraction_address.push(address);
-                    this.attraction_ratings.push(ratings);
-                    // console.log("Name is: " + name + "  --  Address is: " + address + "  --  Ratings : " + ratings);
-                }
+                // for (var i = 0; i < 12; i++) {
+                //     var obj = this.attractions_list[i];
+                //     var name = obj.name;
+                //     var address = obj.vicinity;
+                //     var ratings = obj.rating;
+                //     if (name == null){  name = "Could not find attraction";  }
+                //     if (address == null){   address = "Address not known";  }
+                //     if (ratings == null){   ratings = "Unrated";    }
+                //     if (obj == null){   continue;   }
+                //     this.attraction_names.push(name);
+                //     this.attraction_address.push(address);
+                //     this.attraction_ratings.push(ratings);
+                //     // console.log("Name is: " + name + "  --  Address is: " + address + "  --  Ratings : " + ratings);
+                // }
             }        
         );
         // this.connService.getServiceData('api/places/?place=tokyo').subscribe(res => this.attractions_list = res.results);        
@@ -77,7 +81,6 @@ export class StopComponent {
     }
 
     getBannerPhoto() {
-        // this.bannerPhoto = this.connService.flickrSearch();
         this.connService.getServiceData('api/flickr/?search=Paris%20Landmarks&results=1').subscribe(res => this.bannerPhoto = res.images[0]);
         
         console.log("Hello with " + this.bannerPhoto);
