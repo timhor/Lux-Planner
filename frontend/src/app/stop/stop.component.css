@@ -56,6 +56,11 @@ h2 {
     text-align: left;
 }
 
+#attraction_image {
+    width: 20vw;
+    height: 25vh;
+}
+
 #attraction_heading {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    

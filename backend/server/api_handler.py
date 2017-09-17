@@ -33,7 +33,7 @@ def search_places(request):
         try:
             print(place['photos'][0])
             photo_key = place['photos'][0]['photo_reference']
-            photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=220&photoreference={photo_key}&key={places_key}"
+            photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference={photo_key}&key={places_key}"
         except KeyError:
             photo_url = "http://via.placeholder.com/250x250"
             

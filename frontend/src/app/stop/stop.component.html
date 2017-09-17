@@ -66,13 +66,13 @@
             <div *ngFor="let attraction of attractions;let i=index">
               <div class="row" id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-top:5vh; padding-bottom:1vh;">
                 <div class="col-sm-4" id="colColor">
-                  <img src={{attractions[i].photo}}>
+                  <img id="attraction_image" src={{attractions[i].photo}}>
                 </div>
                 <div class="col-sm-4" id="colColor">
-                  <img src={{attractions[i+1].photo}}>
+                  <img id="attraction_image" src={{attractions[i+1].photo}}>
                 </div>
                 <div class="col-sm-4" id="colColor">
-                  <img src={{attractions[i+2].photo}}>
+                  <img id="attraction_image" src={{attractions[i+2].photo}}>
                 </div>
               </div>
               <div class="row" id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-bottom:1vh;">
