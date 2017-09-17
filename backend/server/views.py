@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
 from datetime import datetime, timedelta
 import pickle
+import json
 
 CORS(app)
 
@@ -165,20 +166,22 @@ def google_places():
 @app.route('/api/new_user', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
-    print(request)
-    username = request.form['username']
+    body = json.loads(request.data)
+    # print(data)
+    username = body['username']
+    print(username)
     search_username = models.User.query.filter_by(username=username).first()
     if search_username:
         return jsonify({
             'message': username + " is taken."
         })
     
-    password = request.form['password']
-    email = request.form['email']
+    password = body['password']
+    email = body['email']
     created_user = models.User(username=username, password=password, email=email)
     db.session.add(created_user)
     db.session.commit()
-    return authenticate(username, password)
+    return jsonify({'message': 'success'})
 
 @app.route('/api/new_place', methods=['POST'])
 def new_place():

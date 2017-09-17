@@ -14,7 +14,6 @@ export class LoggedInService {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
-
      return this.http.post(this.server + 'auth', JSON.stringify({'username': username, 'password': password}),
         options).map((res: Response) => res.json());
   }
@@ -24,6 +23,16 @@ export class LoggedInService {
             return true;
         
         return false;
+  }
+
+  public signup(username: string, password: string, email: string) {
+
+    let options: RequestOptions = new RequestOptions({
+        headers: new Headers({'Content-Type': 'application/json'})
+    });
+     return this.http.post(this.server + 'api/new_user', JSON.stringify({'username': username, 
+        'password': password, 'email': email}),
+        options).map((res: Response) => res.json());
   }
 
 }

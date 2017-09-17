@@ -25,6 +25,14 @@ export class AppComponent {
 }
 
   public isLoggedIn() {
+    try {
+        let jwtHelper: JwtHelper = new JwtHelper();    
+        let token: string = localStorage.getItem('id_token');
+        let decoded = jwtHelper.decodeToken(token);
+        this.username = decoded.identity[1];
+    } catch (e) {
+        // Do nothing, user not logged in
+    }
     return this.loggedInService.loggedIn();
   }
 
