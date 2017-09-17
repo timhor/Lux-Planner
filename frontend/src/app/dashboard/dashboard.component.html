@@ -121,11 +121,8 @@
         </div>
         <div class="well">
           <p id="subHeading">About: {{stops[0]}}</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
-            nulla. Ut sagittis lobortis lorem at volutpat</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
-            nulla. Ut sagittis lobortis lorem at volutpat</p>
-          <button type="button" class="btn btn-default btn-md pull-right" id="btnFormat" width="100px" (click)="stop.show()">More Info</button>
+          <p>{{aboutText}}</p>
+          <button type="button" class="btn btn-default btn-md pull-right" id="btnFormat" width="100px" (click)="stop.show(getCurrStop())">Find Out More</button>
           <br><br>
         </div>
       </div>

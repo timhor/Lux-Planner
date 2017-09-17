@@ -133,7 +133,7 @@ h2 {
 
 .modal {
     background: rgba(0,0,0,0.6);
-    position: absolute;
+    position: fixed;
     height: 100%;
 }
  
