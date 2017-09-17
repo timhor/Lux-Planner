@@ -24,6 +24,7 @@ export class StopComponent {
     public visible = false;
     public visibleAnimate = false;
     public attractions: Array<any> = [];
+    public location_images = [];
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, _connectionService: ConnectionService) {
@@ -83,7 +84,7 @@ export class StopComponent {
     }
 
     getBannerPhoto() {
-        this.connService.getServiceData('api/flickr/?search=Paris%20Landmarks&results=1').subscribe(res => this.bannerPhoto = res.images[0]);
+        this.connService.getServiceData('api/flickr/?search='+this.currStop+'%20Landmarks&results=0-4').subscribe(res => this.location_images = res.images);
         
         console.log("Hello with " + this.bannerPhoto);
     }
