@@ -54,6 +54,17 @@ class Place(db.Model):
     def __repr__(self):
         return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
 
+class StopInformation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    place_name = db.Column(db.String(128), index=True)
+    data_type = db.Column(db.String(128))    
+    cached_data = db.Column(db.LargeBinary)
+    expiry = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return f"ID: {self.id} | place: {self.place_name} | expiry: {self.expiry}"
+    
+
 """
 To add stuff:
 

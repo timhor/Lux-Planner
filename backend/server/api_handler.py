@@ -1,6 +1,7 @@
 from server import flickr
 import wikipedia
 import requests
+# import pickle
 
 # places_key = "AIzaSyDexUm1K0gdiN6UTsOqSpZv-C09D_N6l-w"
 places_key = "AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc"
@@ -31,7 +32,7 @@ def search_places(request):
         address = place.get('vicinity', 'Address is unknown')
         ratings = place.get('rating', 'Unrated')
         try:
-            print(place['photos'][0])
+            # print(place['photos'][0])
             photo_key = place['photos'][0]['photo_reference']
             photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference={photo_key}&key={places_key}"
         except KeyError:
@@ -45,6 +46,6 @@ def search_places(request):
         }
         attractions.append(item)
 
-
+    # print(pickle.dumps(attractions))
     # return response.json()
     return attractions

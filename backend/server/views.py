@@ -7,7 +7,8 @@ from server import app, api_handler, models, db
 from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
-from datetime import datetime
+from datetime import datetime, timedelta
+import pickle
 
 CORS(app)
 
@@ -97,7 +98,26 @@ def wikipedia_search():
 @app.route('/api/places/', methods=['GET'])
 def google_places():
     place = request.args.get('place', 'toyko')
-    return jsonify(api_handler.search_places(place))
+    query = models.StopInformation.query.filter_by(place_name=place, data_type='attractions').first()
+    if query:
+        if query.expiry < datetime.utcnow():
+            print('OLD')
+            data = api_handler.search_places(place)
+            cache = pickle.dumps(data)            
+            query.cached_data = cache
+            query.expiry = datetime.utcnow() + timedelta(days=7)
+            db.session.commit()
+        else:
+            print('DODGED!' + str(query))
+            data = pickle.loads(query.cached_data)
+    else:
+        data = api_handler.search_places(place)
+        cache = pickle.dumps(data)
+        created_cache = models.StopInformation(place_name=place, data_type='attractions', 
+                                            cached_data=cache, expiry=datetime.utcnow())
+        db.session.add(created_cache)
+        db.session.commit()
+    return jsonify(data)
 
 
 @app.route('/api/new_user', methods=['POST'])
