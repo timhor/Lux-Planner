@@ -32,18 +32,6 @@ export class DashboardComponent implements OnInit {
     //temporarily. Should something check which is active
     return this.stops[0];
   }
-  
-  scrollTop() {
-    window.scrollTo(0, 0);
-  }
 
-  saveScroll() {
-    this.scrollx = window.pageXOffset;
-    this.scrolly= window.pageYOffset;
-  }
-
-  loadScroll() {
-    window.scrollTo(this.scrollx,this.scrolly);
-  }
 }
 
