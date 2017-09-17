@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoggedInService } from './loggedIn.service';
 import { Router } from '@angular/router';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,24 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   public title = 'LUX: Holiday Planner';
+  public username: String = 'Username';
 
-  constructor(private loggedInService: LoggedInService, private router: Router) {
-  }
+  constructor(private loggedInService: LoggedInService, private router: Router, ) {
+    try {
+        let jwtHelper: JwtHelper = new JwtHelper();    
+        let token: string = localStorage.getItem('id_token');
+        let decoded = jwtHelper.decodeToken(token);
+        this.username = decoded.identity[1];
+    } catch (e) {
+        // Do nothing, user not logged in
+    }
+}
 
   public isLoggedIn() {
-    //  console.log(this.loggedInService.loggedIn());
     return this.loggedInService.loggedIn();
   }
 
   public logout() {
     localStorage.removeItem('id_token');
-    // this.loggedInService.loggedIn = false;
   }
 }

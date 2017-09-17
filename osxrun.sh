@@ -10,5 +10,5 @@ sleep 5
 osascript \
     -e "tell application \"Terminal\"" \
     -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-    -e "do script \"cd frontend; ng serve\" in front window" \
+    -e "do script \"cd frontend; ng serve; cd ..\" in front window" \
     -e "end tell" > /dev/null

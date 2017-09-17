@@ -12,7 +12,7 @@
             <li *ngIf="!isLoggedIn()"><a class="grow" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log in</a></li>
             <!-- <li *ngIf="isLoggedIn()"><a class="grow" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-circle"></i>&nbsp;Username&nbsp;<i class="fa fa-caret-down"></i></a></li> -->
             <li *ngIf="isLoggedIn()" class="dropdown" dropdown>
-                <a dropdown-open class="grow" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-circle"></i>&nbsp;Username&nbsp;<i class="fa fa-caret-down"></i></a>
+                <a dropdown-open class="grow" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user-circle"></i>&nbsp;{{username}}&nbsp;<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu">
                     <li><a routerLink="/profile">Profile</a></li>
                     <li><a routerLink="/account-settings">Account Settings</a></li>
