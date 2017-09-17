@@ -114,7 +114,7 @@ def google_places():
         data = api_handler.search_places(place)
         cache = pickle.dumps(data)
         created_cache = models.StopInformation(place_name=place, data_type='attractions', 
-                                            cached_data=cache, expiry=datetime.utcnow())
+                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()
     return jsonify(data)
