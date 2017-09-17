@@ -31,33 +31,33 @@ export class StopComponent {
         // Utilize .get request from app/stop.service.ts to populate stops object
         this.stops = _stopService.getStops();
         this.connService = _connectionService;
-        this.getBannerPhoto();
+        // this.getBannerPhoto();
         // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=Tokyo&callback=?
         // this.aboutText = _connectionService.wikiSearch("Tokyo").subscribe(
         //     (data) => console.log(data)
         // );
         // console.log(this.aboutText);
 
-        this.connService.getServiceData('api/stop_information/?stop=tokyo').subscribe(
-            res => {
-                this.aboutText = res.info; 
-                console.log("About text is " + this.aboutText);   
-            }        
-        );
+        // this.connService.getServiceData('api/stop_information/?stop=tokyo').subscribe(
+        //     res => {
+        //         this.aboutText = res.info; 
+        //         console.log("About text is " + this.aboutText);   
+        //     }        
+        // );
 
-        this.connService.getServiceData('api/places/?place=Tokyo').subscribe(
-            res => {
-                res.forEach(place => {
-                    console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
-                });
-                this.attractions = res;
+        // this.connService.getServiceData('api/places/?place=Tokyo').subscribe(
+        //     res => {
+        //         res.forEach(place => {
+        //             console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
+        //         });
+        //         this.attractions = res;
 
                 // this.attractions_list = res.results; 
                 
-                // // Comment Below is for SORT BY RATINGS
-                // // this.attractions_list.sort(function(a, b) {
-                // //     return parseFloat(b.rating) - parseFloat(a.rating);
-                // // });
+                // Comment Below is for SORT BY RATINGS
+                // this.attractions_list.sort(function(a, b) {
+                //     return parseFloat(b.rating) - parseFloat(a.rating);
+                // });
 
                 // for (var i = 0; i < 12; i++) {
                 //     var obj = this.attractions_list[i];
@@ -73,8 +73,8 @@ export class StopComponent {
                 //     this.attraction_ratings.push(ratings);
                 //     // console.log("Name is: " + name + "  --  Address is: " + address + "  --  Ratings : " + ratings);
                 // }
-            }        
-        );
+        //     }        
+        // );
         // this.connService.getServiceData('api/places/?place=tokyo').subscribe(res => this.attractions_list = res.results);        
         // console.log("Attractions list is: " + this.attractions_list);
         // for(var i = 0; i < this.attractions_list.length; i++) {
@@ -89,19 +89,38 @@ export class StopComponent {
         console.log("Hello with " + this.bannerPhoto);
     }
 
-    public show(): void {
-      this.visible = true;
-      setTimeout(() => this.visibleAnimate = true, 100);
+    public show(stop): void {
+        console.log(stop);
+        this.currStop = stop;
+        this.getBannerPhoto();
+
+        this.connService.getServiceData('api/stop_information/?stop='+ this.currStop).subscribe(
+            res => {
+                this.aboutText = res.info; 
+                console.log("About text is " + this.aboutText);   
+            }        
+        );
+
+        this.connService.getServiceData('api/places/?place='+ this.currStop).subscribe(
+            res => {
+                res.forEach(place => {
+                    console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
+                });
+                this.attractions = res;
+            }        
+        );
+        this.visible = true;
+        setTimeout(() => this.visibleAnimate = true, 100);
     }
   
     public hide(): void {
-      this.visibleAnimate = false;
-      setTimeout(() => this.visible = false, 300);
+        this.visibleAnimate = false;
+        setTimeout(() => this.visible = false, 300);
     }
   
     public onContainerClicked(event: MouseEvent): void {
-      if ((<HTMLElement>event.target).classList.contains('modal')) {
-        this.hide();
-      }
+        if ((<HTMLElement>event.target).classList.contains('modal')) {
+            this.hide();
+        }
     }
 }

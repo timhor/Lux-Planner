@@ -19,12 +19,12 @@
     <div class="row">
       <div class="col-sm-5">
         <label id="stop-label">Starting Location</label>
-        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation">
+        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation" id="initialLocation">
       </div>
       <div class="col-sm-2">
         <br>
         <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-        <a (click)="stop.show()"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
+        <a (click)="stop.show(myJourneys.get('initialLocation').value)"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
       <div class="col-sm-4">
         <label id="date-label">Departure Date</label>
