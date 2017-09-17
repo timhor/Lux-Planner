@@ -23,6 +23,7 @@ export class StopComponent {
     public attraction_ratings = [];
     public visible = false;
     public visibleAnimate = false;
+    public attractions: Array<any> = [];
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, _connectionService: ConnectionService) {
@@ -47,8 +48,9 @@ export class StopComponent {
             res => {
                 res.forEach(place => {
                     console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
-                    
                 });
+                this.attractions = res;
+
                 // this.attractions_list = res.results; 
                 
                 // // Comment Below is for SORT BY RATINGS
