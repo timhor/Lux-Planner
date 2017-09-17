@@ -63,32 +63,32 @@
             <br>
             <h2>Popular Landmarks and Attractions</h2>
             <br>
-            <div *ngFor="let attraction of attraction_names;let i=index">
+            <div *ngFor="let attraction of attractions;let i=index">
               <div class="row" id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-top:5vh; padding-bottom:1vh;">
                 <div class="col-sm-4" id="colColor">
-                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <img src={{attractions[i].photo}}>
                 </div>
                 <div class="col-sm-4" id="colColor">
-                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <img src={{attractions[i+1].photo}}>
                 </div>
                 <div class="col-sm-4" id="colColor">
-                  <img src="https://dummyimage.com/250x250/000/fff">
+                  <img src={{attractions[i+2].photo}}>
                 </div>
               </div>
               <div class="row" id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-bottom:1vh;">
                 <div class="col-sm-4" id="colColor">
                   <p id="attraction_heading">
-                    <b>{{attraction_names[i]}}</b>
+                    <b>{{attractions[i].name}}</b>
                   </p>
                 </div>
                 <div class="col-sm-4" id="colColor">
                   <p id="attraction_heading">
-                    <b>{{attraction_names[i+1]}}</b>
+                    <b>{{attractions[i+1].name}}</b>
                   </p>
                 </div>
                 <div class="col-sm-4" id="colColor">
                   <p id="attraction_heading">
-                    <b>{{attraction_names[i+2]}}</b>
+                    <b>{{attractions[i+2].name}}</b>
                   </p>
                 </div>
               </div>
@@ -96,30 +96,30 @@
                 <div class="col-sm-4" id="colColor" style="padding-bottom:5vh;">
                   <div id="attraction_details">
                     <div style="padding-bottom:1vh;">
-                      <b>Ratings: </b> <br> {{attraction_ratings[i]}} <br>
+                      <b>Ratings: </b> <br> {{attractions[i].ratings}} <br>
                     </div>
                     <div>
-                      <b>Address: </b> <br> {{attraction_address[i]}}
+                      <b>Address: </b> <br> {{attractions[i].address}}
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4" id="colColor">
                   <div id="attraction_details">
                     <div style="padding-bottom:1vh;">
-                      <b>Ratings: </b> <br> {{attraction_ratings[i+1]}} <br>
+                      <b>Ratings: </b> <br> {{attractions[i+1].ratings}} <br>
                     </div>
                     <div>
-                      <b>Address: </b> <br> {{attraction_address[i+1]}}
+                      <b>Address: </b> <br> {{attractions[i+1].address}}
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4" id="colColor">
                   <div id="attraction_details">
                     <div style="padding-bottom:1vh;">
-                      <b>Ratings: </b> <br> {{attraction_ratings[i+2]}} <br>
+                      <b>Ratings: </b> <br> {{attractions[i+2].ratings}} <br>
                     </div>
                     <div>
-                      <b>Address: </b> <br> {{attraction_address[i+2]}}
+                      <b>Address: </b> <br> {{attractions[i+2].address}}
                     </div>
                   </div>
                 </div>
