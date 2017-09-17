@@ -5,10 +5,9 @@ SENG2021 s2 2017
 
 from server import app, api_handler, models, db
 from flask import render_template, jsonify, request, current_app
-import json
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 CORS(app)
 
@@ -42,7 +41,7 @@ def make_payload(identity):
     iat = datetime.utcnow()
     exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
-    # id_payload = getattr(identity, 'id') or identity['id']  # Create the identity payload here
+    # Create the identity payload here
     id_payload = [getattr(identity, 'id'), getattr(identity, 'username')]
     
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': id_payload}
