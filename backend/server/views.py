@@ -91,14 +91,37 @@ def flickr(): # REST params: ([search], [results])
 @app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
     stop = request.args.get('stop', 'toyko')
-    info = api_handler.wikipedia_call(stop)
+    query = models.CacheInformation.query.filter_by(place_name=stop, data_type='wiki').first()
+    if query:
+        if query.expiry < datetime.utcnow():
+            print('OLD')
+            # data = api_handler.search_places(stop)
+            info = api_handler.wikipedia_call(stop)
+            cache = pickle.dumps(info)            
+            query.cached_data = cache
+            query.expiry = datetime.utcnow() + timedelta(days=7)
+            db.session.commit()
+        else:
+            print('DODGED!' + str(query))
+            info = pickle.loads(query.cached_data)
+    else:
+        # data = api_handler.search_places(stop)
+        info = api_handler.wikipedia_call(stop)
+        
+        cache = pickle.dumps(info)
+        created_cache = models.CacheInformation(place_name=stop, data_type='wiki', 
+                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+        db.session.add(created_cache)
+        db.session.commit()
+
+    # info = api_handler.wikipedia_call(stop)
     return jsonify({'info': info})
 
 
 @app.route('/api/places/', methods=['GET'])
 def google_places():
     place = request.args.get('place', 'toyko')
-    query = models.StopInformation.query.filter_by(place_name=place, data_type='attractions').first()
+    query = models.CacheInformation.query.filter_by(place_name=place, data_type='attractions').first()
     if query:
         if query.expiry < datetime.utcnow():
             print('OLD')
@@ -113,7 +136,7 @@ def google_places():
     else:
         data = api_handler.search_places(place)
         cache = pickle.dumps(data)
-        created_cache = models.StopInformation(place_name=place, data_type='attractions', 
+        created_cache = models.CacheInformation(place_name=place, data_type='attractions', 
                                             cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()

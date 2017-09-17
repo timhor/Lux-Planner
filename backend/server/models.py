@@ -54,7 +54,7 @@ class Place(db.Model):
     def __repr__(self):
         return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
 
-class StopInformation(db.Model):
+class CacheInformation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     place_name = db.Column(db.String(128), index=True)
     data_type = db.Column(db.String(128))    
