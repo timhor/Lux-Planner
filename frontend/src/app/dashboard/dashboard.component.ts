@@ -10,10 +10,7 @@ import { ConnectionService } from '../connection/connection.service';
 export class DashboardComponent implements OnInit {
   public currJourney = "Journey 1";
   public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore'];
-<<<<<<< HEAD
   public activeIndex = 0;
-  constructor() {}
-=======
   public aboutText: string = "Loading Information...";
   public connService: ConnectionService;
   public scrollx;
@@ -28,14 +25,13 @@ export class DashboardComponent implements OnInit {
       }        
   );
   }
->>>>>>> 338bcde20436cb19a6cc72120bdeecead65b7a2a
 
   ngOnInit() {
   }
 
   getCurrStop () {
     //temporarily. Should something check which is active
-    return this.stops[0];
+    return this.stops[this.activeIndex];
   }
 
 }
