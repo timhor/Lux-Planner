@@ -47,9 +47,48 @@ h4 {
     margin: 0 auto;
  }
 
+ @media (max-width: 767px) {
+    .slider-size {
+        height: auto;
+    }
+    .slider-size > img {
+         width: 80%;
+    }
+}
+
+/* tablets */
+@media (max-width: 991px) and (min-width: 768px) {
+    .slider-size {
+        height: auto;
+    }
+    .slider-size > img {
+        width: 80%;
+    }
+}
+
+/* laptops */
+@media (max-width: 1023px) and (min-width: 992px) {
+    .slider-size {
+         height: 200px;
+    }
+    .slider-size > img {
+        width: 80%;
+    }
+}
+
+/* desktops */
+@media (min-width: 1024px) {
+    .slider-size {
+        height: 300px;
+    }
+    .slider-size > img {
+        width: 60%;
+    }
+}
+
 #myCarousel{
-    width: 100%;
     margin: 0 auto;
+    background-color: black;
 }
 
 h2 {
