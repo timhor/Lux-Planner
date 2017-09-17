@@ -61,9 +61,28 @@ def flickr(): # REST params: ([search], [results])
     search = request.args.get('search', 'Paris')
     results = request.args.get('results', None)
     try:
-        data = api_handler.search_flickr(search)
-        if results is None:
-            return jsonify(data)
+        query = models.CacheInformation.query.filter_by(place_name=search, data_type='flickr').first()
+        if query:
+            if query.expiry < datetime.utcnow():
+                print('OLD')
+                data = api_handler.search_flickr(search)
+                # data = api_handler.search_places(place)
+                cache = pickle.dumps(data)            
+                query.cached_data = cache
+                query.expiry = datetime.utcnow() + timedelta(days=7)
+                db.session.commit()
+            else:
+                print('DODGED!' + str(query))
+                data = pickle.loads(query.cached_data)
+        else:
+            # data = api_handler.search_places(place)
+            data = api_handler.search_flickr(search)
+            
+            cache = pickle.dumps(data)
+            created_cache = models.CacheInformation(place_name=search, data_type='flickr', 
+                                                cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+            db.session.add(created_cache)
+            db.session.commit()
 
         urls = []
         if '-' in results:
@@ -86,7 +105,7 @@ def flickr(): # REST params: ([search], [results])
             urls.append(url)
         return jsonify({"images" : urls})
     except:
-        return "Error"
+        return jsonify({"images" : 'None'})
 
 @app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
