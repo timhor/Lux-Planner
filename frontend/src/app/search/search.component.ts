@@ -11,8 +11,7 @@ export class SearchComponent {
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
   @ViewChild('search') public searchElement: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone,
-    private searchService: SearchService) {}
+  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {}
 
   ngOnInit() {
     this.mapsAPILoader.load().then(

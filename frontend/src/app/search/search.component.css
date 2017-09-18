@@ -1,4 +1,4 @@
-:host-context(.main-search) input {
+:host-context(#mainSearch) input {
     padding-top: 2vh;
     padding-bottom: 2vh;
     width: 35vw;
