@@ -19,22 +19,6 @@
   </div>
   <div class="row" id="text">
     <div class="col-sm-4">
-      Avatar:
-    </div>
-    <div class="col-sm-6">
-      <img [src]="avatar" height="75">
-      <br><br>
-      <form action="/action_page.php">
-        <input  *ngIf="editAvatar" type="file" accept="image/*" class="form-control"  [(ngModel)]="newAvatar" >
-      </form>
-    </div>
-    <div class="col-sm-2">
-        <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editAvatar" (click)="updateAvatar()"></i>
-        <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editAvatar" (click)="updateAvatar()"></i>
-      </div>
-  </div>
-  <div class="row" id="text">
-    <div class="col-sm-4">
       Username:
     </div>
     <div class="col-sm-8">
