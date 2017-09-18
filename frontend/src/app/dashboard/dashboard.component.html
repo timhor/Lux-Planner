@@ -21,14 +21,21 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="well">
-        <p id="subHeading">Current Journey</p>
-        <h1 style="font-weight: bolder; font-style: italic;" align="center">{{currJourney}}</h1>
+        <p id="subHeading">Current Journey</p> 
+         <!-- TODO Add css to pointer -->
+        <div class="dropdown" dropdown>
+          <h1 dropdown-open style="font-weight: bolder; font-style: italic;" align="center">{{journeyName}}&nbsp;<i class="fa fa-caret-down" *ngIf="allJourneys.length !== 1"></i></h1>
+          <ul class="dropdown-menu" style="width:16.5vw;text-align:center" *ngIf="allJourneys.length !== 1">
+                      <!-- replace with allJourneys.journey_name after backend-->
+            <li *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey)">{{journey}}</li>
+            </ul>
+        </div>
       </div>
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!=0">{{stop}}</button>
-          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i==0">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop)">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{stop}}</button>
         </div>
       </div>
       <div class="well">
