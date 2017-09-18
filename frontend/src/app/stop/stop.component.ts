@@ -91,7 +91,6 @@ export class StopComponent {
 
     public show(stop): void {
         if (stop === "") {
-            console.log("EMPTY");
             return;
         }
         this.currStop = stop;
@@ -117,6 +116,12 @@ export class StopComponent {
     }
   
     public hide(): void {
+        // Clear all data in vars
+        this.location_images = [];
+        this.attractions = [];
+        this.aboutText = "Loading Information...";
+        this.currStop = "";
+
         this.visibleAnimate = false;
         setTimeout(() => this.visible = false, 300);
     }
