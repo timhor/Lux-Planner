@@ -11,7 +11,7 @@ import { ConnectionService } from '../connection/connection.service';
 export class StopComponent {
     public componentName: string = 'StopComponent';
     public currStop = 'Tokyo';
-    // public stops;
+    public stops;
     public bannerPhoto: string = "https://dummyimage.com/650x300/000000/baffef&text=No+Image+Available";
     public connService: ConnectionService;
     public aboutText: string = "Loading Information...";
