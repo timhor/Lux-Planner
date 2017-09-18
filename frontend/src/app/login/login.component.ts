@@ -12,16 +12,11 @@ export class LoginComponent {
   public password;
   public isChecked = false; 
   public incorrectCredentials = false;
-
-//   submitted = false;
   
   setChecked() {
     this.isChecked = !this.isChecked;
   }
   onSubmit() {
-    // this.submitted = true;
-    // console.log(this.username);
-    // console.log(this.password);
     let response = this.loggedInService.login(this.username, this.password);
     response.subscribe(
         (data) => {
