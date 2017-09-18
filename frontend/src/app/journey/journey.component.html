@@ -38,8 +38,7 @@
             [formGroup]="item">
         <div class="col-sm-5">
           <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
-          <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search          
-            [attr.id]="'location'+i" formControlName="location">
+          <planner-search></planner-search>
         </div>
         <div class="col-sm-2">
           <br>

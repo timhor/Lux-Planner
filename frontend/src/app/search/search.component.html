@@ -1,13 +1,2 @@
-<div align="center">
-	<h2>COOL Search Box from {{title}}!</h2>
-    <div id="custom-search-input">
-        <div class="input-group col-md-6">
-            <input type="text" class="  search-query form-control" placeholder="Search" />
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" routerLink="/destination">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-    </div>
-</div>
+<input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search          
+[attr.id]="'location'+i">

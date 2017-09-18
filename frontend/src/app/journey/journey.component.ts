@@ -6,6 +6,7 @@ import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
 import { SearchService } from '../search.service'
+import { SearchComponent } from '../search/search.component'
 
 @Component({
   selector: 'app-journey',

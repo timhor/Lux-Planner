@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { StopComponent } from "./stop/stop.component";
 import { AboutComponent } from "./about/about.component";
+import { SearchComponent } from "./search/search.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
