@@ -10,3 +10,19 @@
    font-weight: bold;
    text-decoration: underline;
 }
+
+.modal {
+   background: rgba(0,0,0,0.6);
+   position: fixed;
+   height: 100%;
+}
+
+.modal-header {
+   font-size: 20px;
+}
+
+.modal-body {
+   max-height: calc(100vh - 200px);
+   overflow-y: auto;
+   background-color: rgb(240,245,255)
+}

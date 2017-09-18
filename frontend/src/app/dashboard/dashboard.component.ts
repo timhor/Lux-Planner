@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StopComponent } from '../stop/stop.component'
+import { StopComponent } from '../stop/stop.component';
 import { ConnectionService } from '../connection/connection.service';
+import { ItineraryComponent } from '../itinerary/itinerary.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +14,6 @@ export class DashboardComponent implements OnInit {
   public activeIndex = 0;
   public aboutText: string = "Loading Information...";
   public connService: ConnectionService;
-  public scrollx;
-  public scrolly;
 
   constructor( _connectionService: ConnectionService) {
     this.connService = _connectionService;
