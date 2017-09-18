@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     //fetch account details from backend
     //TODO: replace literals with details
-    this.avatar = "https://dummyimage.com/250x250/000/fff";
+    this.avatar = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available";
     this.username = "Username";
     this.email = "userEmail@mail.com";
     this.dateJoined = "dd/mm/yyyy";

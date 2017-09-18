@@ -36,7 +36,7 @@ def search_places(request):
             photo_key = place['photos'][0]['photo_reference']
             photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference={photo_key}&key={places_key}"
         except KeyError:
-            photo_url = "http://via.placeholder.com/250x250"
+            photo_url = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available"
             
         item = {
             'name': name,

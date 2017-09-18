@@ -13,7 +13,7 @@ export class StopComponent {
     public componentName: string = 'StopComponent';
     public currStop = 'Tokyo';
     public stops;
-    public bannerPhoto: string = "http://via.placeholder.com/650x300";
+    public bannerPhoto: string = "https://dummyimage.com/650x300/000000/baffef&text=No+Image+Available";
     public connService: ConnectionService;
     public aboutText: string = "Loading Information...";
     // public attractions_index = [0,3,6,9];
