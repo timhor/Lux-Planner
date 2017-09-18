@@ -19,22 +19,25 @@ export class DashboardComponent implements OnInit {
 
   constructor( _connectionService: ConnectionService) {
     this.connService = _connectionService;
-    // this.connService.getProtectedData('api/get_all_journeys').subscribe(
-    //   res => {
-    //       this.activeJourneyIndex = res.active_journey;
-    //       this.allJourneys = res.journeys;
-    //       this.journeyName = res.journeys[this.activeIndex].journey_name;
-    //       this.stops = res.journeys[this.activeIndex].stops;
-    //   }        
-    // );
-
+    
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
-      res => {
-          this.aboutText = res.info; 
-          console.log("About text is " + this.aboutText);   
-      }        
+        res => {
+            this.aboutText = res.info; 
+            console.log("About text is " + this.aboutText);   
+        }        
     );
-  }
+    this.connService.getProtectedData('api/get_all_journeys').subscribe(
+      res => {
+          this.activeJourneyIndex = res.active_journey;
+          this.allJourneys = res.journeys;
+          this.journeyName = res.journeys[this.activeStopIndex].journey_name;
+          this.stops = res.journeys[this.activeStopIndex].stops;
+          console.log('Success getting journeys');
+        },
+        (error) => {console.log(`could not connect ${error}`)}
+    );
+    
+}
 
   ngOnInit() {
   }

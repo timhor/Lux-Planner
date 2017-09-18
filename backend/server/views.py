@@ -20,6 +20,7 @@ def authenticate(username, password):
         @return: the user that matches both username and password
             else return None
     """
+    print('hello auth')
     user = models.User.query.filter_by(username=username).first()
     try:
         print(user)
@@ -32,7 +33,7 @@ def authenticate(username, password):
 def identity(payload):
     """ Provides an identity of the user """
     print(payload['identity'])
-    return payload  # identity payload => current_identity (global var)
+    return payload['identity']  # identity payload => current_identity (global var)
 
 jwt = JWT(app, authenticate, identity)
 
@@ -230,7 +231,9 @@ def get_journey():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_all_journeys():
-    user = models.User.query.filter_by(current_identity[1]) # or models.User.query.get(1)
+    # print('hello get journeys')
+    id = current_identity[0]
+    user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
     payload = []
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     for j in journeys:
@@ -238,6 +241,7 @@ def get_all_journeys():
         print(stops)
         j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
         payload.append(j_item)
+    # Think about how to handle a user without a journey
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
 @app.route('/api/switch_journey/', methods=['GET'])

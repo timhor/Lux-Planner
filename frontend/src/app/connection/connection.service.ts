@@ -23,7 +23,7 @@ export class ConnectionService {
     }
 
     getProtectedData(endpoint: String) {
-        console.log("Hello from service");
+        console.log("Hello from protected");
         this.string = this.server + endpoint;
         console.log(this.string);
         return this.authHttp.get(this.string).map(response => response.json());
