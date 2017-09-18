@@ -142,7 +142,7 @@ h2 {
 }
 
 .modal-body {
-    max-height: 72.5vh;
+    max-height: calc(100vh - 180px);
     overflow-y: auto;
     background-color: rgb(240,245,255)
 }
