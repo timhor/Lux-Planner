@@ -10,31 +10,11 @@ import { SearchService } from '../search.service'
 })
 
 export class HomeComponent {
-
-  // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
-  @ViewChild('search') public searchElement: ElementRef;
-
-  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, 
-    private searchService: SearchService) {}
+  constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.mapsAPILoader.load().then(
-      () => {
-        // let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement);
-        let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {
-          types: ['(cities)']
-        });
-
-        autocomplete.addListener("place_changed", () => {
-          this.ngZone.run(() => {
-            let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-            if (place.geometry === undefined || place.geometry === null) {
-              return;
-            }
-          });
-        });
-      }
-    );
+    let mainSearchBar = <HTMLInputElement>document.getElementById("mainSearch").children[0];
+    mainSearchBar.placeholder = "Search for location..."
   }
 
   sendQuery() {
