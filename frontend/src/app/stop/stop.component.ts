@@ -90,7 +90,10 @@ export class StopComponent {
     }
 
     public show(stop): void {
-        console.log(stop);
+        if (stop === "") {
+            console.log("EMPTY");
+            return;
+        }
         this.currStop = stop;
         this.getBannerPhoto();
 
