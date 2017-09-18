@@ -7,6 +7,7 @@ class User(db.Model):
     email = db.Column(db.String(128), index=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(64), index=True)
+    active_journey_index = db.Column(db.Integer)
     journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
     def __repr__(self):	

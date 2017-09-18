@@ -227,16 +227,18 @@ def get_journey():
     pass
 
 @app.route('/api/get_all_journeys', methods=['GET'])
+# @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+# @jwt_required()
 def get_all_journeys():
-    admin = models.User.query.get(1)
+    user = models.User.query.get(1) or models.User.query.filter_by(current_identity[1])
     payload = []
-    journeys = models.Journey.query.filter_by(user_id=1).all()
+    journeys = models.Journey.query.filter_by(user_id=user.id).all()
     for j in journeys:
         stops = models.Stop.query.filter_by(journey_id=j.id).all()
         print(stops)
         j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
         payload.append(j_item)
-    return jsonify(payload)
+    return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():
