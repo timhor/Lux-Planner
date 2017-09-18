@@ -6,17 +6,7 @@
   <div id="mainBlurb">
     Completely customise your journey and <br> make the most of it with LUX.
   </div>
-
-  <!-- MAIN SEARCH BAR -->
-  <div class="container">
-    <div class="form-group">
-      <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
-        #search id="mainSearch">
-    </div>
-  </div>
-  <!-- END MAIN SEARCH BAR -->
-
-
+  <planner-search class="main-search"></planner-search>
   <br><br>  
   <button class="button_primary" routerLink="/journey" (click)="sendQuery()"> New J<i class="fa fa-globe"></i>urney&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
 </div>

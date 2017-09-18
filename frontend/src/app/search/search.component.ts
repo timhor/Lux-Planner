@@ -5,7 +5,7 @@ import { SearchService } from '../search.service';
 @Component({
   selector: 'planner-search',
   templateUrl: './search.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
