@@ -256,7 +256,7 @@ def switch_journey():
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
 
-@app.route('/api/switch_journey/', methods=['GET'])
+@app.route('/api/get_account_details/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_account_details():
