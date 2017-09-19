@@ -2,7 +2,7 @@
 
 <app-stop #stop>
   <div class="app-stop-header">
-    <button type="button" class="btn btn-danger pull-right" id="btnFormat" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-danger pull-right" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
   </div>
   <div class="app-stop-body">
   </div>
@@ -68,28 +68,27 @@
           <div class="col-sm-1">
             <br>
             <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
-              <i class="glyphicon glyphicon-minus-sign" aria-hidden="true" id="minusIcon"></i></a>
+              <i class="glyphicon glyphicon-minus-sign grow" aria-hidden="true" id="minusIcon"></i></a>
           </div>
         </div>
         <br>
       </div>
-      <br>
     </fieldset>
-    <div class="form-group row">
-      <div class="col-sm-1">
-        <button type="button" id="btnFormat" class="btn btn-primary"
-                (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
-      </div>
-    </div>
+    <button type="button" class="button-rect button-blue"
+            (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
+    <br>
+    <br>
     <hr>
     <div class="row">
       <div class="form-group col-sm-6">
-          <button type="submit" class="button_primary"
-            value="Submit" [disabled]="myJourneys?.invalid" routerLink="/itinerary">Customise Itinerary&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
+        <button type="submit" class="button-rect button-green" value="Submit" [disabled]="myJourneys?.invalid"
+                routerLink="/itinerary">Customise Itinerary&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+        </button>
       </div>
       <div class="form-group col-sm-6">
-        <button type="submit" class="button_primary" id="saveJourneyBtn"
-          value="Submit" routerLink="/my-journeys">Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
+        <button type="submit" class="button-rect button-orange" value="Submit"
+                routerLink="/my-journeys">Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+        </button>
       </div>
     </div>
   </form>

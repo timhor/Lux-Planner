@@ -1,21 +1,13 @@
-h3, form {
-    margin: 0;
-    padding: 0;
- }
- 
- button {
-    width: 100%;
- }
- 
- #loginHead{
+#loginHead {
     margin: 0 auto;
     text-align: left;
- }
- #loginForm{
-    margin: 0 auto;
- }
+}
 
- #body_div{
+#loginForm {
+    margin: 0 auto;
+}
+
+#body_div {
     background-color: rgba(255, 255, 255, 0.8);
     padding-top: 5vh;
     padding-bottom: 5vh;  
@@ -25,4 +17,4 @@ h3, form {
     min-width: 300px;   
     margin: 0 auto;
     border-radius: 5vh;
- }
+}

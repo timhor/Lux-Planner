@@ -13,6 +13,11 @@ img {
    margin: 0 auto;
 }
 
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
 h2 { 
    text-align: center;
 }
@@ -20,13 +25,14 @@ h2 {
 h4 {
    font-style: italic;
 }
-#lowerBorder{
+
+#lowerBorder {
    border-color: black;
    border-width: 1px;
    background-color: #fafafa;
 }
 
-#mainBorder{
+#mainBorder {
    border-color: black;
    border-width: 2px;
    background-color:  rgb(255, 155, 215);
@@ -38,7 +44,7 @@ h4 {
    cursor: default;
 }
 
-#body_div{
+#body_div {
    background-color: rgba(255, 255, 255, 0.8);
    padding-top: 5vh;
    padding-bottom: 5vh;  
@@ -49,30 +55,26 @@ h4 {
    border-radius: 5vh;
 }
 
-#myCarousel{
+#myCarousel {
    width: 100%;
    margin: 0 auto;
-}
-
-h2 {
-   text-align: left;
 }
 
 #subtitle {
    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
    font-style: italic;
-   font-size:calc(5px + 1vw);                
-   /* font-size: 1.5vw;  */
+   font-size: calc(5px + 1vw);                
    text-align: center;
 }
 
-#stopsTable{
+#stopsTable {
    width: 50%;
 }
 
-#btnFormat{
-   border-width: 1px;
-   border-color:#FFFFFF;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   cursor: pointer; cursor: hand; outline: none;  
+.button-rect {
+    padding-top: 1.3vh;
+    padding-bottom: 1.3vh;
+    letter-spacing: normal;
+    width: 25%;
+    margin-left: 30px;
 }

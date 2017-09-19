@@ -1,22 +1,13 @@
-h3, form {
-   margin: 0;
-   padding: 0;
-}
-
-button {
-   width: 100%;
-}
-
-#signUpHead{
+#signUpHead {
    margin: 0 auto;
    text-align: left;
 }
 
-#signUpForm{
+#signUpForm {
    margin: 0 auto;
 }
 
-#body_div{
+#body_div {
    background-color: rgba(255, 255, 255, 0.8);
    padding-top: 5vh;
    padding-bottom: 5vh;  

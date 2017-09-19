@@ -18,32 +18,10 @@
    text-align: left;
 }
 
-.button_primary {
+.button-rect {
    padding-top: 2vh;
    padding-bottom: 2vh;
-   text-align: center;
-   text-transform: uppercase;
-   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   font-weight: bold;   
-   color: #3EB000;
-   background: #FFFFFF;
-   border-color: #3EB000;
-   cursor: pointer;
-   -webkit-transition: background .1s ease-out,border-color .1s ease-out;
-   transition: background .1s ease-out,border-color .1s ease-out;
-   border: 1;
-   border-style: solid;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   display: inline-block;
-   letter-spacing: .15em;
-   font-size:calc(10px + 0.5vw);        
    width: 20vw;
-   min-width: 200px; 
-}
-
-.button_primary:hover { 
-   background: #3EB000; 
-   color: white;
 }
 
 #body_div {
@@ -76,25 +54,10 @@
     cursor: pointer;   
 }
 
-#btnFormat {
-   border-width: 1px;
-   border-color:#FFFFFF;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   cursor: pointer; cursor: hand; outline: none;
-   min-width: 2em; 
-}
-
-#saveJourneyBtn {
-    color: #FF7B00;
-    border-width: 2px;
-    border-color:#FF7B00;
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    cursor: pointer; cursor: hand; outline: none;
-    min-width: 3em;
-    
-}
-
-#saveJourneyBtn:hover {
-    background: #FF7B00; 
-    color: white;
+.button-blue {
+   padding-top: 1vh;
+   padding-bottom: 1vh;
+   letter-spacing: .05em;
+   width: 10vw;
+   min-width: 2em;
 }

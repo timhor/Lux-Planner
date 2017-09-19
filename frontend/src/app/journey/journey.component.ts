@@ -11,7 +11,7 @@ import { SearchComponent } from '../search/search.component'
 @Component({
   selector: 'app-journey',
   templateUrl: './journey.component.html',
-  styleUrls: ['./journey.component.css']
+  styleUrls: ['../app.component.css', './journey.component.css']
 })
 export class JourneyComponent implements OnInit {
 
