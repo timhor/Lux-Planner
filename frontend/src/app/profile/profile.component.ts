@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public lastName;
   public gender;
   public dateJoined = "19/09/2017";
-  public journeys;
+  public journeys: string[] = ['Journey1', 'Journey2'];
   public connService: ConnectionService;
 
   constructor( _connectionService: ConnectionService) { 
@@ -31,14 +31,14 @@ export class ProfileComponent implements OnInit {
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
-    this.connService.getProtectedData('api/get_all_journeys').subscribe(
+   /* this.connService.getProtectedData('api/get_all_journeys').subscribe(
       res => {
           this.journeys = res.journeys;
           console.log('Success getting journeys');
           console.log(this.journeys)
         },
         (error) => {console.log(`could not connect ${error}`)}
-    );
+    );*/
 
   }
 

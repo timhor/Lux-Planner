@@ -19,6 +19,7 @@ class User(db.Model):
 class Journey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    journey_name = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     cost = db.Column(db.Float, index=True)
@@ -32,6 +33,8 @@ class Stop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     journey_id = db.Column(db.Integer, db.ForeignKey('journey.id'))
     stop_name = db.Column(db.String(128), index=True)
+    arrival_date = db.Column(db.DateTime)
+    departure_date = db.Column(db.DateTime)
     stop_rating = db.Column(db.Float, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
