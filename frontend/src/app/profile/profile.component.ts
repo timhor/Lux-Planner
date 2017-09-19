@@ -35,7 +35,6 @@ export class ProfileComponent implements OnInit {
       res => {
           this.journeys = res.names;
           console.log('Success getting journeys');
-          console.log(this.journeys)
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
