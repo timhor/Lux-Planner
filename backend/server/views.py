@@ -216,7 +216,7 @@ def new_stop():
 
 @app.route('/api/new_journey', methods=['POST'])
 def new_journey():
-    user_id = current_identity
+    user_id = current_identity[0]
     created_journey = models.Journey(user_id=user_id,cost=0)
     db.session.add(created_journey)
     db.session.commit()
@@ -252,7 +252,6 @@ def switch_journey():
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
-
 
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():

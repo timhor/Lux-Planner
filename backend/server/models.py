@@ -2,7 +2,9 @@ from server import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True)
+    first_name = db.Column(db.String(128), index=True)
+    last_name = db.Column(db.String(128), index=True)
+    gender = db.Column(db.String(64), index=True)
     age = db.Column(db.Integer, index=True)
     email = db.Column(db.String(128), index=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -11,7 +13,7 @@ class User(db.Model):
     journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
     def __repr__(self):	
-        return "ID: {} | Name: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.name, self.age, self.email, self.username, self.password)
+        return "ID: {} | First Name: {} | Last Name: {} | Gender: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.frist_name, self.last_name, self.gender, self.age, self.email, self.username, self.password)
 
 
 class Journey(db.Model):
