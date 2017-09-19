@@ -256,6 +256,13 @@ def switch_journey():
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
 
+@app.route('/api/switch_journey/', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_account_details():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name, 'last_name': user.last_name, 'gender': user.gender})
+
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():
     #TO DO: get stop_id from stop in journey
