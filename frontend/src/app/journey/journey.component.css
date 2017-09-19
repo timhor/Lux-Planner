@@ -1,24 +1,19 @@
-h3, form {
-   margin: 0;
-   padding: 0;
-}
-
-#journeyHead{
+#journeyHead {
    margin: 0 auto;
    text-align: left;
 }
 
-#stops-form{
+#stops-form {
    margin: 0 auto;
    text-align: left;
 }
 
-#stop-label{
+#stop-label {
    margin: 0 auto;
    text-align: left;
 }
 
-#date-label{
+#date-label {
    margin: 0 auto;
    text-align: left;
 }
@@ -45,12 +40,13 @@ h3, form {
    width: 20vw;
    min-width: 200px; 
 }
+
 .button_primary:hover { 
    background: #3EB000; 
    color: white;
 }
 
-#body_div{
+#body_div {
    background-color: rgba(255, 255, 255, 0.8);
    padding-top: 5vh;
    padding-bottom: 5vh;  
@@ -62,7 +58,7 @@ h3, form {
    border-radius: 5vh;
 }
 
-#infoIcon{
+#infoIcon {
    font-size:calc(15px + 1vw);
    color: #337ab7;
    -webkit-text-stroke-width: 1px;
@@ -71,7 +67,7 @@ h3, form {
    cursor: pointer;   
 }
 
-#minusIcon{
+#minusIcon {
     font-size:calc(15px + 1vw);
     color: #c9302c;
     -webkit-text-stroke-width: 1px;
@@ -80,7 +76,7 @@ h3, form {
     cursor: pointer;   
 }
 
-#btnFormat{
+#btnFormat {
    border-width: 1px;
    border-color:#FFFFFF;
    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
@@ -88,7 +84,7 @@ h3, form {
    min-width: 2em; 
 }
 
-#saveJourneyBtn{
+#saveJourneyBtn {
     color: #FF7B00;
     border-width: 2px;
     border-color:#FF7B00;
@@ -98,7 +94,7 @@ h3, form {
     
 }
 
-#saveJourneyBtn:hover{
+#saveJourneyBtn:hover {
     background: #FF7B00; 
     color: white;
 }
