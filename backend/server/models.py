@@ -13,7 +13,7 @@ class User(db.Model):
     journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
     def __repr__(self):	
-        return "ID: {} | First Name: {} | Last Name: {} | Gender: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.frist_name, self.last_name, self.gender, self.age, self.email, self.username, self.password)
+        return "ID: {} | First Name: {} | Last Name: {} | Gender: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.first_name, self.last_name, self.gender, self.age, self.email, self.username, self.password)
 
 
 class Journey(db.Model):

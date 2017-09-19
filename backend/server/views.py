@@ -168,7 +168,7 @@ def google_places():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
     body = json.loads(request.data)
-    # print(data)
+    #print(data)
     username = body['username']
     print(username)
     search_username = models.User.query.filter_by(username=username).first()
