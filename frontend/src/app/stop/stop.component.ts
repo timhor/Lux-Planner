@@ -30,7 +30,7 @@ export class StopComponent {
     getBannerPhoto() {
         this.connService.getServiceData('api/flickr/?search='+this.currStop+'%20Landmarks&results=0-9')
             .subscribe(res => this.location_images = res.images);
-        console.log("Hello with " + this.bannerPhoto);
+        // console.log("Hello with " + this.bannerPhoto);
     }
 
     public show(stop): void {
@@ -43,15 +43,15 @@ export class StopComponent {
         this.connService.getServiceData('api/stop_information/?stop='+ this.currStop).subscribe(
             res => {
                 this.aboutText = res.info; 
-                console.log("About text is " + this.aboutText);   
+                // console.log("About text is " + this.aboutText);   
             }        
         );
 
         this.connService.getServiceData('api/places/?place='+ this.currStop).subscribe(
             res => {
-                res.forEach(place => {
-                    console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
-                });
+                // res.forEach(place => {
+                //     console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
+                // });
                 this.attractions = res;
             }        
         );

@@ -61,7 +61,6 @@ export class ConnectionService {
     }
 
     wikiSearch(search: String) {
-                // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=Tokyo&callback=?
         var conn = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=" + search + "&callback=?";
         console.log(conn);
         return this.httpPoint.get(conn).map(response => response.json());

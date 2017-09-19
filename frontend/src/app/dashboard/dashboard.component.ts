@@ -9,9 +9,9 @@ import { ItineraryComponent } from '../itinerary/itinerary.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public journeyName: string = 'Journey1'; //set as empty for all once backend works
-  public stops = [{'name': 'Stop'}];// = ['Tokyo', 'Hong Kong', 'Singapore']; 
-  public allJourneys = [{'journey_name': 'Journey', 'stops': []}]; // = ['Journey1', 'Journey2', 'Journey3'];
+  public journeyName: string = 'Journey1';
+  public stops = [{'name': 'Stop'}];
+  public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
                     this.aboutText = res.info; 
-                    console.log("About text is " + this.aboutText);   
+                    // console.log("About text is " + this.aboutText);   
                 }        
             );
         },
@@ -43,21 +43,17 @@ export class DashboardComponent implements OnInit {
   }
 
   getCurrStop () {
-    //temporarily. Should something check which is active
     return this.stops[this.activeStopIndex].name;
   }
 
   setActiveJourney(name:string) {
-    // console.log(name);
     if (name === this.journeyName) return;
     this.journeyName = name;
     
     for (let i=0; i < this.allJourneys.length; i++) {
-      // TODO replace with allJourneys[i].journey_name
       if (this.allJourneys[i].journey_name === name) {
-        this.stops = this.allJourneys[i].stops; // <-- Uncomment this after
+        this.stops = this.allJourneys[i].stops;
         this.activeJourneyIndex = i;
-        // console.log(this.activeIndex);
         break;
       }
     }
@@ -72,7 +68,6 @@ export class DashboardComponent implements OnInit {
   setActiveStop(stop:string) {
     for (let i=0; i < this.stops.length; i++) {
       if (stop === this.stops[i].name) {
-        //   console.log(i);
         this.activeStopIndex = i;
       }
     }
