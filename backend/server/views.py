@@ -263,6 +263,17 @@ def get_account_details():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name, 'last_name': user.last_name, 'gender': user.gender})
 
+@app.route('/api/get_all_journey_names/', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_all_journey_names():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).all()
+    names = []
+    for j in journeys:
+        names.append(j.journey_name)
+    return jsonify({'names': names})
+
 #@app.route('/api/new_itinerary', methods=['POST'])
 #def new_itinerary():
     #TO DO: get stop_id from stop in journey
