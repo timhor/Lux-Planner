@@ -67,10 +67,26 @@ export class JourneyComponent implements OnInit {
           }
         });
       });
+      let instance = this;
+      autocomplete.addListener("place_changed", function() {
+        instance.fillDetails();
+      });
     });
   }
 
-  getPlace () {
-    return (<HTMLInputElement>document.getElementById('initialLocation')).value;
+  getPlace (id) { 
+    return (<HTMLInputElement>document.getElementById(id)).value;
+  }
+
+  fillDetails() {
+    //for (
+      let field = "initialLocation";// in this.myJourneys.value) {
+      console.log("ENTERED FILLED DETAILS");
+      console.log(field);
+      console.log((<HTMLInputElement>document.getElementById(field)).value);
+      console.log(this.myJourneys.controls[field].value);
+      this.myJourneys.controls[field].setValue(this.getPlace(field));
+      console.log(this.myJourneys.controls[field].value);
+    //}
   }
 }
