@@ -10,8 +10,8 @@ import { ItineraryComponent } from '../itinerary/itinerary.component';
 })
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1'; //set as empty for all once backend works
-  public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore']; 
-  public allJourneys: string[] = ['Journey1', 'Journey2', 'Journey3'];
+  public stops = [{'name': 'Stop'}];// = ['Tokyo', 'Hong Kong', 'Singapore']; 
+  public allJourneys = [{'journey_name': 'Journey', 'stops': []}]; // = ['Journey1', 'Journey2', 'Journey3'];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
@@ -20,19 +20,19 @@ export class DashboardComponent implements OnInit {
   constructor( _connectionService: ConnectionService) {
     this.connService = _connectionService;
     
-    this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
-        res => {
-            this.aboutText = res.info; 
-            console.log("About text is " + this.aboutText);   
-        }        
-    );
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
-      res => {
-          this.activeJourneyIndex = res.active_journey;
-          this.allJourneys = res.journeys;
-          this.journeyName = res.journeys[this.activeStopIndex].journey_name;
-          this.stops = res.journeys[this.activeStopIndex].stops;
-          console.log('Success getting journeys');
+        res => {
+            this.activeJourneyIndex = res.active_journey;
+            this.allJourneys = res.journeys;
+            this.journeyName = res.journeys[this.activeStopIndex].journey_name;
+            this.stops = res.journeys[this.activeStopIndex].stops;
+            console.log('Success getting journeys');
+            this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
+                res => {
+                    this.aboutText = res.info; 
+                    console.log("About text is " + this.aboutText);   
+                }        
+            );
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
 
   getCurrStop () {
     //temporarily. Should something check which is active
-    return this.stops[this.activeStopIndex];
+    return this.stops[this.activeStopIndex].name;
   }
 
   setActiveJourney(name:string) {
@@ -54,8 +54,8 @@ export class DashboardComponent implements OnInit {
     
     for (let i=0; i < this.allJourneys.length; i++) {
       // TODO replace with allJourneys[i].journey_name
-      if (this.allJourneys[i] === name) {
-        //this.stops = this.allJourneys[i].stops; <-- Uncomment this after
+      if (this.allJourneys[i].journey_name === name) {
+        this.stops = this.allJourneys[i].stops; // <-- Uncomment this after
         this.activeJourneyIndex = i;
         // console.log(this.activeIndex);
         break;
@@ -71,7 +71,8 @@ export class DashboardComponent implements OnInit {
 
   setActiveStop(stop:string) {
     for (let i=0; i < this.stops.length; i++) {
-      if (stop === this.stops[i]) {
+      if (stop === this.stops[i].name) {
+        //   console.log(i);
         this.activeStopIndex = i;
       }
     }
@@ -81,6 +82,14 @@ export class DashboardComponent implements OnInit {
           console.log("About text is " + this.aboutText);   
       }        
     );
+  }
+
+  getJourneyLength() {
+      try {
+        return this.allJourneys.length;
+      } catch (e) {
+        return 0;
+      }
   }
 
 }

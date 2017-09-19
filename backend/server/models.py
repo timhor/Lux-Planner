@@ -33,8 +33,8 @@ class Stop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     journey_id = db.Column(db.Integer, db.ForeignKey('journey.id'))
     stop_name = db.Column(db.String(128), index=True)
-    arrival_date = db.Column(db.DateTime, index =True)
-    departure_date = db.Column(db.DateTime, index =True)
+    arrival_date = db.Column(db.DateTime, index=True)
+    departure_date = db.Column(db.DateTime, index=True)
     stop_rating = db.Column(db.Float, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 

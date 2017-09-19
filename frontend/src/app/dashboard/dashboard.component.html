@@ -24,18 +24,18 @@
         <p id="subHeading">Current Journey</p> 
          <!-- TODO Add css to pointer -->
         <div class="dropdown" dropdown>
-          <h1 dropdown-open style="font-weight: bolder; font-style: italic;" align="center">{{journeyName}}&nbsp;<i class="fa fa-caret-down" *ngIf="allJourneys.length !== 1"></i></h1>
-          <ul class="dropdown-menu" style="width:16.5vw;text-align:center" *ngIf="allJourneys.length !== 1">
+          <h1 dropdown-open style="font-weight: bolder; font-style: italic;" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;<i class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></i></h1>
+          <ul class="dropdown-menu" style="width:16.5vw;text-align:center" *ngIf="getJourneyLength() !== 1">
                       <!-- replace with allJourneys.journey_name after backend-->
-            <li *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey)">{{journey}}</li>
+            <li *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">{{journey.journey_name}}</li>
             </ul>
         </div>
       </div>
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop)">{{stop}}</button>
-          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{stop}}</button>
+          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)">{{stop.name}}</button>
+          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{stop.name}}</button>
         </div>
       </div>
       <div class="well">
@@ -134,11 +134,11 @@
         </div>
         <br>
         <div class="well">
-          <p id="subHeading">Local Weather: {{stops[0]}}</p>
+          <p id="subHeading">Local Weather: {{stops[activeStopIndex].name}}</p>
           <div style="width: 780px;"><iframe style="display: block;" src="//cdnres.willyweather.com/widget/loadView.html?id=70867" width="780" height="92" frameborder="0" scrolling="no"></iframe><a style="margin: -92px 0 0 0;float: right;height: 92px;text-indent: -9999em;z-index: 1;position: relative;width: 20px" href="http://www.willyweather.com/fl/hillsborough-county/sydney.html" rel="nofollow"></a></div>
         </div>
         <div class="well">
-          <p id="subHeading">About: {{stops[0]}}</p>
+          <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
           <p>{{aboutText}}</p>
           <button type="button" class="btn btn-default btn-md pull-right" id="btnFormat" width="100px" (click)="stop.show(getCurrStop())">Find Out More</button>
           <br><br>

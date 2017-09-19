@@ -42,7 +42,7 @@ def make_payload(identity):
     """ Creates a payload to return to user after authenticating
     """
     iat = datetime.utcnow()
-    exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
+    exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA') + timedelta(days=7)
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
     # Create the identity payload here
     id_payload = [getattr(identity, 'id'), getattr(identity, 'username')]
@@ -231,18 +231,23 @@ def get_journey():
     pass
 
 @app.route('/api/get_all_journeys', methods=['GET'])
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
+# @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+# @jwt_required()
 def get_all_journeys():
     # print('hello get journeys')
-    id = current_identity[0]
-    user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
+    # id = current_identity[0]
+    # user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
+    user = models.User.query.get(1)
     payload = []
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     for j in journeys:
         stops = models.Stop.query.filter_by(journey_id=j.id).all()
         print(stops)
-        j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
+        # j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
+        j_item = {'journey_name': j.journey_name, 'start': j.start_date, 'end': j.end_date, 'stops': [
+                {'name': s.stop_name, 'arrival': s.arrival_date, 'departure': s.departure_date} for s in stops
+            ]}
+        
         payload.append(j_item)
     # Think about how to handle a user without a journey
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
