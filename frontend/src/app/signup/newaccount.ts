@@ -4,7 +4,10 @@ export class NewAccount {
       public username: string,
       public password: string,
       public confirmPassword: string,
-      public email: string
+      public email: string,
+      public firstName: string,
+      public lastName: string,
+      public gender: string
    ) { }
 
 }

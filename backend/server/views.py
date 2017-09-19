@@ -179,8 +179,8 @@ def new_user():
     
     password = body['password']
     email = body['email']
-    first_name = body['first_name']
-    last_name = body['last_name']
+    first_name = body['firstName']
+    last_name = body['lastName']
     gender = body['gender']
     created_user = models.User(username=username, password=password, email=email, first_name=first_name, last_name=last_name, gender=gender)
     db.session.add(created_user)

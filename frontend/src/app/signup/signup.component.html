@@ -46,6 +46,21 @@
         <input class="form-control" type="email" placeholder="Enter email" id="email" required
           [(ngModel)]="account.email" name="email" #email="ngModel">
       </div>
+      <div class="form-group">
+        <label for="firstName"><b>First Name</b></label>
+        <input class="form-control" type="firstName" placeholder="Enter first name" id="firstName" required
+          [(ngModel)]="account.firstName" name="firstName" #firstName="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="lastName"><b>Last Name</b></label>
+        <input class="form-control" type="lastName" placeholder="Enter last name" id="lastName" required
+          [(ngModel)]="account.lastName" name="lastName" #lastName="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="gender"><b>Gender</b></label>
+        <input class="form-control" type="gender" placeholder="Enter gender" id="gender" required
+          [(ngModel)]="account.gender" name="gender" #gender="ngModel">
+      </div>
       <br>
       <div class="form-group">
         <button type="submit" class="btn btn-success">Create Account</button>

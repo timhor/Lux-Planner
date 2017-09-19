@@ -10,12 +10,12 @@ import { LoggedInService } from '../loggedIn.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  account = new NewAccount('','','','');
+  account = new NewAccount('','','','','','','');
 
   constructor(private loggedInService: LoggedInService, public router: Router) {}
   
   onSubmit() {
-    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email);
+    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName, this.account.gender);
     response.subscribe(
         (data) => {
             if (data.message == 'success') {
