@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
       if (this.allJourneys[i].journey_name === name) {
         this.stops = this.allJourneys[i].stops;
         this.activeJourneyIndex = i;
+        this.activeStopIndex = 0;
         break;
       }
     }

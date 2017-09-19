@@ -25,7 +25,7 @@
          <!-- TODO Add css to pointer -->
         <div class="dropdown" dropdown>
           <h1 dropdown-open style="font-weight: bolder; font-style: italic;" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;<i class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></i></h1>
-          <ul class="dropdown-menu" style="width:16.5vw;text-align:center" *ngIf="getJourneyLength() !== 1">
+          <ul class="dropdown-menu" style="width:15.5vw;text-align:center" *ngIf="getJourneyLength() !== 1">
             <li *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">{{journey.journey_name}}</li>
             </ul>
         </div>
