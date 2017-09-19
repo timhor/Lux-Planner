@@ -24,7 +24,7 @@
       <div class="col-sm-1">
         <br>
         <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-        <a (click)="stop.show(getPlace())"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
+        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
     </div>
     <br>
@@ -56,14 +56,14 @@
         <br>
         <div class="row">
           <div class="col-sm-5">
-            <label id="date-label" [attr.for]="'date'+i">Departure Date - Time</label>
+            <label id="date-label" [attr.for]="'departure'+i">Departure Date - Time</label>
             <input type="datetime-local" class="form-control"
-              [attr.id]="'date'+i" formControlName="departure">
+              [attr.id]="'departure'+i" formControlName="departure">
           </div>
           <div class="col-sm-5">
-            <label id="date-label" [attr.for]="'date'+i">Arrival Date - Time</label>
+            <label id="date-label" [attr.for]="'arrival'+i">Arrival Date - Time</label>
             <input type="datetime-local" class="form-control"
-              [attr.id]="'date'+i" formControlName="arrival">
+              [attr.id]="'arrival'+i" formControlName="arrival">
           </div>
           <div class="col-sm-1">
             <br>
