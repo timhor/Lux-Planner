@@ -79,14 +79,15 @@ export class JourneyComponent implements OnInit {
   }
 
   fillDetails() {
-    //for (
-      let field = "initialLocation";// in this.myJourneys.value) {
+    for (let field in this.myJourneys.value) {
+      let re = /location/i;
+      if (!field.match(re)) continue;
       console.log("ENTERED FILLED DETAILS");
       console.log(field);
       console.log((<HTMLInputElement>document.getElementById(field)).value);
       console.log(this.myJourneys.controls[field].value);
       this.myJourneys.controls[field].setValue(this.getPlace(field));
       console.log(this.myJourneys.controls[field].value);
-    //}
+    }
   }
 }
