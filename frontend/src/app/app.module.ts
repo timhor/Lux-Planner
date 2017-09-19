@@ -27,13 +27,13 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { JourneyComponent } from './journey/journey.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
-import { FaqComponent } from './faq/faq.component';
 import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
 import { DropdownModule } from "ng2-dropdown";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -65,11 +65,11 @@ export const serviceProviders = [
     JourneyComponent,
     DashboardComponent,
     ItineraryComponent,
-    FaqComponent,
     HelpComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    MyJourneysComponent
+    MyJourneysComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

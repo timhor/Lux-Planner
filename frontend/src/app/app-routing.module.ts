@@ -11,11 +11,11 @@ import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { JourneyComponent } from "./journey/journey.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ItineraryComponent } from "./itinerary/itinerary.component";
-import { FaqComponent } from "./faq/faq.component";
 import { HelpComponent } from "./help/help.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { MyJourneysComponent } from "./my-journeys/my-journeys.component"
+import { NotFoundComponent } from "./not-found/not-found.component";
 
 const routes: Routes = [
     {
@@ -56,10 +56,6 @@ const routes: Routes = [
         component: ItineraryComponent
     },
     {
-        path: 'faq',
-        component: FaqComponent
-    },
-    {
         path: 'help',
         component: HelpComponent
     },
@@ -75,6 +71,14 @@ const routes: Routes = [
         path: 'my-journeys',
         component: MyJourneysComponent
     },
+    {
+        path: '404',
+        component: NotFoundComponent
+    },
+    {
+        path: '**',
+        redirectTo: '404'
+    }
 ];
 
 @NgModule({

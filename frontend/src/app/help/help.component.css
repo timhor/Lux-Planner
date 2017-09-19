@@ -1,26 +1,22 @@
-h3, form {
-   margin: 0;
-   padding: 0;
+h2 {
+    margin-bottom: 35px;
+    text-align: left;
+    font-weight: bold;
 }
 
-#headText{
-   margin: 0 auto;
-   text-align: left;
+div {
+    text-align: justify;
 }
 
-#paragraph{
-   margin: 0 auto;
-   text-align: justify;
-}
-
-#body_div{
-   background-color: rgba(255, 255, 255, 0.8);
-   padding-top: 5vh;
-   padding-bottom: 5vh;  
-   padding-right: 5vw;
-   padding-left: 5vw; 
-   width: 50vw;
-   min-width: 300px;   
-   margin: 0 auto;
-   border-radius: 5vh;
+.content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-top: 5vh;
+    padding-bottom: 5vh;  
+    padding-right: 5vw;
+    padding-left: 5vw; 
+    width: 50vw;
+    min-width: 300px;   
+    margin: 50px auto 0;
+    border-radius: 5vh;
+    font-size: 1.3em;        
 }
