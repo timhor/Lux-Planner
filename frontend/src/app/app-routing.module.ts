@@ -15,6 +15,7 @@ import { HelpComponent } from "./help/help.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { MyJourneysComponent } from "./my-journeys/my-journeys.component"
+import { NotFoundComponent } from "./not-found/not-found.component";
 
 const routes: Routes = [
     {
@@ -70,6 +71,14 @@ const routes: Routes = [
         path: 'my-journeys',
         component: MyJourneysComponent
     },
+    {
+        path: '404',
+        component: NotFoundComponent
+    },
+    {
+        path: '**',
+        redirectTo: '404'
+    }
 ];
 
 @NgModule({
