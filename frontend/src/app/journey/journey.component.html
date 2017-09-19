@@ -17,43 +17,61 @@
   <form [formGroup]="myJourneys" (ngSubmit)="submit()">
     <hr>
     <div class="row">
-      <div class="col-sm-5">
+      <div class="col-sm-10">
         <label id="stop-label">Starting Location</label>
         <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation" id="initialLocation">
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-1">
         <br>
         <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
         <a (click)="stop.show(getPlace())"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
-      <div class="col-sm-4">
-        <label id="date-label">Departure Date</label>
-        <input type="date" placeholder="Date" class="form-control" formControlName="initialDate">
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-5">
+        <label id="date-label">Departure Date - Time</label>
+        <input type="datetime-local" class="form-control" formControlName="initialDeparture">
+      </div>
+      <div class="col-sm-5">
+        <label id="date-label">Arrival Date - Time</label>
+        <input type="datetime-local" class="form-control" formControlName="initialArrival">
       </div>
     </div>
     <hr>
     <fieldset formArrayName="destinations">
-      <div class="form-group row"
+      <div class="form-group"
             *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
             [formGroup]="item">
-        <div class="col-sm-5">
-          <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
-          <planner-search></planner-search>
+        <div class="row">
+          <div class="col-sm-10">
+            <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
+            <planner-search></planner-search>
+          </div>
+          <div class="col-sm-1">
+            <br>
+            <a (click)="stop.show()"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>
+          </div>
         </div>
-        <div class="col-sm-2">
-          <br>
-          <a (click)="stop.show()"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
+        <br>
+        <div class="row">
+          <div class="col-sm-5">
+            <label id="date-label" [attr.for]="'date'+i">Departure Date - Time</label>
+            <input type="datetime-local" class="form-control"
+              [attr.id]="'date'+i" formControlName="departure">
+          </div>
+          <div class="col-sm-5">
+            <label id="date-label" [attr.for]="'date'+i">Arrival Date - Time</label>
+            <input type="datetime-local" class="form-control"
+              [attr.id]="'date'+i" formControlName="arrival">
+          </div>
+          <div class="col-sm-1">
+            <br>
+            <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
+              <i class="glyphicon glyphicon-minus-sign" aria-hidden="true" id="minusIcon"></i></a>
+          </div>
         </div>
-        <div class="col-sm-4">
-          <label id="date-label" [attr.for]="'date'+i">Departure Date</label>
-          <input type="date" placeholder="Date" class="form-control"
-            [attr.id]="'date'+i" formControlName="date">
-        </div>
-        <div class="col-sm-1">
-          <br>
-          <button type="button" id="btnFormat" class="btn btn-danger" *ngIf="myJourneys.get('destinations').length != 1"
-                  (click)="myJourneys.get('destinations').removeAt(i)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-        </div>
+        <br>
       </div>
       <br>
     </fieldset>

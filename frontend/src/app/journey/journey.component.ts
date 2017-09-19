@@ -31,7 +31,8 @@ export class JourneyComponent implements OnInit {
     // build the form model
     this.myJourneys = this.fb.group({
       initialLocation: new FormControl(this.searchService.query),
-      initialDate: new FormControl(),
+      initialDeparture: new FormControl(),
+      initialArrival: new FormControl(),
       destinations: this.fb.array(
         [this.buildItem('')]
       )
@@ -47,7 +48,8 @@ export class JourneyComponent implements OnInit {
   buildItem(val: string) {
     return new FormGroup({
       location: new FormControl(val, Validators.required),
-      date: new FormControl()
+      departure: new FormControl(),
+      arrival: new FormControl()
     })
   }
 
