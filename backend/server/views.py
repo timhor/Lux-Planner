@@ -218,11 +218,15 @@ def new_stop():
     db.session.commit()
 
 @app.route('/api/new_journey', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
 def new_journey():
-    user_id = current_identity[0]
-    created_journey = models.Journey(user_id=user_id,cost=0)
-    db.session.add(created_journey)
-    db.session.commit()
+    # user_id = current_identity[0]
+    body = json.loads(request.data)
+    print(body)
+    # created_journey = models.Journey(user_id=user_id,cost=0)
+    # db.session.add(created_journey)
+    # db.session.commit()
 
 @app.route('/api/get_journey', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround

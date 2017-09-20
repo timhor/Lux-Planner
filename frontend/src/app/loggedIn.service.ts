@@ -35,4 +35,12 @@ export class LoggedInService {
         options).map((res: Response) => res.json());
   }
 
+  public postJourney(payload: string) {
+    let options: RequestOptions = new RequestOptions({
+        headers: new Headers({'Content-Type': 'application/json'})
+    });
+     return this.authHttp.post(this.server + 'api/new_journey', payload,
+        options).map((res: Response) => res.json());
+  }
+
 }

@@ -7,6 +7,7 @@ import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-journey',
@@ -25,7 +26,8 @@ export class JourneyComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,
     private fb: FormBuilder,
-    private loggedInService: LoggedInService
+    private loggedInService: LoggedInService,
+    public router: Router
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -48,6 +50,14 @@ export class JourneyComponent implements OnInit {
   submit() {
     this.updateVars();
     let myJourney = JSON.stringify(this.myJourneys.getRawValue());
+    console.log(myJourney);
+    let handle = this.loggedInService.postJourney(myJourney);
+    handle.subscribe(
+        (res) => {
+            this.router.navigate(['/dashboard']);
+        },
+        (error) => console.log("nah fuck you.")
+    )
     // Send this JSON to backend 
     // Make invalidForm = true if invalid credentials
   }
