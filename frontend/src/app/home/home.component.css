@@ -88,6 +88,22 @@
     text-align: center;
 }
 
+#iconFormat {
+    margin-bottom: 5%;
+    margin-top: 5%;
+    /* max-width: 250px;
+    width: 50vw; */
+    font-size: 35vh;
+}
+
+#innerContainer {
+    border: 0.2vw;
+    border-radius: 5vh;
+    background-color: rgba(193, 214, 0, 0.50);
+    height: 45vh;
+    width: 45vh;
+}
+
 #imgBorder {
     border: 0.2vw;
     border-color: #bed600;
