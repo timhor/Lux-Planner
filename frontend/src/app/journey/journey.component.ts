@@ -36,6 +36,7 @@ export class JourneyComponent implements OnInit {
   ngOnInit() {
     // build the form model
     this.myJourneys = this.fb.group({
+      journeyName: new FormControl(),
       initialLocation: new FormControl(),
       initialDeparture: new FormControl(),
       initialArrival: new FormControl(),
