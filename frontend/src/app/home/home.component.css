@@ -5,6 +5,7 @@
 #mainText {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
     font-weight: bold;
+    color: #000037;    
     font-size:calc(10px + 3vw);    
     /* font-size: 3.5vw; */
     padding-bottom: 1vh;
