@@ -15,6 +15,8 @@ def search_flickr(request):
 
 
 def wikipedia_call(request):
+    # NOTE YOU CAN GET COORDINATES BY DOING: wikipedia.WikipediaPage(wikipedia.search(request)[0]).coordinates
+    # it will return a tuple of decimals in format (Lat, Lon): (Decimal('-33.86500000000000198951966012828052043914794921875'), Decimal('151.209444439999998621715349145233631134033203125'))
     return wikipedia.summary(wikipedia.search(request)[0])
 
 def search_places(request):

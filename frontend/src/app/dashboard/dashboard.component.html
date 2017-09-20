@@ -127,15 +127,12 @@
     <div class="col-sm-9">
       <div class="col-sm-12">
         <div class="well" id="map">
-          <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc
-                      &q=Tokyo" allowfullscreen>
-          </iframe>
+          <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)' allowfullscreen></iframe>
         </div>
         <br>
         <div class="well">
           <p id="subHeading">Local Weather: {{stops[activeStopIndex].name}}</p>
-          <div style="width: 780px;"><iframe style="display: block;" src="//cdnres.willyweather.com/widget/loadView.html?id=70867" width="780" height="92" frameborder="0" scrolling="no"></iframe><a style="margin: -92px 0 0 0;float: right;height: 92px;text-indent: -9999em;z-index: 1;position: relative;width: 20px" href="http://www.willyweather.com/fl/hillsborough-county/sydney.html" rel="nofollow"></a></div>
-        </div>
+          <iframe id="forecast_embed" frameborder="0" height="245" width="100%" [src]='sanitizer.bypassSecurityTrustResourceUrl(weatherUrl)'></iframe>
         <div class="well">
           <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
           <p>{{aboutText}}</p>

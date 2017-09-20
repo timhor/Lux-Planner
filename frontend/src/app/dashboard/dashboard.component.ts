@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
 import { ConnectionService } from '../connection/connection.service';
 import { ItineraryComponent } from '../itinerary/itinerary.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,28 +17,35 @@ export class DashboardComponent implements OnInit {
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
   public connService: ConnectionService;
+  public latitude: string  = "42.35000000000000142108547152020037174224853515625";
+  public longitude: string = "-71.0666666700000035916673368774354457855224609375";
+  public weatherUrl: string = "Nothing";
+  public mapUrl: string = "Nothing";
 
-  constructor( _connectionService: ConnectionService) {
+  constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer) {
     this.connService = _connectionService;
     
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
             this.activeJourneyIndex = res.active_journey;
             this.allJourneys = res.journeys;
-            this.journeyName = res.journeys[this.activeStopIndex].journey_name;
+            this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
             this.stops = res.journeys[this.activeStopIndex].stops;
             console.log('Success getting journeys');
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
                     this.aboutText = res.info; 
+                    // this.latitude = res.latitude;
+                    // this.longitude = res.longitude;
+
                     // console.log("About text is " + this.aboutText);   
-                }        
+                }                
             );
+            this.setUrls(this.getCurrStop());            
         },
         (error) => {console.log(`could not connect ${error}`)}
-    );
-    
-}
+    ); 
+  }
 
   ngOnInit() {
   }
@@ -61,9 +69,10 @@ export class DashboardComponent implements OnInit {
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info; 
-          console.log("About text is " + this.aboutText);   
+          // console.log("About text is " + this.aboutText);   
       }        
     );
+    this.setUrls(this.getCurrStop());        
   }
 
   setActiveStop(stop:string) {
@@ -75,9 +84,10 @@ export class DashboardComponent implements OnInit {
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info; 
-          console.log("About text is " + this.aboutText);   
+          // console.log("About text is " + this.aboutText);   
       }        
     );
+    this.setUrls(this.getCurrStop());    
   }
 
   getJourneyLength() {
@@ -88,5 +98,9 @@ export class DashboardComponent implements OnInit {
       }
   }
 
+  setUrls(stopName:string){
+    this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
+    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
+  }
 }
 
