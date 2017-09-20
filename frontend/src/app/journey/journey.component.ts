@@ -5,7 +5,6 @@ import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
-import { SearchService } from '../search.service'
 import { SearchComponent } from '../search/search.component'
 
 @Component({
@@ -22,7 +21,6 @@ export class JourneyComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,
     private fb: FormBuilder,
-    private searchService: SearchService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -31,7 +29,7 @@ export class JourneyComponent implements OnInit {
   ngOnInit() {
     // build the form model
     this.myJourneys = this.fb.group({
-      initialLocation: new FormControl(this.searchService.query),
+      initialLocation: new FormControl(),
       initialDeparture: new FormControl(),
       initialArrival: new FormControl(),
       destinations: this.fb.array(
