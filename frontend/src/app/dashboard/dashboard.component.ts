@@ -102,9 +102,9 @@ export class DashboardComponent implements OnInit {
 
   setUrls(stopName:string){
       console.log("Hello");
-      console.log("==================> The forecast lat and long are : " + this.stops[this.activeStopIndex].lat.toString() + " " + this.stops[this.activeStopIndex].lng.toString());
+      // console.log("==================> The forecast lat and long are : " + this.stops[this.activeStopIndex].lat.toString() + " " + this.stops[this.activeStopIndex].lng.toString());
     // this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
-    this.weatherUrl = "//forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat.toString() + "&lon=" + this.stops[this.activeStopIndex].lng.toString() + "&name=" + this.stops[this.activeStopIndex].name + "&units=uk&color=#000037";
+    this.weatherUrl = "http://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat.toString() + "&lon=" + this.stops[this.activeStopIndex].lng.toString() + "&name=" + this.stops[this.activeStopIndex].name + "&units=uk&color=#000037";
     console.log("==================> The weather url is : " + this.weatherUrl);
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
   }

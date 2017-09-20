@@ -88,20 +88,12 @@
     text-align: center;
 }
 
-#iconFormat {
+.iconFormat {
     margin-bottom: 5%;
     margin-top: 5%;
     /* max-width: 250px;
     width: 50vw; */
     font-size: 35vh;
-}
-
-#innerContainer {
-    border: 0.2vw;
-    border-radius: 5vh;
-    background-color: rgba(193, 214, 0, 0.50);
-    height: 45vh;
-    width: 45vh;
 }
 
 #imgBorder {
@@ -121,4 +113,40 @@
 
 .jumbotron {
     margin-top: 45px;
+}
+
+#userAccIcon{
+    border: 0.2vw;
+    border-radius: 5vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    height: 45vh;
+    width: 25vw;
+    color: #3EB000;
+    background: #FFFFFF;
+    border-color: #3EB000;
+}
+
+#planTripIcon{
+    border: 0.2vw;
+    border-radius: 5vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    height: 45vh;
+    width: 25vw;
+    color: #2B8BF8;
+    background: #FFFFFF;
+    border-color: #2B8BF8;
+}
+
+#reviewTripIcon{
+    border: 0.2vw;
+    border-radius: 5vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    height: 45vh;
+    width: 25vw;
+    color: #f4c20d;
+    background: #FFFFFF;
+    border-color: #f4c20d;
 }
