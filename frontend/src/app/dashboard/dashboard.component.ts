@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
   }
 
   setUrls(stopName:string){
-    this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&name=" + stopName + "&units=us";
+    this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
   }
 }
