@@ -132,7 +132,7 @@
         <br>
         <div class="well">
           <p id="subHeading">Local Weather: {{stops[activeStopIndex].name}}</p>
-          <iframe id="forecast_embed" frameborder="0" height="245" width="100%" [src]='sanitizer.bypassSecurityTrustResourceUrl(weatherUrl)'></iframe>
+          <iframe width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(weatherUrl)' allowfullscreen></iframe>
         <div class="well">
           <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
           <p>{{aboutText}}</p>
