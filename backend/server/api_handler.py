@@ -51,3 +51,9 @@ def search_places(request):
     # print(pickle.dumps(attractions))
     # return response.json()
     return attractions
+
+def wiki_location(request):
+    try:
+        return wikipedia.WikipediaPage(wikipedia.search(request)[0]).coordinates
+    except:
+        return None

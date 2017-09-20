@@ -244,12 +244,22 @@ def get_all_journeys():
         stops = models.Stop.query.filter_by(journey_id=j.id).all()
         print(stops)
         # j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
-        j_item = {'journey_name': j.journey_name, 'start': j.start_date, 'end': j.end_date, 'stops': [
-                {'name': s.stop_name, 'arrival': s.arrival_date, 'departure': s.departure_date} for s in stops
-            ]}
+        s_payload = []
+        for s in stops:
+            location = call_cache(s.stop_name + ' city', 'coord') or (0,0)
+            s_instance = {
+                'name': s.stop_name,
+                'arrival': s.arrival_date,
+                'departure': s.departure_date,
+                'lat': float(f'{location[0]:.4f}'),
+                'lng': float(f'{location[1]:.4f}')
+            }
+            s_payload.append(s_instance)
+        j_item = {'journey_name': j.journey_name, 'start': j.start_date, 'end': j.end_date, 'stops': s_payload}
         
         payload.append(j_item)
     # Think about how to handle a user without a journey
+    print(payload)
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
 @app.route('/api/switch_journey/', methods=['GET'])
@@ -356,4 +366,45 @@ def secure():
 
 
 
+@app.route('/api/test')
+def test():
+    location = call_cache('sydney', 'coord')
+    # return '{0[0]}, {0[1]}'.format(location)
+    return f'{location[0]:.4f}'
 
+
+def call_cache(search, data_type):
+    query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
+    if query:
+        if query.expiry < datetime.utcnow():
+            # print('OLD')
+            # data = api_handler.search_places(place)
+            data = api_caller(search, data_type)        
+            cache = pickle.dumps(data)            
+            query.cached_data = cache
+            query.expiry = datetime.utcnow() + timedelta(days=7)
+            db.session.commit()
+        else:
+            # print('DODGED!' + str(query))
+            data = pickle.loads(query.cached_data)
+    else:
+        data = api_caller(search, data_type)
+            
+        cache = pickle.dumps(data)
+        created_cache = models.CacheInformation(place_name=search, data_type=data_type, 
+                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+        db.session.add(created_cache)
+        db.session.commit()
+    print(data)
+    return data
+
+def api_caller(search, data_type):
+    if data_type ==  'attractions':
+        data = api_handler.search_places(search)
+    elif data_type == 'flickr':
+        data = api_handler.search_flickr(search)
+    elif data_type == 'wiki':
+        data = api_handler.wikipedia_call(search)
+    elif data_type == 'coord':
+        data = api_handler.wiki_location(search)
+    return data
