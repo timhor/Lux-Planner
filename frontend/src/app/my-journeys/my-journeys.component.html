@@ -2,9 +2,9 @@
 <div class="container" id="body_div">
   <h1>My Journeys</h1>
 
-  <br><br>
-  <div align="center">
-    <h2>Journey 1</h2>
+  <div align="center" *ngFor="let journey of allJourneys">
+    <br><br>
+    <h2>{{journey.journey_name}}</h2>
     <table class="table table-striped" id="stopsTable">
       <thead class="thead-normal">
         <tr>
@@ -12,17 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>London</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Sydney</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>New York</td>
+        <tr *ngFor="let stop of journey.stops; let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{stop.name}}</td>
         </tr>
       </tbody>
     </table>
@@ -32,72 +24,5 @@
       <button type="button" class="button-rect button-blue" routerLink="/journey">Modify Journey</button>
       <button type="button" class="button-rect button-red" routerLink="/my-journeys">Delete Journey</button>
     </div>
+    <br><br>
   </div>
-
-  <br><br>
-
-  <div align="center">
-    <h2>Journey 2</h2>
-    <table class="table table-striped" id="stopsTable">
-      <thead class="thead-normal">
-        <tr>
-          <th>Stops</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>London</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Sydney</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>New York</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <div class="btn-group">
-      <button type="button" class="button-rect button-green" routerLink="/dashboard">View Journey</button>
-      <button type="button" class="button-rect button-blue" routerLink="/journey">Modify Journey</button>
-      <button type="button" class="button-rect button-red" routerLink="/my-journeys">Delete Journey</button>
-    </div>
-  </div>
-
-  <br><br>
-
-  <div align="center">
-    <h2>Journey 3</h2>
-    <table class="table table-striped" id="stopsTable">
-      <thead class="thead-normal">
-        <tr>
-          <th>Stops</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>London</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Sydney</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>New York</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <div class="btn-group">
-      <button type="button" class="button-rect button-green" routerLink="/dashboard">View Journey</button>
-      <button type="button" class="button-rect button-blue" routerLink="/journey">Modify Journey</button>
-      <button type="button" class="button-rect button-red" routerLink="/my-journeys">Delete Journey</button>
-    </div>
-  </div>
-</div>
-<br><br>
