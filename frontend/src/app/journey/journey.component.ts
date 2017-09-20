@@ -65,14 +65,15 @@ export class JourneyComponent implements OnInit {
   }
 
   updateVars() {
-    let x = <HTMLFormElement>document.getElementById('nextStop');
+    let x = document.getElementsByClassName('searchComponent');
     this.myStops = [];
-    for (let i = 5; i < x.elements.length; i+=3) {
-      let value = (<HTMLInputElement>x.elements.item(i)).value;
+    for (let i = 0; i < x.length; i++) {
+      let value = (<HTMLInputElement>x[i].firstElementChild).value;
       console.log(value);
       if (value === "") continue;
       this.myStops.push(value);
     }
+
     console.log(this.myStops);
     let d = <FormArray>this.myJourneys.controls['destinations'].value;
     for (let i = 0; i < d.length; i++) {
