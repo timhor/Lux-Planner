@@ -43,7 +43,12 @@ export class JourneyComponent implements OnInit {
   }
   
   submit() {
+    this.updateVars();
+  }
+
+  updateVars() {
     let x = <HTMLFormElement>document.getElementById('nextStop');
+    this.myStops = [];
     for (let i = 4; i < x.elements.length; i+=3) {
       let value = (<HTMLInputElement>x.elements.item(i)).value;
       console.log(value);
@@ -87,21 +92,17 @@ export class JourneyComponent implements OnInit {
     });
   }
 
-  getPlace (id) { 
-    return (<HTMLInputElement>document.getElementById(id)).value;
+  fillDetails() {
+    let field = "initialLocation";
+    console.log("ENTERED FILLED DETAILS");
+    console.log(this.myJourneys.controls[field].value);
+    this.myJourneys.controls[field].setValue((<HTMLInputElement>document.getElementById(field)).value);
+    console.log(this.myJourneys.controls[field].value);
   }
 
-  fillDetails() {
-    console.log((<HTMLInputElement>(<HTMLFormElement>document.getElementById('nextStop')).elements.item(4)).value);
-    for (let field in this.myJourneys.value) {
-      let re = /location/i;
-      if (!field.match(re)) continue;
-      console.log("ENTERED FILLED DETAILS");
-      console.log(field);
-      console.log((<HTMLInputElement>document.getElementById(field)).value);
-      console.log(this.myJourneys.controls[field].value);
-      this.myJourneys.controls[field].setValue(this.getPlace(field));
-      console.log(this.myJourneys.controls[field].value);
-    }
+  getStop(i) {
+    this.updateVars();
+    console.log("Curr Index = " + i);
+    return this.myStops[i];
   }
 }
