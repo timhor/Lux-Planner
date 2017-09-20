@@ -5,8 +5,8 @@ import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
-import { SearchService } from '../search.service'
 import { SearchComponent } from '../search/search.component'
+import { LoggedInService } from '../loggedIn.service';
 
 @Component({
   selector: 'app-journey',
@@ -15,14 +15,17 @@ import { SearchComponent } from '../search/search.component'
 })
 export class JourneyComponent implements OnInit {
 
-  myJourneys: FormGroup;
-  myStops = [];
+  public myJourneys: FormGroup;
+  public myStops = [];
+  public invalidForm:boolean = false;;
+  public isLoggedIn;
+
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,
     private fb: FormBuilder,
-    private searchService: SearchService
+    private loggedInService: LoggedInService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -31,19 +34,22 @@ export class JourneyComponent implements OnInit {
   ngOnInit() {
     // build the form model
     this.myJourneys = this.fb.group({
-      initialLocation: new FormControl(this.searchService.query),
+      initialLocation: new FormControl(),
       initialDeparture: new FormControl(),
       initialArrival: new FormControl(),
       destinations: this.fb.array(
         [this.buildItem('')]
       )
     })
-
+    this.isLoggedIn = this.loggedInService.loggedIn();
     this.getAutocomplete();
   }
   
   submit() {
     this.updateVars();
+    let myJourney = JSON.stringify(this.myJourneys.getRawValue());
+    // Send this JSON to backend 
+    // Make invalidForm = true if invalid credentials
   }
 
   updateVars() {

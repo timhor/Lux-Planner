@@ -18,8 +18,8 @@ export class HomeComponent {
   }
 
   sendQuery() {
-    console.log((<HTMLInputElement>document.getElementById("mainSearch")).value);
-    this.searchService.query =(<HTMLInputElement>document.getElementById("mainSearch")).value;
+    console.log((<HTMLInputElement>(<HTMLElement>document.getElementById("mainSearch")).firstElementChild).value);
+    this.searchService.query = (<HTMLInputElement>(<HTMLElement>document.getElementById("mainSearch")).firstElementChild).value;
   }
 }
 

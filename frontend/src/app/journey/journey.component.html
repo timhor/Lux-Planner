@@ -14,8 +14,7 @@
   <div id="journeyHead">
     <h2>New Journey</h2>
   </div>
-  <!-- TEMPORAY TO REMOVE -->
-  <button (click)="submit()">SUBMIT</button>
+  <div [hidden]="!invalidForm"><br><div class="alert alert-danger">Invalid Entries</div></div>
   <form [formGroup]="myJourneys" (ngSubmit)="submit()" id="nextStop">
     <hr>
     <div class="row">
@@ -82,7 +81,7 @@
     <br>
     <hr>
     <div class="row">
-      <div class="form-group col-sm-6">
+      <!-- <div class="form-group col-sm-6">
         <button type="submit" class="button-rect button-green" value="Submit" [disabled]="myJourneys?.invalid"
                 routerLink="/itinerary">Customise Itinerary&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
         </button>
@@ -91,6 +90,27 @@
         <button type="submit" class="button-rect button-orange" value="Submit"
                 routerLink="/my-journeys">Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
         </button>
+      </div> -->
+      <div *ngIf="!isLoggedIn" align="center">
+        Log in to save your Journey!
+      </div>
+      <br>
+      <div class="form-group" align="center">
+        <button type="submit" class="button-rect button-green" value="Submit" *ngIf="isLoggedIn">
+          Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+        </button>
+        <div *ngIf="!isLoggedIn">
+          <div class="form-group col-sm-6">
+            <button class="button-rect button-orange" routerLink="/signup">
+              Sign Up&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+            </button>
+          </div>
+          <div class="form-group col-sm-6">
+            <button class="button-rect button-green" routerLink="/login">
+              Log In&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
