@@ -108,5 +108,9 @@ export class DashboardComponent implements OnInit {
     console.log("==================> The weather url is : " + this.weatherUrl);
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
   }
+
+  regStop(string) {
+    return string.replace(/,.*/,'');
+  }
 }
 

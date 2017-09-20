@@ -33,8 +33,8 @@
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)">{{stop.name}}</button>
-          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{stop.name}}</button>
+          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)">{{regStop(stop.name)}}</button>
+          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{regStop(stop.name)}}</button>
         </div>
       </div>
       <div class="well">
