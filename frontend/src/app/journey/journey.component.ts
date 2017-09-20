@@ -16,6 +16,7 @@ import { SearchComponent } from '../search/search.component'
 export class JourneyComponent implements OnInit {
 
   myJourneys: FormGroup;
+  myStops = [];
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
@@ -42,7 +43,19 @@ export class JourneyComponent implements OnInit {
   }
   
   submit() {
-    console.log("Reactive Form submitted: ", this.myJourneys)
+    let x = <HTMLFormElement>document.getElementById('nextStop');
+    for (let i = 4; i < x.elements.length; i+=3) {
+      let value = (<HTMLInputElement>x.elements.item(i)).value;
+      console.log(value);
+      if (value === "") continue;
+      this.myStops.push(value);
+    }
+    console.log(this.myStops);
+    let d = <FormArray>this.myJourneys.controls['destinations'].value;
+    for (let i = 0; i < d.length; i++) {
+      (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
+    }
+    console.log(this.myJourneys.value);
   }
 
   buildItem(val: string) {
@@ -79,6 +92,7 @@ export class JourneyComponent implements OnInit {
   }
 
   fillDetails() {
+    console.log((<HTMLInputElement>(<HTMLFormElement>document.getElementById('nextStop')).elements.item(4)).value);
     for (let field in this.myJourneys.value) {
       let re = /location/i;
       if (!field.match(re)) continue;

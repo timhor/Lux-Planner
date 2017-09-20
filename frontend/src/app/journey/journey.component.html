@@ -14,7 +14,9 @@
   <div id="journeyHead">
     <h2>New Journey</h2>
   </div>
-  <form [formGroup]="myJourneys" (ngSubmit)="submit()">
+  <!-- TEMPORAY TO REMOVE -->
+  <button (click)="submit()">SUBMIT</button>
+  <form [formGroup]="myJourneys" (ngSubmit)="submit()" id="nextStop">
     <hr>
     <div class="row">
       <div class="col-sm-10">
@@ -46,7 +48,7 @@
         <div class="row">
           <div class="col-sm-10">
             <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
-            <planner-search></planner-search>
+            <planner-search #searchComponent></planner-search>
           </div>
           <div class="col-sm-1">
             <br>
