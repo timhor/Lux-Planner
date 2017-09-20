@@ -11,14 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
-  public stops = [{'name': 'Stop', 'lat': 0, 'lng': 0}];
+  public stops = [{'name': 'Stop'}];
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
   public connService: ConnectionService;
-  public latitude; //  = "42.35000000000000142108547152020037174224853515625";
-  public longitude; //: string = "-71.0666666700000035916673368774354457855224609375";
+  public latitude: string  = "42.35000000000000142108547152020037174224853515625";
+  public longitude: string = "-71.0666666700000035916673368774354457855224609375";
   public weatherUrl: string = "Nothing";
   public mapUrl: string = "Nothing";
 
@@ -32,12 +32,10 @@ export class DashboardComponent implements OnInit {
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
             this.stops = res.journeys[this.activeStopIndex].stops;
             console.log('Success getting journeys');
-            console.log(res);
-            
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
                     this.aboutText = res.info; 
-                    // this.latitude = this.stops[this.activeStopIndex].lat;
+                    // this.latitude = res.latitude;
                     // this.longitude = res.longitude;
 
                     // console.log("About text is " + this.aboutText);   
@@ -101,10 +99,7 @@ export class DashboardComponent implements OnInit {
   }
 
   setUrls(stopName:string){
-      console.log("Hello");
-    // this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
-    this.weatherUrl = "//forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat + "&lon=" + this.stops[this.activeStopIndex].lng + "&units=uk";
-    console.log(this.weatherUrl);
+    this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
   }
 }

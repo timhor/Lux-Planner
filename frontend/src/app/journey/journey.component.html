@@ -25,7 +25,7 @@
       <div class="col-sm-1">
         <br>
         <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>            
+        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
     </div>
     <br>
@@ -51,12 +51,12 @@
           </div>
           <div class="col-sm-1">
             <br>
-            <a (click)="stop.show(getStop(i))"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+            <a (click)="stop.show(getStop(i))"><i class="glyphicon glyphicon-info-sign grow" aria-hidden="true" id="infoIcon"></i></a>
           </div>
         </div>
         <br>
         <div class="row">
-          <div class="col-sm-5 ui-state-hover">
+          <div class="col-sm-5">
             <label id="date-label" [attr.for]="'departure'+i">Departure Date - Time</label>
             <input type="datetime-local" class="form-control"
               [attr.id]="'departure'+i" formControlName="departure">
@@ -69,7 +69,7 @@
           <div class="col-sm-1">
             <br>
             <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
-              <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
+              <i class="glyphicon glyphicon-minus-sign grow" aria-hidden="true" id="minusIcon"></i></a>
           </div>
         </div>
         <br>
