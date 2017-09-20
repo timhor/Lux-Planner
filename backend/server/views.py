@@ -221,12 +221,32 @@ def new_stop():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def new_journey():
-    # user_id = current_identity[0]
+    user_id = current_identity[0]
     body = json.loads(request.data)
     print(body)
-    # created_journey = models.Journey(user_id=user_id,cost=0)
+
+    created_journey = models.Journey(
+            user_id=user_id,
+            journey_name=body['journeyName'],
+            start_date = body['initialDeparture'],
+            end_date = body['initialArrival'],
+            
+            cost=0
+        )
+    db.session.add(created_journey)
+    db.session.commit()
+    for s in body['destinations']:
+        stop = models.Stop(
+            journey_id=created_journey.id,
+            stop_name=s['location'],
+            arrival_date=s['arrival'],
+            departure_date=s['departure']
+        )
+        db.session.add(stop)
+
     # db.session.add(created_journey)
-    # db.session.commit()
+    db.session.commit()
+    return jsonify({'message': 'OK'})
 
 @app.route('/api/get_journey', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
