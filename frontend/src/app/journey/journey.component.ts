@@ -6,6 +6,7 @@ import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
+import { LoggedInService } from '../loggedIn.service';
 
 @Component({
   selector: 'app-journey',
@@ -14,13 +15,17 @@ import { SearchComponent } from '../search/search.component'
 })
 export class JourneyComponent implements OnInit {
 
-  myJourneys: FormGroup;
-  myStops = [];
+  public myJourneys: FormGroup;
+  public myStops = [];
+  public invalidForm:boolean = false;;
+  public isLoggedIn;
+
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,
     private fb: FormBuilder,
+    private loggedInService: LoggedInService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -36,12 +41,14 @@ export class JourneyComponent implements OnInit {
         [this.buildItem('')]
       )
     })
-
+    this.isLoggedIn = this.loggedInService.loggedIn();
     this.getAutocomplete();
   }
   
   submit() {
     this.updateVars();
+    //Set as below if invalid entries
+    //this.invalidForm = !this.invalidForm;
   }
 
   updateVars() {
