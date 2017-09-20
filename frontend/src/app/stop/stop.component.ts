@@ -34,7 +34,7 @@ export class StopComponent {
     }
 
     public show(stop): void {
-        if (stop === "") {
+        if (stop === null || stop === undefined) {
             return;
         }
         this.currStop = stop;
