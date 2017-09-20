@@ -27,12 +27,14 @@
     text-transform: uppercase;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    color: #1b365d;
+    color: #000037;
     background: #bed600;
+    border-width: 0.2vw;
+    border-color: #000037;
+    border-style: solid;
     cursor: pointer;
     -webkit-transition: background .1s ease-out,border-color .1s ease-out;
     transition: background .1s ease-out,border-color .1s ease-out;
-    border: 0;
     display: inline-block;
     letter-spacing: .3vw;
     font-size:calc(5px + 1.7vw);        
@@ -125,6 +127,7 @@
     color: #3EB000;
     background: #FFFFFF;
     border-color: #3EB000;
+    text-align: center;
 }
 
 #planTripIcon{
@@ -137,6 +140,7 @@
     color: #2B8BF8;
     background: #FFFFFF;
     border-color: #2B8BF8;
+    text-align: center;
 }
 
 #reviewTripIcon{
@@ -149,4 +153,5 @@
     color: #f4c20d;
     background: #FFFFFF;
     border-color: #f4c20d;
+    text-align: center;
 }
