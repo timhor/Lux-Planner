@@ -66,7 +66,7 @@ export class JourneyComponent implements OnInit {
   updateVars() {
     let x = <HTMLFormElement>document.getElementById('nextStop');
     this.myStops = [];
-    for (let i = 4; i < x.elements.length; i+=3) {
+    for (let i = 5; i < x.elements.length; i+=3) {
       let value = (<HTMLInputElement>x.elements.item(i)).value;
       console.log(value);
       if (value === "") continue;
