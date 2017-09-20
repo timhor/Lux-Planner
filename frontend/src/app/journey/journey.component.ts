@@ -47,8 +47,9 @@ export class JourneyComponent implements OnInit {
   
   submit() {
     this.updateVars();
-    //Set as below if invalid entries
-    //this.invalidForm = !this.invalidForm;
+    let myJourney = JSON.stringify(this.myJourneys.getRawValue());
+    // Send this JSON to backend 
+    // Make invalidForm = true if invalid credentials
   }
 
   updateVars() {
