@@ -15,7 +15,7 @@ export class SignupComponent {
   constructor(private loggedInService: LoggedInService, public router: Router) {}
   
   onSubmit() {
-    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName, this.account.gender);
+    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName, "M");
     response.subscribe(
         (data) => {
             if (data.message == 'success') {
