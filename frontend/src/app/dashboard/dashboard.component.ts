@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css', '../app.component.css']
+  styleUrls: ['../app.component.css', './dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
