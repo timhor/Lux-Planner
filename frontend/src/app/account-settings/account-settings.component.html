@@ -94,14 +94,14 @@
       <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editLastName" (click)="updateLastName()"></i>
     </div>
   </div>
-  <div class="row" id="text">
+  <!--<div class="row" id="text">
     <div class="col-sm-4">
       Gender:
     </div>
     <div class="col-sm-8">
       <label>{{gender}}</label>
     </div>
-  </div>
+  </div>-->
   <br>
   <button class="btn btn-primary" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
 </div>
