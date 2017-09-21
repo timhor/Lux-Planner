@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
     // this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
     this.weatherUrl = "http://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat.toString() + "&lon=" + this.stops[this.activeStopIndex].lng.toString() + "&units=uk&color=#000037";
     console.log("==================> The weather url is : " + this.weatherUrl);
-    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName;  
+    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName + " City";  
   }
 
   regStop(string) {
