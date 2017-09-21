@@ -24,7 +24,7 @@
 </nav>
 <div id="wrap">
     <div id="main">
-        <router-outlet></router-outlet>            
+        <router-outlet (deactivate)="onDeactivate()"></router-outlet>            
     </div>
 </div>
 <div class="footer">

@@ -30,4 +30,8 @@ export class AppComponent {
   public logout() {
     localStorage.removeItem('id_token');
   }
+
+  onDeactivate() {
+    document.body.scrollTop = 0;
+  }
 }
