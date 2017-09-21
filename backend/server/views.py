@@ -63,28 +63,29 @@ def flickr(): # REST params: ([search], [results])
     search = request.args.get('search', 'Paris')
     results = request.args.get('results', None)
     try:
-        query = models.CacheInformation.query.filter_by(place_name=search, data_type='flickr').first()
-        if query:
-            if query.expiry < datetime.utcnow():
-                print('OLD')
-                data = api_handler.search_flickr(search)
-                # data = api_handler.search_places(place)
-                cache = pickle.dumps(data)            
-                query.cached_data = cache
-                query.expiry = datetime.utcnow() + timedelta(days=7)
-                db.session.commit()
-            else:
-                print('DODGED!' + str(query))
-                data = pickle.loads(query.cached_data)
-        else:
-            # data = api_handler.search_places(place)
-            data = api_handler.search_flickr(search)
+        # query = models.CacheInformation.query.filter_by(place_name=search, data_type='flickr').first()
+        # if query:
+        #     if query.expiry < datetime.utcnow():
+        #         print('OLD')
+        #         data = api_handler.search_flickr(search)
+        #         # data = api_handler.search_places(place)
+        #         cache = pickle.dumps(data)            
+        #         query.cached_data = cache
+        #         query.expiry = datetime.utcnow() + timedelta(days=7)
+        #         db.session.commit()
+        #     else:
+        #         print('DODGED!' + str(query))
+        #         data = pickle.loads(query.cached_data)
+        # else:
+        #     # data = api_handler.search_places(place)
+        #     data = api_handler.search_flickr(search)
             
-            cache = pickle.dumps(data)
-            created_cache = models.CacheInformation(place_name=search, data_type='flickr', 
-                                                cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-            db.session.add(created_cache)
-            db.session.commit()
+        #     cache = pickle.dumps(data)
+        #     created_cache = models.CacheInformation(place_name=search, data_type='flickr', 
+        #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+        #     db.session.add(created_cache)
+        #     db.session.commit()
+        data = call_cache(search, 'flickr')
 
         urls = []
         if '-' in results:
@@ -112,28 +113,29 @@ def flickr(): # REST params: ([search], [results])
 @app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
     stop = request.args.get('stop', 'toyko')
-    query = models.CacheInformation.query.filter_by(place_name=stop, data_type='wiki').first()
-    if query:
-        if query.expiry < datetime.utcnow():
-            print('OLD')
-            # data = api_handler.search_places(stop)
-            info = api_handler.wikipedia_call(stop)
-            cache = pickle.dumps(info)            
-            query.cached_data = cache
-            query.expiry = datetime.utcnow() + timedelta(days=7)
-            db.session.commit()
-        else:
-            print('DODGED!' + str(query))
-            info = pickle.loads(query.cached_data)
-    else:
-        # data = api_handler.search_places(stop)
-        info = api_handler.wikipedia_call(stop)
+    info = call_cache(stop, 'wiki')
+    # query = models.CacheInformation.query.filter_by(place_name=stop, data_type='wiki').first()
+    # if query:
+    #     if query.expiry < datetime.utcnow():
+    #         print('OLD')
+    #         # data = api_handler.search_places(stop)
+    #         info = api_handler.wikipedia_call(stop)
+    #         cache = pickle.dumps(info)            
+    #         query.cached_data = cache
+    #         query.expiry = datetime.utcnow() + timedelta(days=7)
+    #         db.session.commit()
+    #     else:
+    #         print('DODGED!' + str(query))
+    #         info = pickle.loads(query.cached_data)
+    # else:
+    #     # data = api_handler.search_places(stop)
+    #     info = api_handler.wikipedia_call(stop)
         
-        cache = pickle.dumps(info)
-        created_cache = models.CacheInformation(place_name=stop, data_type='wiki', 
-                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-        db.session.add(created_cache)
-        db.session.commit()
+    #     cache = pickle.dumps(info)
+    #     created_cache = models.CacheInformation(place_name=stop, data_type='wiki', 
+    #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+    #     db.session.add(created_cache)
+    #     db.session.commit()
 
     # info = api_handler.wikipedia_call(stop)
     return jsonify({'info': info})
@@ -142,25 +144,26 @@ def wikipedia_search():
 @app.route('/api/places/', methods=['GET'])
 def google_places():
     place = request.args.get('place', 'toyko')
-    query = models.CacheInformation.query.filter_by(place_name=place, data_type='attractions').first()
-    if query:
-        if query.expiry < datetime.utcnow():
-            print('OLD')
-            data = api_handler.search_places(place)
-            cache = pickle.dumps(data)            
-            query.cached_data = cache
-            query.expiry = datetime.utcnow() + timedelta(days=7)
-            db.session.commit()
-        else:
-            print('DODGED!' + str(query))
-            data = pickle.loads(query.cached_data)
-    else:
-        data = api_handler.search_places(place)
-        cache = pickle.dumps(data)
-        created_cache = models.CacheInformation(place_name=place, data_type='attractions', 
-                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-        db.session.add(created_cache)
-        db.session.commit()
+    data = call_cache(place, 'attractions')
+    # query = models.CacheInformation.query.filter_by(place_name=place, data_type='attractions').first()
+    # if query:
+    #     if query.expiry < datetime.utcnow():
+    #         print('OLD')
+    #         data = api_handler.search_places(place)
+    #         cache = pickle.dumps(data)            
+    #         query.cached_data = cache
+    #         query.expiry = datetime.utcnow() + timedelta(days=7)
+    #         db.session.commit()
+    #     else:
+    #         print('DODGED!' + str(query))
+    #         data = pickle.loads(query.cached_data)
+    # else:
+    #     data = api_handler.search_places(place)
+    #     cache = pickle.dumps(data)
+    #     created_cache = models.CacheInformation(place_name=place, data_type='attractions', 
+    #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+    #     db.session.add(created_cache)
+    #     db.session.commit()
     return jsonify(data)
 
 
@@ -414,6 +417,8 @@ def secure():
 
 
 
+##### Helper functions ####
+
 @app.route('/api/test')
 def test():
     location = call_cache('sydney', 'coord')
@@ -462,5 +467,4 @@ def convert_time(time_string):
         python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M')
     except:
         python_time = datetime.utcnow()
-
     return python_time
