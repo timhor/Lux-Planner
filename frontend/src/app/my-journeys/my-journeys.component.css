@@ -50,7 +50,7 @@ h4 {
    padding-right: 5vw;
    padding-left: 5vw; 
    min-width: 300px;
-   width: 65vw; 
+   width: 50vw; 
    margin: 0 auto;
    border-radius: 5vh;
 }
@@ -68,13 +68,13 @@ h4 {
 }
 
 #stopsTable {
-   width: 50vw;
+   width: 500px;
 }
 
 .button-rect {
     padding-top: 1.3vh;
     padding-bottom: 1.3vh;
     letter-spacing: normal;
-    width: 25%;
-    margin-left: 30px;
+    min-width: 160px;
+    width: 100px;
 }
