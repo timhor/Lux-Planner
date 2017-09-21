@@ -36,3 +36,9 @@
    overflow-y: auto;
    background-color: rgb(240,245,255)
 }
+
+.button-rect {
+   width: 160px;
+   min-width: 160px;
+   font-size: 14px;
+}
