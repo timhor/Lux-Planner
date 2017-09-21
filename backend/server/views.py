@@ -224,23 +224,47 @@ def new_journey():
     user_id = current_identity[0]
     body = json.loads(request.data)
     print(body)
+    j_start = convert_time(body['initialDeparture'])
+    j_end = convert_time(body['initialArrival'])
+    
+    # try:
+    #     j_start = datetime.strptime(body['initialDeparture'], '%Y-%m-%dT%H:%M')
+    # except:
+    #     j_start = datetime.utcnow()
+
+    # try:
+    #     j_end = datetime.strptime(body['initialArrival'], '%Y-%m-%dT%H:%M')
+    # except:
+    #     j_end = datetime.utcnow()
+
 
     created_journey = models.Journey(
             user_id=user_id,
             journey_name=body['journeyName'],
-            start_date = body['initialDeparture'],
-            end_date = body['initialArrival'],
+            start_date = j_start,
+            end_date = j_end,
             
             cost=0
         )
     db.session.add(created_journey)
     db.session.commit()
     for s in body['destinations']:
+        s_start = convert_time(s['arrival'])
+        s_end = convert_time(s['departure'])
+        # try:
+        #     s_start = datetime.strptime(s['arrival'], '%Y-%m-%dT%H:%M')
+        # except:
+        #     s_start = datetime.utcnow()
+
+        # try:
+        #     s_end = datetime.strptime(s['departure'], '%Y-%m-%dT%H:%M')
+        # except:
+        #     s_end = datetime.utcnow()
         stop = models.Stop(
             journey_id=created_journey.id,
             stop_name=s['location'],
-            arrival_date=s['arrival'],
-            departure_date=s['departure']
+            arrival_date=s_start,
+            departure_date=s_end
         )
         db.session.add(stop)
 
@@ -432,3 +456,11 @@ def api_caller(search, data_type):
     elif data_type == 'coord':
         data = api_handler.wiki_location(search)
     return data
+
+def convert_time(time_string):
+    try:
+        python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M')
+    except:
+        python_time = datetime.utcnow()
+
+    return python_time
