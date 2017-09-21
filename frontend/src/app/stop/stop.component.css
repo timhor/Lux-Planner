@@ -38,12 +38,13 @@ h4 {
     cursor: default;
 }
 
-#body_div{
+#body_div {
     padding-top: 5vh;
     padding-bottom: 5vh;  
     padding-right: 5vw;
     padding-left: 5vw; 
-    min-width: 300px;   
+    min-width: 300px;
+    width: 85vw;
     margin: 0 auto;
  }
 

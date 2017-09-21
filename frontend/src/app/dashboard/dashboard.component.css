@@ -6,27 +6,39 @@
 
 .stopButton {
    border: 0.2vw;
-   border-color: #bed600;;
+   border-color: #3EB000;;
    border-style:solid; 
-   border-radius: 2vh;
    color: #000037;   
    height: 7vh;
-   margin: 2.5px;
-   width: 100%;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+   margin-top: 2.5px;
+   margin-bottom: 2.5px;
+   width: 14vw;
 }
 
-.stopButton:hover { 
-    background: #bed600; 
-    border-color: white;
-    color: #000086;    
+.itineraryButton {
+    border: 0.2vw;
+    border-color: #3EB000;;
+    border-style:solid; 
+    color: #000037;   
+    height: 7vh;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    width: 4vw;
+}
+
+.btn-group {
+    padding-left: 1vw;
+}
+
+/* .stopButton:hover { 
+    background: #3EB000; 
+    color: white;    
 }
 
 .stopButton:active { 
-    background: #bed600; 
-    border-color: white;
-    color: #000086;    
-}
+    background: #3EB000; 
+    color: white;
+} */
 
 img {
    display: block;
