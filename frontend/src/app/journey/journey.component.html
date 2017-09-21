@@ -39,11 +39,11 @@
     <div class="row">
       <div class="col-sm-5">
         <label id="date-label">Departure Date - Time</label>
-        <input type="datetime-local" class="form-control" formControlName="initialDeparture">
+        <input type="date" class="form-control" formControlName="initialDeparture">
       </div>
       <div class="col-sm-5">
         <label id="date-label">Arrival Date - Time</label>
-        <input type="datetime-local" class="form-control" formControlName="initialArrival">
+        <input type="date" class="form-control" formControlName="initialArrival">
       </div>
     </div>
     <hr>
@@ -65,12 +65,12 @@
         <div class="row">
           <div class="col-sm-5 ui-state-hover">
             <label id="date-label" [attr.for]="'departure'+i">Departure Date - Time</label>
-            <input type="datetime-local" class="form-control"
+            <input type="date" class="form-control"
               [attr.id]="'departure'+i" formControlName="departure">
           </div>
           <div class="col-sm-5">
             <label id="date-label" [attr.for]="'arrival'+i">Arrival Date - Time</label>
-            <input type="datetime-local" class="form-control"
+            <input type="date" class="form-control"
               [attr.id]="'arrival'+i" formControlName="arrival">
           </div>
           <div class="col-sm-1">
