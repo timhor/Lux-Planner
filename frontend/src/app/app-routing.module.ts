@@ -32,10 +32,6 @@ const routes: Routes = [
         component: SignupComponent
     },
     {
-        path: 'stop',
-        component: StopComponent
-    },
-    {
         path: 'contact-us',
         component: ContactUsComponent
     },
@@ -50,10 +46,6 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent
-    },
-    {
-        path: 'itinerary',
-        component: ItineraryComponent
     },
     {
         path: 'help',

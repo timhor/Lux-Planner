@@ -32,7 +32,7 @@ export class LoginComponent {
   }
 
   constructor(private loggedInService: LoggedInService, public router: Router) {}
-
+  
   setLoggedIn() {
     console.log("Logged In=" + this.loggedInService.loggedIn);
   }
