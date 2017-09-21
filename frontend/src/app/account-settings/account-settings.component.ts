@@ -60,7 +60,7 @@ export class AccountSettingsComponent implements OnInit {
     this.avatar = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available";
     //this.username = "Username";
     //this.email = "userEmail@mail.com";
-    this.password = "!@#$%^&*()";
+    this.password = "••••••••";
   }
 
   updateAvatar() {
