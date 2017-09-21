@@ -50,7 +50,8 @@ img {
    font-weight: bold;
 }
 
-#btnFormat {
-   cursor: pointer; cursor: hand; outline: none;
-   width: 2em !important; 
+.button-rect {
+   min-width: 100px;
+   width: 190px;
+   letter-spacing: .08em;
 }
