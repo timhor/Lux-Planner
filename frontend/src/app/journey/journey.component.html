@@ -16,7 +16,7 @@
   </div>
   <br>
   <div [hidden]="!invalidForm"><br><div class="alert alert-danger">Invalid Entries</div></div>
-  <form [formGroup]="myJourneys" (ngSubmit)="submit()" id="nextStop">
+  <form [formGroup]="myJourneys">
     <div class="row">
       <div class="col-sm-10">
         <label id="stop-label">Journey Name</label>
@@ -103,7 +103,7 @@
       </div>
       <br>
       <div class="form-group" align="center">
-        <button type="submit" class="button-rect button-green" value="Submit" *ngIf="isLoggedIn">
+        <button type="button" class="button-rect button-green" *ngIf="isLoggedIn" (click)="submit()">
           Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
         </button>
         <div *ngIf="!isLoggedIn">
