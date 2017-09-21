@@ -10,7 +10,7 @@ import { LoggedInService } from '../loggedIn.service';
 export class LoginComponent {
   public username;
   public password;
-  public isChecked = false; 
+  public isChecked = true; 
   public incorrectCredentials = false;
   
   setChecked() {
