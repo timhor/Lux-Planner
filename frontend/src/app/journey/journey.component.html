@@ -104,9 +104,11 @@
       </div> -->
       <br>
       <div class="form-group" align="center">
-        <button *ngIf="isLoggedIn" type="button" class="button-rect button-green" (click)="submit()">
-          Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
-        </button>
+        <div class="col-sm-12">
+          <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-green" (click)="submit()">
+            Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+          </button>
+        </div>
         <div *ngIf="!isLoggedIn">
           <div class="form-group col-sm-6">
             <button class="button-rect button-orange" routerLink="/signup">
