@@ -120,7 +120,8 @@ def new_user():
     first_name = body['firstName']
     last_name = body['lastName']
     gender = body['gender']
-    created_user = models.User(username=username, password=password, email=email, first_name=first_name, last_name=last_name, gender=gender)
+    created_user = models.User(username=username, password=password, email=email,
+        first_name=first_name, last_name=last_name, gender=gender, active_journey_index=0)
     db.session.add(created_user)
     db.session.commit()
     return jsonify({'message': 'success'})
