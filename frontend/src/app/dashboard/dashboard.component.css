@@ -39,5 +39,7 @@ img {
 }
 
 .button-rect {
-   width: 200px; 
+   min-width: 100px;
+   width: 190px;
+   letter-spacing: .08em;
 }
