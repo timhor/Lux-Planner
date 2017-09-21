@@ -1,4 +1,4 @@
-#headText{
+#headText {
    margin: 0 auto;
    text-align: left;
 }
@@ -10,7 +10,7 @@
    padding-bottom: 20px
 }
 
-#body_div{
+#body_div {
    background-color: rgba(255, 255, 255, 0.8);
    padding-top: 5vh;
    padding-bottom: 5vh;  
@@ -20,4 +20,8 @@
    min-width: 300px;   
    margin: 0 auto;
    border-radius: 5vh;
+}
+
+.grow:hover {
+   transform: scale(1.3);
 }
