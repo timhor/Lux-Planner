@@ -5,12 +5,12 @@ h3, form {
 
 #headText{
    margin: 0 auto;
-   text-align: center;
+   text-align: left;
 }
 
 #subText {
    margin: 0 auto;
-   text-align: center;
+   text-align: left;
    font-weight: bold;
    font-size: 18px;
    padding-bottom: 5px;
@@ -18,12 +18,16 @@ h3, form {
 
 #text {
    margin: 0 auto;
-   text-align: center;
+   text-align: left;
    font-size: 14px;
-   padding-bottom: 15px
+   padding-bottom: 20px
 }
 
-ul { display:table; margin:0 auto;}
+#text ul, #text li {
+    margin: 0; 
+    padding: 0;
+    margin-left: 10px;
+}
 
 #body_div{
    background-color: rgba(255, 255, 255, 0.8);
@@ -31,7 +35,7 @@ ul { display:table; margin:0 auto;}
    padding-bottom: 5vh;  
    padding-right: 5vw;
    padding-left: 5vw; 
-   width: 50vw;
+   width: 65vw;
    min-width: 300px;   
    margin: 0 auto;
    border-radius: 5vh;
