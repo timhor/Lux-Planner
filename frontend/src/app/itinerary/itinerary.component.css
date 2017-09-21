@@ -11,6 +11,16 @@
    text-decoration: underline;
 }
 
+#body_div {
+    padding-top: 5vh;
+    padding-bottom: 5vh;  
+    padding-right: 5vw;
+    padding-left: 5vw; 
+    min-width: 300px;
+    width: 85vw;
+    margin: 0 auto;
+}
+
 .modal {
    background: rgba(0,0,0,0.6);
    position: fixed;
@@ -22,7 +32,7 @@
 }
 
 .modal-body {
-   max-height: calc(100vh - 200px);
+   max-height: calc(100vh - 180px);
    overflow-y: auto;
    background-color: rgb(240,245,255)
 }
