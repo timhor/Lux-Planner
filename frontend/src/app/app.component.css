@@ -78,7 +78,6 @@ img { cursor: pointer; cursor: hand; outline: none; }
 .icon-blue:hover{
     font-size:calc(15px + 1vw);
     color: #FFFFFF;
-    background-color: #000037;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color:#2B8BF8;
     text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
@@ -89,7 +88,6 @@ img { cursor: pointer; cursor: hand; outline: none; }
 .icon-red:hover{
     font-size:calc(15px + 1vw);
     color: #FFFFFF;
-    background-color: #6B0000;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color:#DB0000;
     text-shadow: 0 2px 4px rgba(145, 92, 182, .4);

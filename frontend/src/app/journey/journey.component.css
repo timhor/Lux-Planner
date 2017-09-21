@@ -65,3 +65,7 @@
    width: 10vw;
    min-width: 2em;
 }
+
+.grow:hover { 
+   transform: scale(1.15); 
+}
