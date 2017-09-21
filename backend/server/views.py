@@ -360,7 +360,7 @@ def api_caller(search, data_type):
 
 def convert_time(time_string):
     try:
-        python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M')
+        python_time = datetime.strptime(time_string, '%Y-%m-%d')
     except:
         python_time = datetime.utcnow()
     return python_time
