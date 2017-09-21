@@ -55,8 +55,8 @@ export class JourneyComponent implements OnInit {
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
         (res) => {
-            // this.router.navigate(['/dashboard']);
             console.log("SUCCESS!!!");
+            this.router.navigate(['/dashboard']);
         },
         (error) => console.log("nah fuck you.")
     )

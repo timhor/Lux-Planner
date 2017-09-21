@@ -24,7 +24,7 @@ export class SignupComponent {
                     (data) => {
                         let token = data.access_token;
                         localStorage.setItem('id_token', token);  // 'id_token' is the default location AuthHTTP looks for
-                        this.router.navigate(['/dashboard'])
+                        this.router.navigate(['/journey'])
                     },
                     (error) => {
                         console.log(`This shouldn't happen anyways: ${error}`);
