@@ -5,7 +5,11 @@ a.active{
     color: white !important;
 }
 
-img { cursor: pointer; cursor: hand; outline: none; }
+img, .dropdown {
+    cursor: pointer;
+    cursor: hand;
+    outline: none;
+}
 
 #subText {
     font-size: 1.5vh;
