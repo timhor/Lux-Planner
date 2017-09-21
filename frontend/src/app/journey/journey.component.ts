@@ -58,7 +58,7 @@ export class JourneyComponent implements OnInit {
             console.log("SUCCESS!!!");
             this.router.navigate(['/dashboard']);
         },
-        (error) => console.log("nah fuck you.")
+        (error) => console.log("Unable to save journey")
     )
     // Send this JSON to backend 
     // Make invalidForm = true if invalid credentials
