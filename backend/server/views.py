@@ -63,28 +63,6 @@ def flickr(): # REST params: ([search], [results])
     search = request.args.get('search', 'Paris')
     results = request.args.get('results', None)
     try:
-        # query = models.CacheInformation.query.filter_by(place_name=search, data_type='flickr').first()
-        # if query:
-        #     if query.expiry < datetime.utcnow():
-        #         print('OLD')
-        #         data = api_handler.search_flickr(search)
-        #         # data = api_handler.search_places(place)
-        #         cache = pickle.dumps(data)            
-        #         query.cached_data = cache
-        #         query.expiry = datetime.utcnow() + timedelta(days=7)
-        #         db.session.commit()
-        #     else:
-        #         print('DODGED!' + str(query))
-        #         data = pickle.loads(query.cached_data)
-        # else:
-        #     # data = api_handler.search_places(place)
-        #     data = api_handler.search_flickr(search)
-            
-        #     cache = pickle.dumps(data)
-        #     created_cache = models.CacheInformation(place_name=search, data_type='flickr', 
-        #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-        #     db.session.add(created_cache)
-        #     db.session.commit()
         data = call_cache(search, 'flickr')
 
         urls = []
@@ -114,30 +92,6 @@ def flickr(): # REST params: ([search], [results])
 def wikipedia_search():
     stop = request.args.get('stop', 'toyko')
     info = call_cache(stop, 'wiki')
-    # query = models.CacheInformation.query.filter_by(place_name=stop, data_type='wiki').first()
-    # if query:
-    #     if query.expiry < datetime.utcnow():
-    #         print('OLD')
-    #         # data = api_handler.search_places(stop)
-    #         info = api_handler.wikipedia_call(stop)
-    #         cache = pickle.dumps(info)            
-    #         query.cached_data = cache
-    #         query.expiry = datetime.utcnow() + timedelta(days=7)
-    #         db.session.commit()
-    #     else:
-    #         print('DODGED!' + str(query))
-    #         info = pickle.loads(query.cached_data)
-    # else:
-    #     # data = api_handler.search_places(stop)
-    #     info = api_handler.wikipedia_call(stop)
-        
-    #     cache = pickle.dumps(info)
-    #     created_cache = models.CacheInformation(place_name=stop, data_type='wiki', 
-    #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-    #     db.session.add(created_cache)
-    #     db.session.commit()
-
-    # info = api_handler.wikipedia_call(stop)
     return jsonify({'info': info})
 
 
@@ -145,25 +99,6 @@ def wikipedia_search():
 def google_places():
     place = request.args.get('place', 'toyko')
     data = call_cache(place, 'attractions')
-    # query = models.CacheInformation.query.filter_by(place_name=place, data_type='attractions').first()
-    # if query:
-    #     if query.expiry < datetime.utcnow():
-    #         print('OLD')
-    #         data = api_handler.search_places(place)
-    #         cache = pickle.dumps(data)            
-    #         query.cached_data = cache
-    #         query.expiry = datetime.utcnow() + timedelta(days=7)
-    #         db.session.commit()
-    #     else:
-    #         print('DODGED!' + str(query))
-    #         data = pickle.loads(query.cached_data)
-    # else:
-    #     data = api_handler.search_places(place)
-    #     cache = pickle.dumps(data)
-    #     created_cache = models.CacheInformation(place_name=place, data_type='attractions', 
-    #                                         cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
-    #     db.session.add(created_cache)
-    #     db.session.commit()
     return jsonify(data)
 
 
@@ -229,17 +164,6 @@ def new_journey():
     print(body)
     j_start = convert_time(body['initialDeparture'])
     j_end = convert_time(body['initialArrival'])
-    
-    # try:
-    #     j_start = datetime.strptime(body['initialDeparture'], '%Y-%m-%dT%H:%M')
-    # except:
-    #     j_start = datetime.utcnow()
-
-    # try:
-    #     j_end = datetime.strptime(body['initialArrival'], '%Y-%m-%dT%H:%M')
-    # except:
-    #     j_end = datetime.utcnow()
-
 
     created_journey = models.Journey(
             user_id=user_id,
@@ -254,15 +178,6 @@ def new_journey():
     for s in body['destinations']:
         s_start = convert_time(s['arrival'])
         s_end = convert_time(s['departure'])
-        # try:
-        #     s_start = datetime.strptime(s['arrival'], '%Y-%m-%dT%H:%M')
-        # except:
-        #     s_start = datetime.utcnow()
-
-        # try:
-        #     s_end = datetime.strptime(s['departure'], '%Y-%m-%dT%H:%M')
-        # except:
-        #     s_end = datetime.utcnow()
         stop = models.Stop(
             journey_id=created_journey.id,
             stop_name=s['location'],
@@ -271,30 +186,21 @@ def new_journey():
         )
         db.session.add(stop)
 
-    # db.session.add(created_journey)
     db.session.commit()
     return jsonify({'message': 'OK'})
 
-@app.route('/api/get_journey', methods=['GET'])
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def get_journey():
-    pass
 
 @app.route('/api/get_all_journeys', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_all_journeys():
-    # print('hello get journeys')
     id = current_identity[0]
     user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
-    # user = models.User.query.get(1)
     payload = []
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     for j in journeys:
         stops = models.Stop.query.filter_by(journey_id=j.id).all()
         print(stops)
-        # j_item = {'journey_name': j.id, 'stops': [s.stop_name for s in stops]}
         s_payload = []
         for s in stops:
             location = call_cache(s.stop_name + ' city', 'coord') or (0,0)
@@ -313,6 +219,7 @@ def get_all_journeys():
     print(payload)
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
+
 @app.route('/api/switch_journey/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
@@ -322,12 +229,14 @@ def switch_journey():
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
 
+
 @app.route('/api/get_account_details/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_account_details():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name, 'last_name': user.last_name, 'gender': user.gender})
+
 
 @app.route('/api/get_all_journey_names/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
@@ -340,14 +249,6 @@ def get_all_journey_names():
         names.append(j.journey_name)
     return jsonify({'names': names})
 
-#@app.route('/api/new_itinerary', methods=['POST'])
-#def new_itinerary():
-    #TO DO: get stop_id from stop in journey
-    #print(request)
-    #eventDay = request.form['eventDay']
-    #created_itinerary = models.Itinerary(day_of_event=eventDay)
-    #db.session.add(created_itinerary)
-    #db.session.commit()
 
 ################ Old stuff ####################
 @app.route('/')
@@ -422,7 +323,6 @@ def secure():
 @app.route('/api/test')
 def test():
     location = call_cache('sydney', 'coord')
-    # return '{0[0]}, {0[1]}'.format(location)
     return f'{location[0]:.4f}'
 
 
@@ -430,15 +330,12 @@ def call_cache(search, data_type):
     query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
     if query:
         if query.expiry < datetime.utcnow():
-            # print('OLD')
-            # data = api_handler.search_places(place)
             data = api_caller(search, data_type)        
             cache = pickle.dumps(data)            
             query.cached_data = cache
             query.expiry = datetime.utcnow() + timedelta(days=7)
             db.session.commit()
         else:
-            # print('DODGED!' + str(query))
             data = pickle.loads(query.cached_data)
     else:
         data = api_caller(search, data_type)
