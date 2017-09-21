@@ -249,7 +249,6 @@ def get_all_journey_names():
         names.append(j.journey_name)
     return jsonify({'names': names})
 
-
 ################ Old stuff ####################
 @app.route('/')
 @app.route('/index')

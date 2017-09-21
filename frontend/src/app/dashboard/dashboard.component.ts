@@ -3,6 +3,8 @@ import { StopComponent } from '../stop/stop.component';
 import { ConnectionService } from '../connection/connection.service';
 import { ItineraryComponent } from '../itinerary/itinerary.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LoggedInService } from '../loggedIn.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +23,12 @@ export class DashboardComponent implements OnInit {
   public longitude; //: string = "-71.0666666700000035916673368774354457855224609375";
   public weatherUrl: string = "Nothing";
   public mapUrl: string = "Nothing";
+  public loggedInService: LoggedInService;
 
-  constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer) {
+  constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router) {
     this.connService = _connectionService;
-    
+    this.loggedInService = _loggedinService;
+
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
             this.activeJourneyIndex = res.active_journey;
@@ -50,6 +54,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.loggedInService.loggedIn()) {
+      this.router.navigate(['/login']);
+    }
   }
 
   getCurrStop () {

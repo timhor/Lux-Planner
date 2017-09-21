@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection/connection.service';
+import { LoggedInService } from '../loggedIn.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-settings',
@@ -19,6 +21,7 @@ export class AccountSettingsComponent implements OnInit {
   public lastName;
   public gender;
   public connService: ConnectionService;
+  public loggedInService: LoggedInService;
 
   public newAvatar;
   public newEmail;
@@ -27,8 +30,9 @@ export class AccountSettingsComponent implements OnInit {
 
   submitted = false;
 
-  constructor( _connectionService: ConnectionService) { 
+  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) { 
     this.connService = _connectionService;
+    this.loggedInService = _loggedinService;
 
     this.connService.getProtectedData('api/get_account_details/').subscribe(
       res => {
@@ -44,6 +48,9 @@ export class AccountSettingsComponent implements OnInit {
   }
     
   ngOnInit() {
+    if (!this.loggedInService.loggedIn()) {
+      this.router.navigate(['/login']);
+    }
     //fetch account details from backend
     //TODO: replace literals with details
     this.avatar = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available";
