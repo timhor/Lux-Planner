@@ -6,7 +6,9 @@
   <br>
   <!-- <code>{{diagnostic}}</code> -->
   <div class="alert alert-warning" [hidden]="(password.valid || !password.touched) 
-    && (email.valid || !email.touched) && newPassword === newPasswordConfirm && (!editPassword || !editEmail)">
+    && (email.valid || !email.touched) && (firstName.valid || !firstName.touched)
+    && (lastName.valid || !lastName.touched) && newPassword === newPasswordConfirm
+    && (!editPassword || !editEmail || !editFirstName || !editLastName)">
     <div [hidden]="password.valid || !editPassword || !password.touched">
       Password is required. Min. 8 characters
     </div>
@@ -15,6 +17,12 @@
     </div>
     <div [hidden]="email.valid || !editEmail || !email.touched">
       Email is required
+    </div>
+    <div [hidden]="firstName.valid || !editFirstName || !firstName.touched">
+      First Name is required
+    </div>
+    <div [hidden]="lastName.valid || !editLastName || !lastName.touched">
+      Last Name is required
     </div>
   </div>
   <div class="row" id="text">
@@ -59,8 +67,42 @@
       <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editEmail" (click)="updateEmail()"></i>
     </div>
   </div>
+  <div class="row" id="text">
+    <div class="col-sm-4">
+      First Name:
+    </div>
+    <div class="col-sm-6">
+      <label *ngIf="!editFirstName">{{firstName}}</label>
+      <input *ngIf="editFirstName" type="firstName" placeholder="Enter new first name" class="form-control" [(ngModel)]="newFirstName" name="firstName" #firstName="ngModel" required>
+    </div>
+    <div class="col-sm-2">
+      <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editFirstName" (click)="updateFirstName()"></i>
+      <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editFirstName" (click)="updateFirstName()"></i>
+    </div>
+  </div>
+  <div class="row" id="text">
+    <div class="col-sm-4">
+      Last Name:
+    </div>
+    <div class="col-sm-6">
+      <label *ngIf="!editLastName">{{lastName}}</label>
+      <input *ngIf="editLastName" type="lastName" placeholder="Enter new last name" class="form-control" [(ngModel)]="newLastName" name="lastName" #lastName="ngModel" required>
+    </div>
+    <div class="col-sm-2">
+      <i class="glyphicon glyphicon-edit grow" aria-hidden="true" *ngIf="!editLastName" (click)="updateLastName()"></i>
+      <i class="glyphicon glyphicon-remove-sign" aria-hidden="true" *ngIf="editLastName" (click)="updateLastName()"></i>
+    </div>
+  </div>
+  <div class="row" id="text">
+    <div class="col-sm-4">
+      Gender:
+    </div>
+    <div class="col-sm-8">
+      <label>{{gender}}</label>
+    </div>
+  </div>
   <br>
-  <button class="btn btn-primary" *ngIf="editAvatar || editPassword || editEmail" (click)="onSubmit()">Confirm Changes</button>
+  <button class="btn btn-primary" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
 </div>
 
 <br><br>

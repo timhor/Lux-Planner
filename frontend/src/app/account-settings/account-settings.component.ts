@@ -12,6 +12,8 @@ export class AccountSettingsComponent implements OnInit {
   public editAvatar:boolean = false;
   public editPassword:boolean = false;
   public editEmail:boolean = false;
+  public editFirstName:boolean = false;
+  public editLastName:boolean = false;
 
   public avatar;
   public username;
@@ -27,6 +29,8 @@ export class AccountSettingsComponent implements OnInit {
   public newEmail;
   public newPassword = "";
   public newPasswordConfirm = "";
+  public newFirstName;
+  public newLastName;
 
   submitted = false;
 
@@ -69,6 +73,14 @@ export class AccountSettingsComponent implements OnInit {
 
   updateEmail() {
     this.editEmail = !this.editEmail;
+  }
+
+  updateFirstName() {
+    this.editFirstName = !this.editFirstName;
+  }
+
+  updateLastName() {
+    this.editLastName = !this.editLastName;
   }
 
   onSubmit() {
