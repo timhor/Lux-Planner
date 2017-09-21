@@ -5,25 +5,26 @@
 }
 
 .stopButton {
-   border: 0.2vw;
+   border: 2.4px;
+   border-right-width: 1.2px;
    border-color: #3EB000;;
    border-style:solid; 
    color: #000037;   
    height: 7vh;
    margin-top: 2.5px;
    margin-bottom: 2.5px;
-   width: 14vw;
+   width: 170px;
 }
 
 .itineraryButton {
-    border: 0.2vw;
+    border: 2.4px;
     border-color: #3EB000;;
     border-style:solid; 
     color: #000037;   
     height: 7vh;
     margin-top: 2.5px;
     margin-bottom: 2.5px;
-    width: 4vw;
+    width: 50px;
 }
 
 .btn-group {
