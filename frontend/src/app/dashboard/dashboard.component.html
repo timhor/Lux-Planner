@@ -1,6 +1,6 @@
 <app-stop #stop>
   <div class="app-stop-header">
-    <button type="button" class="btn btn-danger pull-right" id="btnFormat" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-danger pull-right" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
   </div>
   <div class="app-stop-body">
   </div>
@@ -9,7 +9,7 @@
 </app-stop>
 <app-itinerary #itinerary>
   <div class="app-itinerary-header">
-    <button type="button" class="btn btn-danger pull-right" id="btnFormat" (click)="itinerary.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>     
+    <button type="button" class="btn btn-danger pull-right" (click)="itinerary.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>     
   </div>
   <div class="app-itinerary-body">
   </div>
@@ -33,8 +33,8 @@
       <div class="well">
         <p id="subHeading">Stops</p>
         <div *ngFor="let stop of stops; let i=index;">
-          <button type="button" class="btn btn-default btn-md" id="stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)">{{regStop(stop.name)}}</button>
-          <button type="button" class="btn btn-default btn-md active" id="stopButton" *ngIf="i===activeStopIndex">{{regStop(stop.name)}}</button>
+          <button type="button" class="btn btn-default btn-md stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)">{{regStop(stop.name)}}</button>
+          <button type="button" class="btn btn-default btn-md active stopButton" *ngIf="i===activeStopIndex">{{regStop(stop.name)}}</button>
         </div>
       </div>
       <div class="well">
@@ -121,7 +121,7 @@
         </div>
       </div>
       <div class="well">
-        <button type="button" class="btn btn-default btn-lg" id="btnFormat" style="width:100%" (click)="itinerary.show(getCurrStop())">Itinerary</button>
+        <button type="button" class="button-rect button-green" style="width:100%" (click)="itinerary.show(getCurrStop())">Itinerary</button>
       </div>
     </div>
     <div class="col-sm-9">
@@ -136,7 +136,8 @@
         <div class="well">
           <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
           <p>{{aboutText}}</p>
-          <button type="button" class="btn btn-default btn-md pull-right" id="btnFormat" width="100px" (click)="stop.show(getCurrStop())">Find Out More</button>
+          <br>
+          <button type="button" class="button-rect button-blue pull-right" id="btnFormat" (click)="stop.show(getCurrStop())">Find Out More</button>
           <br><br>
         </div>
       </div>

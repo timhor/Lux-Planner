@@ -4,12 +4,28 @@
    text-align: left;
 }
 
-#stopButton {
-   border: 0.1vw;
-   border-color: #000000;
+.stopButton {
+   border: 0.2vw;
+   border-color: #bed600;;
    border-style:solid; 
-   margin: 0.5px;
+   border-radius: 2vh;
+   color: #000037;   
+   height: 7vh;
+   margin: 2.5px;
    width: 100%;
+   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+}
+
+.stopButton:hover { 
+    background: #bed600; 
+    border-color: white;
+    color: #000086;    
+}
+
+.stopButton:active { 
+    background: #bed600; 
+    border-color: white;
+    color: #000086;    
 }
 
 img {
@@ -17,20 +33,12 @@ img {
    margin: 0 auto;
 }
 
-#map {
-   /* height: 600px;
-   width: 800px; */
-}
-
 #subHeading {
    font-size: 16px; 
    font-weight: bold;
 }
 
-#btnFormat{
-   border-width: 1px;
-   border-color:#FFFFFF;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+#btnFormat {
    cursor: pointer; cursor: hand; outline: none;
-   min-width: 2em; 
+   width: 2em !important; 
 }
