@@ -122,5 +122,9 @@ export class DashboardComponent implements OnInit {
   regInfo(string) {
     return string.replace(/\\n/,'\n\n');
   }
+
+  public resetFirstLoad(): void {
+    this.firstLoad = true;
+  }
 }
 
