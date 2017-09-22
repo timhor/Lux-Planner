@@ -8,3 +8,9 @@
     border-color: #bed600;
     font-size:calc(5px + 1vw);
 }
+
+:host-context(#stopSearch) input {
+    border: auto;
+    border:solid 1px #ccc;
+    border-radius: 10px;
+}

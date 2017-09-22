@@ -1,71 +1,79 @@
 #journeyHead {
-   margin: 0 auto;
-   text-align: left;
+    margin: 0 auto;
+    text-align: left;
 }
 
 #stops-form {
-   margin: 0 auto;
-   text-align: left;
+    margin: 0 auto;
+    text-align: left;
 }
 
 #stop-label {
-   margin: 0 auto;
-   text-align: left;
+    padding-bottom: 5px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 #date-label {
-   margin: 0 auto;
-   text-align: left;
+    padding-bottom: 5px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .button-rect {
-   padding-top: 2vh;
-   padding-bottom: 2vh;
-   width: 20vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    width: 20vw;
 }
 
 #body_div {
-   background-color: rgba(255, 255, 255, 0.8);
-   padding-top: 5vh;
-   padding-bottom: 5vh;  
-   padding-right: 5vw;
-   padding-left: 5vw; 
-   width: 50vw;
-   min-width: 300px;   
-   margin: 0 auto;
-   border-radius: 5vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-top: 5vh;
+    padding-bottom: 5vh;  
+    padding-right: 5vw;
+    padding-left: 5vw; 
+    width: 50vw;
+    min-width: 300px;   
+    margin: 0 auto;
+    border-radius: 5vh;
 }
 
 #infoIcon {
-   font-size:calc(15px + 1vw);
-   color: #2B8BF8;
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color:#FFFFFF;
-   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   cursor: pointer;   
+    font-size:calc(15px + 1vw);
+    color: #2B8BF8;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:#FFFFFF;
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    cursor: pointer;   
 }
 
 #minusIcon {
-   font-size:calc(15px + 1vw);
-   color: #DB0000;
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color:#FFFFFF;
-   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-   cursor: pointer;   
+    font-size:calc(15px + 1vw);
+    color: #DB0000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:#FFFFFF;
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    cursor: pointer;   
 }
 
 #saveJourneyBtn {
-   width: 100%;
+    width: 100%;
 }
 
 .button-blue {
-   padding-top: 1vh;
-   padding-bottom: 1vh;
-   letter-spacing: .05em;
-   width: 10vw;
-   min-width: 2em;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    letter-spacing: .05em;
+    width: 10vw;
+    min-width: 2em;
 }
 
 .grow:hover { 
-   transform: scale(1.15); 
+    transform: scale(1.15); 
+}
+
+input {
+    border: auto;
+    border:solid 1px #ccc;
+    border-radius: 10px;
 }
