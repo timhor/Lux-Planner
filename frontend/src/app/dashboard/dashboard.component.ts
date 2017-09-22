@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
           this.aboutText = res.info; 
       }        
     );
+    this.setUrls(this.getCurrStop());  // Refresh the Map
   }
 
   setActiveStop(stop:string) {
@@ -91,7 +92,6 @@ export class DashboardComponent implements OnInit {
       }        
     );
     this.setUrls(this.getCurrStop());  // Refresh the Map
-
   }
 
   getJourneyLength() {
