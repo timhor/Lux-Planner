@@ -13,7 +13,7 @@
    height: 7vh;
    margin-top: 2.5px;
    margin-bottom: 2.5px;
-   width: 170px;
+   width: 74%;
 }
 
 .itineraryButton {
@@ -24,11 +24,11 @@
     height: 7vh;
     margin-top: 2.5px;
     margin-bottom: 2.5px;
-    width: 50px;
+    width: 24%;
 }
 
 .btn-group {
-    padding-left: 1vw;
+    width: 100%;
 }
 
 /* .stopButton:hover { 
