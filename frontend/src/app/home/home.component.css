@@ -127,12 +127,14 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 45vh;
-    width: 22.5vw;
+    height: 300px;
+    width: 300px;
     color: #3EB000;
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.75);
     border-color: #3EB000;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
 }
 
 #planTripIcon{
@@ -140,12 +142,14 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 45vh;
-    width: 22.5vw;
+    height: 300px;
+    width: 300px;
     color: #2B8BF8;
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.75);
     border-color: #2B8BF8;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
 }
 
 #reviewTripIcon{
@@ -153,10 +157,12 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 45vh;
-    width: 22.5vw;
+    height: 300px;
+    width: 300px;
     color: #f4c20d;
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.75);
     border-color: #f4c20d;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
 }
