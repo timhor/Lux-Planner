@@ -59,9 +59,8 @@
         </div>
         <br>
         <div class="well">
-          <p id="subHeading">Local Weather: {{stops[activeStopIndex].name}}</p>            
           <div id="weather-forecast" *ngFor="let i of stops">
-            <iframe id="weatherapp" *ngIf="i==stops[activeStopIndex]" width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl("https://forecast.io/embed/#lat=" + i.lat + "&lon=" + i.lng + "&units=uk&color=#000037")' allowfullscreen></iframe>            
+            <iframe id="weatherapp" *ngIf="i==stops[activeStopIndex]" width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl("https://forecast.io/embed/#lat=" + i.lat + "&lon=" + i.lng + "&name=" + i.name + "&units=uk&color=#000037")' allowfullscreen></iframe>            
           </div>
         <div class="well">
           <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
