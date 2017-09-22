@@ -36,8 +36,8 @@ export class DashboardComponent implements OnInit {
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
             this.stops = res.journeys[this.activeStopIndex].stops;
-            console.log('Success getting journeys');
-            console.log(res);
+            // console.log('Success getting journeys');
+            // console.log(res);
             
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
@@ -84,6 +84,8 @@ export class DashboardComponent implements OnInit {
   }
 
   setActiveStop(stop:string) {
+    // document.getElementById('weather-forecast').innerHTML = "";
+    
     for (let i=0; i < this.stops.length; i++) {
       if (stop === this.stops[i].name) {
         this.activeStopIndex = i;
@@ -95,7 +97,9 @@ export class DashboardComponent implements OnInit {
           // console.log("About text is " + this.aboutText);   
       }        
     );
-    this.setUrls(this.getCurrStop());    
+    this.setUrls(this.getCurrStop());  
+
+    // document.getElementById('weather-forecast').innerHTML = '<iframe width="100%" height="100%" display="block" frameborder="0" style="border:0" [src]=&#39;sanitizer.bypassSecurityTrustResourceUrl(mapUrl)&#39; allowfullscreen></iframe>';  
   }
 
   getJourneyLength() {
@@ -107,10 +111,9 @@ export class DashboardComponent implements OnInit {
   }
 
   setUrls(stopName:string){
-      console.log("Hello");
     // this.weatherUrl = "//forecast.io/embed/#lat=" + this.latitude + "&lon=" + this.longitude + "&units=uk";
-    this.weatherUrl = "https://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat + "&lon=" + this.stops[this.activeStopIndex].lng + "&units=uk&color=#000037";    ;
-    console.log("==================> The weather url is : " + this.weatherUrl);
+    // this.weatherUrl = "https://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat + "&lon=" + this.stops[this.activeStopIndex].lng + "&units=uk&color=#000037";
+    // console.log("==================> The weather url is : " + this.weatherUrl);
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName + " City";  
   }
 
