@@ -204,13 +204,13 @@ def get_all_journeys():
         print(stops)
         s_payload = []
         for s in stops:
-            location = call_cache(s.stop_name + ' city', 'coord') or (0,0)
+            location = call_cache(s.stop_name, 'coord')
             s_instance = {
                 'name': s.stop_name,
                 'arrival': s.arrival_date,
                 'departure': s.departure_date,
-                'lat': float(f'{location[0]:.4f}'),
-                'lng': float(f'{location[1]:.4f}')
+                'lat': location['lat'],
+                'lng': location['lon']
             }
             s_payload.append(s_instance)
         j_item = {'journey_name': j.journey_name, 'start': j.start_date, 'end': j.end_date, 'stops': s_payload}
@@ -356,7 +356,7 @@ def api_caller(search, data_type):
     elif data_type == 'wiki':
         data = api_handler.wikipedia_call(search)
     elif data_type == 'coord':
-        data = api_handler.wiki_location(search)
+        data = api_handler.search_places_coords(search)
     return data
 
 def convert_time(time_string):
