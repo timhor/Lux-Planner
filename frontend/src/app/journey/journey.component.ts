@@ -51,17 +51,17 @@ export class JourneyComponent implements OnInit {
   submit() {
     this.updateVars();
     let myJourney = JSON.stringify(this.myJourneys.getRawValue());
-    console.log(myJourney);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
         (res) => {
             console.log("SUCCESS!!!");
             this.router.navigate(['/dashboard']);
         },
-        (error) => console.log("Unable to save journey")
+        (error) => {
+          console.log("Unable to save journey")
+          this.invalidForm = !this.invalidForm;
+        }
     )
-    // Send this JSON to backend 
-    // Make invalidForm = true if invalid credentials
   }
 
   updateVars() {
@@ -69,17 +69,15 @@ export class JourneyComponent implements OnInit {
     this.myStops = [];
     for (let i = 0; i < x.length; i++) {
       let value = (<HTMLInputElement>x[i].firstElementChild).value;
-      console.log(value);
       if (value === "") continue;
       this.myStops.push(value);
     }
 
-    console.log(this.myStops);
     let d = <FormArray>this.myJourneys.controls['destinations'].value;
     for (let i = 0; i < d.length; i++) {
       (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
     }
-    console.log(this.myJourneys.value);
+    console.log("Form variables Updated!")
   }
 
   buildItem(val: string) {
@@ -92,7 +90,6 @@ export class JourneyComponent implements OnInit {
 
   private getAutocomplete() {
     this.mapsAPILoader.load().then(() => {
-      // let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement);
       let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {
         types: ['(cities)']
       });
@@ -106,22 +103,19 @@ export class JourneyComponent implements OnInit {
       });
       let instance = this;
       autocomplete.addListener("place_changed", function() {
-        instance.fillDetails();
+        instance.saveInitialLocation();
       });
     });
   }
 
-  fillDetails() {
+  saveInitialLocation() {
     let field = "initialLocation";
-    console.log("ENTERED FILLED DETAILS");
-    console.log(this.myJourneys.controls[field].value);
-    this.myJourneys.controls[field].setValue((<HTMLInputElement>document.getElementById(field)).value);
-    console.log(this.myJourneys.controls[field].value);
+    this.myJourneys.controls['initialLocation'].setValue((<HTMLInputElement>document.getElementById(field)).value);
+    console.log("Start Location Saved!");
   }
 
   getStop(i) {
     this.updateVars();
-    console.log("Curr Index = " + i);
     return this.myStops[i];
   }
 }
