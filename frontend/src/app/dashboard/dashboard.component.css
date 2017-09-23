@@ -47,7 +47,7 @@ img {
 }
 
 #subHeading {
-   font-size: 16px; 
+   font-size: 20px; 
    font-weight: bold;
 }
 
@@ -55,4 +55,12 @@ img {
    min-width: 100px;
    width: 190px;
    letter-spacing: .08em;
+}
+
+#dropdownItem :hover{
+    background-color: rgba(67, 176, 0, 0.28);
+}
+
+#currentJourney{
+    font-size: 40px;
 }

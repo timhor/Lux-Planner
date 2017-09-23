@@ -19,19 +19,19 @@
 <div class="container">
   <br>
   <div class="row">
-    <div class="col-sm-3">
-      <div class="well">
-        <p id="subHeading">Current Journey</p>
-        <!-- TODO Add css to pointer -->
-        <div class="dropdown" dropdown width="100%">
-          <h1 dropdown-open style="font-weight: bolder; font-style: italic;" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;<i class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></i></h1>
-          <ul class="dropdown-menu" style="width:100%; text-align:center;" *ngIf="getJourneyLength() !== 1">
-            <li *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
-              <h4 style="-webkit-text-stroke-color: #424242; -webkit-text-stroke-width: 0.05vh; padding-top: 1vh; padding-bottom:1vh;">{{journey.journey_name}}</h4>
-            </li>
-          </ul>
-        </div>
+    <div class="well">
+      <p id="subHeading">Current Journey</p>
+      <!-- TODO Add css to pointer -->
+      <div class="dropdown" dropdown width="100%">
+        <h1 dropdown-open style="font-weight: bolder; font-style: italic;" id="currentJourney" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;&nbsp;<i class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></i></h1>
+        <ul class="dropdown-menu" style="width:100%; text-align:center;" *ngIf="getJourneyLength() !== 1">
+          <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
+            <h4 style="-webkit-text-stroke-color: #424242; -webkit-text-stroke-width: 0.05vh; padding-top: 1vh; padding-bottom:1vh;">{{journey.journey_name}}</h4>
+          </li>
+        </ul>
       </div>
+    </div>
+    <div class="col-sm-3">
       <div class="well " align="center">
         <p id="subHeading">Stops</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
