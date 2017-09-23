@@ -30,3 +30,7 @@ div {
     padding-bottom: 2vh;
     width: 20vw;
 }
+
+#emojiIcon{
+    font-size: 100px;
+}
