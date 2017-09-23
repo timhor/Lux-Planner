@@ -7,7 +7,7 @@
 .stopButton {
    border: 2.4px;
    border-right-width: 1.2px;
-   border-color: #3EB000;;
+   border-color: #3EB000;
    border-style:solid; 
    color: #000037;   
    height: 7vh;
@@ -63,4 +63,15 @@ img {
 
 #currentJourney{
     font-size: 40px;
+}
+
+#currentJourneyHeader{
+    background-color: transparent; 
+    width:100%;
+    outline-style: none; 
+}
+
+#currentJourneyHeader :hover{
+    color: #3EB000;
+    -webkit-text-stroke-width: 1px;  
 }
