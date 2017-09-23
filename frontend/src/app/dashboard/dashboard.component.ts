@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
-  public stops = [{'name': 'Stop', 'lat': 0, 'lng': 0}];
+  public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0}];
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
@@ -70,8 +70,7 @@ export class DashboardComponent implements OnInit {
     // }
 
     for (let i=0; i < this.stops.length; i++) {
-      // Need backend to pass Date values
-      this.events.push({ "date": new Date(), "header": this.stops[i].name, "body": "Info of stop here" });
+      this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name, "body": "Info of stop here" });
     }
   }
 
