@@ -85,10 +85,7 @@
         <div class="well">
           <div class="well">
             <p id="subHeading">{{allJourneys[activeJourneyIndex].journey_name}} Overview:</p>
-            <div>
-              <h1>Here goes the time line!</h1>
-            </div>
-            <br><br>
+            <ngx-timeline [events]="events"></ngx-timeline>
           </div>
         </div>
       </div>

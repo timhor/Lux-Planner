@@ -32,8 +32,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 
-import { DropdownModule } from "ng2-dropdown";
+import { DropdownModule } from "ngx-dropdown";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { NgxTimelineModule } from 'ngx-timeline';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -81,7 +82,8 @@ export const serviceProviders = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc',
       libraries: ["places"]
-    })  
+    }),
+    NgxTimelineModule  
   ],
   providers:
     serviceProviders

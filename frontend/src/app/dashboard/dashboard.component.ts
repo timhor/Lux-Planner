@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   public loggedInService: LoggedInService;
   private toRefresh:boolean = false;  
   private firstLoad:boolean;
+  events: Array<any>;
 
   constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router) {
     this.connService = _connectionService;
@@ -44,7 +45,8 @@ export class DashboardComponent implements OnInit {
                 }                
             );
             this.setUrls(this.getCurrStop());     // Refresh the Map   
-            this.firstLoad = false;                            
+            this.firstLoad = false;       
+            this.setTimeline();                     
         },
         (error) => {console.log(`could not connect ${error}`)}
     ); 
@@ -54,6 +56,22 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {    
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
+    }
+  }
+
+  setTimeline() {
+    this.events = new Array<any>();
+    // Need initialLocation to be passed from backend
+    // for (let i=0; i < this.allJourneys.length; i++) {
+    //   if (this.allJourneys[i].journey_name === this.journeyName) {
+    //     this.events.push({ "date": new Date(), "header": this.allJourneys[i].initialLocation, "body": "Info of stop here" });
+    //     break;
+    //   }
+    // }
+
+    for (let i=0; i < this.stops.length; i++) {
+      // Need backend to pass Date values
+      this.events.push({ "date": new Date(), "header": this.stops[i].name, "body": "Info of stop here" });
     }
   }
 
@@ -83,6 +101,7 @@ export class DashboardComponent implements OnInit {
     );
     
     this.setUrls(this.getCurrStop());  // Refresh the Map
+    this.setTimeline();
   }
 
   setActiveStop(stop:string) {

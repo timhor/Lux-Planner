@@ -24,7 +24,8 @@
     "angular2-jwt": "^0.1.28",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "ng2-dropdown": "0.0.21",
+    "ngx-dropdown": "0.0.22",
+    "ngx-timeline": "^1.0.0",
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.14"
   },
