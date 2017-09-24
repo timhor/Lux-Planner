@@ -31,16 +31,6 @@
     width: 100%;
 }
 
-/* .stopButton:hover { 
-    background: #3EB000; 
-    color: white;    
-}
-
-.stopButton:active { 
-    background: #3EB000; 
-    color: white;
-} */
-
 img {
    display: block;
    margin: 0 auto;
@@ -63,15 +53,25 @@ img {
 
 #currentJourney{
     font-size: 40px;
+    font-weight: bolder;
+    font-style: italic;
 }
 
-#currentJourneyHeader{
+#currentJourneyHeader {
     background-color: transparent; 
     width:100%;
     outline-style: none; 
 }
 
-#currentJourneyHeader :hover{
-    color: #3EB000;
-    -webkit-text-stroke-width: 1px;  
+#currentJourneyHeader:hover,
+#currentJourneyHeader:focus {
+    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+}
+
+.btn:active,
+.btn:focus,
+.btn.active,
+.btn:active:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

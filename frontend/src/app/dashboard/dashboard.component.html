@@ -18,20 +18,23 @@
 </app-itinerary>
 <div class="container">
   <div class="row">
-    <div class="well">
-      <p id="subHeading">Current Journey</p>
-      <!-- TODO Add css to pointer -->
-      <div align="center">
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader"><h1 style="font-weight: bolder; font-style: italic;" id="currentJourney" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;&nbsp;<span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span></h1></button>
-          <ul class="dropdown-menu" style="width:100%; text-align:center;" *ngIf="getJourneyLength() !== 1">
-            <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
-              <h4 style="-webkit-text-stroke-color: #424242; -webkit-text-stroke-width: 0.05vh; padding-top: 1vh; padding-bottom:1vh;">{{journey.journey_name}}</h4>
-            </li>
-          </ul>
+    <div class="col-sm-12" style="width:1155px">
+      <div class="well">
+        <p id="subHeading">Current Journey</p>
+        <div align="center">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader"><h1 id="currentJourney" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;&nbsp;<span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span></h1></button>
+            <ul class="dropdown-menu" style="width:100%; text-align:center;" *ngIf="getJourneyLength() !== 1">
+              <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
+                <h4 style="-webkit-text-stroke-color: #424242; -webkit-text-stroke-width: 0.05vh; padding-top: 1vh; padding-bottom:1vh;">{{journey.journey_name}}</h4>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-sm-3">
       <div class="well " align="center">
         <p id="subHeading">Stops</p>
