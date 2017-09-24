@@ -64,7 +64,9 @@ def search_places_coords(request):
 
 def get_wiki_summary(request):
     while 1:
-        data = requests.get(f'https://simple.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
+        # data = requests.get(f'https://simple.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
+        data = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
+        
         if '-1' in data['query']['pages']:
             if ',' not in request:
                 return 'No information found.'
