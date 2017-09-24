@@ -50,7 +50,6 @@ export class DashboardComponent implements OnInit {
         },
         (error) => {console.log(`could not connect ${error}`)}
     ); 
-    this.aboutText = this.regInfo(this.aboutText); 
   }
   
   ngOnInit() {    
@@ -61,17 +60,22 @@ export class DashboardComponent implements OnInit {
 
   setTimeline() {
     this.events = new Array<any>();
-    // Need initialLocation to be passed from backend
-    // for (let i=0; i < this.allJourneys.length; i++) {
-    //   if (this.allJourneys[i].journey_name === this.journeyName) {
-    //     this.events.push({ "date": new Date(), "header": this.allJourneys[i].initialLocation, "body": "Info of stop here" });
-    //     break;
-    //   }
-    // }
+    let endDate;
+    let start_location;
+    for (let i=0; i < this.allJourneys.length; i++) {
+      if (this.allJourneys[i].journey_name === this.journeyName) {
+        this.events.push({ "date": new Date(this.allJourneys[i].start), "header": this.allJourneys[i].start_location, "icon": "fa-plane"});
+        endDate = this.allJourneys[i].end;
+        start_location = this.allJourneys[i].start_location;
+        break;
+      }
+    }
 
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
+
+    this.events.push({ "date": new Date(endDate), "header": start_location, "icon": "fa-flag-checkered" });
   }
 
   getCurrStop () {
@@ -99,7 +103,7 @@ export class DashboardComponent implements OnInit {
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
-          this.aboutText = res.info; 
+          this.aboutText = res.info
       }        
     );
     
@@ -116,7 +120,8 @@ export class DashboardComponent implements OnInit {
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
-          this.aboutText = res.info; 
+          this.aboutText = res.info
+          console.log(this.aboutText);
       }        
     );
     this.setUrls(this.getCurrStop());  // Refresh the Map
@@ -141,9 +146,6 @@ export class DashboardComponent implements OnInit {
 
   regStop(string) {
     return string.replace(/,.*/,'');
-  }
-  regInfo(string) {
-    return string.replace(/\\n/,'\n\n');
   }
 
   public resetFirstLoad(): void {
