@@ -60,17 +60,24 @@ export class DashboardComponent implements OnInit {
 
   setTimeline() {
     this.events = new Array<any>();
+    let startDate;
     let endDate;
     let start_location;
     for (let i=0; i < this.allJourneys.length; i++) {
       if (this.allJourneys[i].journey_name === this.journeyName) {
-        this.events.push({ "date": new Date(this.allJourneys[i].start), "header": this.allJourneys[i].start_location, "icon": "fa-plane"});
+        startDate = this.allJourneys[i].start;
         endDate = this.allJourneys[i].end;
-        start_location = this.allJourneys[i].start_location;
+        if (!this.allJourneys[i].start_location) {
+          start_location = "Start Location";
+        } else {
+          start_location = this.allJourneys[i].start_location;
+        }
         break;
       }
     }
 
+    this.events.push({ "date": new Date(startDate), "header": start_location, "icon": "fa-plane"});
+    
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
