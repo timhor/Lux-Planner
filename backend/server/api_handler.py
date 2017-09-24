@@ -67,7 +67,9 @@ def get_wiki_summary(request):
         data = requests.get(f'https://simple.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
         if '-1' in data['query']['pages']:
             if ',' not in request:
-                return None
+                return 'No information found.'
             request = re.sub(r',[^,]*?$', '', request)
         else:
+            for item in data['query']['pages']:
+                return data['query']['pages'][item]['extract']
             return data

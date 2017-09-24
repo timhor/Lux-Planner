@@ -361,7 +361,8 @@ def api_caller(search, data_type):
     elif data_type == 'flickr':
         data = api_handler.search_flickr(search)
     elif data_type == 'wiki':
-        data = api_handler.wikipedia_call(search)
+        # data = api_handler.wikipedia_call(search)
+        data =api_handler.get_wiki_summary(search)
     elif data_type == 'coord':
         data = api_handler.search_places_coords(search)
     return data
