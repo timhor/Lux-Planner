@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0}];
-  public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
+  public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
