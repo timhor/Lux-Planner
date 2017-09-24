@@ -1,9 +1,8 @@
 from server import flickr
 import wikipedia
 import requests
-# import pickle
+import re
 
-# places_key = "AIzaSyDexUm1K0gdiN6UTsOqSpZv-C09D_N6l-w"
 places_key = "AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc"
 
 def search_flickr(request):
@@ -48,8 +47,6 @@ def search_places(request):
         }
         attractions.append(item)
 
-    # print(pickle.dumps(attractions))
-    # return response.json()
     return attractions
 
 def search_places_coords(request):
@@ -63,3 +60,14 @@ def search_places_coords(request):
         'lon': lon
     }
     return coords
+
+
+def get_wiki_summary(request):
+    while 1:
+        data = requests.get(f'https://simple.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
+        if '-1' in data['query']['pages']:
+            if ',' not in request:
+                return None
+            request = re.sub(r',[^,]*?$', '', request)
+        else:
+            return data
