@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
-          this.aboutText = res.info
+          this.aboutText = res.info;
       }        
     );
     
@@ -120,8 +120,7 @@ export class DashboardComponent implements OnInit {
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
-          this.aboutText = res.info
-          console.log(this.aboutText);
+          this.aboutText = res.info;
       }        
     );
     this.setUrls(this.getCurrStop());  // Refresh the Map
