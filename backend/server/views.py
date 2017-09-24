@@ -6,7 +6,7 @@ SENG2021 s2 2017
 from server import app, api_handler, models, db
 from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
-from flask_jwt import JWT, jwt_required, current_identity #, payload_handler
+from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime, timedelta
 import pickle
 import json
@@ -34,6 +34,7 @@ def identity(payload):
     """ Provides an identity of the user """
     print(payload['identity'])
     return payload['identity']  # identity payload => current_identity (global var)
+
 
 jwt = JWT(app, authenticate, identity)
 
@@ -88,6 +89,7 @@ def flickr(): # REST params: ([search], [results])
     except:
         return jsonify({"images" : 'None'})
 
+
 @app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
     stop = request.args.get('stop', 'toyko')
@@ -126,6 +128,7 @@ def new_user():
     db.session.commit()
     return jsonify({'message': 'success'})
 
+
 @app.route('/api/new_place', methods=['POST'])
 def new_place():
     print(request)
@@ -141,6 +144,7 @@ def new_place():
     db.session.add(created_place)
     db.session.commit()
 
+
 @app.route('/api/new_stop', methods=['POST'])
 def new_stop():
     print(request)
@@ -155,6 +159,7 @@ def new_stop():
     created_stop = models.Stop(stop_name=name, stop_rating=rating)
     db.session.add(created_stop)
     db.session.commit()
+
 
 @app.route('/api/new_journey', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
@@ -250,6 +255,7 @@ def get_all_journey_names():
         names.append(j.journey_name)
     return jsonify({'names': names})
 
+
 ################ Old stuff ####################
 @app.route('/')
 @app.route('/index')
@@ -322,8 +328,8 @@ def secure():
 
 @app.route('/api/test')
 def test():
-    location = call_cache('sydney', 'coord')
-    return f'{location[0]:.4f}'
+    search = request.args.get('search', 'Sydney')
+    return jsonify(api_handler.get_wiki_summary(search))
 
 
 def call_cache(search, data_type):
@@ -348,6 +354,7 @@ def call_cache(search, data_type):
     print(data)
     return data
 
+
 def api_caller(search, data_type):
     if data_type ==  'attractions':
         data = api_handler.search_places(search)
@@ -358,6 +365,7 @@ def api_caller(search, data_type):
     elif data_type == 'coord':
         data = api_handler.search_places_coords(search)
     return data
+
 
 def convert_time(time_string):
     try:
