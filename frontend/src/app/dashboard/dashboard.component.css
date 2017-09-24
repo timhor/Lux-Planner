@@ -14,6 +14,7 @@
    margin-top: 2.5px;
    margin-bottom: 2.5px;
    width: 74%;
+   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
 .itineraryButton {
@@ -25,6 +26,14 @@
     margin-top: 2.5px;
     margin-bottom: 2.5px;
     width: 24%;
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+}
+
+button.btn-default:active, 
+button.btn-default:focus, 
+button.btn-default:target, 
+button.btn-default:active:focus {
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
 .btn-group {
@@ -66,17 +75,11 @@ img {
     background-color: transparent; 
     width:100%;
     outline-style: none; 
+    -webkit-box-shadow: none;
+    box-shadow: none;   
 }
 
 #currentJourneyHeader:hover,
 #currentJourneyHeader:focus {
     text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-}
-
-.btn:active,
-.btn:focus,
-.btn.active,
-.btn:active:focus {
-    -webkit-box-shadow: none;
-    box-shadow: none;
 }
