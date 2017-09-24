@@ -70,12 +70,16 @@ export class DashboardComponent implements OnInit {
     // }
 
     for (let i=0; i < this.stops.length; i++) {
-      this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name, "body": "Info of stop here" });
+      this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
   }
 
   getCurrStop () {
     return this.stops[this.activeStopIndex].name;
+  }
+
+  getStop (i:number) {
+    return this.stops[i].name;
   }
 
   setActiveJourney(name:string) {
