@@ -174,6 +174,7 @@ def new_journey():
     created_journey = models.Journey(
             user_id=user_id,
             journey_name=body['journeyName'],
+            start_location=body['initialLocation'],
             start_date = j_start,
             end_date = j_end,
             
@@ -218,7 +219,13 @@ def get_all_journeys():
                 'lng': location['lon']
             }
             s_payload.append(s_instance)
-        j_item = {'journey_name': j.journey_name, 'start': j.start_date, 'end': j.end_date, 'stops': s_payload}
+        j_item = {
+            'journey_name': j.journey_name,
+            'start_location': j.start_location,
+            'start': j.start_date,
+            'end': j.end_date,
+            'stops': s_payload
+            }
         
         payload.append(j_item)
     # Think about how to handle a user without a journey

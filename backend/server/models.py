@@ -20,6 +20,7 @@ class Journey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     journey_name = db.Column(db.String(128), index=True)
+    start_location = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime, index=True)
     cost = db.Column(db.Float, index=True)
