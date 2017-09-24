@@ -3,7 +3,7 @@ import { StopService } from './stop.service';
 import { ConnectionService } from '../connection/connection.service';
 
 @Component({
-    selector: 'app-stop',
+    selector: 'stop-info',
     providers : [StopService, ConnectionService],
     styleUrls: ['./stop.component.css'],
     templateUrl: './stop.component.html',

@@ -77,3 +77,8 @@ input {
     border:solid 1px #ccc;
     border-radius: 10px;
 }
+
+#stopModalCloseButton {
+    padding: 6px 11px;
+    margin-right: -8px;
+}

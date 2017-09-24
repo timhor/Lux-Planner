@@ -1,20 +1,24 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&libraries=places"></script>
 
-<app-stop #stop>
-  <div class="app-stop-header">
-    <button type="button" class="btn btn-danger pull-right" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+<stop-info #stop>
+  <div class="stop-info-header">
+    <button type="button" id="stopModalCloseButton" class="btn btn-danger pull-right" (click)="stop.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
   </div>
-  <div class="app-stop-body">
+  <div class="stop-info-body">
   </div>
-  <div class="app-stop-footer">
+  <div class="stop-info-footer">
   </div>
-</app-stop>
+</stop-info>
+
 <br>
+
 <div id="body_div">
   <div id="journeyHead">
     <h1>New Journey</h1>
   </div>
+
   <br>
+
   <div [hidden]="!invalidForm"><br><div class="alert alert-danger">Invalid Entries</div></div>
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
@@ -39,7 +43,9 @@
         <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>            
       </div>
     </div>
+
     <br>
+
     <div class="row">
       <div class="col-sm-5">
         <label id="date-label">Journey Start Date</label>
@@ -50,7 +56,9 @@
         <input type="date" class="form-control" formControlName="initialArrival">
       </div>
     </div>
+
     <hr>
+
     <fieldset formArrayName="destinations">
       <div class="form-group"
             *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
@@ -88,21 +96,13 @@
     </fieldset>
     <button type="button" class="button-rect button-blue"
             (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
+
     <br>
     <br>
     <hr>
+    <br>
+
     <div class="row">
-      <!-- <div class="form-group col-sm-6">
-        <button type="submit" class="button-rect button-green" value="Submit" [disabled]="myJourneys?.invalid"
-                routerLink="/itinerary">Customise Itinerary&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
-        </button>
-      </div>
-      <div class="form-group col-sm-6">
-        <button type="submit" class="button-rect button-orange" value="Submit"
-                routerLink="/my-journeys">Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
-        </button>
-      </div> -->
-      <br>
       <div class="form-group" align="center">
         <div class="col-sm-12">
           <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-green" (click)="submit()">
@@ -124,8 +124,7 @@
       </div>
     </div>
   </form>
-  <!-- <h6 class="mt-3">FormGroup Model (<code>myJourneys.value</code>)</h6>
-  <div><pre><code>{{ myJourneys?.value | json }}</code></pre></div> -->
-  
 </div>
-<br><br>
+
+<br>
+<br>

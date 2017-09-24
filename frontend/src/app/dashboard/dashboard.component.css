@@ -47,6 +47,11 @@ img {
    letter-spacing: .08em;
 }
 
+#stopModalCloseButton {
+    padding: 6px 11px;
+    margin-right: -8px;
+}
+
 #dropdownItem :hover{
     background-color: rgba(67, 176, 0, 0.28);
 }
