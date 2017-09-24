@@ -118,12 +118,6 @@ h2 {
     padding-right: 2vw;    
 }
 
-#fromWikipedia{
-    font-style: italic;
-    font-weight: bold;
-    padding-top: 1vh;
-}
-
 #rowColor{
     height: fit-content; 
 }
@@ -139,13 +133,20 @@ h2 {
 }
  
 .modal-header {
-    font-size: 20px;
+    font-size: 23px;
+    padding: 11px 20px;
 }
 
 .modal-body {
     max-height: calc(100vh - 180px);
     overflow-y: auto;
     background-color: rgb(240,245,255)
+}
+
+.modal-footer {
+    text-align: center;
+    padding: 15px 0px 3px 18px;
+    margin-bottom: -6px;
 }
 
 /* table {

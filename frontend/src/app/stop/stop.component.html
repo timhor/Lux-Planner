@@ -75,17 +75,16 @@
             </div>
 
             <br>
+
             <h2>About</h2>
             <br>
-            <div id="information">
+            <div>
               {{aboutText}}
-            </div>
-            <div id="fromWikipedia" align="right">
-              Information retrieved from Wikipedia.
             </div>
 
             <br>
             <br>
+            
             <h2>Popular Landmarks and Attractions</h2>
             <br>
             <div *ngFor="let attraction of attractions;let i=index">
@@ -156,6 +155,11 @@
       </div>
       <div class="modal-footer">
         <ng-content select=".stop-info-footer"></ng-content>
+        <div class="row">
+          <div class="col-sm-2">Image gallery: <a href="https://www.flickr.com/">Flickr</a></div>
+          <div class="col-sm-4 col-sm-offset-2">Information: <a href="https://en.wikipedia.org/">Wikipedia</a></div>
+          <div class="col-sm-3 col-sm-offset-1">Place details: <a href="https://developers.google.com/places/web-service/">Google Places</a></div>
+        </div>
         <br>
       </div>
     </div>
