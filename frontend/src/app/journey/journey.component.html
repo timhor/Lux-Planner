@@ -28,40 +28,47 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   </div>
   <form [formGroup]="myJourneys">
-    <div class="row" style="padding-left:1vw;">
+    <div class="row" style="padding-left:2vw; padding-right:2vw;">
       <div class="col-sm-10">
         <label id="stop-label">Journey Name</label>
         <input type="text" placeholder="Name your Journey" class="form-control" formControlName="journeyName">
       </div>
     </div>
     <hr>
-    <div class="row" style="padding-left:1vw;">
-      <div class="col-sm-10">
-        <label id="stop-label">Starting Location</label>
-        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
-          #search formControlName="initialLocation" id="initialLocation">
+
+    <div style="padding-left:2vw; padding-right:2vw;" class="card-start">
+      <br>
+      <div class="row">
+        <div class="col-sm-10">
+          <label id="stop-label">Starting Location</label>
+          <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
+            #search formControlName="initialLocation" id="initialLocation">
+        </div>
+        <div class="col-sm-1">
+          <br>
+          <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
+          <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+        </div>
       </div>
-      <div class="col-sm-1">
-        <br>
-        <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+
+      <br>
+      
+      <div class="row">
+        <div class="col-sm-5">
+          <label id="date-label">Journey Start Date</label>
+          <input type="date" class="form-control" formControlName="initialDeparture">
+        </div>
+        <div class="col-sm-5">
+          <label id="date-label">Journey End Date</label>
+          <input type="date" class="form-control" formControlName="initialArrival">
+        </div>
       </div>
+      <br>
     </div>
 
-    <br>
-
-    <div class="row" style="padding-left:1vw;">
-      <div class="col-sm-5">
-        <label id="date-label">Journey Start Date</label>
-        <input type="date" class="form-control" formControlName="initialDeparture">
-      </div>
-      <div class="col-sm-5">
-        <label id="date-label">Journey End Date</label>
-        <input type="date" class="form-control" formControlName="initialArrival">
-      </div>
+    <div id="circleBackground">
+      <span><i class="fa fa-plane" aria-hidden="true"></i></span>
     </div>
-
-    <hr>
 
     <fieldset formArrayName="destinations">
       <div class="form-group" *ngFor="let item of myJourneys.get('destinations').controls; let i=index" [formGroup]="item">
@@ -95,9 +102,12 @@
           </div>
           <br>
         </div>
-        <br>        
+        <div id="circleBackground" *ngIf="myJourneys.get('destinations').length-1 !== i">
+          <span><i class="fa fa-plane" aria-hidden="true"></i></span>
+        </div>    
       </div>
     </fieldset>
+    <br>
     <button type="button" class="button-rect button-blue" (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
 
     <br>
