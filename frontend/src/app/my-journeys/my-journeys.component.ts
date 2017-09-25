@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
+import { ModifyJourneyService } from '../modify-journey.service';
 
 @Component({
   selector: 'app-my-journeys',
@@ -11,10 +12,18 @@ import { Router } from '@angular/router';
 export class MyJourneysComponent implements OnInit {
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public connService: ConnectionService;
-  public loggedInService
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
+  public loggedInService: LoggedInService;
+  public modifyJourneyService: ModifyJourneyService;
+
+  constructor(
+    _connectionService: ConnectionService,
+    _loggedinService: LoggedInService,
+    public router: Router,
+    _modifyJourneyService: ModifyJourneyService
+  ) {
     this.connService = _connectionService; 
     this.loggedInService = _loggedinService;
+    this.modifyJourneyService = _modifyJourneyService;
   }
 
   ngOnInit() {
@@ -29,6 +38,12 @@ export class MyJourneysComponent implements OnInit {
       },
       (error) => {console.log(`could not connect ${error}`)}
     ); 
+  }
+
+  setModify(index:number) {
+    this.modifyJourneyService.isModifying = true;
+    this.modifyJourneyService.journeyIndex = index;
+    this.router.navigate(['/journey']);
   }
 
 }

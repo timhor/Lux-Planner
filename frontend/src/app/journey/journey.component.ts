@@ -8,6 +8,8 @@ import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
+import { ModifyJourneyService } from '../modify-journey.service';
+import { ConnectionService } from '../connection/connection.service';
 
 @Component({
   selector: 'app-journey',
@@ -18,23 +20,28 @@ export class JourneyComponent implements OnInit {
 
   public myJourneys: FormGroup;
   public myStops = [];
-  public invalidForm:boolean = false;;
+  public invalidForm:boolean = false;
   public isLoggedIn;
-
+  public isModifying:boolean = false;
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,
     private fb: FormBuilder,
     private loggedInService: LoggedInService,
-    public router: Router
+    public router: Router,
+    private modifyJourneyService: ModifyJourneyService,
+    private connectionService: ConnectionService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
   @ViewChild("search") public searchElement: ElementRef;
 
   ngOnInit() {
-    // build the form model
+    this.isLoggedIn = this.loggedInService.loggedIn();
+    this.getAutocomplete();
+    this.isModifying = this.modifyJourneyService.isModifying;
+    console.log(this.isModifying);
     this.myJourneys = this.fb.group({
       journeyName: new FormControl(),
       initialLocation: new FormControl(),
@@ -44,8 +51,27 @@ export class JourneyComponent implements OnInit {
         [this.buildItem('')]
       )
     })
-    this.isLoggedIn = this.loggedInService.loggedIn();
-    this.getAutocomplete();
+    if (this.isModifying) {
+      this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
+        res => {
+          let journey = res.journeys[this.modifyJourneyService.journeyIndex];
+          this.myJourneys = this.fb.group({
+            journeyName: new FormControl(journey.journey_name),
+            initialLocation: new FormControl(journey.start_location),
+            initialDeparture: new FormControl(this.transformDate(journey.start)),
+            initialArrival: new FormControl(this.transformDate(journey.end)),
+            destinations: this.fb.array([])
+          })
+          for (let i = 0; i < journey.stops.length; i++) {
+            let stop = journey.stops[i];
+            (<FormArray>this.myJourneys.get('destinations')).push(
+              this.loadItem(stop.name, this.transformDate(stop.arrival), this.transformDate(stop.departure))
+            );
+          }  
+        },
+        (error) => {console.log(`could not connect ${error}`)}
+      ); 
+    }
   }
   
   submit() {
@@ -86,6 +112,18 @@ export class JourneyComponent implements OnInit {
       departure: new FormControl(),
       arrival: new FormControl()
     })
+  }
+
+  loadItem(loc, start, end) {
+    return new FormGroup({
+      location: new FormControl(loc),
+      departure: new FormControl(start),
+      arrival: new FormControl(end)
+    })
+  }
+
+  transformDate(date) {
+    return new Date(date).toISOString().slice(0,10);
   }
 
   private getAutocomplete() {

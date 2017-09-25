@@ -2,7 +2,7 @@
 <div id="body_div">
   <h1>My Journeys</h1>
 
-  <div align="center" *ngFor="let journey of allJourneys">
+  <div align="center" *ngFor="let journey of allJourneys; let j=index">
     <br><br>
     <h2>{{journey.journey_name}}</h2>
     <table class="table table-striped" id="stopsTable">
@@ -21,7 +21,7 @@
     <br>
     <div class="btn-group">
       <button type="button" class="button-rect button-green" routerLink="/dashboard">View Journey</button>
-      <button type="button" class="button-rect button-blue" routerLink="/journey">Modify Journey</button>
+      <button type="button" class="button-rect button-blue" (click)="setModify(j)">Modify Journey</button>
       <button type="button" class="button-rect button-red" routerLink="/my-journeys">Delete Journey</button>
     </div>
     <br><br>
