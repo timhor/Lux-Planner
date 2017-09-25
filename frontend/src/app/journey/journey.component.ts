@@ -79,24 +79,8 @@ export class JourneyComponent implements OnInit {
     let payload = this.myJourneys.getRawValue();
     console.log(payload);
     let journey_start: Date = new Date(payload.initialDeparture);
-    // console.log(journey_start.getTime());
     let journey_end = new Date(payload.initialArrival);
     let curr_end = journey_start;
-    // payload.destinations.forEach(dest => {
-    //     let curr_arr = new Date(dest.arrival);
-    //     let curr_dep = new Date(dest.departure);
-
-    //     if (curr_arr.getTime() < curr_end.getTime()) {
-    //         // Tell the user error
-    //         console.log("Bad arrival time");
-    //         return;
-    //     }
-    //     if (curr_arr.getTime() > curr_dep.getTime()) {
-    //         console.log("Bad depature time");
-    //         return;
-    //     }
-    //     curr_end = curr_dep;
-    // });
 
     for (var i = 0; i < payload.destinations.length; i++) {
         let curr_arr = new Date(payload.destinations[i].arrival);
@@ -122,7 +106,7 @@ export class JourneyComponent implements OnInit {
     }
     
     
-    let myJourney = JSON.stringify(this.myJourneys.getRawValue());
+    let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
         (res) => {
