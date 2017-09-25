@@ -20,34 +20,37 @@
 
   <br>
 
-  <div [hidden]="!invalidForm"><br><div class="alert alert-danger">Invalid Entries</div></div>
+  <div [hidden]="!invalidForm"><br>
+    <div class="alert alert-danger">Invalid Entries</div>
+  </div>
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   </div>
   <form [formGroup]="myJourneys">
-    <div class="row">
+    <div class="row" style="padding-left:1vw;">
       <div class="col-sm-10">
         <label id="stop-label">Journey Name</label>
         <input type="text" placeholder="Name your Journey" class="form-control" formControlName="journeyName">
       </div>
     </div>
     <hr>
-    <div class="row">
+    <div class="row" style="padding-left:1vw;">
       <div class="col-sm-10">
         <label id="stop-label">Starting Location</label>
-        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search formControlName="initialLocation" id="initialLocation">
+        <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
+          #search formControlName="initialLocation" id="initialLocation">
       </div>
       <div class="col-sm-1">
         <br>
         <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>            
+        <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
       </div>
     </div>
 
     <br>
 
-    <div class="row">
+    <div class="row" style="padding-left:1vw;">
       <div class="col-sm-5">
         <label id="date-label">Journey Start Date</label>
         <input type="date" class="form-control" formControlName="initialDeparture">
@@ -61,42 +64,41 @@
     <hr>
 
     <fieldset formArrayName="destinations">
-      <div class="form-group"
-            *ngFor="let item of myJourneys.get('destinations').controls; let i=index"
-            [formGroup]="item">
-        <div class="row">
-          <div class="col-sm-10">
-            <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
-            <planner-search class="searchComponent" id="stopSearch"></planner-search>
+      <div class="form-group" *ngFor="let item of myJourneys.get('destinations').controls; let i=index" [formGroup]="item">
+        <div style="padding-left:2vw; padding-right:2vw;" class="card card-1">
+          <br>
+          <div class="row">
+            <div class="col-sm-10">
+              <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
+              <planner-search class="searchComponent" id="stopSearch"></planner-search>
+            </div>
+            <div class="col-sm-1">
+              <br>
+              <a (click)="stop.show(getStop(i))"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+            </div>
           </div>
-          <div class="col-sm-1">
-            <br>
-            <a (click)="stop.show(getStop(i))"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+          <br>
+          <div class="row">
+            <div class="col-sm-5 ui-state-hover">
+              <label id="date-label" [attr.for]="'departure'+i">Arrival Date</label>
+              <input type="date" class="form-control" [attr.id]="'departure'+i" formControlName="arrival">
+            </div>
+            <div class="col-sm-5">
+              <label id="date-label" [attr.for]="'arrival'+i">Departure Date</label>
+              <input type="date" class="form-control" [attr.id]="'arrival'+i" formControlName="departure">
+            </div>
+            <div class="col-sm-1">
+              <br>
+              <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
+                <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
+            </div>
           </div>
+          <br>
         </div>
-        <br>
-        <div class="row">
-          <div class="col-sm-5 ui-state-hover">
-            <label id="date-label" [attr.for]="'departure'+i">Arrival Date</label>
-            <input type="date" class="form-control"
-              [attr.id]="'departure'+i" formControlName="arrival">
-          </div>
-          <div class="col-sm-5">
-            <label id="date-label" [attr.for]="'arrival'+i">Departure Date</label>
-            <input type="date" class="form-control"
-              [attr.id]="'arrival'+i" formControlName="departure">
-          </div>
-          <div class="col-sm-1">
-            <br>
-            <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
-              <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
-          </div>
-        </div>
-        <br>
+        <br>        
       </div>
     </fieldset>
-    <button type="button" class="button-rect button-blue"
-            (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
+    <button type="button" class="button-rect button-blue" (click)="myJourneys.get('destinations').push(buildItem(''))"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
 
     <br>
     <br>
