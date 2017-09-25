@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/fullcalendar/dist/fullcalendar.min.css";
-
 .navbar {
    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
    font-size: 3vh;
