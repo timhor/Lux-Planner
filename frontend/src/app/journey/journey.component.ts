@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl,
-  FormGroup, Validators } from '@angular/forms'
+         FormGroup, Validators } from '@angular/forms'
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
@@ -20,11 +20,11 @@ export class JourneyComponent implements OnInit {
 
   public myJourneys: FormGroup;
   public myStops = [];
-  public invalidForm:boolean = false;
+  public invalidForm: boolean = false;
   public isLoggedIn;
-  public isModifying:boolean = false;
+  public isModifying: boolean = false;
   public modifyingStops = [];
-  
+
   constructor(
     private mapsAPILoader: MapsAPILoader, 
     private ngZone: NgZone,

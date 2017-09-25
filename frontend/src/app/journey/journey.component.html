@@ -53,11 +53,15 @@
     <div class="row" style="padding-left:1vw;">
       <div class="col-sm-5">
         <label id="date-label">Journey Start Date</label>
-        <input type="date" class="form-control" formControlName="initialDeparture">
+        <p-calendar formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" 
+                    dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+        </p-calendar>
       </div>
       <div class="col-sm-5">
         <label id="date-label">Journey End Date</label>
-        <input type="date" class="form-control" formControlName="initialArrival">
+        <p-calendar formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" 
+                    dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+        </p-calendar>
       </div>
     </div>
 
@@ -81,11 +85,15 @@
           <div class="row">
             <div class="col-sm-5 ui-state-hover">
               <label id="date-label" [attr.for]="'departure'+i">Arrival Date</label>
-              <input type="date" class="form-control" [attr.id]="'departure'+i" formControlName="arrival">
+              <p-calendar [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
+                          dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+              </p-calendar>
             </div>
             <div class="col-sm-5">
               <label id="date-label" [attr.for]="'arrival'+i">Departure Date</label>
-              <input type="date" class="form-control" [attr.id]="'arrival'+i" formControlName="departure">
+              <p-calendar [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
+                          dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+              </p-calendar>
             </div>
             <div class="col-sm-1">
               <br>

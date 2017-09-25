@@ -8,6 +8,7 @@ import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AgmCoreModule } from '@agm/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -15,14 +16,6 @@ import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
 import { StopComponent } from './stop/stop.component';
 import { ConnectionComponent } from './connection/connection.component';
-
-import { StopService } from './stop/stop.service';
-import { ConnectionService } from './connection/connection.service';
-import { LoggedInService } from './loggedIn.service';
-import { SearchService } from './search.service';
-import { ModifyJourneyService } from './modify-journey.service';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { JourneyComponent } from './journey/journey.component';
@@ -32,12 +25,18 @@ import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
+import { StopService } from './stop/stop.service';
+import { ConnectionService } from './connection/connection.service';
+import { LoggedInService } from './loggedIn.service';
+import { SearchService } from './search.service';
+import { ModifyJourneyService } from './modify-journey.service';
 
 import { DropdownModule } from "ngx-dropdown";
-import { NotFoundComponent } from './not-found/not-found.component';
 import { NgxTimelineModule } from 'ngx-timeline';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ScheduleModule} from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScheduleModule, CalendarModule } from 'primeng/primeng';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -93,7 +92,8 @@ export const serviceProviders = [
     }),
     NgxTimelineModule,
     BrowserAnimationsModule,
-    ScheduleModule
+    ScheduleModule,
+    CalendarModule
   ],
   providers:
     serviceProviders
