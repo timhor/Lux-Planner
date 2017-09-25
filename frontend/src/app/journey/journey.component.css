@@ -91,14 +91,69 @@ input, :host ::ng-deep .ui-inputtext {
     padding-top: 1vh;
     padding-bottom: 1vh;
 }
-  
+
+.card-start {
+    background: rgba(235, 235, 235, 0.7);
+    border-radius: 2px;
+    position: relative;
+    width: 100%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
 .card-1 {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  }
+}
   
 .card-1:hover {
     box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+}
+
+.glyphicon {
+    padding-top: 1vh;
+}
+
+.fa-plane {
+    transform: rotate(135deg);
+    text-align: center;
+    font-size: 16px;
+    color: black;
+}
+
+#circleBackground {
+    background-color:#bed600;
+    border:2px solid #FFFFFF;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    height: 35px;
+    width: 35px;
+    line-height: 30px;
+    text-align: center;  
+    margin: 0 auto;
+    margin-bottom: -4px;
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+}
+
+span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    align-self: center;
+}
+
+#planeLine {
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.planeIcon {
+    margin: 0 auto;
+    margin-top: -4px;
 }
 
 /* :host ::ng-deep is needed to override component styles (shadow-piercing descendant combinator) */
