@@ -103,21 +103,21 @@ export class JourneyComponent implements OnInit {
         let curr_arr = new Date(payload.destinations[i].arrival);
         let curr_dep = new Date(payload.destinations[i].departure);
 
-        if (curr_arr.getTime() < curr_end.getTime()) {
+        if (curr_arr.getDate() < curr_end.getDate()) {
             // Tell the user error
-            console.log(`Bad arrival time ${curr_arr.getTime()} vs ${curr_end.getTime()}`);
+            console.log(`Bad arrival date ${curr_arr.getDate()} vs ${curr_end.getDate()}`);
             this.invalidForm = true;
             return;
         }
-        if (curr_arr.getTime() < curr_dep.getTime()) {
-            console.log(`Bad depature time ${curr_arr.getTime()} vs ${curr_dep.getTime()}`);
+        if (curr_arr.getDate() < curr_dep.getDate()) {
+            console.log(`Bad depature date ${curr_arr.getDate()} vs ${curr_dep.getDate()}`);
             this.invalidForm = true;            
             return;
         }
         curr_end = curr_dep;
     }
-    if (curr_end.getTime() > journey_end.getTime()) {
-        console.log(`Bad finish time ${curr_end.getTime()} vs ${journey_end.getTime()}`);
+    if (curr_end.getDate() > journey_end.getDate()) {
+        console.log(`Bad finish date ${curr_end.getDate()} vs ${journey_end.getDate()}`);
         this.invalidForm = true;        
         return;
     }

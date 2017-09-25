@@ -170,3 +170,7 @@ span {
 :host ::ng-deep .ui-button-icon-only .fa {
     margin-left: -0.7em;
 }
+
+:host ::ng-deep .ui-inputtext {
+    width: calc(100% - 34px);
+}
