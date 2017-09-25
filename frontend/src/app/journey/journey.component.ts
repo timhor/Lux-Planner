@@ -41,7 +41,7 @@ export class JourneyComponent implements OnInit {
     this.isLoggedIn = this.loggedInService.loggedIn();
     this.getAutocomplete();
     this.isModifying = this.modifyJourneyService.isModifying;
-    console.log(this.isModifying);
+    this.modifyJourneyService.isModifying = false;
     this.myJourneys = this.fb.group({
       journeyName: new FormControl(),
       initialLocation: new FormControl(),
