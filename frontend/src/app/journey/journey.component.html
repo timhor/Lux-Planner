@@ -70,18 +70,8 @@
       <br>
     </div>
 
-    <br>
-
-    <div class="planeIcon">
-      <div id="planeLine">
-        <span>|</span>
-      </div>
-      <div id="circleBackground">
-        <span><i class="fa fa-plane" aria-hidden="true"></i></span>
-      </div>
-      <div id="planeLine">
-        <span>|</span>
-      </div>
+    <div id="circleBackground">
+      <span><i class="fa fa-plane" aria-hidden="true"></i></span>
     </div>
 
     <fieldset formArrayName="destinations">
@@ -120,17 +110,9 @@
           </div>
           <br>
         </div>
-        <div class="planeIcon" *ngIf="myJourneys.get('destinations').length-1 !== i">
-          <div id="planeLine">
-            <span>|</span>
-          </div>
-          <div id="circleBackground">
-            <span><i class="fa fa-plane" aria-hidden="true"></i></span>
-          </div>
-          <div id="planeLine">
-            <span>|</span>
-          </div>
-        </div>       
+        <div id="circleBackground" *ngIf="myJourneys.get('destinations').length-1 !== i">
+          <span><i class="fa fa-plane" aria-hidden="true"></i></span>
+        </div>    
       </div>
     </fieldset>
     <br>
