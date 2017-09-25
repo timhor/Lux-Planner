@@ -107,7 +107,37 @@ export class JourneyComponent implements OnInit {
   
   submit() {
     this.updateVars();
-    let myJourney = JSON.stringify(this.myJourneys.getRawValue());
+    let payload = this.myJourneys.getRawValue();
+    console.log(payload);
+    let journey_start: Date = new Date(payload.initialDeparture);
+    let journey_end = new Date(payload.initialArrival);
+    let curr_end = journey_start;
+
+    for (var i = 0; i < payload.destinations.length; i++) {
+        let curr_arr = new Date(payload.destinations[i].arrival);
+        let curr_dep = new Date(payload.destinations[i].departure);
+
+        if (curr_arr.getTime() < curr_end.getTime()) {
+            // Tell the user error
+            console.log(`Bad arrival time ${curr_arr.getTime()} vs ${curr_end.getTime()}`);
+            this.invalidForm = true;
+            return;
+        }
+        if (curr_arr.getTime() < curr_dep.getTime()) {
+            console.log(`Bad depature time ${curr_arr.getTime()} vs ${curr_dep.getTime()}`);
+            this.invalidForm = true;            
+            return;
+        }
+        curr_end = curr_dep;
+    }
+    if (curr_end.getTime() > journey_end.getTime()) {
+        console.log(`Bad finish time ${curr_end.getTime()} vs ${journey_end.getTime()}`);
+        this.invalidForm = true;        
+        return;
+    }
+    
+    
+    let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
         (res) => {
