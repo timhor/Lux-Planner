@@ -15,6 +15,9 @@ export class SignupComponent {
   constructor(private loggedInService: LoggedInService, public router: Router) {}
   
   onSubmit() {
+    if (this.account.password.length < 8) {
+        return;
+    }
     let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName, "M");
     response.subscribe(
         (data) => {
