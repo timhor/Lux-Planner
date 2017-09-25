@@ -23,6 +23,7 @@ export class JourneyComponent implements OnInit {
   public invalidForm:boolean = false;
   public isLoggedIn;
   public isModifying:boolean = false;
+  public modifyingStops = [];
   
   constructor(
     private mapsAPILoader: MapsAPILoader, 
@@ -67,11 +68,41 @@ export class JourneyComponent implements OnInit {
             (<FormArray>this.myJourneys.get('destinations')).push(
               this.loadItem(stop.name, this.transformDate(stop.arrival), this.transformDate(stop.departure))
             );
-          }  
+          }
+          // let stops = [];
+          // let d = <FormArray>this.myJourneys.controls['destinations'].value;
+          // for (let i = 0; i < d.length; i++) {
+          //   stops.push((<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value);
+          // }
+          // let x = document.getElementsByClassName('searchComponent');
+          
+          // console.log(document.getElementsByClassName('searchComponent')[0]);
+          // console.log(document.getElementsByClassName('searchComponent')[1]);
+          // for (let i = 0; i < x.length; i++) {
+          //   (<HTMLInputElement>x[i].firstElementChild).setAttribute('value', stops[i]);
+          // }  
         },
         (error) => {console.log(`could not connect ${error}`)}
       ); 
     }
+  }
+
+  ngAfterViewChecked() {
+    if (this.isModifying) {
+      let d = <FormArray>this.myJourneys.controls['destinations'].value;
+      for (let i = 0; i < d.length; i++) {
+        let value = (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value;
+        if (!this.modifyingStops.includes(value) && value) {
+          this.modifyingStops.push(value);
+        }
+      }
+      console.log(this.modifyingStops);
+      let x = document.getElementsByClassName('searchComponent');
+      for (let i = 0; i < x.length; i++) {
+        (<HTMLInputElement>x[i].firstElementChild).value = this.modifyingStops[i];
+        console.log(x[i].firstElementChild);
+      }
+    }  
   }
   
   submit() {
