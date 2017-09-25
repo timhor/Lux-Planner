@@ -8,9 +8,36 @@ import { Component, OnInit } from '@angular/core';
 export class ItineraryComponent implements OnInit {
   public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore'];
   public currStop;
-  constructor() { }
+
+  events: any[];
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
+    this.events = [
+      {
+          "title": "All Day Event",
+          "start": "2017-09-25"
+      },
+      {
+          "title": "All Day Event",
+          "start": "2017-09-25"
+      },
+      {
+          "title": "All Day Event",
+          "start": "2017-09-25"
+      },
+      {
+          "title": "All Day Event",
+          "start": "2017-09-25"
+      },
+      {
+          "title": "All Day Event",
+          "start": "2017-09-25"
+      },
+    ];
   }
 
   public visible = false;
