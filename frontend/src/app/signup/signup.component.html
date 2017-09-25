@@ -9,63 +9,74 @@
   <!-- <code>{{diagnostic}}</code> -->
 
   <div id="signUpForm">
-    <form (ngSubmit)="onSubmit()">
-      <div class="alert alert-warning" [hidden]="(username.valid || username.pristine)
-        && (password.valid || password.pristine) && (email.valid || email.pristine)
-        && ((account.password === account.confirmPassword) || confirmPassword.pristine)">
-        <div [hidden]="username.valid || username.pristine">
-          Username is required
+    <div class="col">
+      <form (ngSubmit)="onSubmit()">
+        <div class="alert alert-warning" [hidden]="(username.valid || username.pristine)
+          && (password.valid || password.pristine) && (email.valid || email.pristine)
+          && ((account.password === account.confirmPassword) || confirmPassword.pristine)">
+          <div [hidden]="username.valid || username.pristine">
+            Username is required
+          </div>
+          <div [hidden]="password.valid || password.pristine">
+            Password is required. Min. 8 characters
+          </div>
+          <div [hidden]="(account.password === account.confirmPassword) || confirmPassword.pristine">
+            Passwords do not match
+          </div>
+          <div [hidden]="email.valid || email.pristine">
+            Email is required
+          </div>
         </div>
-        <div [hidden]="password.valid || password.pristine">
-          Password is required. Min. 8 characters
+        <div class="row">            
+          <div class="form-group col-sm-12">
+            <label for="username"><b>Username*</b></label>
+            <input class="form-control" type="text" placeholder="Enter username" id="username" required
+              [(ngModel)]="account.username" name="username" #username="ngModel" autofocus>
+          </div>
         </div>
-        <div [hidden]="(account.password === account.confirmPassword) || confirmPassword.pristine">
-          Passwords do not match
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="password"><b>Password*</b></label>
+            <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="password" required 
+              [(ngModel)]="account.password" name="password" #password="ngModel">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="confirmedPassword"><b>Confirm Password*</b></label>
+            <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="confirmPassword" required
+              [(ngModel)]="account.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" pw-check='password'>
+          </div>
         </div>
-        <div [hidden]="email.valid || email.pristine">
-          Email is required
+        <br>
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label for="email"><b>Email*</b></label>
+            <input class="form-control" type="email" placeholder="Enter email" id="email" required
+              [(ngModel)]="account.email" name="email" #email="ngModel">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="username"><b>Username*</b></label>
-        <input class="form-control" type="text" placeholder="Enter username" id="username" required
-          [(ngModel)]="account.username" name="username" #username="ngModel" autofocus>
-      </div>
-      <div class="form-group">
-        <label for="password"><b>Password*</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="password" required 
-          [(ngModel)]="account.password" name="password" #password="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="confirmedPassword"><b>Confirm Password*</b></label>
-        <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="confirmPassword" required
-          [(ngModel)]="account.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" pw-check='password'>
-      </div>
-      <div class="form-group">
-        <label for="email"><b>Email*</b></label>
-        <input class="form-control" type="email" placeholder="Enter email" id="email" required
-          [(ngModel)]="account.email" name="email" #email="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="firstName"><b>First Name</b></label>
-        <input class="form-control" type="firstName" placeholder="Enter first name" id="firstName"
-          [(ngModel)]="account.firstName" name="firstName" #firstName="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="lastName"><b>Last Name</b></label>
-        <input class="form-control" type="lastName" placeholder="Enter last name" id="lastName"
-          [(ngModel)]="account.lastName" name="lastName" #lastName="ngModel">
-      </div>
-      <!-- <div class="form-group">
-        <label for="gender"><b>Gender</b></label>
-        <input class="form-control" type="gender" placeholder="Enter gender" id="gender" required
-          [(ngModel)]="account.gender" name="gender" #gender="ngModel">
-      </div> -->
-      <br>
-      <div class="form-group">
-        <button type="submit" class="button-rect button-green">Create Account</button>
-      </div>
-    </form>
+        <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="firstName"><b>First Name</b></label>
+              <input class="form-control" type="firstName" placeholder="Enter first name" id="firstName"
+                [(ngModel)]="account.firstName" name="firstName" #firstName="ngModel">
+            </div>  
+            <div class="form-group col-sm-6">
+              <label for="lastName"><b>Last Name</b></label>
+              <input class="form-control" type="lastName" placeholder="Enter last name" id="lastName"
+                [(ngModel)]="account.lastName" name="lastName" #lastName="ngModel">
+            </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="gender"><b>Gender</b></label>
+          <input class="form-control" type="gender" placeholder="Enter gender" id="gender" required
+            [(ngModel)]="account.gender" name="gender" #gender="ngModel">
+        </div> -->
+        <br>
+        <div class="form-group">
+          <button type="submit" class="button-rect button-green">Create Account</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <br><br>
