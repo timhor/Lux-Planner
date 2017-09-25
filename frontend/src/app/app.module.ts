@@ -35,6 +35,8 @@ import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 import { DropdownModule } from "ngx-dropdown";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgxTimelineModule } from 'ngx-timeline';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ScheduleModule} from 'primeng/primeng';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -83,7 +85,9 @@ export const serviceProviders = [
       apiKey: 'AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc',
       libraries: ["places"]
     }),
-    NgxTimelineModule  
+    NgxTimelineModule,
+    BrowserAnimationsModule,
+    ScheduleModule
   ],
   providers:
     serviceProviders
