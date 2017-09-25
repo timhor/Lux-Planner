@@ -33,8 +33,7 @@ export class MyJourneysComponent implements OnInit {
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
       res => {
           this.allJourneys = res.journeys;
-          console.log('Success getting journeys');
-          console.log(res);            
+          console.log('Success getting journeys');    
       },
       (error) => {console.log(`could not connect ${error}`)}
     ); 
