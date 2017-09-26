@@ -97,7 +97,7 @@ input, :host ::ng-deep .ui-inputtext {
 }
 
 .card-start {
-    background: rgba(235, 235, 235, 0.7);
+    background: rgba(243, 243, 243, 0.7);
     border-radius: 2px;
     position: relative;
     width: 100%;
@@ -122,9 +122,10 @@ input, :host ::ng-deep .ui-inputtext {
 
 .fa-plane {
     transform: rotate(135deg);
-    text-align: center;
     font-size: 16px;
     color: black;
+    font-size: calc(11px + 1vh);
+    margin-bottom: 4px;
 }
 
 #circleBackground {
@@ -141,6 +142,27 @@ input, :host ::ng-deep .ui-inputtext {
     margin-top: 3vh;
     margin-bottom: 3vh;
     box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    position: relative;
+}
+
+#circleBackground:before {
+    content: '';
+    width: 2px;
+    height: 2.9vh;
+    background: black;
+    position: absolute;
+    bottom: 108%;
+    left: 48%;
+}
+
+#circleBackground:after {
+    content: '';
+    width: 2px;
+    height: 2.9vh;
+    background: black;
+    position: absolute;
+    top: 108%;
+    left: 48%;
 }
 
 span {
@@ -179,12 +201,11 @@ span {
     width: calc(100% - 34px);
 }
 
-@keyframes slidein {
-    0%   {margin-left:50%;}
-    100% {margin-left:0px;}
+@keyframes fadein {
+    from { opacity: 0 }
 }
-#stopCard {
-    animation-name: slidein;
-    animation-duration: .9s;
+
+#stopCard, #circleBackground {
+    animation: fadein .5s;
     display: block;
 }
