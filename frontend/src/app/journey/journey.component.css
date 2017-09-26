@@ -179,12 +179,11 @@ span {
     width: calc(100% - 34px);
 }
 
-@keyframes slidein {
-    0%   {margin-left:50%;}
-    100% {margin-left:0px;}
+@keyframes fadein {
+    from { opacity: 0 }
 }
+
 #stopCard {
-    animation-name: slidein;
-    animation-duration: .9s;
+    animation: fadein .5s;
     display: block;
 }
