@@ -1,12 +1,12 @@
 :host-context(#mainSearch) input {
     padding-top: 2vh;
     padding-bottom: 2vh;
-    width: 35vw;
-    height: 6vh;
+    width: 40vw;
+    height: 8vh;
     min-width: 175px;
     border-width: 2px;
     border-color: #bed600;
-    font-size:calc(5px + 1vw);
+    font-size:calc(10px + 1vw);
 }
 
 :host-context(#stopSearch) input {
