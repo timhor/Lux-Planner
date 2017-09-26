@@ -30,8 +30,8 @@
   <form [formGroup]="myJourneys">
     <div class="row" style="padding-left:2vw; padding-right:2vw;">
       <div class="col-sm-10">
-        <label id="stop-label">Journey Name</label>
-        <input type="text" placeholder="Name your Journey" class="form-control" formControlName="journeyName">
+        <label for="journeyName">Journey Name</label>
+        <input type="text" placeholder="Name your Journey" class="form-control" id="journeyName" formControlName="journeyName">
       </div>
     </div>
     <hr>
@@ -40,7 +40,7 @@
       <br>
       <div class="row">
         <div class="col-sm-10">
-          <label id="stop-label">Starting Location</label>
+          <label for="initialLocation">Starting Location</label>
           <input type="search" placeholder="Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
             #search formControlName="initialLocation" id="initialLocation">
         </div>
@@ -55,14 +55,14 @@
       
       <div class="row">
         <div class="col-sm-5">
-          <label id="date-label">Journey Start Date</label>
-          <p-calendar formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
+          <label for="initialDeparture">Journey Start Date</label>
+          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
             hourFormat="24" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
         <div class="col-sm-5">
-          <label id="date-label">Journey End Date</label>
-          <p-calendar formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
+          <label for="initialArrival">Journey End Date</label>
+          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
             hourFormat="24" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
@@ -80,7 +80,7 @@
           <br>
           <div class="row">
             <div class="col-sm-10">
-              <label id="stop-label" [attr.for]="'location'+i">Next Location</label>
+              <label for="stopSearch" [attr.for]="'location'+i">Next Location</label>
               <planner-search class="searchComponent" id="stopSearch"></planner-search>
             </div>
             <div class="col-sm-1">
@@ -91,14 +91,14 @@
           <br>
           <div class="row">
             <div class="col-sm-5 ui-state-hover">
-              <label id="date-label" [attr.for]="'departure'+i">Arrival Date</label>
-              <p-calendar [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
+              <label for="arrival" [attr.for]="'departure'+i">From</label>
+              <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
                           dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-5">
-              <label id="date-label" [attr.for]="'arrival'+i">Departure Date</label>
-              <p-calendar [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
+              <label for="departure" [attr.for]="'arrival'+i">To</label>
+              <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
                           dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
