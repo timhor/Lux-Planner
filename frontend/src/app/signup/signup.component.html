@@ -18,7 +18,7 @@
             Username is required
           </div>
           <div [hidden]="password.valid || password.pristine">
-            Password is required. Min. 8 characters
+            Password must be at least 8 characters long
           </div>
           <div [hidden]="(account.password === account.confirmPassword) || confirmPassword.pristine">
             Passwords do not match
