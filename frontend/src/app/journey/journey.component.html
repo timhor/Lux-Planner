@@ -56,13 +56,13 @@
       <div class="row">
         <div class="col-sm-5">
           <label for="initialDeparture">Journey Start Date</label>
-          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
+          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy, " showTime="showTime"
             hourFormat="24" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
         <div class="col-sm-5">
           <label for="initialArrival">Journey End Date</label>
-          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/y, " showTime="showTime"
+          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy, " showTime="showTime"
             hourFormat="24" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
@@ -93,13 +93,13 @@
             <div class="col-sm-5 ui-state-hover">
               <label for="arrival" [attr.for]="'departure'+i">From</label>
               <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
-                          dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+                          dateFormat="dd/mm/yy, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-5">
               <label for="departure" [attr.for]="'arrival'+i">To</label>
               <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
-                          dateFormat="dd/mm/y, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+                          dateFormat="dd/mm/yy, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-1">
@@ -145,6 +145,8 @@
       </div>
     </div>
   </form>
+  <!-- <h6 class="mt-3">FormGroup Model (<code>myJourneys.value</code>)</h6>
+  <div><pre><code>{{ myJourneys?.value | json }}</code></pre></div> -->
 </div>
 
 <br>
