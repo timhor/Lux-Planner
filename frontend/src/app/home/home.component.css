@@ -99,9 +99,7 @@
 .iconFormat {
     margin-bottom: 5%;
     margin-top: 5%;
-    /* max-width: 250px;
-    width: 50vw; */
-    font-size: 35vh;
+    font-size: 20vh;
 }
 
 #imgBorder {
@@ -128,8 +126,7 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 300px;
-    width: 300px;
+    width: 30vh;
     color: #3EB000;
     background: rgba(255, 255, 255, 0.75);
     border-color: #3EB000;
@@ -143,8 +140,7 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 300px;
-    width: 300px;
+    width: 30vh;
     color: #2B8BF8;
     background: rgba(255, 255, 255, 0.75);
     border-color: #2B8BF8;
@@ -158,8 +154,7 @@
     border-radius: 5vh;
     border-style: solid;
     border-width: 0.5vh;
-    height: 300px;
-    width: 300px;
+    width: 30vh;
     color: #f4c20d;
     background: rgba(255, 255, 255, 0.75);
     border-color: #f4c20d;
