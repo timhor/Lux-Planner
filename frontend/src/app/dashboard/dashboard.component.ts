@@ -96,7 +96,8 @@ export class DashboardComponent implements OnInit {
   setActiveJourney(name:string) {
     if (!this.firstLoad){
       this.firstLoad = true;
-    }                                
+    }
+
     if (name === this.journeyName) return;
     this.journeyName = name;
     
@@ -108,6 +109,7 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
+    
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -156,6 +158,6 @@ export class DashboardComponent implements OnInit {
 
   public resetFirstLoad(): void {
     this.firstLoad = true;
+    this.activeStopIndex = -1;
   }
 }
-

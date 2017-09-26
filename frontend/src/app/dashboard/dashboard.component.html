@@ -30,6 +30,9 @@
               </h1>
             </button>
             <ul class="dropdown-menu" *ngIf="getJourneyLength() !== 1">
+              <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
+                <h4>Journey Overview</h4>
+              </li>
               <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
                 <h4>{{journey.journey_name}}</h4>
               </li>
