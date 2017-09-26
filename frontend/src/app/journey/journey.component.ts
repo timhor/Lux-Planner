@@ -24,6 +24,7 @@ export class JourneyComponent implements OnInit {
   public isLoggedIn;
   public isModifying: boolean = false;
   public modifyingStops = [];
+  public modifyingCounter;
 
   constructor(
     private mapsAPILoader: MapsAPILoader, 
@@ -59,16 +60,17 @@ export class JourneyComponent implements OnInit {
           this.myJourneys = this.fb.group({
             journeyName: new FormControl(journey.journey_name),
             initialLocation: new FormControl(journey.start_location),
-            initialDeparture: new FormControl(this.transformDate(journey.start)),
-            initialArrival: new FormControl(this.transformDate(journey.end)),
+            initialDeparture: new FormControl(new Date(journey.start)),
+            initialArrival: new FormControl(new Date(journey.end)),
             destinations: this.fb.array([])
           })
           for (let i = 0; i < journey.stops.length; i++) {
             let stop = journey.stops[i];
             (<FormArray>this.myJourneys.get('destinations')).push(
-              this.loadItem(stop.name, this.transformDate(stop.arrival), this.transformDate(stop.departure))
+              this.loadItem(stop.name, new Date(stop.arrival), new Date(stop.departure))
             );
           }
+          this.modifyingCounter = 0;
         },
         (error) => {console.log(`could not connect ${error}`)}
       ); 
@@ -76,7 +78,11 @@ export class JourneyComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    if (this.isModifying) {
+    if (this.modifyingCounter === 0) {
+      this.modifyingCounter++;
+      return;
+    }
+    if (this.isModifying && this.modifyingCounter < 2) {
       let d = <FormArray>this.myJourneys.controls['destinations'].value;
       for (let i = 0; i < d.length; i++) {
         let value = (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value;
@@ -85,9 +91,11 @@ export class JourneyComponent implements OnInit {
         }
       }
       let x = document.getElementsByClassName('searchComponent');
+      console.log(x.length);
       for (let i = 0; i < x.length; i++) {
         (<HTMLInputElement>x[i].firstElementChild).value = this.modifyingStops[i];
       }
+      this.modifyingCounter++;
     }  
   }
   
@@ -172,10 +180,6 @@ export class JourneyComponent implements OnInit {
       departure: new FormControl(start),
       arrival: new FormControl(end)
     })
-  }
-
-  transformDate(date) {
-    return new Date(date).toISOString().slice(0,10);
   }
 
   private getAutocomplete() {
