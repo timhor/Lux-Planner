@@ -61,9 +61,12 @@
     </div>
     <div class="col-sm-9">
       <div class="col-sm-12" *ngIf="activeStopIndex!==-1">
-        <div class="well" id="map">
-          <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
-            allowfullscreen></iframe>
+        <div class="well">
+          <agm-map [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng" [zoom]="10" >
+            <agm-marker [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng"></agm-marker>
+          </agm-map>
+          <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
+            allowfullscreen></iframe> -->
         </div>
         <br>
         <div class="well">
@@ -82,8 +85,11 @@
       </div>
       <div class="col-sm-12" *ngIf="activeStopIndex===-1">
         <div class="well" id="map">
-          <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
-            allowfullscreen></iframe>
+          <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
+            allowfullscreen></iframe> -->
+            <agm-map [latitude]="0" [longitude]="0" [zoom]="2">
+              <!-- <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker> -->
+            </agm-map>
         </div>
         <div class="well">
           <div class="well">

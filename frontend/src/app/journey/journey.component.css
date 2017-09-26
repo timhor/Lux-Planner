@@ -60,8 +60,17 @@ label {
     padding-bottom: 1vh;
     letter-spacing: .05em;
     width: 10vw;
-    min-width: 2em;
+    min-width: 125px;
 }
+
+.button-orange {
+    min-width: 150px;
+}
+
+.button-green {
+    min-width: 150px;
+}
+
 
 .grow:hover { 
     transform: scale(1.15); 
