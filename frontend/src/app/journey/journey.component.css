@@ -122,10 +122,10 @@ input, :host ::ng-deep .ui-inputtext {
 
 .fa-plane {
     transform: rotate(135deg);
-    text-align: center;
     font-size: 16px;
     color: black;
-    align-content: center;
+    font-size: 2.3vh;
+    margin-bottom: 4px;
 }
 
 #circleBackground {
