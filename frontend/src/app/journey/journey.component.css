@@ -125,8 +125,7 @@ input, :host ::ng-deep .ui-inputtext {
     text-align: center;
     font-size: 16px;
     color: black;
-    margin-bottom: 4px;
-    margin-right: .5px;
+    align-content: center;
 }
 
 #circleBackground {
