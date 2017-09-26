@@ -376,8 +376,10 @@ def api_caller(search, data_type):
 
 
 def convert_time(time_string):
+    print(time_string)
+    # 2017-09-26T10:05:56.000Z
     try:
-        python_time = datetime.strptime(time_string, '%Y-%m-%d')
+        python_time = datetime.strptime(time_string, '%Y-%m-%dT%h:%m:%S')
     except:
         python_time = datetime.utcnow()
     return python_time
