@@ -84,8 +84,70 @@ export class AccountSettingsComponent implements OnInit {
   }
 
   onSubmit() {
+    if ((this.newPassword.length < 8 && this.newPassword.length > 0) || this.newPassword != this.newPasswordConfirm) {
+      return;
+    }
     this.submitted = true;
+    if (this.editPassword == true) {
+      let response = this.loggedInService.changeDetails('password', this.newPassword);
+      response.subscribe(
+        (data) => {
+          console.log(data.message);
+        },
+          (error) => {
+          console.log(`Sumting wong: ${error}`);
+        }
+      )
+      this.editPassword = false;
+    }
+    if (this.editEmail == true) {
+      let response = this.loggedInService.changeDetails('email', this.newEmail);
+      response.subscribe(
+        (data) => {
+          console.log(data.message);
+        },
+          (error) => {
+          console.log(`Sumting wong: ${error}`);
+        }
+      )
+      this.editEmail = false;
+    }
+    if (this.editFirstName == true) {
+      let response = this.loggedInService.changeDetails('firstName', this.newFirstName);
+      response.subscribe(
+        (data) => {
+          console.log(data.message);
+        },
+          (error) => {
+          console.log(`Sumting wong: ${error}`);
+        }
+      )
+      this.editFirstName = false;
+    }
+    if (this.editLastName == true) {
+      let response = this.loggedInService.changeDetails('lastName', this.newLastName);
+      response.subscribe(
+        (data) => {
+          console.log(data.message);
+        },
+          (error) => {
+          console.log(`Sumting wong: ${error}`);
+        }
+      )
+      this.editLastName = false;
+    } 
     
+    this.connService.getProtectedData('api/get_account_details/').subscribe(
+      res => {
+        this.username = res.username;
+        this.email = res.email;
+        this.firstName = res.first_name;
+        this.lastName = res.last_name;
+        this.gender = res.gender;
+        console.log('Success updating account details'); 
+      },
+        (error) => {console.log(`could not connect ${error}`)}
+    );
     //Add stuff here to send account details to backend
     //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
   }

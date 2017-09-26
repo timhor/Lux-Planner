@@ -262,6 +262,49 @@ def get_all_journey_names():
         names.append(j.journey_name)
     return jsonify({'names': names})
 
+@app.route('/api/change_user_password/', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def change_user_password():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    body = json.loads(request.data)
+    password = body['password']
+    user.password = password
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
+@app.route('/api/change_user_email/', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def change_user_email():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    body = json.loads(request.data)
+    email = body['email']
+    user.email = email
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
+@app.route('/api/change_user_first_name/', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def change_user_first_name():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    body = json.loads(request.data)
+    first_name = body['firstName']
+    user.first_name = first_name
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
+@app.route('/api/change_user_last_name/', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def change_user_last_name():
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    body = json.loads(request.data)
+    last_name = body['lastName']
+    user.last_name = last_name
+    db.session.commit()
+    return jsonify({'message': 'success'})
 
 ################ Old stuff ####################
 @app.route('/')
