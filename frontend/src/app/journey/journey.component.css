@@ -8,16 +8,11 @@
     text-align: left;
 }
 
-#stop-label {
+label {
     padding-bottom: 5px;
     margin: 0 auto;
     text-align: left;
-}
-
-#date-label {
-    padding-bottom: 5px;
-    margin: 0 auto;
-    text-align: left;
+    display: block;
 }
 
 .button-rect {
