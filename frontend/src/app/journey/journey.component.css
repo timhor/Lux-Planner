@@ -124,7 +124,7 @@ input, :host ::ng-deep .ui-inputtext {
     transform: rotate(135deg);
     font-size: 16px;
     color: black;
-    font-size: 2.3vh;
+    font-size: calc(11px + 1vh);
     margin-bottom: 4px;
 }
 
