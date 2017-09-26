@@ -30,9 +30,9 @@
               </h1>
             </button>
             <ul class="dropdown-menu" *ngIf="getJourneyLength() !== 1">
-              <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
+              <!-- <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
                 <h4>Journey Overview</h4>
-              </li>
+              </li> -->
               <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
                 <h4>{{journey.journey_name}}</h4>
               </li>
@@ -44,6 +44,15 @@
   </div>
   <div class="row">
     <div class="col-sm-3">
+      <div class="well " align="center">            
+        <p id="subHeading">Journey Overview</p>          
+        <div class="row" align="center" style="padding-left:0.5vw; padding-right:0.1vw;">
+            <div class="btn-group" align="center">
+              <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="activeStopIndex===-1" (click)="resetFirstLoad()" style="width: 99% !important; border-right-width: 2.4px;"><span>Journey Overview</span></button>
+              <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="activeStopIndex!==-1" (click)="resetFirstLoad()" style="width: 99% !important; border-right-width: 2.4px;"><span>Journey Overview</span></button>            
+            </div>
+        </div>
+      </div>
       <div class="well " align="center">
         <p id="subHeading">Stops</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
@@ -55,11 +64,8 @@
         </div>
       </div>
       <div class="well">
-        <p id="subHeading">Upcoming Flights</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
-          nulla. Ut sagittis lobortis lorem at volutpat</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo neque, rutrum vitae sem eget, feugiat molestie
-          nulla. Ut sagittis lobortis lorem at volutpat</p>
+        <p id="subHeading">Search for Flights</p>
+        <div data-skyscanner-widget="SearchWidget" 	data-button-label="Get a flight!"></div>
       </div>
       <div class="well">
         <p id="subHeading">Calendar</p>
