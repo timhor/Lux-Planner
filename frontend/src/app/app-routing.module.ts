@@ -64,6 +64,10 @@ const routes: Routes = [
         component: MyJourneysComponent
     },
     {
+        path: 'modify/:id',
+        component: JourneyComponent
+    },
+    {
         path: '404',
         component: NotFoundComponent
     },
