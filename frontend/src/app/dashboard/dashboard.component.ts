@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
-  public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0}];
+  public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0, 'notes': ''}];
   public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit {
   public loggedInService: LoggedInService;
   private toRefresh:boolean = false;  
   private firstLoad:boolean;
+  private isModifyingNotes = false;
+  private newNotes = "";
   events: Array<any>;
 
   constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router) {
@@ -159,5 +161,20 @@ export class DashboardComponent implements OnInit {
   public resetFirstLoad(): void {
     this.firstLoad = true;
     this.activeStopIndex = -1;
+  }
+
+  modifyNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
+    this.newNotes = this.stops[this.activeStopIndex].notes;
+  }
+
+  saveNotes() {
+    // Post to backend
+    this.stops[this.activeStopIndex].notes = this.newNotes;
+    this.isModifyingNotes = !this.isModifyingNotes;
+  }
+
+  deleteNotes() {
+    // TODO
   }
 }

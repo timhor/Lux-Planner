@@ -1,20 +1,20 @@
 .well {
-   background-color: rgba(255, 255, 255, 0.75);
-   border-radius: 2.5vh;
-   text-align: left;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 2.5vh;
+    text-align: left;
 }
 
 .stopButton {
-   border: 2.4px;
-   border-right-width: 1.2px;
-   border-color: #3EB000;
-   border-style:solid; 
-   color: #000037;   
-   height: 7vh;
-   margin-top: 2.5px;
-   margin-bottom: 2.5px;
-   width: 74%;
-   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+    border: 2.4px;
+    border-right-width: 1.2px;
+    border-color: #3EB000;
+    border-style:solid; 
+    color: #000037;   
+    height: 7vh;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    width: 74%;
+    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
 .itineraryButton {
@@ -41,19 +41,19 @@ button.btn-default:active:focus {
 }
 
 img {
-   display: block;
-   margin: 0 auto;
+    display: block;
+    margin: 0 auto;
 }
 
 #subHeading {
-   font-size: 20px; 
-   font-weight: bold;
+    font-size: 20px; 
+    font-weight: bold;
 }
 
 .button-rect {
-   min-width: 100px;
-   width: 190px;
-   letter-spacing: .08em;
+    min-width: 100px;
+    width: 190px;
+    letter-spacing: .08em;
 }
 
 #stopModalCloseButton {
@@ -85,17 +85,17 @@ img {
 }
 
 button.truncate {
-  display: flex;
+    display: flex;
 }
 
 button.truncate span:not(.caret) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 button.truncate .caret {
-  margin: auto;
+    margin: auto;
 }
 
 agm-map {
@@ -113,4 +113,8 @@ h4 {
     -webkit-text-stroke-width: 0.05vh;
     padding-top: 1vh;
     padding-bottom:1vh;
+}
+
+#deleteBtn {
+    margin-right: 10px;
 }

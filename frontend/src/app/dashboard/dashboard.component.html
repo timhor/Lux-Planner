@@ -96,6 +96,18 @@
             <br><br>
           </div>
         </div>
+        <div class="well">
+          <div class="well">
+            <p id="subHeading">Notes: {{stops[activeStopIndex].name}}</p>
+            <p *ngIf="!isModifyingNotes">{{stops[activeStopIndex].notes}}</p>
+            <textarea *ngIf="isModifyingNotes" class="form-control" rows="10" [(ngModel)]="newNotes"></textarea>
+            <br>
+            <button *ngIf="!isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
+            <button *ngIf="!isModifyingNotes" type="button" class="button-rect button-orange pull-right" id="deleteBtn" (click)="deleteNotes()">Delete Notes</button>
+            <button *ngIf="isModifyingNotes" type="button" class="button-rect button-green pull-right" (click)="saveNotes()">Save Notes</button>
+            <br><br>
+          </div>
+        </div>
       </div>
       <div class="col-sm-12" *ngIf="activeStopIndex===-1">
         <div class="well" id="map">
