@@ -22,7 +22,8 @@ export class JourneyComponent implements OnInit {
   public myStops = [];
   public invalidForm: boolean = false;
   public isLoggedIn;
-  public isModifying: boolean = false;
+//   public isModifying: boolean = false;
+  public isModifying = -1;
   public modifyingStops = [];
   public modifyingCounter;
 
@@ -43,7 +44,7 @@ export class JourneyComponent implements OnInit {
     this.isLoggedIn = this.loggedInService.loggedIn();
     this.getAutocomplete();
     this.isModifying = this.modifyJourneyService.isModifying;
-    this.modifyJourneyService.isModifying = false;
+    this.modifyJourneyService.isModifying = -1;
     this.myJourneys = this.fb.group({
       journeyName: new FormControl(),
       initialLocation: new FormControl(),
@@ -53,10 +54,11 @@ export class JourneyComponent implements OnInit {
         [this.buildItem('')]
       )
     })
-    if (this.isModifying) {
+    if (this.isModifying != -1) {
       this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
-          let journey = res.journeys[this.modifyJourneyService.journeyIndex];
+            console.log(this.isModifying);
+          let journey = res.journeys[this.isModifying];
           this.myJourneys = this.fb.group({
             journeyName: new FormControl(journey.journey_name),
             initialLocation: new FormControl(journey.start_location),
@@ -82,7 +84,7 @@ export class JourneyComponent implements OnInit {
       this.modifyingCounter++;
       return;
     }
-    if (this.isModifying && this.modifyingCounter < 2) {
+    if (this.isModifying != -1 && this.modifyingCounter < 2) {
       let d = <FormArray>this.myJourneys.controls['destinations'].value;
       for (let i = 0; i < d.length; i++) {
         let value = (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value;
@@ -135,7 +137,7 @@ export class JourneyComponent implements OnInit {
         return;
     }
     
-    
+    payload.isModifying = this.isModifying;
     let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(

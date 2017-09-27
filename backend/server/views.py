@@ -168,33 +168,78 @@ def new_journey():
     user_id = current_identity[0]
     body = json.loads(request.data)
     print(body)
-    j_start = convert_time(body['initialDeparture'])
-    j_end = convert_time(body['initialArrival'])
+    if body['isModifying'] == -1:
+        j_start = convert_time(body['initialDeparture'])
+        j_end = convert_time(body['initialArrival'])
 
-    created_journey = models.Journey(
-            user_id=user_id,
-            journey_name=body['journeyName'],
-            start_location=body['initialLocation'],
-            start_date = j_start,
-            end_date = j_end,
-            
-            cost=0
-        )
-    db.session.add(created_journey)
-    db.session.commit()
-    for s in body['destinations']:
-        s_start = convert_time(s['arrival'])
-        s_end = convert_time(s['departure'])
-        stop = models.Stop(
-            journey_id=created_journey.id,
-            stop_name=s['location'],
-            arrival_date=s_start,
-            departure_date=s_end
-        )
-        db.session.add(stop)
+        created_journey = models.Journey(
+                user_id=user_id,
+                journey_name=body['journeyName'],
+                start_location=body['initialLocation'],
+                start_date = j_start,
+                end_date = j_end,
+                
+                cost=0
+            )
+        db.session.add(created_journey)
+        db.session.commit()
+        for s in body['destinations']:
+            s_start = convert_time(s['arrival'])
+            s_end = convert_time(s['departure'])
+            stop = models.Stop(
+                journey_id=created_journey.id,
+                stop_name=s['location'],
+                arrival_date=s_start,
+                departure_date=s_end
+            )
+            db.session.add(stop)
 
-    db.session.commit()
-    return jsonify({'message': 'OK'})
+        db.session.commit()
+        return jsonify({'message': 'OK'})
+    else:
+        # Dirty hack only
+        user = models.User.query.filter_by(id=user_id).first()
+        journeys = models.Journey.query.filter_by(user_id=user.id).all()
+        j = journeys[body['isModifying']]
+        j.journey_name = body['journeyName']
+        j.start_location = body['initialLocation']
+        j.start_date = convert_time(body['initialDeparture'])
+        j.end_date = convert_time(body['initialArrival'])
+        stops = models.Stop.query.filter_by(journey_id=j.id).all()
+        for i in stops:
+            db.session.delete(i)
+        db.session.commit()
+
+        # Make the length the correct size
+        # diff = len(stops) - len(body['destinations'])
+        # if diff > 0:
+        #     # Queried more stops
+        #     delete = models.Stop.query.filter_by(journey_id=j.id).limit(diff).all()
+        #     for entry in delete:
+        #         db.session.delete(entry)
+        #     db.session.commit()
+
+        # elif diff < 0:
+        #     # Queried less stops
+        #     for i in range(-diff):
+        #         entry = models.Stop(journey_id=j.id)
+        #         db.session.add(entry)
+        #     db.session.commit()
+        
+        for s in body['destinations']:
+            s_start = convert_time(s['arrival'])
+            s_end = convert_time(s['departure'])
+            stop = models.Stop(
+                journey_id=j.id,
+                stop_name=s['location'],
+                arrival_date=s_start,
+                departure_date=s_end
+            )
+            db.session.add(stop)
+        db.session.commit()
+        return jsonify({'message': 'OK'})        
+        
+
 
 
 @app.route('/api/get_all_journeys', methods=['GET'])
@@ -216,7 +261,8 @@ def get_all_journeys():
                 'arrival': s.arrival_date,
                 'departure': s.departure_date,
                 'lat': location['lat'],
-                'lng': location['lon']
+                'lng': location['lon'],
+                'notes': s.notes
             }
             s_payload.append(s_instance)
         j_item = {

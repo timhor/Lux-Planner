@@ -37,6 +37,7 @@ class Stop(db.Model):
     arrival_date = db.Column(db.DateTime, index=True)
     departure_date = db.Column(db.DateTime, index=True)
     stop_rating = db.Column(db.Float, index=True)
+    notes = db.Column(db.Text, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):

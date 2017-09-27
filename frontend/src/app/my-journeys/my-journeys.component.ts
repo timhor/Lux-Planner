@@ -40,8 +40,9 @@ export class MyJourneysComponent implements OnInit {
   }
 
   setModify(index:number) {
-    this.modifyJourneyService.isModifying = true;
-    this.modifyJourneyService.journeyIndex = index;
+    // this.modifyJourneyService.isModifying = true;
+    // this.modifyJourneyService.journeyIndex = index;
+    this.modifyJourneyService.isModifying = index;
     this.router.navigate(['/journey']);
   }
 
