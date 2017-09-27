@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
-import { ModifyJourneyService } from '../modify-journey.service';
 
 @Component({
   selector: 'app-my-journeys',
@@ -13,17 +12,14 @@ export class MyJourneysComponent implements OnInit {
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
-  public modifyJourneyService: ModifyJourneyService;
 
   constructor(
     _connectionService: ConnectionService,
     _loggedinService: LoggedInService,
     public router: Router,
-    _modifyJourneyService: ModifyJourneyService
   ) {
     this.connService = _connectionService; 
     this.loggedInService = _loggedinService;
-    this.modifyJourneyService = _modifyJourneyService;
   }
 
   ngOnInit() {
@@ -39,11 +35,8 @@ export class MyJourneysComponent implements OnInit {
     ); 
   }
 
-  setModify(index:number) {
-    // this.modifyJourneyService.isModifying = true;
-    // this.modifyJourneyService.journeyIndex = index;
-    this.modifyJourneyService.isModifying = index;
-    this.router.navigate(['/journey']);
+  setModify(i:number) {
+    this.router.navigate(['/modify', i]);
   }
 
 }

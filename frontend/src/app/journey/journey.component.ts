@@ -7,8 +7,7 @@ import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
-import { Router } from '@angular/router';
-import { ModifyJourneyService } from '../modify-journey.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from '../connection/connection.service';
 
 @Component({
@@ -22,10 +21,10 @@ export class JourneyComponent implements OnInit {
   public myStops = [];
   public invalidForm: boolean = false;
   public isLoggedIn;
-//   public isModifying: boolean = false;
   public isModifying = -1;
   public modifyingStops = [];
   public modifyingCounter;
+  private sub:any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader, 
@@ -33,7 +32,7 @@ export class JourneyComponent implements OnInit {
     private fb: FormBuilder,
     private loggedInService: LoggedInService,
     public router: Router,
-    private modifyJourneyService: ModifyJourneyService,
+    private route: ActivatedRoute,
     private connectionService: ConnectionService
   ) {}
 
@@ -43,8 +42,11 @@ export class JourneyComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this.loggedInService.loggedIn();
     this.getAutocomplete();
-    this.isModifying = this.modifyJourneyService.isModifying;
-    this.modifyJourneyService.isModifying = -1;
+    this.sub = this.route.params.subscribe(params => {
+      if(+params['id'] >= 0) {
+        this.isModifying = +params['id'];
+      }
+    });
     this.myJourneys = this.fb.group({
       journeyName: new FormControl(),
       initialLocation: new FormControl(),
@@ -54,10 +56,9 @@ export class JourneyComponent implements OnInit {
         [this.buildItem('')]
       )
     })
-    if (this.isModifying != -1) {
+    if (this.isModifying !== -1) {
       this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
-            console.log(this.isModifying);
           let journey = res.journeys[this.isModifying];
           this.myJourneys = this.fb.group({
             journeyName: new FormControl(journey.journey_name),
@@ -84,7 +85,7 @@ export class JourneyComponent implements OnInit {
       this.modifyingCounter++;
       return;
     }
-    if (this.isModifying != -1 && this.modifyingCounter < 2) {
+    if (this.isModifying !== -1 && this.modifyingCounter === 1) {
       let d = <FormArray>this.myJourneys.controls['destinations'].value;
       for (let i = 0; i < d.length; i++) {
         let value = (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value;
@@ -93,7 +94,6 @@ export class JourneyComponent implements OnInit {
         }
       }
       let x = document.getElementsByClassName('searchComponent');
-      console.log(x.length);
       for (let i = 0; i < x.length; i++) {
         (<HTMLInputElement>x[i].firstElementChild).value = this.modifyingStops[i];
       }
