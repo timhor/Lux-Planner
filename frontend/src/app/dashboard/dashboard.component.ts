@@ -37,6 +37,11 @@ export class DashboardComponent implements OnInit {
 
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
+            if (res.journeys.length == 0) {
+                // No journeys, direct them to make a journey :)
+                this.router.navigate(['/journey']);
+                return;
+            }
             this.activeJourneyIndex = res.active_journey;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;

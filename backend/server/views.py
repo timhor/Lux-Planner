@@ -289,6 +289,21 @@ def switch_journey():
     return jsonify({'active': user.active_journey_index})
 
 
+@app.route('/api/delete_journey', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def delete_journey():
+    body = json.loads(request.data)    
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).all()
+    j = journeys[body['delete']]
+    stops = models.Stop.query.filter_by(journey_id=j.id)
+    for s in stops:
+        db.session.delete(s)
+    db.session.delete(j)
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
 @app.route('/api/get_account_details/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
