@@ -15,7 +15,9 @@
     <h1 *ngIf="isModifying === -1">New Journey</h1>
     <h1 *ngIf="isModifying !== -1">Modify Journey</h1>
   </div>
-
+  <div [hidden]="isModifying == -1" class="alert alert-warning alert-dismissible" role="alert">
+    <strong>Warning:</strong> All notes will be deleted if any changes are made!
+  </div>
   <br>
 
   <div [hidden]="!invalidForm"><br>
@@ -119,7 +121,7 @@
     <br>
     <br>
     <hr>
-    <br>
+    <br>  
 
     <div class="row">
       <div class="form-group" align="center">

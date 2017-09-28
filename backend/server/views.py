@@ -209,22 +209,6 @@ def new_journey():
         for i in stops:
             db.session.delete(i)
         db.session.commit()
-
-        # Make the length the correct size
-        # diff = len(stops) - len(body['destinations'])
-        # if diff > 0:
-        #     # Queried more stops
-        #     delete = models.Stop.query.filter_by(journey_id=j.id).limit(diff).all()
-        #     for entry in delete:
-        #         db.session.delete(entry)
-        #     db.session.commit()
-
-        # elif diff < 0:
-        #     # Queried less stops
-        #     for i in range(-diff):
-        #         entry = models.Stop(journey_id=j.id)
-        #         db.session.add(entry)
-        #     db.session.commit()
         
         for s in body['destinations']:
             s_start = convert_time(s['arrival'])
@@ -287,6 +271,19 @@ def switch_journey():
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
+
+@app.route('/api/update_notes', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def update_notes():
+    user_id = current_identity[0]
+    body = json.loads(request.data)
+    journeys = models.Journey.query.filter_by(user_id=user_id).all()
+    j = journeys[body['jIndex']]
+    stops = models.Stop.query.filter_by(journey_id=j.id).all()
+    stops[body['sIndex']].notes = body['notes']
+    db.session.commit()
+    return jsonify({'message': 'success'})
 
 
 @app.route('/api/delete_journey', methods=['POST'])
@@ -373,7 +370,6 @@ def change_user_last_name():
 def index():
     """ Front page of the backend """
     return render_template('index.html')
-
 
 @app.route('/admin/registered-users')
 def registered_users():

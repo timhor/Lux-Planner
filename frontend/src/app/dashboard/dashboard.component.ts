@@ -177,9 +177,22 @@ export class DashboardComponent implements OnInit {
     // Post to backend
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
+    this.pushNotes();
   }
 
   deleteNotes() {
     // TODO
+    this.stops[this.activeStopIndex].notes = null;    
+    this.pushNotes();
+  }
+
+  pushNotes() {
+    let payload = {'jIndex': this.activeJourneyIndex,
+        'sIndex': this.activeStopIndex,
+        'notes': this.stops[this.activeStopIndex].notes
+    };
+    this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
+        (res) => {console.log("pushed to server successfully")}
+    )
   }
 }

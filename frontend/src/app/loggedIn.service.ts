@@ -71,4 +71,12 @@ export class LoggedInService {
         options).map((res: Response) => res.json());
   }
 
+  public updateNotes(payload:string) {
+    let options: RequestOptions = new RequestOptions({
+        headers: new Headers({'Content-Type': 'application/json'})
+    });
+     return this.authHttp.post(this.server + 'api/update_notes', payload,
+        options).map((res: Response) => res.json());
+  }
+
 }
