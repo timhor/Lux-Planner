@@ -1,36 +1,36 @@
 h1 {
-    font-size: 72px;
-    font-weight: bold;
-    margin-bottom: 35px;    
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 35px;
 }
 
 h2 {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 div {
-    text-align: center;
+  text-align: center;
 }
 
 .content {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 5vh;
-    padding-bottom: 5vh;  
-    padding-right: 5vw;
-    padding-left: 5vw; 
-    width: 70vw;
-    min-width: 300px;   
-    margin: 50px auto 0;
-    border-radius: 5vh;
-    font-size: 1.3em;        
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  width: 70vw;
+  min-width: 300px;
+  margin: 50px auto 0;
+  border-radius: 5vh;
+  font-size: 1.3em;
 }
 
 .button-rect {
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    width: 20vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 20vw;
 }
 
-#emojiIcon{
-    font-size: 100px;
+#emojiIcon {
+  font-size: 100px;
 }

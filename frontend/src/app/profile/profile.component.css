@@ -1,53 +1,55 @@
-h3, form {
-   margin: 0;
-   padding: 0;
+h3,
+form {
+  margin: 0;
+  padding: 0;
 }
 
-#headText{
-   margin: 0 auto;
-   text-align: left;
+#headText {
+  margin: 0 auto;
+  text-align: left;
 }
 
 #subText {
-   margin: 0 auto;
-   text-align: left;
-   font-weight: bold;
-   font-size: 18px;
-   padding-bottom: 5px;
+  margin: 0 auto;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 5px;
 }
 
 #text {
-   margin: 0 auto;
-   text-align: left;
-   font-size: 14px;
-   padding-bottom: 20px
+  margin: 0 auto;
+  text-align: left;
+  font-size: 14px;
+  padding-bottom: 20px
 }
 
-#text ul, #text li {
-    margin: 0; 
-    padding: 0;
-    margin-left: 10px;
+#text ul,
+#text li {
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
 }
 
-#body_div{
-   background-color: rgba(255, 255, 255, 0.8);
-   padding-top: 5vh;
-   padding-bottom: 5vh;  
-   padding-right: 5vw;
-   padding-left: 5vw; 
-   width: 50vw;
-   min-width: 300px;   
-   margin: 0 auto;
-   border-radius: 5vh;
+#body_div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  width: 50vw;
+  min-width: 300px;
+  margin: 0 auto;
+  border-radius: 5vh;
 }
 
 img {
-   border: 0.2vw;
-   border-color: #bed600;
-   border-style:solid; 
-   border-radius: 5vh;
-   margin-bottom: 5%;
-   margin-top: 5%;
-   max-width: 250px;
-   width: 50vw;
+  border: 0.2vw;
+  border-color: #bed600;
+  border-style: solid;
+  border-radius: 5vh;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  max-width: 250px;
+  width: 50vw;
 }

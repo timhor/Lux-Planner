@@ -1,86 +1,85 @@
-#box { 
-   background-color:#EFEFEF;
-   margin-bottom:15px;
-   padding:15px;
-   margin: 15px;
-   border:1px solid #DDD;
-   box-shadow:2px 2px 2px 0 rgba(0, 0, 0, 0.3);
-   border-radius:3px;
+#box {
+  background-color: #EFEFEF;
+  margin-bottom: 15px;
+  padding: 15px;
+  margin: 15px;
+  border: 1px solid #DDD;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
 }
 
 img {
-   display: block;
-   margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 h1 {
-    text-align: left;
+  text-align: left;
 }
 
-h2 { 
-   text-align: center;
+h2 {
+  text-align: center;
 }
 
 h4 {
-   font-style: italic;
+  font-style: italic;
 }
 
 #lowerBorder {
-   border-color: black;
-   border-width: 1px;
-   background-color: #fafafa;
+  border-color: black;
+  border-width: 1px;
+  background-color: #fafafa;
 }
 
 #mainBorder {
-   border-color: black;
-   border-width: 2px;
-   background-color:  rgb(255, 155, 215);
-   
+  border-color: black;
+  border-width: 2px;
+  background-color: rgb(255, 155, 215);
 }
 
 .inactiveLink {
-   pointer-events: none;
-   cursor: default;
+  pointer-events: none;
+  cursor: default;
 }
 
 #body_div {
-   background-color: rgba(255, 255, 255, 0.8);
-   padding-top: 5vh;
-   padding-bottom: 5vh;  
-   padding-right: 5vw;
-   padding-left: 5vw; 
-   min-width: 300px;
-   width: 50vw; 
-   margin: 0 auto;
-   border-radius: 5vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  min-width: 300px;
+  width: 50vw;
+  margin: 0 auto;
+  border-radius: 5vh;
 }
 
 #myCarousel {
-   width: 100%;
-   margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #subtitle {
-   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
-   font-style: italic;
-   font-size: calc(5px + 1vw);                
-   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  font-size: calc(5px + 1vw);
+  text-align: center;
 }
 
 #stopsTable {
-   width: 500px;
+  width: 500px;
 }
 
 .button-rect {
-    padding-top: 1.3vh;
-    padding-bottom: 1.3vh;
-    letter-spacing: normal;
-    min-width: 160px;
-    width: 100px;
-    font-size: 15px;
-    margin-left: 8px;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  letter-spacing: normal;
+  min-width: 160px;
+  width: 100px;
+  font-size: 15px;
+  margin-left: 8px;
 }
 
 td {
-    width: 32em;
+  width: 32em;
 }

@@ -1,52 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
 .navbar {
-   font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-   font-size: 3vh;
-   text-align: center;
-   background-color: #000037;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  background-color: #000037;
 }
 
 .grow {
-    transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .grow:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 html {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scroll-behavior: smooth;   
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    width: 100%;
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    font-size: 2.5vh;
-    text-align: center;
-    color: white;
-    background-color: #000037;
- } 
-
- .main-container {
-    min-height: 100vh; /* will cover the 100% of viewport */
-    overflow: hidden;
-    display: block;
-    position: relative;
-    padding-bottom: 100px; /* height of your footer */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-size: 2.5vh;
+  text-align: center;
+  color: white;
+  background-color: #000037;
 }
 
-body{
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    background-image: url("/assets/Sky_Background.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+.main-container {
+  min-height: 100vh;
+  /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 100px;
+  /* height of your footer */
+}
+
+body {
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  background-image: url("/assets/Sky_Background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

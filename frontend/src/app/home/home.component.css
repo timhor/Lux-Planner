@@ -1,164 +1,163 @@
 .title {
-    text-align:center;
+  text-align: center;
 }
 
 #mainText {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
-    font-weight: bold;
-    color: #000037;    
-    font-size:calc(10px + 3vw);    
-    /* font-size: 3.5vw; */
-    padding-bottom: 1vh;
-    margin-bottom: 5%;    
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  color: #000037;
+  font-size: calc(10px + 3vw);
+  padding-bottom: 1vh;
+  margin-bottom: 5%;
 }
 
 #mainBlurb {
-    text-align:center;    
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size:calc(5px + 1.7vw);        
-    /* font-size: 1.7vw; */
-    padding-bottom: 1vh; 
-    margin-bottom: 5%;    
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: calc(5px + 1.7vw);
+  padding-bottom: 1vh;
+  margin-bottom: 5%;
 }
 
 .button_primary {
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    border-width: 0.2vw;
-    border-style: solid;
-    cursor: pointer;
-    -webkit-transition: background .1s ease-out,border-color .1s ease-out;
-    transition: background .1s ease-out,border-color .1s ease-out;
-    display: inline-block;
-    letter-spacing: .3vw;
-    font-size:calc(5px + 1.7vw);        
-    width: 30vw;
-    min-width: 175px;    
-    color: #000037;
-    background: #FFFFFF;
-    border-color: #bed600;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);        
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  border-width: 0.2vw;
+  border-style: solid;
+  cursor: pointer;
+  -webkit-transition: background .1s ease-out, border-color .1s ease-out;
+  transition: background .1s ease-out, border-color .1s ease-out;
+  display: inline-block;
+  letter-spacing: .3vw;
+  font-size: calc(5px + 1.7vw);
+  width: 30vw;
+  min-width: 175px;
+  color: #000037;
+  background: #FFFFFF;
+  border-color: #bed600;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
-.button_primary:hover { 
-    background: #bed600; 
-    color: #000086;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0);    
+
+.button_primary:hover {
+  background: #bed600;
+  color: #000086;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0);
 }
 
 .jumbotron {
-    width:60vw;
-    min-width: 300px;
-    height: 25%;
-    margin: 0 auto;
-    margin-top: inherit;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 5vh;
-    padding-top: 7vh;
-    padding-bottom: 7vh;      
-    border: 0.2vw;
-    border-color: #bed600;
-    border-style:solid; 
-    margin-bottom: 2%;
+  width: 60vw;
+  min-width: 300px;
+  height: 25%;
+  margin: 0 auto;
+  margin-top: inherit;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5vh;
+  padding-top: 7vh;
+  padding-bottom: 7vh;
+  border: 0.2vw;
+  border-color: #bed600;
+  border-style: solid;
+  margin-bottom: 2%;
 }
 
 #rowColor {
-    background-color: rgba(255, 255, 255, 0.75);
-    padding-bottom: 2.5vh;
-    padding-top: 2.5vh;
-    margin-bottom: 2%
+  background-color: rgba(255, 255, 255, 0.75);
+  padding-bottom: 2.5vh;
+  padding-top: 2.5vh;
+  margin-bottom: 2%
 }
 
 #subText {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
-    font-style: italic;
-    font-size:calc(5px + 2.5vw);            
-    /* font-size: 2.5vw;  */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  font-size: calc(5px + 2.5vw);
+  /* font-size: 2.5vw;  */
 }
 
 #subHeading {
-    text-align: center;    
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    font-size:calc(5px + 2vw);                
-    /* font-size: 2vw;   */
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  font-size: calc(5px + 2vw);
+  /* font-size: 2vw;   */
 }
 
 .subtitle {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;    
-    font-style: italic;
-    font-size:calc(5px + 1vw);                
-    /* font-size: 1.5vw;  */
-    text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  font-size: calc(5px + 1vw);
+  /* font-size: 1.5vw;  */
+  text-align: center;
 }
 
 .iconFormat {
-    margin-bottom: 5%;
-    margin-top: 5%;
-    font-size: 20vh;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  font-size: 20vh;
 }
 
 #imgBorder {
-    border: 0.2vw;
-    border-color: #bed600;
-    border-style:solid; 
-    border-radius: 5vh;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    max-width: 250px;
-    width: 50vw;
+  border: 0.2vw;
+  border-color: #bed600;
+  border-style: solid;
+  border-radius: 5vh;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  max-width: 250px;
+  width: 50vw;
 }
 
 .col-sm-4 {
-    padding-bottom: 5vh;
+  padding-bottom: 5vh;
 }
 
 .jumbotron {
-    margin-top: 45px;
+  margin-top: 45px;
 }
 
-#userAccIcon{
-    border: 0.2vw;
-    border-radius: 5vh;
-    border-style: solid;
-    border-width: 0.5vh;
-    width: 30vh;
-    color: #3EB000;
-    background: rgba(255, 255, 255, 0.75);
-    border-color: #3EB000;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
+#userAccIcon {
+  border: 0.2vw;
+  border-radius: 5vh;
+  border-style: solid;
+  border-width: 0.5vh;
+  width: 30vh;
+  color: #3EB000;
+  background: rgba(255, 255, 255, 0.75);
+  border-color: #3EB000;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
-#planTripIcon{
-    border: 0.2vw;
-    border-radius: 5vh;
-    border-style: solid;
-    border-width: 0.5vh;
-    width: 30vh;
-    color: #2B8BF8;
-    background: rgba(255, 255, 255, 0.75);
-    border-color: #2B8BF8;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
+#planTripIcon {
+  border: 0.2vw;
+  border-radius: 5vh;
+  border-style: solid;
+  border-width: 0.5vh;
+  width: 30vh;
+  color: #2B8BF8;
+  background: rgba(255, 255, 255, 0.75);
+  border-color: #2B8BF8;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
-#reviewTripIcon{
-    border: 0.2vw;
-    border-radius: 5vh;
-    border-style: solid;
-    border-width: 0.5vh;
-    width: 30vh;
-    color: #f4c20d;
-    background: rgba(255, 255, 255, 0.75);
-    border-color: #f4c20d;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);    
+#reviewTripIcon {
+  border: 0.2vw;
+  border-radius: 5vh;
+  border-style: solid;
+  border-width: 0.5vh;
+  width: 30vh;
+  color: #f4c20d;
+  background: rgba(255, 255, 255, 0.75);
+  border-color: #f4c20d;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }

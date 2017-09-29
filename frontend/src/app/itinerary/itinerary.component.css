@@ -1,44 +1,44 @@
 .well {
-   background-color: rgba(255, 255, 255, 0.75);
-   border-radius: 2.5vh;
-   text-align: left;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 2.5vh;
+  text-align: left;
 }
 
 #stopHeading {
-   padding-left: 15px;
-   font-size: 20px; 
-   font-weight: bold;
-   text-decoration: underline;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 #body_div {
-    padding-top: 5vh;
-    padding-bottom: 5vh;  
-    padding-right: 5vw;
-    padding-left: 5vw; 
-    min-width: 300px;
-    width: 85vw;
-    margin: 0 auto;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  min-width: 300px;
+  width: 85vw;
+  margin: 0 auto;
 }
 
 .modal {
-   background: rgba(0,0,0,0.6);
-   position: fixed;
-   height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  height: 100%;
 }
 
 .modal-header {
-   font-size: 20px;
+  font-size: 20px;
 }
 
 .modal-body {
-   max-height: calc(100vh - 180px);
-   overflow-y: auto;
-   background-color: rgb(240,245,255)
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  background-color: rgb(240, 245, 255)
 }
 
 .button-rect {
-   width: 160px;
-   min-width: 160px;
-   font-size: 14px;
+  width: 160px;
+  min-width: 160px;
+  font-size: 14px;
 }

@@ -1,211 +1,216 @@
 #journeyHead {
-    margin: 0 auto;
-    text-align: left;
+  margin: 0 auto;
+  text-align: left;
 }
 
 #stops-form {
-    margin: 0 auto;
-    text-align: left;
+  margin: 0 auto;
+  text-align: left;
 }
 
 label {
-    padding-bottom: 5px;
-    margin: 0 auto;
-    text-align: left;
-    display: block;
+  padding-bottom: 5px;
+  margin: 0 auto;
+  text-align: left;
+  display: block;
 }
 
 .button-rect {
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    width: 20vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 20vw;
 }
 
 #body_div {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 5vh;
-    padding-bottom: 5vh;  
-    padding-right: 5vw;
-    padding-left: 5vw; 
-    width: 50vw;
-    min-width: 300px;   
-    margin: 0 auto;
-    border-radius: 5vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  width: 50vw;
+  min-width: 300px;
+  margin: 0 auto;
+  border-radius: 5vh;
 }
 
 #infoIcon {
-    font-size:calc(15px + 1vw);
-    color: #2B8BF8;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color:#FFFFFF;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    cursor: pointer;   
+  font-size: calc(15px + 1vw);
+  color: #2B8BF8;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  cursor: pointer;
 }
 
 #minusIcon {
-    font-size:calc(15px + 1vw);
-    color: #DB0000;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color:#FFFFFF;
-    text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    cursor: pointer;   
+  font-size: calc(15px + 1vw);
+  color: #DB0000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  cursor: pointer;
 }
 
 #saveJourneyBtn {
-    width: 100%;
+  width: 100%;
 }
 
 .button-blue {
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    letter-spacing: .05em;
-    width: 10vw;
-    min-width: 125px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  letter-spacing: .05em;
+  width: 10vw;
+  min-width: 125px;
 }
 
 .button-orange {
-    min-width: 150px;
+  min-width: 150px;
 }
 
 .button-green {
-    min-width: 150px;
+  min-width: 150px;
 }
 
-
-.grow:hover { 
-    transform: scale(1.15); 
+.grow:hover {
+  transform: scale(1.15);
 }
 
-input, :host ::ng-deep .ui-inputtext {
-    border: auto;
-    border: solid 1px #ccc;
-    border-radius: 10px;
+input,
+:host ::ng-deep .ui-inputtext {
+  border: auto;
+  border: solid 1px #ccc;
+  border-radius: 10px;
 }
 
 #stopModalCloseButton {
-    padding: 6px 11px;
-    margin-right: -8px;
+  padding: 6px 11px;
+  margin-right: -8px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 2px;
-    position: relative;
-    width: 100%;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  position: relative;
+  width: 100%;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 .card-start {
-    background: rgba(243, 243, 243, 0.7);
-    border-radius: 2px;
-    position: relative;
-    width: 100%;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  background: rgba(243, 243, 243, 0.7);
+  border-radius: 2px;
+  position: relative;
+  width: 100%;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .card-1 {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
-  
+
 .card-1:hover {
-    box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
 }
 
 .glyphicon {
-    padding-top: 1vh;
+  padding-top: 1vh;
 }
 
 .fa-plane {
-    transform: rotate(135deg);
-    font-size: 16px;
-    color: black;
-    font-size: calc(11px + 1vh);
-    margin-bottom: 4px;
+  transform: rotate(135deg);
+  font-size: 16px;
+  color: black;
+  font-size: calc(11px + 1vh);
+  margin-bottom: 4px;
 }
 
 #circleBackground {
-    background-color:#bed600;
-    border:2px solid #FFFFFF;    
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-    height: 35px;
-    width: 35px;
-    line-height: 30px;
-    text-align: center;  
-    margin: 0 auto;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-    box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-    position: relative;
+  background-color: #bed600;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  position: relative;
 }
 
 #circleBackground:before {
-    content: '';
-    width: 2px;
-    height: 2.9vh;
-    background: black;
-    position: absolute;
-    bottom: 108%;
-    left: 48%;
+  content: '';
+  width: 2px;
+  height: 2.9vh;
+  background: black;
+  position: absolute;
+  bottom: 108%;
+  left: 48%;
 }
 
 #circleBackground:after {
-    content: '';
-    width: 2px;
-    height: 2.9vh;
-    background: black;
-    position: absolute;
-    top: 108%;
-    left: 48%;
+  content: '';
+  width: 2px;
+  height: 2.9vh;
+  background: black;
+  position: absolute;
+  top: 108%;
+  left: 48%;
 }
 
 span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    align-self: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  align-self: center;
 }
 
+
 /* :host ::ng-deep is needed to override component styles (shadow-piercing descendant combinator) */
+
 :host ::ng-deep .ui-calendar.ui-calendar-w-btn input {
-    height: 34px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    text-align: left;
-    padding-left: 12px;
+  height: 34px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  text-align: left;
+  padding-left: 12px;
 }
 
 :host ::ng-deep .ui-datepicker {
-    width: auto;
+  width: auto;
 }
 
 :host ::ng-deep .ui-calendar-button {
-    height: 34px;
-    width: 34px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 1px solid #3EB000;
-    background: #3EB000;
+  height: 34px;
+  width: 34px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid #3EB000;
+  background: #3EB000;
 }
 
 :host ::ng-deep .ui-button-icon-only .fa {
-    margin-left: -0.7em;
+  margin-left: -0.7em;
 }
 
 :host ::ng-deep .ui-inputtext {
-    width: calc(100% - 34px);
+  width: calc(100% - 34px);
 }
 
 @keyframes fadein {
-    from { opacity: 0 }
+  from {
+    opacity: 0
+  }
 }
 
-#stopCard, #circleBackground {
-    animation: fadein .5s;
-    display: block;
+#stopCard,
+#circleBackground {
+  animation: fadein .5s;
+  display: block;
 }
