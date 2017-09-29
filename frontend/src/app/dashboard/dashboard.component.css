@@ -115,10 +115,14 @@ h4 {
   padding-bottom: 1vh;
 }
 
-#leftBtn {
-  margin-right: 10px;
-}
-
 textarea {
   resize: vertical;
+}
+
+#notesDeleteBtn {
+  float: left;
+}
+
+#notesCancelBtn {
+  margin-right: 10px;
 }

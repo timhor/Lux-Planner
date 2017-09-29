@@ -106,10 +106,12 @@
             <button *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Add Notes</button>
             <div *ngIf="stops[activeStopIndex].notes !== null">
               <button *ngIf="!isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
-              <button *ngIf="!isModifyingNotes" type="button" class="button-rect button-red pull-right" id="leftBtn" (click)="deleteNotes()">Delete Notes</button>
             </div>
-            <button *ngIf="isModifyingNotes" type="button" class="button-rect button-green pull-right" (click)="saveNotes()">Save Notes</button>
-            <button *ngIf="isModifyingNotes" type="button" class="button-rect button-orange pull-right" id="leftBtn" (click)="cancelNotes()">Cancel</button>
+            <div class="btn-group" *ngIf="isModifyingNotes" id="notesBtns" align="right">
+              <button type="button" class="button-rect button-red" id="notesDeleteBtn" (click)="deleteNotes()">Delete</button>
+              <button type="button" class="button-rect button-orange" id="notesCancelBtn" (click)="cancelNotes()">Cancel</button>
+              <button type="button" class="button-rect button-green" (click)="saveNotes()">Save</button>
+            </div>
             <br><br>
           </div>
         </div>
