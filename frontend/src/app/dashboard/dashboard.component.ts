@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit {
     for (let i=0; i < this.stops.length; i++) {
       if (stop === this.stops[i].name) {
         this.activeStopIndex = i;
+        break;
       }
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
