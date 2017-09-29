@@ -104,11 +104,9 @@
             <textarea *ngIf="isModifyingNotes" class="form-control" rows="10" [(ngModel)]="newNotes"></textarea>
             <br>
             <button *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Add Notes</button>
-            <div *ngIf="stops[activeStopIndex].notes !== null">
-              <button *ngIf="!isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
-            </div>
+            <button *ngIf="stops[activeStopIndex].notes !== null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
             <div class="btn-group" *ngIf="isModifyingNotes" id="notesBtns" align="right">
-              <button type="button" class="button-rect button-red" id="notesDeleteBtn" (click)="deleteNotes()">Delete</button>
+              <button type="button" class="button-rect button-red" *ngIf="stops[activeStopIndex].notes !== null" id="notesDeleteBtn" (click)="deleteNotes()">Delete</button>
               <button type="button" class="button-rect button-orange" id="notesCancelBtn" (click)="cancelNotes()">Cancel</button>
               <button type="button" class="button-rect button-green" (click)="saveNotes()">Save</button>
             </div>
