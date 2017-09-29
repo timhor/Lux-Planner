@@ -173,15 +173,18 @@ export class DashboardComponent implements OnInit {
     this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
+  cancelNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
+  }
+
   saveNotes() {
-    // Post to backend
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes();
   }
 
   deleteNotes() {
-    // TODO
+    // TODO - add warning
     this.stops[this.activeStopIndex].notes = null;    
     this.pushNotes();
   }
