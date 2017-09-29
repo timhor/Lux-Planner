@@ -185,6 +185,7 @@ export class DashboardComponent implements OnInit {
 
   deleteNotes() {
     // TODO - add warning
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;    
     this.pushNotes();
   }
