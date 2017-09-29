@@ -58,8 +58,8 @@
         </div>
       </div>
       <div class="well">
-        <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
-        <p [innerHtml]="aboutText"></p>
+        <p id="subHeading">About</p>
+        <p [innerHtml]="shortAbout()"></p>
         <br>
         <button type="button" class="button-rect button-blue pull-right" (click)="stop.show(getCurrStop())">Find Out More</button>
         <br><br>

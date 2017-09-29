@@ -164,6 +164,16 @@ export class DashboardComponent implements OnInit {
     return string.replace(/,.*/,'');
   }
 
+  shortAbout() {
+    let sentences = this.aboutText.match(/^(.*?\..*?)\.(\s|<\/p>)/); // get first two sentences from aboutText
+    if (sentences) {
+      let text = sentences[0]; // only want the first match
+      return text;
+    } else {
+      return "No information found."
+    }
+  }
+
   public resetFirstLoad(): void {
     this.firstLoad = true;
     this.activeStopIndex = -1;
