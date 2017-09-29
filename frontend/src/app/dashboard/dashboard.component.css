@@ -126,3 +126,14 @@ textarea {
 #notesCancelBtn {
   margin-right: 10px;
 }
+
+/* mobile-specific styles */
+@media (max-width: 767px) {
+  #notesBtns {
+    width: 100px;
+  }
+
+  .button-rect {
+    margin-top: 8px;
+  }
+}
