@@ -122,3 +122,15 @@ h4 {
 #deleteBtn {
   margin-right: 10px;
 }
+
+#aboutWell {
+  padding-bottom: 30px;
+}
+
+#findOutMoreBtn {
+  width: 140px;
+  letter-spacing: initial;
+  font-size: 16px;
+  margin-top: 6px;
+  float: left !important;
+}
