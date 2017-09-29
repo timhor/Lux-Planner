@@ -118,3 +118,7 @@ h4 {
 #leftBtn {
   margin-right: 10px;
 }
+
+textarea {
+  resize: vertical;
+}
