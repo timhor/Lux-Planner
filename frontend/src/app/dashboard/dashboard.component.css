@@ -108,6 +108,10 @@ agm-map {
   text-align: center;
 }
 
+.dropdown {
+  margin-top: -40px;
+}
+
 h4 {
   -webkit-text-stroke-color: #424242;
   -webkit-text-stroke-width: 0.05vh;

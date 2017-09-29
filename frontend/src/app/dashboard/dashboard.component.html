@@ -21,20 +21,23 @@
   <div class="row">
     <div class="col-sm-12" style="width:calc(100% - 1%)">
       <div class="well">
-        <p id="subHeading">Current Journey</p>
+        <p id="subHeading">{{ allJourneys[activeJourneyIndex].journey_name }}</p>
         <div align="center">
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader">
-              <h1 id="currentJourney" align="center">{{allJourneys[activeJourneyIndex].journey_name}}&nbsp;&nbsp;
+              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ stops[activeStopIndex].name }}&nbsp;&nbsp;
+                <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
+              </h1>
+              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;
                 <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
               </h1>
             </button>
             <ul class="dropdown-menu" *ngIf="getJourneyLength() !== 1">
-              <!-- <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
-                <h4>Journey Overview</h4>
-              </li> -->
-              <li id="dropdownItem" *ngFor="let journey of allJourneys" (click)="setActiveJourney(journey.journey_name)">
-                <h4>{{journey.journey_name}}</h4>
+              <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
+                <h4>Overview</h4>
+              </li>
+              <li id="dropdownItem" *ngFor="let stop of stops" (click)="setActiveStop(stop.name)">
+                <h4>{{ regStop(stop.name) }}</h4>
               </li>
             </ul>
           </div>
@@ -43,34 +46,35 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-3">
-      <div class="well " align="center">            
-        <p id="subHeading">Journey Overview</p>          
-        <div class="row" align="center" style="padding-left:0.5vw; padding-right:0.1vw;">
-            <div class="btn-group" align="center">
-              <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="activeStopIndex===-1" (click)="resetFirstLoad()" style="width: 99% !important; border-right-width: 2.4px;"><span>Journey Overview</span></button>
-              <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="activeStopIndex!==-1" (click)="resetFirstLoad()" style="width: 99% !important; border-right-width: 2.4px;"><span>Journey Overview</span></button>            
-            </div>
-        </div>
-      </div>
+    <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
       <div class="well " align="center">
-        <p id="subHeading">Stops</p>
+        <p id="subHeading">Itinerary</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
           <div class="btn-group" align="center">
             <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)" align="center"><span>{{regStop(stop.name)}}</span></button>
             <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="i===activeStopIndex" align="center"><span>{{regStop(stop.name)}}</span></button>
-            <button type="button" class="btn btn-default btn-md itineraryButton" (click)="itinerary.show(getStop(i))" align="center"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default btn-md itineraryButton" (click)="itinerary.show(getStop(i))" align="center"><i class="fa fa-map" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
       <div class="well">
-        <p id="subHeading">Search for Flights</p>
-        <iframe id="widgetIframe" src="https://www.expedia.co.uk/marketing/widgets/searchform/widget?wtt=2&tp1=1234&tp2=&tp3=&tp4=&tp5=&lob=F&des=&wbi=8&olc=000000&whf=4&hfc=C7C7C7&wif=4&ifc=000000&wbc=FFCB00&wbf=4&bfc=3D3100&wws=1&sfs=H100RW100R" width="100%" height="500px" scrolling="no" frameborder="0"></iframe>        
+        <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
+        <p [innerHtml]="aboutText"></p>
+        <br>
+        <button type="button" class="button-rect button-blue pull-right" (click)="stop.show(getCurrStop())">Find Out More</button>
+        <br><br>
       </div>
       <div class="well">
         <p id="subHeading">Calendar</p>
         <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=irjrjrntp2vjb11uoduhgl0ubg%40group.calendar.google.com&amp;color=%23AB8B00&amp;ctz=Australia%2FSydney"
           style="border:solid 1px #777" width="100%" height="250" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+    <div class="col-sm-3" *ngIf="activeStopIndex===-1">
+      <div class="well">
+        <p id="subHeading">Search for Flights</p>
+        <iframe id="widgetIframe" src="https://www.expedia.co.uk/marketing/widgets/searchform/widget?wtt=2&tp1=1234&tp2=&tp3=&tp4=&tp5=&lob=F&des=&wbi=8&olc=000000&whf=4&hfc=C7C7C7&wif=4&ifc=000000&wbc=FFCB00&wbf=4&bfc=3D3100&wws=1&sfs=H100RW100R"
+          width="100%" height="500px" scrolling="no" frameborder="0"></iframe>
       </div>
     </div>
     <div class="col-sm-9">
@@ -82,18 +86,10 @@
           <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
             allowfullscreen></iframe> -->
         </div>
-        <br>
         <div class="well">
           <div id="weather-forecast" *ngFor="let i of stops">
             <iframe id="weatherapp" *ngIf="i==stops[activeStopIndex]" width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl("https://forecast.io/embed/#lat=" + i.lat + "&lon=" + i.lng + "&name=" + i.name + "&units=uk&color=#000037")'
               allowfullscreen></iframe>
-          </div>
-          <div class="well">
-            <p id="subHeading">About: {{stops[activeStopIndex].name}}</p>
-            <p [innerHtml]="aboutText"></p>
-            <br>
-            <button type="button" class="button-rect button-blue pull-right" (click)="stop.show(getCurrStop())">Find Out More</button>
-            <br><br>
           </div>
         </div>
         <div class="well">
@@ -119,7 +115,7 @@
         </div>
         <div class="well">
           <div class="well">
-            <p id="subHeading">{{allJourneys[activeJourneyIndex].journey_name}} Overview:</p>
+            <p id="subHeading">Overview:</p>
             <ngx-timeline [events]="events"></ngx-timeline>
           </div>
         </div>

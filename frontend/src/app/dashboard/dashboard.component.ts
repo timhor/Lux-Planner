@@ -53,7 +53,8 @@ export class DashboardComponent implements OnInit {
             );
             this.setUrls(this.getCurrStop());     // Refresh the Map   
             this.firstLoad = false;       
-            this.setTimeline();                     
+            this.setTimeline();
+            this.setActiveJourney(this.journeyName);
         },
         (error) => {console.log(`could not connect ${error}`)}
     ); 
