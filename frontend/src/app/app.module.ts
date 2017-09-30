@@ -31,6 +31,7 @@ import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
 import { LoggedInService } from './loggedIn.service';
 import { SearchService } from './search.service';
+import { JourneyService } from './journey.service';
 
 import { DropdownModule } from "ngx-dropdown";
 import { NgxTimelineModule } from 'ngx-timeline';
@@ -54,7 +55,8 @@ export const serviceProviders = [
   ConnectionService, 
   authProvider, 
   LoggedInService, 
-  SearchService
+  SearchService,
+  JourneyService
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
+import { JourneyService } from '../journey.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +13,12 @@ export class MyJourneysComponent implements OnInit {
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
+  public journeyService: JourneyService;
 
-  constructor(
-    _connectionService: ConnectionService,
-    _loggedinService: LoggedInService,
-    public router: Router,
-  ) {
+  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, public router: Router) {
     this.connService = _connectionService; 
     this.loggedInService = _loggedinService;
+    this.journeyService = _journeyService;
   }
 
   ngOnInit() {
@@ -36,11 +35,15 @@ export class MyJourneysComponent implements OnInit {
     // ); 
   }
 
-  setModify(i:number) {
+  viewJourney(i: number) {
+    this.journeyService.activeJourneyIndex = i;
+  }
+
+  setModify(i: number) {
     this.router.navigate(['/modify', i]);
   }
 
-  deleteJourney(i:number) {
+  deleteJourney(i: number) {
       this.loggedInService.deleteJourney(JSON.stringify({'delete': i})).subscribe(
           (res) => {
             // this.router.navigate(['/my-journeys'])

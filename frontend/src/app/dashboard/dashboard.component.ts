@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { StopComponent } from '../stop/stop.component';
-import { ConnectionService } from '../connection/connection.service';
-import { ItineraryComponent } from '../itinerary/itinerary.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
+import { StopComponent } from '../stop/stop.component';
+import { ItineraryComponent } from '../itinerary/itinerary.component';
+import { ConnectionService } from '../connection/connection.service';
+import { LoggedInService } from '../loggedIn.service';
+import { JourneyService } from '../journey.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,27 +13,29 @@ import { Router } from '@angular/router';
   styleUrls: ['../app.component.css', './dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  public connService: ConnectionService;
+  public loggedInService: LoggedInService;
+  public journeyService: JourneyService;
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0, 'notes': ''}];
   public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
   public activeJourneyIndex = 0;
   public activeStopIndex = 0;
   public aboutText: string = "Loading Information...";
-  public connService: ConnectionService;
   public latitude;
   public longitude;
   public weatherUrl: string = "Nothing";
   public mapUrl: string = "Nothing";
-  public loggedInService: LoggedInService;
   private toRefresh:boolean = false;  
   private firstLoad:boolean;
   private isModifyingNotes = false;
   private newNotes = "";
   events: Array<any>;
 
-  constructor( _connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router) {
+  constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router, _journeyService: JourneyService) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
+    this.journeyService = _journeyService;
     this.firstLoad = true;
 
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
@@ -42,7 +45,8 @@ export class DashboardComponent implements OnInit {
                 this.router.navigate(['/journey']);
                 return;
             }
-            this.activeJourneyIndex = res.active_journey;
+            // this.activeJourneyIndex = res.active_journey;
+            this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
             this.stops = res.journeys[this.activeStopIndex].stops;            
@@ -102,11 +106,10 @@ export class DashboardComponent implements OnInit {
   }
 
   setActiveJourney(name:string) {
-    if (!this.firstLoad){
+    if (!this.firstLoad) {
       this.firstLoad = true;
     }
 
-    if (name === this.journeyName) return;
     this.journeyName = name;
     
     for (let i=0; i < this.allJourneys.length; i++) {
@@ -171,7 +174,7 @@ export class DashboardComponent implements OnInit {
       let text = sentences[0]; // only want the first match
       return text;
     } else {
-      return "No information found."
+      return "<em>No information found.</em>"
     }
   }
 
