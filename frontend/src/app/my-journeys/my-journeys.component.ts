@@ -14,6 +14,8 @@ export class MyJourneysComponent implements OnInit {
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
   public journeyService: JourneyService;
+  public modalJourney: string;
+  public modalIndex: number;
 
   constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, public router: Router) {
     this.connService = _connectionService; 
@@ -25,14 +27,6 @@ export class MyJourneysComponent implements OnInit {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
     }
-    this.getJourneyList();
-    // this.connService.getProtectedData('api/get_all_journeys').subscribe(
-    //   res => {
-    //       this.allJourneys = res.journeys;
-    //       console.log('Success getting journeys');    
-    //   },
-    //   (error) => {console.log(`could not connect ${error}`)}
-    // ); 
   }
 
   viewJourney(i: number) {
@@ -43,8 +37,8 @@ export class MyJourneysComponent implements OnInit {
     this.router.navigate(['/modify', i]);
   }
 
-  deleteJourney(i: number) {
-      this.loggedInService.deleteJourney(JSON.stringify({'delete': i})).subscribe(
+  deleteJourney() {
+      this.loggedInService.deleteJourney(JSON.stringify({'delete': this.modalIndex})).subscribe(
           (res) => {
             // this.router.navigate(['/my-journeys'])
             this.getJourneyList();
@@ -61,6 +55,11 @@ export class MyJourneysComponent implements OnInit {
         },
         (error) => {console.log(`could not connect ${error}`)}
     ); 
+  }
+
+  sendData(journey:string, index:number) {
+    this.modalJourney = journey;
+    this.modalIndex = index;
   }
 
 }

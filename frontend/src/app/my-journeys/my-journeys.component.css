@@ -83,3 +83,43 @@ h4 {
 td {
   width: 32em;
 }
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 10px;
+}
+
+.modal-header {
+  font-size: calc(12px + 0.5vw);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+}
+
+#modal-button {
+  width: 150px;
+}
+
+#modal-button-left {
+  width: 150px;
+  margin-right: 10px;
+}
