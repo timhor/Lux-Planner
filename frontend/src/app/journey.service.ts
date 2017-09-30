@@ -1,3 +1,5 @@
+// Used to share active journey/stop index between components
+
 import { Injectable } from '@angular/core';
 
 @Injectable()

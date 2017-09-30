@@ -1,7 +1,7 @@
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { SearchService } from '../search.service'
+import { SearchService } from '../search/search.service'
 
 @Component({
   selector: 'app-home',

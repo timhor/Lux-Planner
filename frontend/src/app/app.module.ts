@@ -30,7 +30,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
 import { LoggedInService } from './loggedIn.service';
-import { SearchService } from './search.service';
+import { SearchService } from './search/search.service';
 import { JourneyService } from './journey.service';
 
 import { DropdownModule } from "ngx-dropdown";

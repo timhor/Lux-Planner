@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import { SearchService } from '../search.service';
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'planner-search',
