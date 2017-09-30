@@ -133,6 +133,7 @@ export class DashboardComponent implements OnInit {
     for (let i=0; i < this.stops.length; i++) {
       if (stop === this.stops[i].name) {
         this.activeStopIndex = i;
+        break;
       }
     }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
@@ -184,15 +185,19 @@ export class DashboardComponent implements OnInit {
     this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
+  cancelNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
+  }
+
   saveNotes() {
-    // Post to backend
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes();
   }
 
   deleteNotes() {
-    // TODO
+    // TODO - add warning
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;    
     this.pushNotes();
   }

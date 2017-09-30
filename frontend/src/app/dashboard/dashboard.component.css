@@ -119,7 +119,15 @@ h4 {
   padding-bottom: 1vh;
 }
 
-#deleteBtn {
+textarea {
+  resize: vertical;
+}
+
+#notesDeleteBtn {
+  float: left;
+}
+
+#notesCancelBtn {
   margin-right: 10px;
 }
 
@@ -133,4 +141,23 @@ h4 {
   font-size: 16px;
   margin-top: 6px;
   float: left !important;
+}
+
+#notesText {
+  white-space: pre-wrap;
+}
+
+#notesTextEmpty {
+  font-style: italic;
+}
+
+/* mobile-specific styles */
+@media (max-width: 767px) {
+  #notesBtns {
+    width: 100px;
+  }
+
+  .button-rect {
+    margin-top: 8px;
+  }
 }
