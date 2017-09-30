@@ -127,6 +127,14 @@ textarea {
   margin-right: 10px;
 }
 
+#notesText {
+  white-space: pre-wrap;
+}
+
+#notesTextEmpty {
+  font-style: italic;
+}
+
 /* mobile-specific styles */
 @media (max-width: 767px) {
   #notesBtns {

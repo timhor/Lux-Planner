@@ -99,8 +99,8 @@
         <div class="well">
           <div class="well">
             <p id="subHeading">Notes: {{stops[activeStopIndex].name}}</p>
-            <p *ngIf="!isModifyingNotes" style="white-space: pre-wrap">{{stops[activeStopIndex].notes}}</p>
-            <p *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" style="font-style: italic">No existing notes found</p>
+            <p *ngIf="!isModifyingNotes" id="notesText">{{stops[activeStopIndex].notes}}</p>
+            <p *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" id="notesTextEmpty">No existing notes found</p>
             <textarea *ngIf="isModifyingNotes" class="form-control" rows="10" [(ngModel)]="newNotes"></textarea>
             <br>
             <button *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Add Notes</button>
