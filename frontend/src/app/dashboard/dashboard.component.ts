@@ -75,17 +75,13 @@ export class DashboardComponent implements OnInit {
     let startDate;
     let endDate;
     let start_location;
-    for (let i=0; i < this.allJourneys.length; i++) {
-      if (this.allJourneys[i].journey_name === this.journeyName) {
-        startDate = this.allJourneys[i].start;
-        endDate = this.allJourneys[i].end;
-        if (!this.allJourneys[i].start_location) {
-          start_location = "Start Location";
-        } else {
-          start_location = this.allJourneys[i].start_location;
-        }
-        break;
-      }
+    
+    startDate = this.allJourneys[this.activeJourneyIndex].start;
+    endDate = this.allJourneys[this.activeJourneyIndex].end;
+    if (!this.allJourneys[this.activeJourneyIndex].start_location) {
+      start_location = "Start Location";
+    } else {
+      start_location = this.allJourneys[this.activeJourneyIndex].start_location;
     }
 
     this.events.push({ "date": new Date(startDate), "header": start_location, "icon": "fa-plane"});
@@ -111,15 +107,9 @@ export class DashboardComponent implements OnInit {
     }
 
     this.journeyName = name;
-    
-    for (let i=0; i < this.allJourneys.length; i++) {
-      if (this.allJourneys[i].journey_name === name) {
-        this.stops = this.allJourneys[i].stops;
-        this.activeJourneyIndex = i;
-        this.activeStopIndex = 0;
-        break;
-      }
-    }
+    this.stops = this.allJourneys[this.activeJourneyIndex].stops;
+    this.activeJourneyIndex = this.activeJourneyIndex;
+    this.activeStopIndex = 0;
     
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
