@@ -154,7 +154,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  regStop(string) {
+  shortStop(string) {
     return string.replace(/,.*/,'');
   }
 

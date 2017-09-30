@@ -25,7 +25,7 @@
         <div align="center">
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader">
-              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ stops[activeStopIndex].name }}&nbsp;&nbsp;
+              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;
                 <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
               </h1>
               <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;
@@ -37,7 +37,7 @@
                 <h4>Overview</h4>
               </li>
               <li id="dropdownItem" *ngFor="let stop of stops" (click)="setActiveStop(stop.name)">
-                <h4>{{ regStop(stop.name) }}</h4>
+                <h4>{{ shortStop(stop.name) }}</h4>
               </li>
             </ul>
           </div>
@@ -51,8 +51,8 @@
         <p id="subHeading">Itinerary</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
           <div class="btn-group" align="center">
-            <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)" align="center"><span>{{regStop(stop.name)}}</span></button>
-            <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="i===activeStopIndex" align="center"><span>{{regStop(stop.name)}}</span></button>
+            <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(stop.name)" align="center"><span>{{shortStop(stop.name)}}</span></button>
+            <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="i===activeStopIndex" align="center"><span>{{shortStop(stop.name)}}</span></button>
             <button type="button" class="btn btn-default btn-md itineraryButton" (click)="itinerary.show(getStop(i))" align="center"><i class="fa fa-map" aria-hidden="true"></i></button>
           </div>
         </div>
