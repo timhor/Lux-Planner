@@ -81,6 +81,17 @@ img,
   color: white;
 }
 
+.button-black {
+  color: #2B2B2B;
+  background: #FFFFFF;
+  border-color: #2B2B2B;
+}
+
+.button-black:hover {
+  background: #2B2B2B;
+  color: white;
+}
+
 .icon-blue:hover {
   font-size: calc(15px + 1vw);
   color: #FFFFFF;
