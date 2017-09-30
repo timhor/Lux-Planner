@@ -15,8 +15,10 @@
     <h1 *ngIf="isModifying === -1">New Journey</h1>
     <h1 *ngIf="isModifying !== -1">Modify Journey</h1>
   </div>
+  <br>
   <div [hidden]="isModifying == -1" class="alert alert-warning alert-dismissible" role="alert">
     <strong>Warning:</strong> All notes will be deleted if any changes are made!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
   </div>
   <br>
 
@@ -25,7 +27,7 @@
   </div>
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
   </div>
   <form [formGroup]="myJourneys">
     <div class="row" style="padding-left:2vw; padding-right:2vw;">

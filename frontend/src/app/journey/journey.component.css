@@ -214,3 +214,7 @@ span {
   animation: fadein .5s;
   display: block;
 }
+
+#alertDismissBtn {
+  margin-top: -2px;
+}
