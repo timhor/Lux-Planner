@@ -27,6 +27,7 @@ export class MyJourneysComponent implements OnInit {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
     }
+    this.getJourneyList();
   }
 
   viewJourney(i: number) {
