@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoggedInService } from './loggedIn.service';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
+import { TooltipModule } from "ngx-tooltip";
 
 @Component({
   selector: 'app-root',

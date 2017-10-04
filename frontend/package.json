@@ -26,13 +26,14 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "fullcalendar": "^3.5.1",
+    "jquery": "^3.1.1",
+    "moment": "^2.17.1",
     "ngx-dropdown": "0.0.22",
     "ngx-timeline": "^1.0.0",
+    "ngx-tooltip": "0.0.9",
     "primeng": "^4.2.1",
     "rxjs": "^5.4.3",
-    "zone.js": "^0.8.14",
-    "jquery": "^3.1.1",
-    "moment": "^2.17.1"
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@agm/core": "^1.0.0-beta.1",

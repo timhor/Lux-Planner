@@ -37,6 +37,7 @@ import { DropdownModule } from "ngx-dropdown";
 import { NgxTimelineModule } from 'ngx-timeline';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleModule, CalendarModule } from 'primeng/primeng';
+import { TooltipModule } from 'ngx-tooltip';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -93,7 +94,8 @@ export const serviceProviders = [
     NgxTimelineModule,
     BrowserAnimationsModule,
     ScheduleModule,
-    CalendarModule
+    CalendarModule,
+    TooltipModule
   ],
   providers:
     serviceProviders
