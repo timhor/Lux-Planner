@@ -3,10 +3,6 @@ h1 {
   text-align: left;
 }
 
-div {
-  text-align: justify;
-}
-
 .content {
   background-color: rgba(255, 255, 255, 0.8);
   padding-top: 5vh;
@@ -17,5 +13,36 @@ div {
   min-width: 300px;
   margin: 50px auto 0;
   border-radius: 5vh;
-  font-size: 1.3em;
+  font-size: 1.1em;
+}
+
+/* the following accordion styles adapted from https://maxalley.wordpress.com/2015/02/20/bootstrap-style-the-accordion/ */
+
+a.panel-heading {
+  display: block;
+}
+
+.panel-group .panel,
+.panel-group .panel-heading {
+  border: none !important;
+  position: relative;
+}
+
+.panel-group a.panel-heading:hover,
+.panel-group a.panel-heading:focus {
+  text-decoration: none;
+}
+
+.panel-group .panel-heading .icon-indicator {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+}
+
+.panel-group .panel-heading .icon-indicator:before {
+  content: "\e113";
+}
+
+.panel-group .panel-heading.collapsed .icon-indicator:before {
+  content: "\e114";
 }
