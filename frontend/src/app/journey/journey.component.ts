@@ -9,6 +9,7 @@ import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from '../connection/connection.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-journey',
@@ -36,7 +37,8 @@ export class JourneyComponent implements OnInit {
     private loggedInService: LoggedInService,
     public router: Router,
     private route: ActivatedRoute,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
+    private notification: NotificationsService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -148,11 +150,13 @@ export class JourneyComponent implements OnInit {
     handle.subscribe(
         (res) => {
             console.log("SUCCESS!!!");
+            this.notifySuccess();
             this.router.navigate(['/dashboard']);
         },
         (error) => {
           console.log("Unable to save journey")
           this.invalidForm = !this.invalidForm;
+          window.scrollTo(0,0);
         }
     )
   }
@@ -222,5 +226,19 @@ export class JourneyComponent implements OnInit {
   getStop(i) {
     this.updateVars();
     return this.myStops[i];
+  }
+
+  notifySuccess() {
+    if (this.isModifying === -1) {
+      this.notification.success(
+        this.myJourneys.controls['journeyName'].value,
+        "Journey created successfully"
+      )
+    } else {
+      this.notification.success(
+        this.myJourneys.controls['journeyName'].value,
+        "Journey modified successfully"
+      )
+    }
   }
 }
