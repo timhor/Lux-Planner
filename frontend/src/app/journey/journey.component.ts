@@ -139,7 +139,7 @@ export class JourneyComponent implements OnInit {
     // If last dest ends after the journey end
     if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
         console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
-        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";        
+        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";
         this.invalidForm = true;
         return;
     }
@@ -160,11 +160,7 @@ export class JourneyComponent implements OnInit {
   }
 
   cancel() {
-    if (this.isLoggedIn) {
       this.router.navigate(['/my-journeys']);
-    } else {
-      this.router.navigate(['/home'])
-    }
   }
 
   updateVars() {
