@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-account-settings',
@@ -34,7 +35,8 @@ export class AccountSettingsComponent implements OnInit {
 
   public submitted: boolean = false;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
+  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router,
+      private notification: NotificationsService) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
 
@@ -102,6 +104,7 @@ export class AccountSettingsComponent implements OnInit {
         this.editEmail = false;
         this.editFirstName = false;
         this.editLastName = false;
+        this.notify();
       },
         (error) => {
         console.log(`Sumting wong: ${error}`);
@@ -121,6 +124,13 @@ export class AccountSettingsComponent implements OnInit {
     );
     //Add stuff here to send account details to backend
     //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
+  }
+
+  notify() {
+    this.notification.success(
+      this.username,
+      "Account updated successfully",
+    );
   }
   get diagnostic() { return("Email: " + this.newEmail + " Password: " + this.newPassword) + " Confirm: " + this.newPasswordConfirm }
 }

@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
         res => {
             if (res.journeys.length == 0) {
                 // No journeys, direct them to make a journey :)
-                this.notify();
+                this.notifyRedirect();
                 setTimeout(() => {
                   this.router.navigate(['/journey']);
                 }, 500)
@@ -206,11 +206,15 @@ export class DashboardComponent implements OnInit {
         'notes': this.stops[this.activeStopIndex].notes
     };
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
-        (res) => {console.log("pushed to server successfully")}
+        (res) => {
+          this.notifyUpdate();
+          console.log("pushed to server successfully");
+        }
+
     )
   }
 
-  notify() {
+  notifyRedirect() {
     this.notification.error(
       "No Exisiting Journeys",
       "Redirecting...",
@@ -219,5 +223,12 @@ export class DashboardComponent implements OnInit {
         showProgressBar: true
       }
     );
+  }
+
+  notifyUpdate() {
+    this.notification.success(
+      this.stops[this.activeStopIndex].name,
+      "Notes updated successfully"
+    )
   }
 }
