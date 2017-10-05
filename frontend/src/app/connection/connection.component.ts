@@ -7,44 +7,42 @@ import { ConnectionService } from './connection.service';
     templateUrl: './connection.component.html',
 })
 export class ConnectionComponent {
-    public componentName = 'ConnectionComponent';
-    public destinations;
-    private mService;
-    private result;
+    public componentName: string = 'ConnectionComponent';
+    public destinations: Array<any>;
+    private connService: ConnectionService;
+    // private result;
     private messages: Array<String> = [];
 
     constructor(_connectionService: ConnectionService) {
-        this.mService = _connectionService;
+        this.connService = _connectionService;
     }
 
     public getData() {
         console.log("Hello from component");
         this.messages.push("Hello from component");
-        this.mService.getServiceData("api/hello").subscribe(res => this.result = res);
+        this.connService.getServiceData("api/hello").subscribe(res => console.log(res));
         this.getPrivate();
     }
 
 
     public getPublic() {
-        this.mService.getServiceData("api/insecure").subscribe(
+        this.connService.getServiceData("api/insecure").subscribe(
             (data) =>  {this.messages.push(`Hello world with message: ${data.message}`);
-                       // this.mService.login();
                         },
             (error) => this.messages.push(error)
             );
     }
 
     public getPrivate() {
-        this.mService.getProtectedData('api/secure').subscribe(
+        this.connService.getProtectedData('api/secure').subscribe(
             (data) =>  {this.messages.push(`Hello world with message: ${data.message}`);
-                       // this.mService.login();
                         },
             (error) => this.messages.push(error)
             );
     }
 
     public login() {
-        this.mService.login();
+        this.connService.login();
 
     }
 

@@ -12,7 +12,7 @@ export class SearchComponent {
   @ViewChild('search') public searchElement: ElementRef;
 
   public val:string = "";
-  
+
   constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private searchService: SearchService) {}
 
   ngOnInit() {

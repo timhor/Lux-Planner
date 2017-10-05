@@ -15,24 +15,24 @@ export class AccountSettingsComponent implements OnInit {
   public editFirstName:boolean = false;
   public editLastName:boolean = false;
 
-  public avatar;
-  public username;
-  public email;
-  public password;
-  public firstName;
-  public lastName;
-  public gender;
+  public avatar: string;
+  public username: string;
+  public email: string;
+  public password: string;
+  public firstName: string;
+  public lastName: string;
+  public gender: string;
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
 
-  public newAvatar;
-  public newEmail;
-  public newPassword = "";
-  public newPasswordConfirm = "";
-  public newFirstName;
-  public newLastName;
+  public newAvatar: string;
+  public newEmail: string;
+  public newPassword: string = "";
+  public newPasswordConfirm: string = "";
+  public newFirstName: string;
+  public newLastName: string;
 
-  submitted = false;
+  public submitted: boolean = false;
 
   constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
     this.connService = _connectionService;

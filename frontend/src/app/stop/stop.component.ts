@@ -10,15 +10,15 @@ import { ConnectionService } from '../connection/connection.service';
 })
 export class StopComponent {
     public componentName: string = 'StopComponent';
-    public currStop = 'Tokyo';
-    public stops;
+    public currStop: string = 'Tokyo';
+    public stops: Array<any>;
     public bannerPhoto: string = "https://dummyimage.com/650x300/000000/baffef&text=No+Image+Available";
     public connService: ConnectionService;
     public aboutText: string = "Loading Information...";
-    public visible = false;
-    public visibleAnimate = false;
+    public visible: boolean = false;
+    public visibleAnimate: boolean = false;
     public attractions: Array<any> = [];
-    public location_images = [];
+    public location_images: Array<any> = [];
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, _connectionService: ConnectionService) {

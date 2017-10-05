@@ -12,8 +12,8 @@ export class ConfirmComponent implements OnInit {
   ngOnInit() {
   }
 
-  public visible = false;
-  public visibleAnimate = false;
+  public visible: boolean = false;
+  public visibleAnimate: boolean = false;
 
   public show(): void {
     this.visible = true;
