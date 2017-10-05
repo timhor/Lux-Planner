@@ -422,13 +422,8 @@ def call_cache(search, data_type):
     query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
     if query:
         if query.expiry < datetime.utcnow():
-<<<<<<< HEAD
-            data = api_caller(search, data_type)        
-            cache = pickle.dumps(data)           
-=======
             data = api_caller(search, data_type)
             cache = pickle.dumps(data)
->>>>>>> 338165daf4ccf2db79192a436cae32a51b063733
             query.cached_data = cache
             query.expiry = datetime.utcnow() + timedelta(days=7)
             db.session.commit()
