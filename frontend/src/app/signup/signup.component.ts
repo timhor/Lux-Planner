@@ -14,7 +14,7 @@ export class SignupComponent {
   account = new NewAccount('','','','','','','');
 
   constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
-  
+
   onSubmit() {
     if (this.account.password.length < 8) {
         return;
@@ -31,11 +31,11 @@ export class SignupComponent {
                         this.notify()
                         this.router.navigate(['/journey'])
                         window.scrollTo(0,0);
-                        
+
                     },
                     (error) => {
                         console.log(`This shouldn't happen anyways: ${error}`);
-                        this.router.navigate(['/login'])                        
+                        this.router.navigate(['/login'])
                     }
                 )
             }

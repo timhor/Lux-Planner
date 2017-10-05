@@ -21,9 +21,9 @@ export class MyJourneysComponent implements OnInit {
   public notifyfailure: number;
   public success: number;
 
-  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, 
+  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService,
       public router: Router,  private notification: NotificationsService) {
-    this.connService = _connectionService; 
+    this.connService = _connectionService;
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
   }
@@ -77,10 +77,10 @@ export class MyJourneysComponent implements OnInit {
               return;
             }
             this.allJourneys = res.journeys;
-            console.log('Success getting journeys');    
+            console.log('Success getting journeys');
         },
         (error) => {console.log(`could not connect ${error}`)}
-    ); 
+    );
   }
 
   sendData(journey:string, index:number) {

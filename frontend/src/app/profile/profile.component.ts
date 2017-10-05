@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public avatar;
-  public username;
-  public email;
-  public firstName;
-  public lastName;
-  public gender;
-  public dateJoined = "19/09/2017";
-  public journeys;
+  public avatar: string;
+  public username: string;
+  public email: string;
+  public firstName: string;
+  public lastName: string;
+  public gender: string;
+  public dateJoined: string = "19/09/2017";
+  public journeys; // I think this is an Array<any>?
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) { 
+  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
 
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
           this.firstName = res.first_name;
           this.lastName = res.last_name;
           this.gender = res.gender;
-          console.log('Success getting account details');   
+          console.log('Success getting account details');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
