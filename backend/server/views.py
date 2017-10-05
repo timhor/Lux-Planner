@@ -48,7 +48,7 @@ def make_payload(identity):
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
     # Create the identity payload here
     id_payload = [getattr(identity, 'id'), getattr(identity, 'username')]
-    
+
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': id_payload}
 
 
@@ -117,7 +117,7 @@ def new_user():
         return jsonify({
             'message': username + " is taken."
         })
-    
+
     password = body['password']
     email = body['email']
     first_name = body['firstName']
@@ -179,7 +179,7 @@ def new_journey():
                 start_location=body['initialLocation'],
                 start_date = j_start,
                 end_date = j_end,
-                
+
                 cost=0
             )
         db.session.add(created_journey)
@@ -210,7 +210,7 @@ def new_journey():
         for i in stops:
             db.session.delete(i)
         db.session.commit()
-        
+
         for s in body['destinations']:
             s_start = convert_time(s['arrival'])
             s_end = convert_time(s['departure'])
@@ -222,8 +222,8 @@ def new_journey():
             )
             db.session.add(stop)
         db.session.commit()
-        return jsonify({'message': 'OK'})        
-        
+        return jsonify({'message': 'OK'})
+
 
 
 
@@ -257,7 +257,7 @@ def get_all_journeys():
             'end': j.end_date,
             'stops': s_payload
             }
-        
+
         payload.append(j_item)
     # Think about how to handle a user without a journey
     print(payload)
@@ -291,7 +291,7 @@ def update_notes():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def delete_journey():
-    body = json.loads(request.data)    
+    body = json.loads(request.data)
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
@@ -321,49 +321,27 @@ def get_all_journey_names():
         names.append(j.journey_name)
     return jsonify({'names': names})
 
-@app.route('/api/change_user_password/', methods=['POST'])
+
+@app.route('/api/change_user_details/', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
-def change_user_password():
+def change_user_details():
+    print("hello")
     user = models.User.query.filter_by(id=current_identity[0]).first()
     body = json.loads(request.data)
-    password = body['password']
-    user.password = password
+    print(body)
+    for key in body:
+        if key == 'password':
+            user.password = body['password']
+        if key == 'email':
+            user.email = body['email']
+        if key == 'firstName':
+            user.first_name = body['firstName']
+        if key == 'lastName':
+            user.last_name = body['lastName']
     db.session.commit()
     return jsonify({'message': 'success'})
 
-@app.route('/api/change_user_email/', methods=['POST'])
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def change_user_email():
-    user = models.User.query.filter_by(id=current_identity[0]).first()
-    body = json.loads(request.data)
-    email = body['email']
-    user.email = email
-    db.session.commit()
-    return jsonify({'message': 'success'})
-
-@app.route('/api/change_user_first_name/', methods=['POST'])
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def change_user_first_name():
-    user = models.User.query.filter_by(id=current_identity[0]).first()
-    body = json.loads(request.data)
-    first_name = body['firstName']
-    user.first_name = first_name
-    db.session.commit()
-    return jsonify({'message': 'success'})
-
-@app.route('/api/change_user_last_name/', methods=['POST'])
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def change_user_last_name():
-    user = models.User.query.filter_by(id=current_identity[0]).first()
-    body = json.loads(request.data)
-    last_name = body['lastName']
-    user.last_name = last_name
-    db.session.commit()
-    return jsonify({'message': 'success'})
 
 ################ Old stuff ####################
 @app.route('/')
@@ -444,8 +422,8 @@ def call_cache(search, data_type):
     query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
     if query:
         if query.expiry < datetime.utcnow():
-            data = api_caller(search, data_type)        
-            cache = pickle.dumps(data)           
+            data = api_caller(search, data_type)
+            cache = pickle.dumps(data)
             query.cached_data = cache
             query.expiry = datetime.utcnow() + timedelta(days=7)
             db.session.commit()
@@ -454,7 +432,7 @@ def call_cache(search, data_type):
     else:
         data = api_caller(search, data_type)
         cache = pickle.dumps(data)
-        created_cache = models.CacheInformation(place_name=search, data_type=data_type, 
+        created_cache = models.CacheInformation(place_name=search, data_type=data_type,
                                             cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()

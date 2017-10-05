@@ -86,8 +86,8 @@
     <div class="col-sm-3" *ngIf="activeStopIndex===-1">
       <div class="well">
         <p id="subHeading">Search for Flights</p>
-        <iframe id="widgetIframe" src="https://www.expedia.co.uk/marketing/widgets/searchform/widget?wtt=2&tp1=1234&tp2=&tp3=&tp4=&tp5=&lob=F&des=&wbi=8&olc=000000&whf=4&hfc=C7C7C7&wif=4&ifc=000000&wbc=FFCB00&wbf=4&bfc=3D3100&wws=1&sfs=H100RW100R"
-          width="100%" height="500px" scrolling="no" frameborder="0"></iframe>
+        <iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/searchform/widget?wtt=1&tp1=1234&tp2=&lob=F&des=&sfs=5&wbi=13&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=C7C7C7&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2" 
+          width="100%" height="280px" scrolling="no" frameborder="0"></iframe>
       </div>
     </div>
     <div class="col-sm-9">
@@ -96,8 +96,6 @@
           <agm-map [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng" [zoom]="10" >
             <agm-marker [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng"></agm-marker>
           </agm-map>
-          <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
-            allowfullscreen></iframe> -->
         </div>
         <div class="well">
           <div id="weather-forecast" *ngFor="let i of stops">
@@ -127,8 +125,9 @@
         <div class="well" id="map">
           <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
             allowfullscreen></iframe> -->
-            <agm-map [latitude]="0" [longitude]="0" [zoom]="2">
-              <!-- <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker> -->
+            <agm-map [minZoom]="2">
+              <agm-marker *ngFor="let stop of stops; let i=index" [label]="(i+1).toString()" [latitude]="stop.lat" [longitude]="stop.lng" fit="true"></agm-marker>
+              <agm-polygon [paths]='stops'></agm-polygon>
             </agm-map>
         </div>
         <div class="well">
