@@ -17,24 +17,20 @@
   <div class="app-itinerary-footer">
   </div>
 </app-itinerary>
-<div class="modal fade" id="confirmModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-        Confirm
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete your notes?</p>
-        <br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="button-rect button-orange" id="modal-button-left" data-dismiss="modal">Cancel</button>
-        <button type="button" class="button-rect button-red" id="modal-button" (click)="deleteNotes()" data-dismiss="modal">Confirm</button>
-      </div>
-    </div>
+<app-confirm #confirm>
+  <div class="app-confirm-header">
+    <button type="button" class="btn btn-danger pull-right" (click)="confirm.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    Confirm
   </div>
-</div>
+  <div class="app-confirm-body">
+    <p>Are you sure you want to delete your notes?</p>
+    <br>
+  </div>
+  <div class="app-confirm-footer">
+    <button type="button" class="button-rect button-orange" id="modal-button-left" (click)="confirm.hide()">Cancel</button>
+    <button type="button" class="button-rect button-red" id="modal-button" (click)="deleteNotes()" (click)="confirm.hide()">Confirm</button>
+  </div>
+</app-confirm>
 <div class="container">
   <div class="row">
     <div class="col-sm-12" style="width:calc(100% - 1%)">
@@ -119,7 +115,7 @@
             <button *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Add Notes</button>
             <button *ngIf="stops[activeStopIndex].notes !== null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
             <div class="btn-group" *ngIf="isModifyingNotes" id="notesBtns" align="right">
-              <button type="button" class="button-rect button-red" *ngIf="stops[activeStopIndex].notes !== null" id="notesDeleteBtn" data-toggle="modal" data-target="#confirmModal">Delete</button>
+              <button type="button" class="button-rect button-red" *ngIf="stops[activeStopIndex].notes !== null" id="notesDeleteBtn" (click)="confirm.show()">Delete</button>
               <button type="button" class="button-rect button-orange" id="notesCancelBtn" (click)="cancelNotes()">Cancel</button>
               <button type="button" class="button-rect button-green" (click)="saveNotes()">Save</button>
             </div>

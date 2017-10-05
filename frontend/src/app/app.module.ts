@@ -26,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
@@ -78,7 +79,8 @@ export const serviceProviders = [
     ProfileComponent,
     AccountSettingsComponent,
     MyJourneysComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
