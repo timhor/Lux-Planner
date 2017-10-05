@@ -6,6 +6,7 @@ import { ItineraryComponent } from '../itinerary/itinerary.component';
 import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,8 @@ export class DashboardComponent implements OnInit {
   private newNotes = "";
   events: Array<any>;
 
-  constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router, _journeyService: JourneyService) {
+  constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
+      public router: Router, _journeyService: JourneyService, private notification: NotificationsService) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
@@ -42,7 +44,10 @@ export class DashboardComponent implements OnInit {
         res => {
             if (res.journeys.length == 0) {
                 // No journeys, direct them to make a journey :)
-                this.router.navigate(['/journey']);
+                this.notify();
+                setTimeout(() => {
+                  this.router.navigate(['/journey']);
+                }, 500)
                 return;
             }
             // this.activeJourneyIndex = res.active_journey;
@@ -203,5 +208,16 @@ export class DashboardComponent implements OnInit {
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {console.log("pushed to server successfully")}
     )
+  }
+
+  notify() {
+    this.notification.error(
+      "No Exisiting Journeys",
+      "Redirecting...",
+      {
+        timeOut: 1000,
+        showProgressBar: true
+      }
+    );
   }
 }

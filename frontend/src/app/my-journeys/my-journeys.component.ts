@@ -52,7 +52,7 @@ export class MyJourneysComponent implements OnInit {
       this.loggedInService.deleteJourney(JSON.stringify({'delete': this.modalIndex})).subscribe(
           (res) => {
             // this.router.navigate(['/my-journeys'])
-            this.notify();
+            this.notifyDelete();
             this.getJourneyList();
             window.scrollTo(0,0);
             // this.notifysuccess = 1;
@@ -68,6 +68,14 @@ export class MyJourneysComponent implements OnInit {
   getJourneyList() {
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
+            if (res.journeys.length == 0) {
+              // No journeys, direct them to make a journey :)
+              this.notifyRedirect();
+              setTimeout(() => {
+                this.router.navigate(['/journey']);
+              }, 500)
+              return;
+            }
             this.allJourneys = res.journeys;
             console.log('Success getting journeys');    
         },
@@ -80,10 +88,21 @@ export class MyJourneysComponent implements OnInit {
     this.modalIndex = index;
   }
 
-  notify() {
+  notifyDelete() {
     this.notification.success(
       this.modalJourney,
       "Journey deleted successfully",
+    );
+  }
+
+  notifyRedirect() {
+    this.notification.error(
+      "No Exisiting Journeys",
+      "Redirecting...",
+      {
+        timeOut: 1000,
+        showProgressBar: true
+      }
     );
   }
 
