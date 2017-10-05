@@ -5,7 +5,7 @@ import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class LoggedInService {
-  private server: string = 'http://localhost:5000/';
+  private server: string = process.env.BACKEND_URL || 'http://localhost:5000/';
 
   constructor(private http: Http, private authHttp: AuthHttp) {
   }
