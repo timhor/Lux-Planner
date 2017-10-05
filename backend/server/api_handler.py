@@ -68,6 +68,6 @@ def get_wiki_summary(request):
         else:
             for item in data['query']['pages']:
                 info = data['query']['pages'][item]['extract']
-                info = re.sub(r'\(<span></span>\)', '', info)
+                info = re.sub(r' \(<span></span>\)', '', info)
                 return info
             return data
