@@ -152,6 +152,14 @@ export class JourneyComponent implements OnInit {
     )
   }
 
+  cancel() {
+    if (this.isLoggedIn) {
+      this.router.navigate(['/my-journeys']);
+    } else {
+      this.router.navigate(['/home'])
+    }
+  }
+
   updateVars() {
     let x = document.getElementsByClassName('searchComponent');
     this.myStops = [];

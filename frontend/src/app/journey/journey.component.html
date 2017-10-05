@@ -127,7 +127,12 @@
 
     <div class="row">
       <div class="form-group" align="center">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
+           <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-orange" (click)="cancel()">
+            Cancel&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+          </button>
+        </div>
+        <div class="col-sm-6">
           <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-green" (click)="submit()">
             Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
           </button>
