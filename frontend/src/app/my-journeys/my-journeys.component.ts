@@ -16,6 +16,9 @@ export class MyJourneysComponent implements OnInit {
   public journeyService: JourneyService;
   public modalJourney: string;
   public modalIndex: number;
+  public notifysuccess: number;
+  public notifyfailure: number;
+  public success: number;
 
   constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, public router: Router) {
     this.connService = _connectionService; 
@@ -27,6 +30,9 @@ export class MyJourneysComponent implements OnInit {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
     }
+    this.notifysuccess = 0;
+    this.notifyfailure = 0;
+    this.success = 0;
     this.getJourneyList();
   }
 
@@ -39,12 +45,19 @@ export class MyJourneysComponent implements OnInit {
   }
 
   deleteJourney() {
+      this.notifysuccess = 0;
+      this.notifyfailure = 0;
       this.loggedInService.deleteJourney(JSON.stringify({'delete': this.modalIndex})).subscribe(
           (res) => {
             // this.router.navigate(['/my-journeys'])
             this.getJourneyList();
+            this.notifysuccess = 1;
+            console.log("Success deleting journey");
           },
-          (error) => {console.log("Could not delete")}
+          (error) => {
+            this.notifyfailure = 1;
+            console.log("Could not delete");
+          }
       )
   }
 
