@@ -21,8 +21,6 @@ export class JourneyComponent implements OnInit {
   public myStops = [];
   public invalidForm: boolean = false;
   public invalidInfo: string = "";
-//   public invalidArrival: boolean = false;
-//   public invalidDeparture: boolean = false;
   public isLoggedIn;
   public isModifying = -1;
   public modifyingStops = [];
