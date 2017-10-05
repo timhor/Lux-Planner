@@ -34,7 +34,7 @@ export class AccountSettingsComponent implements OnInit {
 
   submitted = false;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) { 
+  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
 
@@ -45,12 +45,12 @@ export class AccountSettingsComponent implements OnInit {
         this.firstName = res.first_name;
         this.lastName = res.last_name;
         this.gender = res.gender;
-        console.log('Success getting account details');   
+        console.log('Success getting account details');
       },
       (error) => {console.log(`could not connect ${error}`)}
   );
   }
-    
+
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
@@ -122,5 +122,5 @@ export class AccountSettingsComponent implements OnInit {
     //Add stuff here to send account details to backend
     //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
   }
-  get diagnostic() { return("Email: " + this.newEmail + " Password: " + this.newPassword) + " Confirm: " + this.newPasswordConfirm }  
+  get diagnostic() { return("Email: " + this.newEmail + " Password: " + this.newPassword) + " Confirm: " + this.newPasswordConfirm }
 }

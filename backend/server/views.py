@@ -48,7 +48,7 @@ def make_payload(identity):
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
     # Create the identity payload here
     id_payload = [getattr(identity, 'id'), getattr(identity, 'username')]
-    
+
     return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': id_payload}
 
 
@@ -117,7 +117,7 @@ def new_user():
         return jsonify({
             'message': username + " is taken."
         })
-    
+
     password = body['password']
     email = body['email']
     first_name = body['firstName']
@@ -179,7 +179,7 @@ def new_journey():
                 start_location=body['initialLocation'],
                 start_date = j_start,
                 end_date = j_end,
-                
+
                 cost=0
             )
         db.session.add(created_journey)
@@ -210,7 +210,7 @@ def new_journey():
         for i in stops:
             db.session.delete(i)
         db.session.commit()
-        
+
         for s in body['destinations']:
             s_start = convert_time(s['arrival'])
             s_end = convert_time(s['departure'])
@@ -222,8 +222,8 @@ def new_journey():
             )
             db.session.add(stop)
         db.session.commit()
-        return jsonify({'message': 'OK'})        
-        
+        return jsonify({'message': 'OK'})
+
 
 
 
@@ -257,7 +257,7 @@ def get_all_journeys():
             'end': j.end_date,
             'stops': s_payload
             }
-        
+
         payload.append(j_item)
     # Think about how to handle a user without a journey
     print(payload)
@@ -291,7 +291,7 @@ def update_notes():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def delete_journey():
-    body = json.loads(request.data)    
+    body = json.loads(request.data)
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
@@ -422,8 +422,13 @@ def call_cache(search, data_type):
     query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
     if query:
         if query.expiry < datetime.utcnow():
+<<<<<<< HEAD
             data = api_caller(search, data_type)        
             cache = pickle.dumps(data)           
+=======
+            data = api_caller(search, data_type)
+            cache = pickle.dumps(data)
+>>>>>>> 338165daf4ccf2db79192a436cae32a51b063733
             query.cached_data = cache
             query.expiry = datetime.utcnow() + timedelta(days=7)
             db.session.commit()
@@ -432,7 +437,7 @@ def call_cache(search, data_type):
     else:
         data = api_caller(search, data_type)
         cache = pickle.dumps(data)
-        created_cache = models.CacheInformation(place_name=search, data_type=data_type, 
+        created_cache = models.CacheInformation(place_name=search, data_type=data_type,
                                             cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()

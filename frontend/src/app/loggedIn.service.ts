@@ -21,7 +21,7 @@ export class LoggedInService {
   public loggedIn() {
         if (localStorage['id_token'])
             return true;
-        
+
         return false;
   }
 
@@ -30,7 +30,7 @@ export class LoggedInService {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
-     return this.http.post(this.server + 'api/new_user', JSON.stringify({'username': username, 
+     return this.http.post(this.server + 'api/new_user', JSON.stringify({'username': username,
         'password': password, 'email': email, 'firstName': firstName, 'lastName': lastName, 'gender': gender}),
         options).map((res: Response) => res.json());
   }
