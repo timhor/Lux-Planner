@@ -35,7 +35,6 @@
   <div class="row">
     <div class="col-sm-12" style="width:calc(100% - 1%)">
       <div class="well">
-          <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline>
         <p id="subHeading">{{ journeyName }}</p>
         <div align="center">
           <div class="dropdown">
@@ -57,6 +56,9 @@
             </ul>
           </div>
         </div>
+      </div>
+      <div class="well">
+        <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline>
       </div>
     </div>
   </div>
