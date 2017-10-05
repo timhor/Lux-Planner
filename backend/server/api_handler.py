@@ -1,5 +1,4 @@
 from server import flickr
-import wikipedia
 import requests
 import re
 
@@ -12,11 +11,6 @@ def search_flickr(request):
     """
     return flickr.photos.search(text=request, sort='relevance')
 
-
-def wikipedia_call(request):
-    # NOTE YOU CAN GET COORDINATES BY DOING: wikipedia.WikipediaPage(wikipedia.search(request)[0]).coordinates
-    # it will return a tuple of decimals in format (Lat, Lon): (Decimal('-33.86500000000000198951966012828052043914794921875'), Decimal('151.209444439999998621715349145233631134033203125'))
-    return wikipedia.summary(wikipedia.search(request)[0],10)
 
 def search_places(request):
     response = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={request}&key={places_key}")
@@ -33,12 +27,11 @@ def search_places(request):
         address = place.get('vicinity', 'Address is unknown')
         ratings = place.get('rating', 'Unrated')
         try:
-            # print(place['photos'][0])
             photo_key = place['photos'][0]['photo_reference']
             photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference={photo_key}&key={places_key}"
         except KeyError:
             photo_url = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available"
-            
+
         item = {
             'name': name,
             'address': address,
@@ -48,6 +41,7 @@ def search_places(request):
         attractions.append(item)
 
     return attractions
+
 
 def search_places_coords(request):
     response = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={request}&key={places_key}")

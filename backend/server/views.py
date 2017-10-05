@@ -225,8 +225,6 @@ def new_journey():
         return jsonify({'message': 'OK'})
 
 
-
-
 @app.route('/api/get_all_journeys', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
@@ -302,12 +300,14 @@ def delete_journey():
     db.session.commit()
     return jsonify({'message': 'success'})
 
+
 @app.route('/api/get_account_details/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_account_details():
     user = models.User.query.filter_by(id=current_identity[0]).first()
-    return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name, 'last_name': user.last_name, 'gender': user.gender})
+    return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name,
+                    'last_name': user.last_name, 'gender': user.gender})
 
 
 @app.route('/api/get_all_journey_names/', methods=['GET'])
@@ -392,11 +392,13 @@ def hello():
     print(data)
     return data
 
+
 @app.route('/api/insecure')
 def insecure():
     return jsonify({
         'message': 'How dare you access me so insecurely!!'
         })
+
 
 @app.route('/api/secure')
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
@@ -433,7 +435,7 @@ def call_cache(search, data_type):
         data = api_caller(search, data_type)
         cache = pickle.dumps(data)
         created_cache = models.CacheInformation(place_name=search, data_type=data_type,
-                                            cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+                                                cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()
     print(data)
@@ -441,13 +443,12 @@ def call_cache(search, data_type):
 
 
 def api_caller(search, data_type):
-    if data_type ==  'attractions':
+    if data_type == 'attractions':
         data = api_handler.search_places(search)
     elif data_type == 'flickr':
         data = api_handler.search_flickr(search)
     elif data_type == 'wiki':
-        # data = api_handler.wikipedia_call(search)
-        data =api_handler.get_wiki_summary(search)
+        data = api_handler.get_wiki_summary(search)
     elif data_type == 'coord':
         data = api_handler.search_places_coords(search)
     return data
