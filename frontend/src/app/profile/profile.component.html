@@ -1,43 +1,66 @@
 <br>
 <div id="body_div">
-    <div id="headText">
-      <h1>{{username}}</h1>
-    </div>
+  <div id="headText">
+    <h1>{{username}}</h1>
+  </div>
+  <br>
+  <div style="padding-left:2vw; padding-right:2vw;" class="card-start">
+
     <br>
-    <br>
-    
-    <div id="subText">
+
+    <div id="subText" class="row">
       E-mail:
     </div>
-    <div id="text">{{email}}</div>
-
-    <div id="subText">
-      First Name:
+    <div id="text" class="row">
+      {{email}}
     </div>
-    <div id="text">{{firstName}}</div>
 
-    <div id="subText">
-      Last Name:
-    </div>
-    <div id="text">{{lastName}}</div>
+    <br>
 
-    <!--<div id="subText">
-      Gender:
+    <div class="row">
+      <div id="subText" class="col-sm-6">
+        First Name:
+      </div>
+
+      <div id="subText" class="col-sm-6">
+        Last Name:
+      </div>
     </div>
-    <div id="text">{{gender}}</div>-->
-    
-    <div id="subText">
+    <div class="row">
+      <div id="text" class="col-sm-6">
+        {{firstName}}
+      </div>
+      <div id="text" class="col-sm-6">
+        {{lastName}}
+      </div>
+    </div>
+
+    <br>
+
+    <div id="subText" class="row">
       Date Joined:
     </div>
-    <div id="text">{{dateJoined}}</div>
+    <div id="text" class="row">
+      {{dateJoined}}
+    </div>
 
-    <div id="subText">
+    <br>
+  </div>
+  
+  <br>
+
+  <div style="padding-left:2vw; padding-right:2vw;" class="card-start"> 
+    
+    <br>
+    
+    <div id="subText" class="row">
       Journeys:
     </div>
-    <div id="text">
+    <div id="text" class="row">
       <ul>
-          <li *ngFor="let journey of journeys" [value]="journey">{{journey}}</li>
-      </ul>   
+        <li *ngFor="let journey of journeys" [value]="journey" style="padding-bottom:5px;">{{journey}}</li>
+      </ul>
     </div>
+  </div>
 </div>
 <br>
