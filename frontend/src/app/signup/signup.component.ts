@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NewAccount } from './newaccount';
 import { Router } from '@angular/router';
 import { LoggedInService } from '../loggedIn.service';
+import { NotificationsService } from 'angular2-notifications'
 
 
 @Component({
@@ -12,7 +13,7 @@ import { LoggedInService } from '../loggedIn.service';
 export class SignupComponent {
   account = new NewAccount('','','','','','','');
 
-  constructor(private loggedInService: LoggedInService, public router: Router) {}
+  constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
   
   onSubmit() {
     if (this.account.password.length < 8) {
@@ -27,7 +28,10 @@ export class SignupComponent {
                     (data) => {
                         let token = data.access_token;
                         localStorage.setItem('id_token', token);  // 'id_token' is the default location AuthHTTP looks for
+                        this.notify()
                         this.router.navigate(['/journey'])
+                        window.scrollTo(0,0);
+                        
                     },
                     (error) => {
                         console.log(`This shouldn't happen anyways: ${error}`);
@@ -40,6 +44,13 @@ export class SignupComponent {
             console.log(`Sumting wong: ${error}`);
         }
     )
+  }
+
+  notify() {
+    this.notification.success(
+      this.account.username,
+      "Account created successfully",
+    );
   }
 
   // For debugging

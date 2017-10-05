@@ -35,4 +35,11 @@ export class AppComponent {
   onDeactivate() {
     window.scrollTo(0,0);
   }
+
+  public options = {
+    position: ["bottom", "right"],
+    timeOut: 1500,
+    showProgressBar: false
+  }
+
 }

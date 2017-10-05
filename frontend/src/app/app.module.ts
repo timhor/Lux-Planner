@@ -39,6 +39,7 @@ import { NgxTimelineModule } from 'ngx-timeline';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleModule, CalendarModule } from 'primeng/primeng';
 import { TooltipModule } from 'ngx-tooltip';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -97,7 +98,8 @@ export const serviceProviders = [
     BrowserAnimationsModule,
     ScheduleModule,
     CalendarModule,
-    TooltipModule
+    TooltipModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers:
     serviceProviders

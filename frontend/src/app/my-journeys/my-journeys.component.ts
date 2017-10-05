@@ -3,6 +3,7 @@ import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications'
 
 @Component({
   selector: 'app-my-journeys',
@@ -20,7 +21,8 @@ export class MyJourneysComponent implements OnInit {
   public notifyfailure: number;
   public success: number;
 
-  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, public router: Router) {
+  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService, 
+      public router: Router,  private notification: NotificationsService) {
     this.connService = _connectionService; 
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
@@ -45,17 +47,19 @@ export class MyJourneysComponent implements OnInit {
   }
 
   deleteJourney() {
-      this.notifysuccess = 0;
-      this.notifyfailure = 0;
+      // this.notifysuccess = 0;
+      // this.notifyfailure = 0;
       this.loggedInService.deleteJourney(JSON.stringify({'delete': this.modalIndex})).subscribe(
           (res) => {
             // this.router.navigate(['/my-journeys'])
+            this.notify();
             this.getJourneyList();
-            this.notifysuccess = 1;
+            window.scrollTo(0,0);
+            // this.notifysuccess = 1;
             console.log("Success deleting journey");
           },
           (error) => {
-            this.notifyfailure = 1;
+            // this.notifyfailure = 1;
             console.log("Could not delete");
           }
       )
@@ -74,6 +78,13 @@ export class MyJourneysComponent implements OnInit {
   sendData(journey:string, index:number) {
     this.modalJourney = journey;
     this.modalIndex = index;
+  }
+
+  notify() {
+    this.notification.success(
+      this.modalJourney,
+      "Journey deleted successfully",
+    );
   }
 
 }
