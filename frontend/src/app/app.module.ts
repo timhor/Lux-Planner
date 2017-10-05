@@ -27,6 +27,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { MyJourneysComponent } from './my-journeys/my-journeys.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { HorizontalTimelineComponent } from './horizontal-timeline/horizontal-timeline.component';
 
 import { StopService } from './stop/stop.service';
 import { ConnectionService } from './connection/connection.service';
@@ -81,7 +82,8 @@ export const serviceProviders = [
     AccountSettingsComponent,
     MyJourneysComponent,
     NotFoundComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    HorizontalTimelineComponent
   ],
   imports: [
     BrowserModule,
