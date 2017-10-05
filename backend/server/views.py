@@ -10,6 +10,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime, timedelta
 import pickle
 import json
+import re
 
 CORS(app)
 
@@ -444,7 +445,7 @@ def call_cache(search, data_type):
     if query:
         if query.expiry < datetime.utcnow():
             data = api_caller(search, data_type)        
-            cache = pickle.dumps(data)            
+            cache = pickle.dumps(data)           
             query.cached_data = cache
             query.expiry = datetime.utcnow() + timedelta(days=7)
             db.session.commit()
@@ -452,7 +453,6 @@ def call_cache(search, data_type):
             data = pickle.loads(query.cached_data)
     else:
         data = api_caller(search, data_type)
-            
         cache = pickle.dumps(data)
         created_cache = models.CacheInformation(place_name=search, data_type=data_type, 
                                             cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
