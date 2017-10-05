@@ -19,17 +19,17 @@ export class DashboardComponent implements OnInit {
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0, 'notes': ''}];
   public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
-  public activeJourneyIndex = 0;
-  public activeStopIndex = 0;
+  public activeJourneyIndex: number = 0;
+  public activeStopIndex: number = 0;
   public aboutText: string = "Loading Information...";
-  public latitude;
-  public longitude;
+  public latitude: number;
+  public longitude: number;
   public weatherUrl: string = "Nothing";
   public mapUrl: string = "Nothing";
-  private toRefresh:boolean = false;  
+  private toRefresh:boolean = false;
   private firstLoad:boolean;
   private isModifyingNotes = false;
-  private newNotes = "";
+  private newNotes: string = "";
   events: Array<any>;
 
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, public router: Router, _journeyService: JourneyService) {
@@ -49,22 +49,22 @@ export class DashboardComponent implements OnInit {
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
-            this.stops = res.journeys[this.activeStopIndex].stops;            
+            this.stops = res.journeys[this.activeStopIndex].stops;
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
-                    this.aboutText = res.info; 
-                }                
+                    this.aboutText = res.info;
+                }
             );
-            this.setUrls(this.getCurrStop());     // Refresh the Map   
-            this.firstLoad = false;       
+            this.setUrls(this.getCurrStop());     // Refresh the Map
+            this.firstLoad = false;
             this.setTimeline();
             this.setActiveJourney(this.journeyName);
         },
         (error) => {console.log(`could not connect ${error}`)}
-    ); 
+    );
   }
-  
-  ngOnInit() {    
+
+  ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
     }
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
     let startDate;
     let endDate;
     let start_location;
-    
+
     startDate = this.allJourneys[this.activeJourneyIndex].start;
     endDate = this.allJourneys[this.activeJourneyIndex].end;
     if (!this.allJourneys[this.activeJourneyIndex].start_location) {
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.events.push({ "date": new Date(startDate), "header": start_location, "icon": "fa-plane"});
-    
+
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
@@ -110,13 +110,13 @@ export class DashboardComponent implements OnInit {
     this.stops = this.allJourneys[this.activeJourneyIndex].stops;
     this.activeJourneyIndex = this.activeJourneyIndex;
     this.activeStopIndex = 0;
-    
+
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
-      }        
+      }
     );
-    
+
     this.setUrls(this.getCurrStop());  // Refresh the Map
     this.setTimeline();
   }
@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
-      }        
+      }
     );
     this.setUrls(this.getCurrStop());  // Refresh the Map
   }
@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
     this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName + " City";
     if (this.firstLoad){
       this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + "Planet Earth";
-      this.activeStopIndex = -1; 
+      this.activeStopIndex = -1;
     }
   }
 
@@ -191,7 +191,7 @@ export class DashboardComponent implements OnInit {
   deleteNotes() {
     // TODO - add warning
     this.isModifyingNotes = !this.isModifyingNotes;
-    this.stops[this.activeStopIndex].notes = null;    
+    this.stops[this.activeStopIndex].notes = null;
     this.pushNotes();
   }
 

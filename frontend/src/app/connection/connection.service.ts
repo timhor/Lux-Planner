@@ -5,9 +5,8 @@ import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class ConnectionService {
-    private server = 'http://localhost:5000/';
-    private httpPoint;
-    private string;
+    private server: string = 'http://localhost:5000/';
+    private httpPoint: Http;
     private result: Array<any>;
 
     destinations:Array<any>;
@@ -17,16 +16,14 @@ export class ConnectionService {
 
     getServiceData(endpoint: String) {
         console.log("Hello from service");
-        this.string = this.server + endpoint;
-        console.log(this.string);
-        return this.httpPoint.get(this.string).map(response => response.json());
+        console.log(this.server + endpoint);
+        return this.httpPoint.get(this.server + endpoint).map(response => response.json());
     }
 
     getProtectedData(endpoint: String) {
         console.log("Hello from protected");
-        this.string = this.server + endpoint;
-        console.log(this.string);
-        return this.authHttp.get(this.string).map(response => response.json());
+        console.log(this.server + endpoint);
+        return this.authHttp.get(this.server + endpoint).map(response => response.json());
     }
 
     login() {
@@ -53,9 +50,7 @@ export class ConnectionService {
 
 
     flickrSearch() {
-        this.string = this.server.concat("api/flickr?search=Paris&results=1");
-        console.log(this.string);
-        var stuff = this.httpPoint.get(this.string);
+        var stuff = this.httpPoint.get(this.server + "api/flickr?search=Paris&results=1");
         console.log(stuff);
         return stuff;
     }

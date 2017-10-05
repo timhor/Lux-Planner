@@ -18,13 +18,13 @@ import { ConnectionService } from '../connection/connection.service';
 export class JourneyComponent implements OnInit {
 
   public myJourneys: FormGroup;
-  public myStops = [];
+  public myStops: Array<any> = [];
   public invalidForm: boolean = false;
   public invalidInfo: string = "";
-  public isLoggedIn;
-  public isModifying = -1;
-  public modifyingStops = [];
-  public modifyingCounter;
+  public isLoggedIn: boolean;
+  public isModifying: number = -1;
+  public modifyingStops: Array<any> = [];
+  public modifyingCounter: number;
   private sub:any;
   // milliseconds: seconds - minutes - hours - 26 hours
   private timeTolerance: number = 1000 * 60 * 60 * 26;
