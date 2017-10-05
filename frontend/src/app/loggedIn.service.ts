@@ -35,24 +35,12 @@ export class LoggedInService {
         options).map((res: Response) => res.json());
   }
 
-  public changeDetails(changeType: string, changedInfo: string) {
-
+  public changeDetails(payload: object) {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
-    if (changeType == 'password') {
-        return this.authHttp.post(this.server + 'api/change_user_password/', JSON.stringify({'password': changedInfo}),
-        options).map((res: Response) => res.json());
-    } else if (changeType == 'email') {
-        return this.authHttp.post(this.server + 'api/change_user_email/', JSON.stringify({'email': changedInfo}),
-        options).map((res: Response) => res.json());
-    } else if (changeType == 'firstName') {
-        return this.authHttp.post(this.server + 'api/change_user_first_name/', JSON.stringify({'firstName': changedInfo}),
-        options).map((res: Response) => res.json());
-    } else if (changeType == 'lastName') {
-        return this.authHttp.post(this.server + 'api/change_user_last_name/', JSON.stringify({'lastName': changedInfo}),
-        options).map((res: Response) => res.json());
-    }
+    return this.authHttp.post(this.server + 'api/change_user_details/', JSON.stringify(payload),
+    options).map((res: Response) => res.json());
   }
 
   public postJourney(payload: string) {

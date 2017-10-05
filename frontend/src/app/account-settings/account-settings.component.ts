@@ -88,55 +88,26 @@ export class AccountSettingsComponent implements OnInit {
       return;
     }
     this.submitted = true;
-    if (this.editPassword == true) {
-      let response = this.loggedInService.changeDetails('password', this.newPassword);
-      response.subscribe(
-        (data) => {
-          console.log(data.message);
-        },
-          (error) => {
-          console.log(`Sumting wong: ${error}`);
+    var payload: any = {};
+    if (this.editPassword == true) payload.password = this.newPassword;
+    if (this.editEmail == true) payload.email = this.newEmail;
+    if (this.editFirstName == true) payload.firstName = this.newFirstName;
+    if (this.editLastName == true) payload.lastName = this.newLastName;
+    let response = this.loggedInService.changeDetails(payload);
+    response.subscribe(
+      (data) => {
+        console.log(data.message);
+        this.editAvatar = false;
+        this.editPassword = false;
+        this.editEmail = false;
+        this.editFirstName = false;
+        this.editLastName = false;
+      },
+        (error) => {
+        console.log(`Sumting wong: ${error}`);
         }
-      )
-      this.editPassword = false;
-    }
-    if (this.editEmail == true) {
-      let response = this.loggedInService.changeDetails('email', this.newEmail);
-      response.subscribe(
-        (data) => {
-          console.log(data.message);
-        },
-          (error) => {
-          console.log(`Sumting wong: ${error}`);
-        }
-      )
-      this.editEmail = false;
-    }
-    if (this.editFirstName == true) {
-      let response = this.loggedInService.changeDetails('firstName', this.newFirstName);
-      response.subscribe(
-        (data) => {
-          console.log(data.message);
-        },
-          (error) => {
-          console.log(`Sumting wong: ${error}`);
-        }
-      )
-      this.editFirstName = false;
-    }
-    if (this.editLastName == true) {
-      let response = this.loggedInService.changeDetails('lastName', this.newLastName);
-      response.subscribe(
-        (data) => {
-          console.log(data.message);
-        },
-          (error) => {
-          console.log(`Sumting wong: ${error}`);
-        }
-      )
-      this.editLastName = false;
-    } 
-    
+    );
+
     this.connService.getProtectedData('api/get_account_details/').subscribe(
       res => {
         this.username = res.username;
@@ -144,7 +115,7 @@ export class AccountSettingsComponent implements OnInit {
         this.firstName = res.first_name;
         this.lastName = res.last_name;
         this.gender = res.gender;
-        console.log('Success updating account details'); 
+        console.log('Success updating account details');
       },
         (error) => {console.log(`could not connect ${error}`)}
     );

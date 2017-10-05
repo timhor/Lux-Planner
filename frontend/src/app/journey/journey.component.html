@@ -23,7 +23,7 @@
   <br>
 
   <div [hidden]="!invalidForm"><br>
-    <div class="alert alert-danger">Invalid Entries</div>
+    <div class="alert alert-danger">Invalid Entries: {{invalidInfo}}</div>
   </div>
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
@@ -54,7 +54,7 @@
       </div>
 
       <br>
-      
+
       <div class="row">
         <div class="col-sm-5">
           <label for="initialDeparture">Journey Start Date</label>
@@ -127,7 +127,12 @@
 
     <div class="row">
       <div class="form-group" align="center">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
+           <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-orange" (click)="cancel()">
+            Cancel&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
+          </button>
+        </div>
+        <div class="col-sm-6">
           <button *ngIf="isLoggedIn" id="saveJourneyBtn" type="button" class="button-rect button-green" (click)="submit()">
             Save Journey&nbsp;&nbsp;<i class="fa fa-caret-right"></i>
           </button>

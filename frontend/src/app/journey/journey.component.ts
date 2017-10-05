@@ -20,14 +20,17 @@ export class JourneyComponent implements OnInit {
   public myJourneys: FormGroup;
   public myStops = [];
   public invalidForm: boolean = false;
+  public invalidInfo: string = "";
   public isLoggedIn;
   public isModifying = -1;
   public modifyingStops = [];
   public modifyingCounter;
   private sub:any;
+  // milliseconds: seconds - minutes - hours - 26 hours
+  private timeTolerance: number = 1000 * 60 * 60 * 26;
 
   constructor(
-    private mapsAPILoader: MapsAPILoader, 
+    private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private fb: FormBuilder,
     private loggedInService: LoggedInService,
@@ -76,7 +79,7 @@ export class JourneyComponent implements OnInit {
           this.modifyingCounter = 0;
         },
         (error) => {console.log(`could not connect ${error}`)}
-      ); 
+      );
     }
   }
 
@@ -98,9 +101,9 @@ export class JourneyComponent implements OnInit {
         (<HTMLInputElement>x[i].firstElementChild).value = this.modifyingStops[i];
       }
       this.modifyingCounter++;
-    }  
+    }
   }
-  
+
   submit() {
     this.updateVars();
     let payload = this.myJourneys.getRawValue();
@@ -108,35 +111,37 @@ export class JourneyComponent implements OnInit {
     let journey_start: Date = new Date(payload.initialDeparture);
     let journey_end = new Date(payload.initialArrival);
     let curr_end = journey_start;
-
     for (var i = 0; i < payload.destinations.length; i++) {
         let curr_arr = new Date(payload.destinations[i].arrival);
         let curr_dep = new Date(payload.destinations[i].departure);
 
         // If arriving here before leaving last place
-        if (curr_arr.getTime() < curr_end.getTime()) {
+        if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
             // Tell the user error
             console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
             this.invalidForm = true;
+            this.invalidInfo = "From date must be after the previous stop's to date.";
             return;
         }
 
-        // If this arrival happens before you leave
+        // If this arrival happens before you leave (no time tolerance since same place)
         if (curr_arr.getTime() > curr_dep.getTime()) {
             console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
-            this.invalidForm = true;            
+            this.invalidInfo = `To date needs to be after a single stop for ${payload.destinations[i].stopSearch}`;
+            this.invalidForm = true;
             return;
         }
         curr_end = curr_dep;
     }
 
     // If last dest ends after the journey end
-    if (curr_end.getTime() > journey_end.getTime()) {
+    if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
         console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
-        this.invalidForm = true;        
+        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";
+        this.invalidForm = true;
         return;
     }
-    
+
     payload.isModifying = this.isModifying;
     let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
@@ -150,6 +155,10 @@ export class JourneyComponent implements OnInit {
           this.invalidForm = !this.invalidForm;
         }
     )
+  }
+
+  cancel() {
+      this.router.navigate(['/my-journeys']);
   }
 
   updateVars() {

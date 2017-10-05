@@ -1,0 +1,50 @@
+.modal {
+    text-align: center;
+    padding: 0!important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.modal {
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-open {
+    overflow: auto;
+}
+
+.modal-open[style] {
+    padding-right: 0px !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 10px;
+}
+
+.modal-header {
+    font-size: calc(14px + 0.5vw);
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.modal-body {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: -15px;
+    font-size: initial;
+}

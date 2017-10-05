@@ -53,7 +53,8 @@
 
 <div id="wrap">
     <div id="main">
-        <router-outlet (deactivate)="onDeactivate()"></router-outlet>            
+        <router-outlet (deactivate)="onDeactivate()"></router-outlet>
+        <simple-notifications [options]="options"></simple-notifications>
     </div>
 </div>
 
