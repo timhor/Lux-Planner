@@ -20,6 +20,9 @@ export class JourneyComponent implements OnInit {
   public myJourneys: FormGroup;
   public myStops = [];
   public invalidForm: boolean = false;
+  public invalidInfo: string = "";
+//   public invalidArrival: boolean = false;
+//   public invalidDeparture: boolean = false;
   public isLoggedIn;
   public isModifying = -1;
   public modifyingStops = [];
@@ -110,7 +113,6 @@ export class JourneyComponent implements OnInit {
     let journey_start: Date = new Date(payload.initialDeparture);
     let journey_end = new Date(payload.initialArrival);
     let curr_end = journey_start;
-
     for (var i = 0; i < payload.destinations.length; i++) {
         let curr_arr = new Date(payload.destinations[i].arrival);
         let curr_dep = new Date(payload.destinations[i].departure);
@@ -120,12 +122,14 @@ export class JourneyComponent implements OnInit {
             // Tell the user error
             console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
             this.invalidForm = true;
+            this.invalidInfo = "From date must be after the previous stop's to date.";
             return;
         }
 
         // If this arrival happens before you leave (no time tolerance since same place)
         if (curr_arr.getTime() > curr_dep.getTime()) {
             console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
+            this.invalidInfo = `To date needs to be after a single stop for ${payload.destinations[i].stopSearch}`;
             this.invalidForm = true;
             return;
         }
@@ -135,6 +139,7 @@ export class JourneyComponent implements OnInit {
     // If last dest ends after the journey end
     if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
         console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
+        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";        
         this.invalidForm = true;
         return;
     }
