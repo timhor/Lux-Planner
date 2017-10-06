@@ -219,6 +219,7 @@ export class DashboardComponent implements OnInit {
       "No Existing Journeys",
       "Redirecting...",
       {
+        timeOut: 2500,
         showProgressBar: true
       }
     );
