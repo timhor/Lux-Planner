@@ -4,8 +4,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(128), index=True)
     last_name = db.Column(db.String(128), index=True)
-    gender = db.Column(db.String(64), index=True)
-    age = db.Column(db.Integer, index=True)
     email = db.Column(db.String(128), index=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(64), index=True)
@@ -13,7 +11,7 @@ class User(db.Model):
     journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
     def __repr__(self):	
-        return "ID: {} | First Name: {} | Last Name: {} | Gender: {} | Age: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.first_name, self.last_name, self.gender, self.age, self.email, self.username, self.password)
+        return "ID: {} | First Name: {} | Last Name: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.first_name, self.last_name, self.email, self.username, self.password)
 
 
 class Journey(db.Model):
@@ -23,11 +21,10 @@ class Journey(db.Model):
     start_location = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime, index=True)
-    cost = db.Column(db.Float, index=True)
     stops = db.relationship('Stop', backref='author', lazy='dynamic')
 
     def __repr__(self):
-        return "ID: {} | User ID: {} | Start Date: {} | End Date: {} | Cost: {}".format(self.id, self.user_id, self.start_date, self.end_date, self.cost)
+        return "ID: {} | User ID: {} | Start Date: {} | End Date: {}".format(self.id, self.user_id, self.start_date, self.end_date)
 
 
 class Stop(db.Model):
@@ -36,12 +33,11 @@ class Stop(db.Model):
     stop_name = db.Column(db.String(128), index=True)
     arrival_date = db.Column(db.DateTime, index=True)
     departure_date = db.Column(db.DateTime, index=True)
-    stop_rating = db.Column(db.Float, index=True)
     notes = db.Column(db.Text, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):
-        return "ID: {} | Stop: {} | Rating: {}".format(self.id, self.stop_name, self.stop_rating)
+        return "ID: {} | Stop: {}".format(self.id, self.stop_name)
 
 class Itinerary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +73,7 @@ class CacheInformation(db.Model):
 To add stuff:
 
 >>> from server import db, models
->>> u = models.User(name='Bob', age=15, fav_fish='Tuna')
+>>> u = models.User(name='Bob', fav_fish='Tuna')
 >>> db.session.add(u)
 >>> db.session.commit()
 >>> users = models.User.query.all()

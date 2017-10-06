@@ -11,7 +11,7 @@ import { NotificationsService } from 'angular2-notifications'
   styleUrls: ['../app.component.css', './signup.component.css']
 })
 export class SignupComponent {
-  account = new NewAccount('','','','','','','');
+  account = new NewAccount('','','','','','');
 
   constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
 
@@ -19,7 +19,7 @@ export class SignupComponent {
     if (this.account.password.length < 8) {
         return;
     }
-    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName, "M");
+    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName);
     response.subscribe(
         (data) => {
             if (data.message == 'success') {

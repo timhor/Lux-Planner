@@ -122,9 +122,8 @@ def new_user():
     email = body['email']
     first_name = body['firstName']
     last_name = body['lastName']
-    gender = body['gender']
     created_user = models.User(username=username, password=password, email=email,
-        first_name=first_name, last_name=last_name, gender=gender, active_journey_index=0)
+        first_name=first_name, last_name=last_name, active_journey_index=0)
     db.session.add(created_user)
     db.session.commit()
     return jsonify({'message': 'success'})
@@ -155,9 +154,7 @@ def new_stop():
         return jsonify({
             'message': name + " already exists."
         })
-
-    rating = request.form['rating']
-    created_stop = models.Stop(stop_name=name, stop_rating=rating)
+    created_stop = models.Stop(stop_name=name)
     db.session.add(created_stop)
     db.session.commit()
 
@@ -178,9 +175,7 @@ def new_journey():
                 journey_name=body['journeyName'],
                 start_location=body['initialLocation'],
                 start_date = j_start,
-                end_date = j_end,
-
-                cost=0
+                end_date = j_end
             )
         db.session.add(created_journey)
         db.session.commit()
@@ -307,7 +302,7 @@ def delete_journey():
 def get_account_details():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name,
-                    'last_name': user.last_name, 'gender': user.gender})
+                    'last_name': user.last_name})
 
 
 @app.route('/api/get_all_journey_names/', methods=['GET'])
@@ -356,15 +351,15 @@ def registered_users():
     admin_name = 'adminny'
     fake_regi = [
         {'name': 'James',
-         'age': '17',
+         #'age': '17',
          'fav_fish': 'Salmon'
         },
         {'name': 'Kevin',
-         'age': '91',
+         #'age': '91',
          'fav_fish': 'Tuna'
         },
         {'name': 'Blake',
-         'age': '45',
+         #'age': '45',
          'fav_fish': 'I\'m a vegan goddammit'
         }
     ]
@@ -375,15 +370,15 @@ def registered_users():
 def hello():
     fake_regi = [
         {'name': 'James',
-         'age': '17',
+         #'age': '17',
          'fav_fish': 'Salmon'
         },
         {'name': 'Kevin',
-         'age': '91',
+         #'age': '91',
          'fav_fish': 'Tuna'
         },
         {'name': 'Blake',
-         'age': '45',
+         #'age': '45',
          'fav_fish': 'I\'m a vegan goddammit'
         }
     ]
