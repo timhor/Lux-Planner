@@ -100,7 +100,6 @@ export class MyJourneysComponent implements OnInit {
       "No Exisiting Journeys",
       "Redirecting...",
       {
-        timeOut: 1000,
         showProgressBar: true
       }
     );
