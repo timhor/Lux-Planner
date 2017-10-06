@@ -112,6 +112,10 @@ export class JourneyComponent implements OnInit {
     }
   }
 
+  addStop(myJourneys: FormGroup) {
+    (<FormArray>this.myJourneys.get('destinations')).push(this.buildItem(''));
+  }
+
   submit() {
     this.updateVars();
     let payload = this.myJourneys.getRawValue();
