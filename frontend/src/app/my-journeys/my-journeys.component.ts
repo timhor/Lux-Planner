@@ -54,7 +54,9 @@ export class MyJourneysComponent implements OnInit {
             // this.router.navigate(['/my-journeys'])
             this.notifyDelete();
             this.getJourneyList();
-            window.scrollTo(0,0);
+            if (this.modalIndex === this.allJourneys.length-1) {
+              window.scrollTo(0,window.scrollY-this.allJourneys[this.modalIndex].stops.length*100-50);
+            }
             // this.notifysuccess = 1;
             console.log("Success deleting journey");
           },
