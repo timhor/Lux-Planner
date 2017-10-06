@@ -5,7 +5,7 @@ import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class LoggedInService {
-  private server: string = 'http://localhost:5000/';
+  private server: string = process.env.BACKEND_URL || 'http://localhost:5000/';
 
   constructor(private http: Http, private authHttp: AuthHttp) {
   }
@@ -25,13 +25,13 @@ export class LoggedInService {
         return false;
   }
 
-  public signup(username: string, password: string, email: string, firstName: string, lastName: string, gender: string) {
+  public signup(username: string, password: string, email: string, firstName: string, lastName: string) {
 
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
      return this.http.post(this.server + 'api/new_user', JSON.stringify({'username': username,
-        'password': password, 'email': email, 'firstName': firstName, 'lastName': lastName, 'gender': gender}),
+        'password': password, 'email': email, 'firstName': firstName, 'lastName': lastName}),
         options).map((res: Response) => res.json());
   }
 

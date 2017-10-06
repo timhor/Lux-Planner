@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl,
-         FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MapsAPILoader } from '@agm/core';
-import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {} from '@types/googlemaps';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from '../connection/connection.service';
 import { NotificationsService } from 'angular2-notifications';
 
@@ -21,14 +20,21 @@ export class JourneyComponent implements OnInit {
   public myJourneys: FormGroup;
   public myStops: Array<any> = [];
   public invalidForm: boolean = false;
-  public invalidInfo: string = "";
+  public invalidInfo: string = "Invalid entries: all fields are required.";
   public isLoggedIn: boolean;
   public isModifying: number = -1;
   public modifyingStops: Array<any> = [];
   public modifyingCounter: number;
   private sub:any;
-  // milliseconds: seconds - minutes - hours - 26 hours
-  private timeTolerance: number = 1000 * 60 * 60 * 26;
+
+  /* The time picker does not take into account different time zones, but the app's validation
+     requires each successive stop to have arrival time after departure time. Technically you 
+     can fly back in time, e.g. Sydney to US or UK, which would be rejected by the app. This
+     adds a 26 hour time tolerance to validation. */
+  private timeTolerance: number =   26  // hours
+                                *   60  // minutes / hour
+                                *   60  // seconds / minute
+                                * 1000; // milliseconds / second 
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -106,63 +112,106 @@ export class JourneyComponent implements OnInit {
     }
   }
 
+  addStop(myJourneys: FormGroup) {
+    (<FormArray>this.myJourneys.get('destinations')).push(this.buildItem(''));
+  }
+
   submit() {
     this.updateVars();
     let payload = this.myJourneys.getRawValue();
     console.log(payload);
+
+    // Check that all fields have been filled in
+
+    if (!payload.journeyName || payload.journeyName.length === 0 || /^\s*$/.test(payload.journeyName)) {
+      this.exitWithMessage("Invalid entries: please provide a <strong>Journey Name</strong>.");
+      return;
+    }
+
+    if (!(payload.initialLocation && payload.initialArrival && payload.initialDeparture)) {
+      this.exitWithMessage("Invalid entries: all fields are required.");
+      return;
+    }
+
+    for (let i = 0; i < payload.destinations.length; i++) {
+      if (!(payload.destinations[i].arrival && payload.destinations[i].departure && payload.destinations[i].location)) {
+        this.exitWithMessage("Invalid entries: all fields are required.");
+        return;
+      }
+    }
+
+    // Check that all inputs are valid
+    // 'From' corresponds to arrival because it represents the date of arriving at a destination
+    // 'To' corresponds to departure because it represents the date of leaving a destination
+    
     let journey_start: Date = new Date(payload.initialDeparture);
     let journey_end = new Date(payload.initialArrival);
     let curr_end = journey_start;
-    for (var i = 0; i < payload.destinations.length; i++) {
-        let curr_arr = new Date(payload.destinations[i].arrival);
-        let curr_dep = new Date(payload.destinations[i].departure);
 
-        // If arriving here before leaving last place
-        if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
-            // Tell the user error
-            console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
-            this.invalidForm = true;
-            this.invalidInfo = "From date must be after the previous stop's to date.";
-            return;
-        }
-
-        // If this arrival happens before you leave (no time tolerance since same place)
-        if (curr_arr.getTime() > curr_dep.getTime()) {
-            console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
-            this.invalidInfo = `To date needs to be after a single stop for ${payload.destinations[i].stopSearch}`;
-            this.invalidForm = true;
-            return;
-        }
-        curr_end = curr_dep;
+    if (journey_end < journey_start) {
+      this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after <strong>Journey Start Date</strong>.");
+      return;
     }
 
-    // If last dest ends after the journey end
-    if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
-        console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
-        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";
-        this.invalidForm = true;
+    for (let i = 0; i < payload.destinations.length; i++) {
+      let curr_arr = new Date(payload.destinations[i].arrival);
+      let curr_dep = new Date(payload.destinations[i].departure);
+
+      // If arriving at a stop before leaving the previous stop
+      if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
+        console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
+        this.exitWithMessage("Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.");
         return;
+      }
+
+      // If arriving at a stop before leaving (no time tolerance since same place)
+      if (curr_arr.getTime() > curr_dep.getTime()) {
+        console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
+        this.exitWithMessage("Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.");
+        return;
+      }
+
+      // If arriving at a stop after the journey has ended
+      if (curr_arr.getTime() > journey_end.getTime()) {
+        this.exitWithMessage("Invalid entries: <strong>From</strong> date and time for each stop must be before <strong>Journey End Date</strong>.");
+        return;
+      }
+
+      curr_end = curr_dep;
+    }
+
+    // If leaving the final stop after the journey has ended
+    if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
+      console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
+      this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.");
+      return;
     }
 
     payload.isModifying = this.isModifying;
     let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
-        (res) => {
-            console.log("SUCCESS!!!");
-            this.notifySuccess();
-            this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.log("Unable to save journey")
-          this.invalidForm = !this.invalidForm;
-          window.scrollTo(0,0);
-        }
+      (res) => {
+        console.log("Successfully saved journey");
+        this.notifySuccess();
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.log("Unable to save journey")
+        this.invalidForm = !this.invalidForm;
+        window.scrollTo(0,0);
+      }
     )
   }
 
+  exitWithMessage(msg: string) {
+    this.invalidInfo = msg;
+    this.invalidForm = true;
+    window.scrollTo(0, 68); // scroll back to top (just under navbar) so user can see the error message
+  }
+
   cancel() {
-      this.router.navigate(['/my-journeys']);
+    this.router.navigate(['/my-journeys']);
   }
 
   updateVars() {
@@ -241,4 +290,5 @@ export class JourneyComponent implements OnInit {
       )
     }
   }
+  
 }

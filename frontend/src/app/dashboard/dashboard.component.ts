@@ -9,6 +9,8 @@ import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
 import { HorizontalTimelineComponent } from '../horizontal-timeline/horizontal-timeline.component';
 import { TimelineElement } from '../horizontal-timeline/timeline-element';
+import { MapsAPILoader } from '@agm/core';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -33,9 +35,11 @@ export class DashboardComponent implements OnInit {
   private isModifyingNotes = false;
   private newNotes: string = "";
   events: Array<any>;
+  bounds = new google.maps.LatLngBounds();    
+  
 
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
-      public router: Router, _journeyService: JourneyService, private notification: NotificationsService) {
+      public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
@@ -62,9 +66,10 @@ export class DashboardComponent implements OnInit {
                     this.aboutText = res.info;
                 }
             );
-            this.setUrls(this.getCurrStop());     // Refresh the Map
+            this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
             this.setTimeline();
+            this.updateMap();
             this.setActiveJourney(this.journeyName);
         },
         (error) => {console.log(`could not connect ${error}`)}
@@ -95,7 +100,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
-    }
+    }    
   }
 
   setTimeline() {
@@ -145,8 +150,9 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    this.setUrls(this.getCurrStop());  // Refresh the Map
+    this.checkForOverview();  // Check if current page is overview
     this.setTimeline();
+    this.updateMap();    
   }
 
   setActiveStop(stop:string) {
@@ -162,7 +168,8 @@ export class DashboardComponent implements OnInit {
           this.aboutText = res.info;
       }
     );
-    this.setUrls(this.getCurrStop());  // Refresh the Map
+    this.checkForOverview();  // Check if current page is overview
+    this.updateMap();    
   }
 
   getJourneyLength() {
@@ -173,11 +180,8 @@ export class DashboardComponent implements OnInit {
       }
   }
 
-  setUrls(stopName:string){
-    // this.weatherUrl = "https://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat + "&lon=" + this.stops[this.activeStopIndex].lng + "&units=uk&color=#000037";
-    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName + " City";
+  checkForOverview(){
     if (this.firstLoad){
-      this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + "Planet Earth";
       this.activeStopIndex = -1;
     }
   }
@@ -213,24 +217,24 @@ export class DashboardComponent implements OnInit {
   saveNotes() {
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
-    this.pushNotes();
+    this.pushNotes("updated");
   }
 
   deleteNotes() {
     // TODO - add warning
     this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
-    this.pushNotes();
+    this.pushNotes("deleted");
   }
 
-  pushNotes() {
+  pushNotes(action: string) {
     let payload = {'jIndex': this.activeJourneyIndex,
         'sIndex': this.activeStopIndex,
         'notes': this.stops[this.activeStopIndex].notes
     };
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {
-          this.notifyUpdate();
+          this.notifyUpdate(action);
           console.log("pushed to server successfully");
         }
 
@@ -239,19 +243,27 @@ export class DashboardComponent implements OnInit {
 
   notifyRedirect() {
     this.notification.error(
-      "No Exisiting Journeys",
+      "No Existing Journeys",
       "Redirecting...",
       {
-        timeOut: 1000,
+        timeOut: 2500,
         showProgressBar: true
       }
     );
   }
 
-  notifyUpdate() {
+  notifyUpdate(action: string) {
     this.notification.success(
       this.stops[this.activeStopIndex].name,
-      "Notes updated successfully"
+      "Notes " + action + " successfully"
     )
+  }
+
+  updateMap(){
+    this.bounds = new google.maps.LatLngBounds();
+    for (let i=0; i < this.stops.length; i++){
+      var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
+      this.bounds.extend(marker.getPosition());
+    }
   }
 }

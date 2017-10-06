@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   public email: string;
   public firstName: string;
   public lastName: string;
-  public gender: string;
   public dateJoined: string = "19/09/2017";
   public journeys; // I think this is an Array<any>?
   public connService: ConnectionService;
@@ -30,7 +29,6 @@ export class ProfileComponent implements OnInit {
           this.email = res.email;
           this.firstName = res.first_name;
           this.lastName = res.last_name;
-          this.gender = res.gender;
           console.log('Success getting account details');
         },
         (error) => {console.log(`could not connect ${error}`)}

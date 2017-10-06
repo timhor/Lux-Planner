@@ -22,7 +22,6 @@ export class AccountSettingsComponent implements OnInit {
   public password: string;
   public firstName: string;
   public lastName: string;
-  public gender: string;
   public connService: ConnectionService;
   public loggedInService: LoggedInService;
 
@@ -46,7 +45,6 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        this.gender = res.gender;
         console.log('Success getting account details');
       },
       (error) => {console.log(`could not connect ${error}`)}
@@ -117,7 +115,6 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        this.gender = res.gender;
         console.log('Success updating account details');
       },
         (error) => {console.log(`could not connect ${error}`)}
