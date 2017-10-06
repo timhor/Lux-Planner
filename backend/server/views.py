@@ -155,9 +155,7 @@ def new_stop():
         return jsonify({
             'message': name + " already exists."
         })
-
-    rating = request.form['rating']
-    created_stop = models.Stop(stop_name=name, stop_rating=rating)
+    created_stop = models.Stop(stop_name=name)
     db.session.add(created_stop)
     db.session.commit()
 
@@ -178,9 +176,7 @@ def new_journey():
                 journey_name=body['journeyName'],
                 start_location=body['initialLocation'],
                 start_date = j_start,
-                end_date = j_end,
-
-                cost=0
+                end_date = j_end
             )
         db.session.add(created_journey)
         db.session.commit()
