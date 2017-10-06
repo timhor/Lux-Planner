@@ -35,8 +35,7 @@ export class DashboardComponent implements OnInit {
   private isModifyingNotes = false;
   private newNotes: string = "";
   events: Array<any>;
-  bounds = new google.maps.LatLngBounds();    
-  
+  private bounds;
 
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
@@ -44,7 +43,7 @@ export class DashboardComponent implements OnInit {
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
     this.firstLoad = true;
-    
+    this.mapsAPILoader.load().then(() => {this.bounds = new google.maps.LatLngBounds();})
 
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
@@ -255,10 +254,12 @@ export class DashboardComponent implements OnInit {
   }
 
   updateMap(){
-    this.bounds = new google.maps.LatLngBounds();
-    for (let i=0; i < this.stops.length; i++){
-      var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
-      this.bounds.extend(marker.getPosition());
-    }
+    this.mapsAPILoader.load().then(() => {
+      this.bounds = new google.maps.LatLngBounds();
+      for (let i=0; i < this.stops.length; i++){
+        var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
+        this.bounds.extend(marker.getPosition());
+      }
+    });
   }
 }
