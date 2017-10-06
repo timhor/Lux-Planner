@@ -1,4 +1,4 @@
-<section class="cd-horizontal-timeline" [ngClass]="{'loaded': loaded}">
+<section class="cd-horizontal-timeline" [ngClass]="{'loaded': true}">
   <div class="timeline">
     <div class="events-wrapper" #timelineWrapper>
       <div class="events" #eventsWrapper>
@@ -14,17 +14,17 @@
       </div>
     </div>
 
-    <!-- <ul class="cd-timeline-navigation">
+    <ul class="cd-timeline-navigation">
       <li>
         <a href="#" (click)="onPrevClick($event)" class="prev" [ngClass]="{'inactive':prevLinkInactive}">Prev</a>
       </li>
       <li>
         <a href="#" (click)="onNextClick($event)" class="next" [ngClass]="{'inactive':nextLinkInactive}">Next</a>
       </li>
-    </ul> -->
+    </ul>
   </div>
-<!-- 
-  <div class="events-content" #eventsContent *ngIf="showContent">
+
+  <!-- <div class="events-content" #eventsContent *ngIf="showContent">
     <ol>
       <li *ngFor="let item of timelineElements; let index = index" [attr.data-date]="item.date | date:dateFormat"
           [attr.data-state]="item.selected ? 'active' : (index < selectedIndex ? 'left' : 'right')"
