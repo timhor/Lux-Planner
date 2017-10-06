@@ -14,11 +14,11 @@ export class AppComponent {
   public title = 'LUX: Holiday Planner';
   public username: string = 'Username';
 
-  constructor(private loggedInService: LoggedInService, private router: Router, private notifications: NotificationsService ) {}
+  constructor(private loggedInService: LoggedInService, public router: Router, private notifications: NotificationsService ) {}
 
   public isLoggedIn() {
     try {
-        let jwtHelper: JwtHelper = new JwtHelper();    
+        let jwtHelper: JwtHelper = new JwtHelper();
         let token: string = localStorage.getItem('id_token');
         let decoded = jwtHelper.decodeToken(token);
         this.username = decoded.identity[1];
