@@ -110,6 +110,28 @@ export class JourneyComponent implements OnInit {
     let payload = this.myJourneys.getRawValue();
     console.log(payload);
 
+    // Check that all fields have been filled in
+
+    if (!payload.journeyName || payload.journeyName.length === 0 || /^\s*$/.test(payload.journeyName)) {
+      this.invalidInfo = "Invalid entries: please provide a <strong>Journey Name</strong>.";
+      this.invalidForm = true;
+      return;
+    }
+
+    if (!(payload.initialLocation && payload.initialArrival && payload.initialDeparture)) {
+      this.invalidInfo = "Invalid entries: all fields are required.";
+      this.invalidForm = true;
+      return;
+    }
+
+    for (let i = 0; i < payload.destinations.length; i++) {
+      if (!(payload.destinations[i].arrival && payload.destinations[i].departure && payload.destinations[i].location)) {
+        this.invalidInfo = "Invalid entries: all fields are required.";
+        this.invalidForm = true;
+        return;
+      }
+    }
+
     // Check that all inputs are valid
     // 'From' corresponds to arrival because it represents the date of arriving at a destination
     // 'To' corresponds to departure because it represents the date of leaving a destination
