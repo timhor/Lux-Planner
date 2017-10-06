@@ -5,6 +5,8 @@ ol, ul {
 .cd-horizontal-timeline {
   opacity: 0;
   margin: 2em auto;
+  margin-top: 0;
+  margin-bottom: 0;
   -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
   transition: opacity 0.2s;
@@ -156,6 +158,8 @@ ol, ul {
 @media only screen and (min-width: 1100px) {
   .cd-horizontal-timeline {
     margin: 6em auto;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .cd-horizontal-timeline::before {
@@ -171,6 +175,12 @@ ol, ul {
   font-size: 12px;
 }
 
+/* @media (min-width: 1000px) {
+  .cd-timeline-navigation {
+    display: none;
+  }
+}
+@media  (max-width: 1000px) { */
 .cd-timeline-navigation a {
   /* these are the left/right arrows to navigate the timeline */
   position: absolute;

@@ -200,7 +200,8 @@ export class HorizontalTimelineComponent implements AfterViewInit {
     let timeSpan = HorizontalTimelineComponent.dayDiff(elements[0].date, elements[elements.length - 1].date);
     let timeSpanNorm = timeSpan / eventsMinLapse;
     timeSpanNorm = Math.round(timeSpanNorm) + 4;
-    let totalWidth = timeSpanNorm * width;
+    //let totalWidth = timeSpanNorm * width+1000;
+    let totalWidth = window.screen.width - 636.5;
     this.eventsWrapper.nativeElement.style.width = totalWidth + 'px';
     let aHref = this.eventsWrapper.nativeElement.querySelectorAll('a.selected')[0];
     HorizontalTimelineComponent.updateFilling(aHref, this.fillingLine, totalWidth);
