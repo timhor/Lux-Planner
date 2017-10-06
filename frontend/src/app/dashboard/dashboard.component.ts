@@ -190,24 +190,24 @@ export class DashboardComponent implements OnInit {
   saveNotes() {
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
-    this.pushNotes();
+    this.pushNotes("updated");
   }
 
   deleteNotes() {
     // TODO - add warning
     this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
-    this.pushNotes();
+    this.pushNotes("deleted");
   }
 
-  pushNotes() {
+  pushNotes(action: string) {
     let payload = {'jIndex': this.activeJourneyIndex,
         'sIndex': this.activeStopIndex,
         'notes': this.stops[this.activeStopIndex].notes
     };
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {
-          this.notifyUpdate();
+          this.notifyUpdate(action);
           console.log("pushed to server successfully");
         }
 
@@ -219,16 +219,15 @@ export class DashboardComponent implements OnInit {
       "No Exisiting Journeys",
       "Redirecting...",
       {
-        timeOut: 1000,
         showProgressBar: true
       }
     );
   }
 
-  notifyUpdate() {
+  notifyUpdate(action: string) {
     this.notification.success(
       this.stops[this.activeStopIndex].name,
-      "Notes updated successfully"
+      "Notes " + action + " successfully"
     )
   }
 }
