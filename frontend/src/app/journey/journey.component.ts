@@ -26,8 +26,15 @@ export class JourneyComponent implements OnInit {
   public modifyingStops: Array<any> = [];
   public modifyingCounter: number;
   private sub:any;
-  // milliseconds: seconds - minutes - hours - 26 hours
-  private timeTolerance: number = 1000 * 60 * 60 * 26;
+
+  /* The time picker does not take into account different time zones, but the app's validation
+     requires each successive stop to have arrival time after departure time. Technically you 
+     can fly back in time, e.g. Sydney to US or UK, which would be rejected by the app. This
+     adds a 26 hour time tolerance to validation. */
+  private timeTolerance: number =   26  // hours
+                                *   60  // minutes / hour
+                                *   60  // seconds / minute
+                                * 1000; // milliseconds / second 
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -146,7 +153,7 @@ export class JourneyComponent implements OnInit {
       let curr_arr = new Date(payload.destinations[i].arrival);
       let curr_dep = new Date(payload.destinations[i].departure);
 
-      // If arriving at a stop before leaving the last stop
+      // If arriving at a stop before leaving the previous stop
       if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
         console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
         this.exitWithMessage("Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.");
@@ -169,7 +176,7 @@ export class JourneyComponent implements OnInit {
       curr_end = curr_dep;
     }
 
-    // If leaving last stop after the journey has ended
+    // If leaving the final stop after the journey has ended
     if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
       console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
       this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.");
