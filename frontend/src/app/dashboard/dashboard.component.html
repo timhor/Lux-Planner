@@ -125,9 +125,21 @@
         <div class="well" id="map">
           <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
             allowfullscreen></iframe> -->
-            <agm-map [minZoom]="2">
-              <agm-marker *ngFor="let stop of stops; let i=index" [label]="(i+1).toString()" [latitude]="stop.lat" [longitude]="stop.lng" fit="true"></agm-marker>
-              <agm-polygon [paths]='stops'></agm-polygon>
+            <agm-map [fitBounds]="bounds" [disableDoubleClickZoom]="false" [scrollwheel]="false">
+              <agm-marker iconUrl="../assets/Marker.png" [latitude]="startingLocationLatitude" [longitude]="startingLocationLongitude"></agm-marker>                                
+              <agm-marker *ngFor="let stop of stops; let i=index" [label]="(i+1).toString()" [latitude]="stop.lat" [longitude]="stop.lng"></agm-marker>
+              <agm-polyline *ngFor="let stop of stops; let i=index" [geodesic]="true" [strokeWeight]="2">            
+                <agm-polyline-point *ngIf="i!==(stops.length-1)" [latitude]="stops[i].lat" [longitude]="stops[i].lng"></agm-polyline-point>
+                <agm-polyline-point *ngIf="i!==(stops.length-1)" [latitude]="stops[i+1].lat" [longitude]="stops[i+1].lng"></agm-polyline-point>
+              </agm-polyline>
+              <agm-polyline [geodesic]="true" [strokeWeight]="2">            
+                <agm-polyline-point [latitude]="startingLocationLatitude" [longitude]="startingLocationLongitude"></agm-polyline-point>
+                <agm-polyline-point [latitude]="stops[0].lat" [longitude]="stops[0].lng"></agm-polyline-point>
+              </agm-polyline> 
+              <agm-polyline [geodesic]="true" [strokeWeight]="2">            
+                <agm-polyline-point [latitude]="stops[stops.length-1].lat" [longitude]="stops[stops.length-1].lng"></agm-polyline-point>
+                <agm-polyline-point [latitude]="startingLocationLatitude" [longitude]="startingLocationLongitude"></agm-polyline-point>
+              </agm-polyline> 
             </agm-map>
         </div>
         <div class="well">

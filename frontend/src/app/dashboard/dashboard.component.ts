@@ -7,6 +7,7 @@ import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,13 +33,18 @@ export class DashboardComponent implements OnInit {
   private isModifyingNotes = false;
   private newNotes: string = "";
   events: Array<any>;
-
+  private bounds;
+  private startingLocationName;
+  private startingLocationLatitude = -33.86514;
+  private startingLocationLongitude = 151.20990;
+  
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
-      public router: Router, _journeyService: JourneyService, private notification: NotificationsService) {
+      public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
     this.connService = _connectionService;
     this.loggedInService = _loggedinService;
     this.journeyService = _journeyService;
     this.firstLoad = true;
+    this.mapsAPILoader.load().then(() => {this.bounds = new google.maps.LatLngBounds();})
 
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
@@ -60,9 +66,10 @@ export class DashboardComponent implements OnInit {
                     this.aboutText = res.info;
                 }
             );
-            this.setUrls(this.getCurrStop());     // Refresh the Map
+            this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
             this.setTimeline();
+            this.updateMap();
             this.setActiveJourney(this.journeyName);
         },
         (error) => {console.log(`could not connect ${error}`)}
@@ -72,30 +79,30 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
-    }
+    }    
   }
 
   setTimeline() {
     this.events = new Array<any>();
     let startDate;
     let endDate;
-    let start_location;
+    this.startingLocationName;
 
     startDate = this.allJourneys[this.activeJourneyIndex].start;
     endDate = this.allJourneys[this.activeJourneyIndex].end;
     if (!this.allJourneys[this.activeJourneyIndex].start_location) {
-      start_location = "Start Location";
+      this.startingLocationName = "Start Location";
     } else {
-      start_location = this.allJourneys[this.activeJourneyIndex].start_location;
+      this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;
     }
 
-    this.events.push({ "date": new Date(startDate), "header": start_location, "icon": "fa-plane"});
+    this.events.push({ "date": new Date(startDate), "header": this.startingLocationName, "icon": "fa-plane"});
 
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
 
-    this.events.push({ "date": new Date(endDate), "header": start_location, "icon": "fa-flag-checkered" });
+    this.events.push({ "date": new Date(endDate), "header": this.startingLocationName, "icon": "fa-flag-checkered" });
   }
 
   getCurrStop () {
@@ -122,8 +129,10 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    this.setUrls(this.getCurrStop());  // Refresh the Map
+    this.checkForOverview();  // Check if current page is overview
     this.setTimeline();
+    this.updateMap();   
+    this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
   }
 
   setActiveStop(stop:string) {
@@ -139,7 +148,8 @@ export class DashboardComponent implements OnInit {
           this.aboutText = res.info;
       }
     );
-    this.setUrls(this.getCurrStop());  // Refresh the Map
+    this.checkForOverview();  // Check if current page is overview
+    this.updateMap();    
   }
 
   getJourneyLength() {
@@ -150,11 +160,8 @@ export class DashboardComponent implements OnInit {
       }
   }
 
-  setUrls(stopName:string){
-    // this.weatherUrl = "https://forecast.io/embed/#lat=" + this.stops[this.activeStopIndex].lat + "&lon=" + this.stops[this.activeStopIndex].lng + "&units=uk&color=#000037";
-    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + stopName + " City";
+  checkForOverview(){
     if (this.firstLoad){
-      this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc&q=" + "Planet Earth";
       this.activeStopIndex = -1;
     }
   }
@@ -216,9 +223,10 @@ export class DashboardComponent implements OnInit {
 
   notifyRedirect() {
     this.notification.error(
-      "No Exisiting Journeys",
+      "No Existing Journeys",
       "Redirecting...",
       {
+        timeOut: 2500,
         showProgressBar: true
       }
     );
@@ -229,5 +237,17 @@ export class DashboardComponent implements OnInit {
       this.stops[this.activeStopIndex].name,
       "Notes " + action + " successfully"
     )
+  }
+
+  updateMap(){
+    this.mapsAPILoader.load().then(() => {
+      this.bounds = new google.maps.LatLngBounds();
+      for (let i=0; i < this.stops.length; i++){
+        var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
+        this.bounds.extend(marker.getPosition());
+      }
+      var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      this.bounds.extend(startMarker.getPosition());
+    });
   }
 }
