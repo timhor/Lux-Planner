@@ -97,7 +97,7 @@ export class MyJourneysComponent implements OnInit {
 
   notifyRedirect() {
     this.notification.error(
-      "No Exisiting Journeys",
+      "No Existing Journeys",
       "Redirecting...",
       {
         showProgressBar: true
