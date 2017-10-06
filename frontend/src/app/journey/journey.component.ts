@@ -113,21 +113,18 @@ export class JourneyComponent implements OnInit {
     // Check that all fields have been filled in
 
     if (!payload.journeyName || payload.journeyName.length === 0 || /^\s*$/.test(payload.journeyName)) {
-      this.invalidInfo = "Invalid entries: please provide a <strong>Journey Name</strong>.";
-      this.invalidForm = true;
+      this.exitWithMessage("Invalid entries: please provide a <strong>Journey Name</strong>.");
       return;
     }
 
     if (!(payload.initialLocation && payload.initialArrival && payload.initialDeparture)) {
-      this.invalidInfo = "Invalid entries: all fields are required.";
-      this.invalidForm = true;
+      this.exitWithMessage("Invalid entries: all fields are required.");
       return;
     }
 
     for (let i = 0; i < payload.destinations.length; i++) {
       if (!(payload.destinations[i].arrival && payload.destinations[i].departure && payload.destinations[i].location)) {
-        this.invalidInfo = "Invalid entries: all fields are required.";
-        this.invalidForm = true;
+        this.exitWithMessage("Invalid entries: all fields are required.");
         return;
       }
     }
@@ -141,8 +138,7 @@ export class JourneyComponent implements OnInit {
     let curr_end = journey_start;
 
     if (journey_end < journey_start) {
-      this.invalidInfo = "Invalid entries: <strong>Journey End Date</strong> must be after <strong>Journey Start Date</strong>.";
-      this.invalidForm = true;
+      this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after <strong>Journey Start Date</strong>.");
       return;
     }
 
@@ -153,23 +149,20 @@ export class JourneyComponent implements OnInit {
       // If arriving at a stop before leaving the last stop
       if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
         console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
-        this.invalidInfo = "Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.";
-        this.invalidForm = true;
+        this.exitWithMessage("Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.");
         return;
       }
 
       // If arriving at a stop before leaving (no time tolerance since same place)
       if (curr_arr.getTime() > curr_dep.getTime()) {
         console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
-        this.invalidInfo = "Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.";
-        this.invalidForm = true;
+        this.exitWithMessage("Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.");
         return;
       }
 
       // If arriving at a stop after the journey has ended
       if (curr_arr.getTime() > journey_end.getTime()) {
-        this.invalidInfo = "Invalid entries: <strong>From</strong> date and time for each stop must be before <strong>Journey End Date</strong>.";
-        this.invalidForm = true;
+        this.exitWithMessage("Invalid entries: <strong>From</strong> date and time for each stop must be before <strong>Journey End Date</strong>.");
         return;
       }
 
@@ -179,8 +172,7 @@ export class JourneyComponent implements OnInit {
     // If leaving last stop after the journey has ended
     if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
       console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
-      this.invalidInfo = "Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.";
-      this.invalidForm = true;
+      this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.");
       return;
     }
 
@@ -199,6 +191,12 @@ export class JourneyComponent implements OnInit {
         window.scrollTo(0,0);
       }
     )
+  }
+
+  exitWithMessage(msg: string) {
+    this.invalidInfo = msg;
+    this.invalidForm = true;
+    window.scrollTo(0, 68); // scroll back to top (just under navbar) so user can see the error message
   }
 
   cancel() {
