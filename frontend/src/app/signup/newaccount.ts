@@ -7,7 +7,6 @@ export class NewAccount {
       public email: string,
       public firstName: string,
       public lastName: string,
-      public gender: string
    ) { }
 
 }
