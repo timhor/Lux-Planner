@@ -157,7 +157,7 @@ def new_stop():
         })
 
     rating = request.form['rating']
-    created_stop = models.Stop(stop_name=name)
+    created_stop = models.Stop(stop_name=name, stop_rating=rating)
     db.session.add(created_stop)
     db.session.commit()
 
@@ -178,7 +178,9 @@ def new_journey():
                 journey_name=body['journeyName'],
                 start_location=body['initialLocation'],
                 start_date = j_start,
-                end_date = j_end
+                end_date = j_end,
+
+                cost=0
             )
         db.session.add(created_journey)
         db.session.commit()

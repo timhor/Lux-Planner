@@ -23,10 +23,11 @@ class Journey(db.Model):
     start_location = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime, index=True)
+    cost = db.Column(db.Float, index=True)
     stops = db.relationship('Stop', backref='author', lazy='dynamic')
 
     def __repr__(self):
-        return "ID: {} | User ID: {} | Start Date: {} | End Date: {}".format(self.id, self.user_id, self.start_date, self.end_date)
+        return "ID: {} | User ID: {} | Start Date: {} | End Date: {} | Cost: {}".format(self.id, self.user_id, self.start_date, self.end_date, self.cost)
 
 
 class Stop(db.Model):
@@ -35,11 +36,12 @@ class Stop(db.Model):
     stop_name = db.Column(db.String(128), index=True)
     arrival_date = db.Column(db.DateTime, index=True)
     departure_date = db.Column(db.DateTime, index=True)
+    stop_rating = db.Column(db.Float, index=True)
     notes = db.Column(db.Text, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):
-        return "ID: {} | Stop: {}".format(self.id, self.stop_name)
+        return "ID: {} | Stop: {} | Rating: {}".format(self.id, self.stop_name, self.stop_rating)
 
 class Itinerary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
