@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
+  private startingLocation;
 
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
@@ -83,23 +84,23 @@ export class DashboardComponent implements OnInit {
     this.events = new Array<any>();
     let startDate;
     let endDate;
-    let start_location;
+    this.startingLocation;
 
     startDate = this.allJourneys[this.activeJourneyIndex].start;
     endDate = this.allJourneys[this.activeJourneyIndex].end;
     if (!this.allJourneys[this.activeJourneyIndex].start_location) {
-      start_location = "Start Location";
+      this.startingLocation = "Start Location";
     } else {
-      start_location = this.allJourneys[this.activeJourneyIndex].start_location;
+      this.startingLocation = this.allJourneys[this.activeJourneyIndex].start_location;
     }
 
-    this.events.push({ "date": new Date(startDate), "header": start_location, "icon": "fa-plane"});
+    this.events.push({ "date": new Date(startDate), "header": this.startingLocation, "icon": "fa-plane"});
 
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
 
-    this.events.push({ "date": new Date(endDate), "header": start_location, "icon": "fa-flag-checkered" });
+    this.events.push({ "date": new Date(endDate), "header": this.startingLocation, "icon": "fa-flag-checkered" });
   }
 
   getCurrStop () {
@@ -128,7 +129,8 @@ export class DashboardComponent implements OnInit {
 
     this.checkForOverview();  // Check if current page is overview
     this.setTimeline();
-    this.updateMap();    
+    this.updateMap();   
+    this.startingLocation = this.allJourneys[this.activeJourneyIndex].start_location;    
   }
 
   setActiveStop(stop:string) {
@@ -242,6 +244,8 @@ export class DashboardComponent implements OnInit {
         var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
         this.bounds.extend(marker.getPosition());
       }
+      var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      this.bounds.extend(startMarker.getPosition());
     });
   }
 }
