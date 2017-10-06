@@ -17,14 +17,14 @@
   </div>
   <br>
   <div [hidden]="isModifying == -1" class="alert alert-warning alert-dismissible" role="alert">
-    <strong>Warning:</strong> All notes will be deleted if any changes are made!
+    <strong>Warning:</strong> All notes will be deleted if any changes are made.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
   </div>
   <br>
-
-  <div [hidden]="!invalidForm"><br>
-    <div class="alert alert-danger">Invalid Entries: {{invalidInfo}}</div>
-  </div>
+  
+  <div *ngIf="invalidForm" [innerHTML]="invalidInfo" class="alert alert-danger" role="alert"></div>
+  <br *ngIf="invalidForm">
+  
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>

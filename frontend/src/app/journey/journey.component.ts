@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl,
-         FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MapsAPILoader } from '@agm/core';
-import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {} from '@types/googlemaps';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from '../connection/connection.service';
 import { NotificationsService } from 'angular2-notifications';
 
@@ -21,7 +20,7 @@ export class JourneyComponent implements OnInit {
   public myJourneys: FormGroup;
   public myStops: Array<any> = [];
   public invalidForm: boolean = false;
-  public invalidInfo: string = "";
+  public invalidInfo: string = "Invalid entries: all fields are required.";
   public isLoggedIn: boolean;
   public isModifying: number = -1;
   public modifyingStops: Array<any> = [];
@@ -110,59 +109,78 @@ export class JourneyComponent implements OnInit {
     this.updateVars();
     let payload = this.myJourneys.getRawValue();
     console.log(payload);
+
+    // Check that all inputs are valid
+    // 'From' corresponds to arrival because it represents the date of arriving at a destination
+    // 'To' corresponds to departure because it represents the date of leaving a destination
+    
     let journey_start: Date = new Date(payload.initialDeparture);
     let journey_end = new Date(payload.initialArrival);
     let curr_end = journey_start;
-    for (var i = 0; i < payload.destinations.length; i++) {
-        let curr_arr = new Date(payload.destinations[i].arrival);
-        let curr_dep = new Date(payload.destinations[i].departure);
 
-        // If arriving here before leaving last place
-        if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
-            // Tell the user error
-            console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
-            this.invalidForm = true;
-            this.invalidInfo = "From date must be after the previous stop's to date.";
-            return;
-        }
-
-        // If this arrival happens before you leave (no time tolerance since same place)
-        if (curr_arr.getTime() > curr_dep.getTime()) {
-            console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
-            this.invalidInfo = `To date needs to be after a single stop for ${payload.destinations[i].stopSearch}`;
-            this.invalidForm = true;
-            return;
-        }
-        curr_end = curr_dep;
+    if (journey_end < journey_start) {
+      this.invalidInfo = "Invalid entries: <strong>Journey End Date</strong> must be after <strong>Journey Start Date</strong>.";
+      this.invalidForm = true;
+      return;
     }
 
-    // If last dest ends after the journey end
-    if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
-        console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
-        this.invalidInfo = "Journey end date needs to be after leaving the final stop.";
+    for (let i = 0; i < payload.destinations.length; i++) {
+      let curr_arr = new Date(payload.destinations[i].arrival);
+      let curr_dep = new Date(payload.destinations[i].departure);
+
+      // If arriving at a stop before leaving the last stop
+      if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
+        console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
+        this.invalidInfo = "Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.";
         this.invalidForm = true;
         return;
+      }
+
+      // If arriving at a stop before leaving (no time tolerance since same place)
+      if (curr_arr.getTime() > curr_dep.getTime()) {
+        console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
+        this.invalidInfo = "Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.";
+        this.invalidForm = true;
+        return;
+      }
+
+      // If arriving at a stop after the journey has ended
+      if (curr_arr.getTime() > journey_end.getTime()) {
+        this.invalidInfo = "Invalid entries: <strong>From</strong> date and time for each stop must be before <strong>Journey End Date</strong>.";
+        this.invalidForm = true;
+        return;
+      }
+
+      curr_end = curr_dep;
+    }
+
+    // If leaving last stop after the journey has ended
+    if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
+      console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
+      this.invalidInfo = "Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.";
+      this.invalidForm = true;
+      return;
     }
 
     payload.isModifying = this.isModifying;
     let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
-        (res) => {
-            console.log("SUCCESS!!!");
-            this.notifySuccess();
-            this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.log("Unable to save journey")
-          this.invalidForm = !this.invalidForm;
-          window.scrollTo(0,0);
-        }
+      (res) => {
+        console.log("Successfully saved journey");
+        this.notifySuccess();
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.log("Unable to save journey")
+        this.invalidForm = !this.invalidForm;
+        window.scrollTo(0,0);
+      }
     )
   }
 
   cancel() {
-      this.router.navigate(['/my-journeys']);
+    this.router.navigate(['/my-journeys']);
   }
 
   updateVars() {
@@ -241,4 +259,5 @@ export class JourneyComponent implements OnInit {
       )
     }
   }
+  
 }
