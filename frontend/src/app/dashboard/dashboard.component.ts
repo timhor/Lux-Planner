@@ -35,8 +35,8 @@ export class DashboardComponent implements OnInit {
   events: Array<any>;
   private bounds;
   private startingLocationName;
-  private startingLocationLatitude;
-  private startingLocationLongitude;
+  private startingLocationLatitude = -33.86514;
+  private startingLocationLongitude = 151.20990;
   
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
