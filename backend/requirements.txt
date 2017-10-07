@@ -4,4 +4,5 @@ flask-cors
 flask-jwt
 flickrapi
 sqlalchemy-migrate
-wikipedia
+gunicorn
+psycopg2
