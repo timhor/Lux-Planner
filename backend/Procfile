@@ -1,0 +1,4 @@
+web: gunicorn server:app -b 0.0.0.0:$PORT -w 1 --log-level info
+migrate: alembic upgrade head
+upgrade: alembic upgrade +1
+downgrade: alembic downgrade -1

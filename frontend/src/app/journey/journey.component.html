@@ -77,7 +77,7 @@
     </div>
 
     <fieldset formArrayName="destinations">
-      <div class="form-group" *ngFor="let item of myJourneys.get('destinations').controls; let i=index" [formGroup]="item">
+      <div class="form-group" *ngFor="let item of myJourneys.get('destinations')['controls']; let i=index" [formGroup]="item">
         <div style="padding-left:2vw; padding-right:2vw;" class="card" id="stopCard">
           <br>
           <div class="row">
@@ -118,6 +118,7 @@
       </div>
     </fieldset>
     <br>
+    <!-- <button type="button" class="button-rect button-blue" >Add Stop</button> -->
     <button type="button" class="button-rect button-blue" (click)="addStop(myJourneys)"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
 
     <br>

@@ -36,8 +36,10 @@ export class DashboardComponent implements OnInit {
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
-  private startingLocation;
-
+  private startingLocationName;
+  private startingLocationLatitude = -33.86514;
+  private startingLocationLongitude = 151.20990;
+  
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
     this.connService = _connectionService;
@@ -102,23 +104,23 @@ export class DashboardComponent implements OnInit {
     this.events = new Array<any>();
     let startDate;
     let endDate;
-    this.startingLocation;
+    this.startingLocationName;
 
     startDate = this.allJourneys[this.activeJourneyIndex].start;
     endDate = this.allJourneys[this.activeJourneyIndex].end;
     if (!this.allJourneys[this.activeJourneyIndex].start_location) {
-      this.startingLocation = "Start Location";
+      this.startingLocationName = "Start Location";
     } else {
-      this.startingLocation = this.allJourneys[this.activeJourneyIndex].start_location;
+      this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;
     }
 
-    this.events.push({ "date": new Date(startDate), "header": this.startingLocation, "icon": "fa-plane"});
+    this.events.push({ "date": new Date(startDate), "header": this.startingLocationName, "icon": "fa-plane"});
 
     for (let i=0; i < this.stops.length; i++) {
       this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
     }
 
-    this.events.push({ "date": new Date(endDate), "header": this.startingLocation, "icon": "fa-flag-checkered" });
+    this.events.push({ "date": new Date(endDate), "header": this.startingLocationName, "icon": "fa-flag-checkered" });
   }
 
   getCurrStop () {
@@ -148,7 +150,7 @@ export class DashboardComponent implements OnInit {
     this.checkForOverview();  // Check if current page is overview
     this.setTimeline();
     this.updateMap();   
-    this.startingLocation = this.allJourneys[this.activeJourneyIndex].start_location;    
+    this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
   }
 
   setActiveStop(stop:string) {
