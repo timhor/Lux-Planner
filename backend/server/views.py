@@ -345,67 +345,6 @@ def index():
     """ Front page of the backend """
     return render_template('index.html')
 
-@app.route('/admin/registered-users')
-def registered_users():
-    """ Registered user page """
-    admin_name = 'adminny'
-    fake_regi = [
-        {'name': 'James',
-         #'age': '17',
-         'fav_fish': 'Salmon'
-        },
-        {'name': 'Kevin',
-         #'age': '91',
-         'fav_fish': 'Tuna'
-        },
-        {'name': 'Blake',
-         #'age': '45',
-         'fav_fish': 'I\'m a vegan goddammit'
-        }
-    ]
-    return render_template('registered-users.html', admin=admin_name, users=fake_regi)
-
-
-@app.route('/api/hello', methods=['GET'])
-def hello():
-    fake_regi = [
-        {'name': 'James',
-         #'age': '17',
-         'fav_fish': 'Salmon'
-        },
-        {'name': 'Kevin',
-         #'age': '91',
-         'fav_fish': 'Tuna'
-        },
-        {'name': 'Blake',
-         #'age': '45',
-         'fav_fish': 'I\'m a vegan goddammit'
-        }
-    ]
-    data = jsonify(fake_regi)
-    print("I am sending!")
-    print(data)
-    return data
-
-
-@app.route('/api/insecure')
-def insecure():
-    return jsonify({
-        'message': 'How dare you access me so insecurely!!'
-        })
-
-
-@app.route('/api/secure')
-@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
-@jwt_required()
-def secure():
-    print("Secured?")
-    return jsonify({
-        'message': 'I am secured! My ID is ' + str(current_identity),
-        'identity': str(current_identity)
-        })
-
-
 
 ##### Helper functions ####
 

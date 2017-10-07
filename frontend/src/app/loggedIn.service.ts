@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class LoggedInService {
-  private server: string = process.env.BACKEND_URL || 'http://localhost:5000/';
+  private server: string = !isDevMode() ? 'https://seng2021-lux-api.herokuapp.com/': 'http://localhost:5000/';
 
   constructor(private http: Http, private authHttp: AuthHttp) {
   }
