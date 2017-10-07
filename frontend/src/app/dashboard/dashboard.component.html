@@ -56,7 +56,11 @@
             </ul>
           </div>
         </div>
-        <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline>
+        <!-- <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline> -->
+        <div class="btn-group btn-block" id="timeline-buttons"> 
+          <span class="line"></span>
+          <button class="btn-circle" *ngFor="let stop of stops"><label class="stop-label">{{shortStop(stop.name)}}</label></button>
+        </div>
       </div>
     </div>
   </div>
