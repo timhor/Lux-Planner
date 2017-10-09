@@ -227,9 +227,9 @@ def get_all_journeys():
     id = current_identity[0]
     user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
     payload = []
-    journeys = models.Journey.query.filter_by(user_id=user.id).all()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     for j in journeys:
-        stops = models.Stop.query.filter_by(journey_id=j.id).all()
+        stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
         print(stops)
         s_payload = []
         for s in stops:
