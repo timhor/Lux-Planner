@@ -62,9 +62,11 @@
         <!-- <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline> -->
         <div class="btn-group btn-block" id="timeline-buttons"> 
           <span class="line"></span>
-          <button class="btn-circle" *ngFor="let stop of stops" (click)="setActiveStop(stop.name)">
-            <label class="stop-label">{{shortStop(stop.name)}}</label>
+          <button class="btn-circle-start"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
+          <button class="btn-circle" *ngFor="let stop of stops; let i=index;" (click)="setActiveStop(stop.name)">
+            {{i+1}}<label class="stop-label">{{shortStop(stop.name)}}</label>
           </button>
+          <button class="btn-circle-start"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
         </div>
       </div>
     </div>
@@ -72,7 +74,7 @@
   <div class="row">
     <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
       <div class ="well">
-        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()">Journey Overview &nbsp;<span class="fa fa-caret-right"></span></h4>
+        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
       </div>
       <div class="well" align="center">
         <p id="subHeading">Itinerary</p>

@@ -7,8 +7,6 @@ import { ConnectionService } from '../connection/connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
-import { HorizontalTimelineComponent } from '../horizontal-timeline/horizontal-timeline.component';
-import { TimelineElement } from '../horizontal-timeline/timeline-element';
 import { MapsAPILoader } from '@agm/core';
 
 @Component({
@@ -77,22 +75,6 @@ export class DashboardComponent implements OnInit {
         (error) => {console.log(`could not connect ${error}`)}
     );
   }
-
-  content = "";
-
-  timeline = [
-    { caption: '16 Jan', date: new Date(2014, 1, 16), selected: true, title: 'Horizontal Timeline', content: this.content },
-    { caption: '28 Feb', date: new Date(2014, 2, 28), title: 'Event title here', content: this.content },
-    { caption: '20 Mar', date: new Date(2014, 3, 20), title: 'Event title here', content: this.content },
-    { caption: '20 May', date: new Date(2014, 5, 20), title: 'Event title here', content: this.content },
-    { caption: '09 Jul', date: new Date(2014, 7, 9), title: 'Event title here', content: this.content },
-    { caption: '30 Aug', date: new Date(2014, 8, 30), title: 'Event title here', content: this.content },
-    { caption: '15 Sep', date: new Date(2014, 9, 15), title: 'Event title here', content: this.content },
-    { caption: '01 Nov', date: new Date(2014, 11, 1), title: 'Event title here', content: this.content },
-    { caption: '10 Dec', date: new Date(2014, 12, 10), title: 'Event title here', content: this.content },
-    { caption: '29 Jan', date: new Date(2015, 1, 19), title: 'Event title here', content: this.content },
-    { caption: '3 Mar', date: new Date(2015, 3, 3), title: 'Event title here', content: this.content },
-  ]
 
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
@@ -185,6 +167,9 @@ export class DashboardComponent implements OnInit {
   }
 
   shortStop(string) {
+    if (!string) {
+      return "Start";
+    }
     return string.replace(/,.*/,'');
   }
 
