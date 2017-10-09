@@ -225,10 +225,14 @@ textarea {
 }
 
 #timeline-buttons {
-  width: 100%;
   text-align: center;
   position: relative;
   z-index: 1;
+}
+
+.scroll-container {
+  /* overflow-x: auto; */
+  width: 100%;
 }
 
 .btn-circle {

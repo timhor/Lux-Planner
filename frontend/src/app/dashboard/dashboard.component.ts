@@ -133,6 +133,7 @@ export class DashboardComponent implements OnInit {
     this.setTimeline();
     this.updateMap();   
     this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
+    // this.setTimelineWidth();
   }
 
   setActiveStop(stop:string) {
@@ -242,7 +243,7 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  updateMap(){
+  updateMap() {
     this.mapsAPILoader.load().then(() => {
       this.bounds = new google.maps.LatLngBounds();
       for (let i=0; i < this.stops.length; i++){
@@ -253,4 +254,16 @@ export class DashboardComponent implements OnInit {
       this.bounds.extend(startMarker.getPosition());
     });
   }
+
+  // setTimelineWidth() {
+  //   let element: HTMLElement = document.getElementById('timeline-buttons');
+  //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
+  //   console.log(timelineWidth);
+  //   console.log(0.65*window.screen.width);
+  //   if (timelineWidth > 0.65*window.screen.width) {
+  //     element.setAttribute('style', "width: " + timelineWidth + "px");
+  //   } else {
+  //     element.setAttribute('style', "width: 100%");
+  //   }
+  // }
 }
