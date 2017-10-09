@@ -21,6 +21,7 @@ class Journey(db.Model):
     start_location = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime, index=True)
+    # index = db.Column(db.Integer, index=True)
     stops = db.relationship('Stop', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -34,6 +35,7 @@ class Stop(db.Model):
     arrival_date = db.Column(db.DateTime, index=True)
     departure_date = db.Column(db.DateTime, index=True)
     notes = db.Column(db.Text, index=True)
+    # index = db.Column(db.Integer, index=True)
     itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):
