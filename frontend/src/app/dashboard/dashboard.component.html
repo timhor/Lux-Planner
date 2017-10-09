@@ -37,7 +37,10 @@
       <div class="well">
         <p id="subHeading">{{ journeyName }}</p>
         <div align="center">
-          <div class="dropdown">
+            <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;</h1>
+            <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;</h1>
+            <br>
+          <!-- <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader">
               <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;
                 <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
@@ -54,19 +57,24 @@
                 <h4>{{ shortStop(stop.name) }}</h4>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <!-- <horizontal-timeline [timelineElements]="timeline" [showContent]="true"></horizontal-timeline> -->
         <div class="btn-group btn-block" id="timeline-buttons"> 
           <span class="line"></span>
-          <button class="btn-circle" *ngFor="let stop of stops"><label class="stop-label">{{shortStop(stop.name)}}</label></button>
+          <button class="btn-circle" *ngFor="let stop of stops" (click)="setActiveStop(stop.name)">
+            <label class="stop-label">{{shortStop(stop.name)}}</label>
+          </button>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
-      <div class="well " align="center">
+      <div class ="well">
+        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()">Journey Overview &nbsp;<span class="fa fa-caret-right"></span></h4>
+      </div>
+      <div class="well" align="center">
         <p id="subHeading">Itinerary</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
           <div class="btn-group" align="center">

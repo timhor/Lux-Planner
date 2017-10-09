@@ -84,6 +84,20 @@ img {
   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
 
+#journeyOverview {
+  font-size: 22px;
+  font-weight: bolder;
+  font-style: italic;
+  cursor: pointer;
+}
+
+
+#journeyOverview:hover,
+#journeyOverview:focus {
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+}
+
+
 button.truncate {
   display: flex;
 }
@@ -212,38 +226,39 @@ textarea {
 
 #timeline-buttons {
   width: 100%;
-}
-
-.btn-group {
   text-align: center;
   position: relative;
   z-index: 1;
 }
 
 .btn-circle {
-  width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 15px;
   margin-left: 5%;
   margin-right: 5%;
   text-align: center;
   background-color: white;
   border: solid #bed600;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  margin-bottom: 40px;
 }
 
-.btn-circle:hover {
+.btn-circle:hover,
+.btn-circle:focus,
+.btn-circle:active {
   background-color: #bed600;
+  border: solid white;
 }
 
 .line {
   position: absolute;
   z-index: -1;
   left: 0;
-  top: 25px;
+  top: 15px;
   height: 2px;
   width: 100%;
   background: #cccccc;
@@ -257,6 +272,13 @@ textarea {
   text-shadow: 0 2px 4px rgba(145, 92, 182, .3);  
   color: #424242;
   cursor: pointer;
+  padding-top: 30px;
+  margin-left: -51px;
+  /* Truncate long text */
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 button:focus {
@@ -275,14 +297,6 @@ button:focus {
 
   .line {
     top: 17px;
-  }
-
-  .btn-circle {
-    width: 35px;
-    height: 35px;
-    padding: 6px 0;
-    line-height: 1.428571429;
-    border-radius: 20px;
   }
 
   .stop-label {
