@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   public journeyService: JourneyService;
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0, 'notes': ''}];
-  public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
+  public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'lat': 0, 'lng': 0, 'stops': []}];
   public activeJourneyIndex: number = 0;
   public activeStopIndex: number = 0;
   public aboutText: string = "Loading Information...";
@@ -246,7 +246,9 @@ export class DashboardComponent implements OnInit {
         var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
         this.bounds.extend(marker.getPosition());
       }
-      var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      // var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      var currJourney = this.allJourneys[this.activeJourneyIndex];
+      var startMarker = new google.maps.Marker({position: {lat: currJourney.lat, lng: currJourney.lng}});
       this.bounds.extend(startMarker.getPosition());
     });
   }

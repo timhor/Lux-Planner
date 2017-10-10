@@ -243,12 +243,15 @@ def get_all_journeys():
                 'notes': s.notes
             }
             s_payload.append(s_instance)
+        home_coord = call_cache(j.start_location, 'coord')
         j_item = {
             'journey_name': j.journey_name,
             'start_location': j.start_location,
             'start': j.start_date,
             'end': j.end_date,
-            'stops': s_payload
+            'stops': s_payload,
+            'lat': home_coord['lat'],
+            'lng': home_coord['lon']
             }
 
         payload.append(j_item)
