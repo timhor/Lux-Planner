@@ -47,6 +47,7 @@ def search_places_coords(request):
     response = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={request}&key={places_key}")
     # https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
     formatted = response.json()
+    print(request, formatted)
     lat = formatted['results'][0]['geometry']['location']['lat']
     lon = formatted['results'][0]['geometry']['location']['lng']
     coords = {
