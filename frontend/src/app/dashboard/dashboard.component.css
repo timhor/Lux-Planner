@@ -74,6 +74,9 @@ img {
 #currentJourneyHeader {
   background-color: transparent;
   width: 100%;
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: -10px;
   outline-style: none;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -118,8 +121,11 @@ agm-map {
 }
 
 .dropdown-menu {
-  width: 100%;
-  text-align: center;
+  width: 10%;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 15px;
 }
 
 .dropdown {

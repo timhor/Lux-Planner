@@ -102,14 +102,20 @@ export class DashboardComponent implements OnInit {
     return this.stops[i].name;
   }
 
-  setActiveJourney(name:string) {
+  setActiveJourney(journey:string) {
     if (!this.firstLoad) {
       this.firstLoad = true;
     }
 
-    this.journeyName = name;
+    for (let i=0; i < this.allJourneys.length; i++) {
+      if (journey === this.allJourneys[i].journey_name) {
+        this.activeJourneyIndex = i;
+        break;
+      }
+    }
+
+    this.journeyName = journey;
     this.stops = this.allJourneys[this.activeJourneyIndex].stops;
-    this.activeJourneyIndex = this.activeJourneyIndex;
     this.activeStopIndex = 0;
 
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(

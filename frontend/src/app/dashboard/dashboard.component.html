@@ -35,7 +35,16 @@
   <div class="row">
     <div class="col-sm-12" style="width:calc(100% - 1%)">
       <div class="well">
-        <p id="subHeading">{{ journeyName }}</p>
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"  id="currentJourneyHeader">
+            <p id="subHeading">{{ journeyName }}&nbsp;<span *ngIf="getJourneyLength() !== 1" class="fa fa-caret-down"></span></p>
+          </button>
+          <ul class="dropdown-menu">
+            <li id="dropdownItem" *ngFor="let journey of allJourneys; let i=index" (click)="setActiveJourney(journey.journey_name)">
+              {{ journey.journey_name }}
+            </li>
+          </ul>
+        </div>
         <div align="center">
             <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;</h1>
             <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;</h1>
