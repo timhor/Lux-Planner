@@ -43,7 +43,6 @@ export class DashboardComponent implements OnInit {
   public mapUrl: string = "Nothing";
   private toRefresh:boolean = false;
   private firstLoad:boolean;
-  private isModifyingNotes = false;
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
@@ -83,6 +82,7 @@ export class DashboardComponent implements OnInit {
             this.firstLoad = false;
             this.updateMap();
             this.setActiveJourney(this.journeyName);
+            this.newNotes = this.stops[this.activeStopIndex].notes;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -128,6 +128,7 @@ export class DashboardComponent implements OnInit {
     this.updateMap();   
     this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
     // this.setTimelineWidth();
+    this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
   setActiveStop(stop:string) {
@@ -144,7 +145,8 @@ export class DashboardComponent implements OnInit {
       }
     );
     this.checkForOverview();  // Check if current page is overview
-    this.updateMap();    
+    this.updateMap();
+    this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
   getJourneyLength() {
@@ -183,25 +185,18 @@ export class DashboardComponent implements OnInit {
     this.activeStopIndex = -1;
   }
 
-  modifyNotes() {
-    this.isModifyingNotes = !this.isModifyingNotes;
-    this.newNotes = this.stops[this.activeStopIndex].notes;
-  }
-
   cancelNotes() {
-    this.isModifyingNotes = !this.isModifyingNotes;
+    this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
   saveNotes() {
     this.stops[this.activeStopIndex].notes = this.newNotes;
-    this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes("updated");
   }
 
   deleteNotes() {
-    // TODO - add warning
-    this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
+    this.newNotes = null;
     this.pushNotes("deleted");
   }
 
