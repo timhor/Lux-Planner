@@ -81,7 +81,6 @@ export class DashboardComponent implements OnInit {
             );
             this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
-            this.setTimeline();
             this.updateMap();
             this.setActiveJourney(this.journeyName);
         },
@@ -93,29 +92,6 @@ export class DashboardComponent implements OnInit {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
     }    
-  }
-
-  setTimeline() {
-    this.events = new Array<any>();
-    let startDate;
-    let endDate;
-    // this.startingLocationName;
-
-    startDate = this.allJourneys[this.activeJourneyIndex].start;
-    endDate = this.allJourneys[this.activeJourneyIndex].end;
-    if (!this.allJourneys[this.activeJourneyIndex].start_location) {
-      this.startingLocationName = "Start Location";
-    } else {
-      this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;
-    }
-
-    this.events.push({ "date": new Date(startDate), "header": this.startingLocationName, "icon": "fa-plane"});
-
-    for (let i=0; i < this.stops.length; i++) {
-      this.events.push({ "date": new Date(this.stops[i].arrival), "header": this.stops[i].name });
-    }
-
-    this.events.push({ "date": new Date(endDate), "header": this.startingLocationName, "icon": "fa-flag-checkered" });
   }
 
   getCurrStop () {
@@ -143,7 +119,6 @@ export class DashboardComponent implements OnInit {
     );
 
     this.checkForOverview();  // Check if current page is overview
-    this.setTimeline();
     this.updateMap();   
     this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
     // this.setTimelineWidth();

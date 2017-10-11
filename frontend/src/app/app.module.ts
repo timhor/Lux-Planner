@@ -35,7 +35,6 @@ import { SearchService } from './search/search.service';
 import { JourneyService } from './journey.service';
 
 import { DropdownModule } from "ngx-dropdown";
-import { NgxTimelineModule } from 'ngx-timeline';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleModule, CalendarModule } from 'primeng/primeng';
 import { TooltipModule } from 'ngx-tooltip';
@@ -94,7 +93,6 @@ export const serviceProviders = [
       apiKey: 'AIzaSyAWhdBjPKjj_DNstBfp3i65VTtCeEzucyc',
       libraries: ["places"]
     }),
-    NgxTimelineModule,
     BrowserAnimationsModule,
     ScheduleModule,
     CalendarModule,
