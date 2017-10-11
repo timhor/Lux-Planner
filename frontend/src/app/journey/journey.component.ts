@@ -9,6 +9,7 @@ import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
 import { ConnectionService } from '../connection/connection.service';
 import { NotificationsService } from 'angular2-notifications';
+import { JourneyService } from'../journey.service';
 
 @Component({
   selector: 'app-journey',
@@ -17,7 +18,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class JourneyComponent implements OnInit {
 
-  public myJourneys: FormGroup;
+  public myJourney: FormGroup;
   public myStops: Array<any> = [];
   public invalidForm: boolean = false;
   public invalidInfo: string = "Invalid entries: all fields are required.";
@@ -44,7 +45,8 @@ export class JourneyComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private connectionService: ConnectionService,
-    private notification: NotificationsService
+    private notification: NotificationsService,
+    private journeyService: JourneyService
   ) {}
 
   // The following template for search bar was obtained from: https://myangularworld.blogspot.com.au/2017/07/google-maps-places-autocomplete-using.html
@@ -58,7 +60,7 @@ export class JourneyComponent implements OnInit {
         this.isModifying = +params['id'];
       }
     });
-    this.myJourneys = this.fb.group({
+    this.myJourney = this.fb.group({
       journeyName: new FormControl(),
       initialLocation: new FormControl(),
       initialDeparture: new FormControl(),
@@ -71,7 +73,7 @@ export class JourneyComponent implements OnInit {
       this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
           let journey = res.journeys[this.isModifying];
-          this.myJourneys = this.fb.group({
+          this.myJourney = this.fb.group({
             journeyName: new FormControl(journey.journey_name),
             initialLocation: new FormControl(journey.start_location),
             initialDeparture: new FormControl(new Date(journey.start)),
@@ -80,7 +82,7 @@ export class JourneyComponent implements OnInit {
           })
           for (let i = 0; i < journey.stops.length; i++) {
             let stop = journey.stops[i];
-            (<FormArray>this.myJourneys.get('destinations')).push(
+            (<FormArray>this.myJourney.get('destinations')).push(
               this.loadItem(stop.name, new Date(stop.arrival), new Date(stop.departure))
             );
           }
@@ -97,9 +99,9 @@ export class JourneyComponent implements OnInit {
       return;
     }
     if (this.isModifying !== -1 && this.modifyingCounter === 1) {
-      let d = <FormArray>this.myJourneys.controls['destinations'].value;
+      let d = <FormArray>this.myJourney.controls['destinations'].value;
       for (let i = 0; i < d.length; i++) {
-        let value = (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].value;
+        let value = (<FormGroup>(<FormArray>this.myJourney.controls['destinations']).at(i)).controls['location'].value;
         if (!this.modifyingStops.includes(value) && value) {
           this.modifyingStops.push(value);
         }
@@ -112,13 +114,13 @@ export class JourneyComponent implements OnInit {
     }
   }
 
-  addStop(myJourneys: FormGroup) {
-    (<FormArray>this.myJourneys.get('destinations')).push(this.buildItem(''));
+  addStop(myJourney: FormGroup) {
+    (<FormArray>this.myJourney.get('destinations')).push(this.buildItem(''));
   }
 
   submit() {
     this.updateVars();
-    let payload = this.myJourneys.getRawValue();
+    let payload = this.myJourney.getRawValue();
     console.log(payload);
 
     // Check that all fields have been filled in
@@ -187,6 +189,13 @@ export class JourneyComponent implements OnInit {
       return;
     }
 
+    this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
+      res => {
+        this.journeyService.activeJourneyIndex = res.journeys.length;
+      },
+      (error) => {console.log(`could not connect ${error}`)}
+    );
+
     payload.isModifying = this.isModifying;
     let myJourney = JSON.stringify(payload);
     let handle = this.loggedInService.postJourney(myJourney);
@@ -223,9 +232,9 @@ export class JourneyComponent implements OnInit {
       this.myStops.push(value);
     }
 
-    let d = <FormArray>this.myJourneys.controls['destinations'].value;
+    let d = <FormArray>this.myJourney.controls['destinations'].value;
     for (let i = 0; i < d.length; i++) {
-      (<FormGroup>(<FormArray>this.myJourneys.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
+      (<FormGroup>(<FormArray>this.myJourney.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
     }
     console.log("Form variables Updated!")
   }
@@ -268,7 +277,7 @@ export class JourneyComponent implements OnInit {
 
   saveInitialLocation() {
     let field = "initialLocation";
-    this.myJourneys.controls['initialLocation'].setValue((<HTMLInputElement>document.getElementById(field)).value);
+    this.myJourney.controls['initialLocation'].setValue((<HTMLInputElement>document.getElementById(field)).value);
     console.log("Start Location Saved!");
   }
 
@@ -280,12 +289,12 @@ export class JourneyComponent implements OnInit {
   notifySuccess() {
     if (this.isModifying === -1) {
       this.notification.success(
-        this.myJourneys.controls['journeyName'].value,
+        this.myJourney.controls['journeyName'].value,
         "Journey created successfully"
       )
     } else {
       this.notification.success(
-        this.myJourneys.controls['journeyName'].value,
+        this.myJourney.controls['journeyName'].value,
         "Journey modified successfully"
       )
     }

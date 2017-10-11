@@ -29,7 +29,7 @@
     You cannot save this journey without being logged in.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
   </div>
-  <form [formGroup]="myJourneys">
+  <form [formGroup]="myJourney">
     <div class="row" style="padding-left:2vw; padding-right:2vw;">
       <div class="col-sm-10">
         <label for="journeyName">Journey Name</label>
@@ -49,7 +49,7 @@
         <div class="col-sm-1">
           <br>
           <!-- Pass parameter of stop to show(), modify show to set currStop to parameter -->
-          <a (click)="stop.show(myJourneys.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
+          <a (click)="stop.show(myJourney.controls['initialLocation'].value)"><i class="glyphicon glyphicon-info-sign grow icon-blue" aria-hidden="true" id="infoIcon"></i></a>
         </div>
       </div>
 
@@ -77,7 +77,7 @@
     </div>
 
     <fieldset formArrayName="destinations">
-      <div class="form-group" *ngFor="let item of myJourneys.get('destinations')['controls']; let i=index" [formGroup]="item">
+      <div class="form-group" *ngFor="let item of myJourney.get('destinations')['controls']; let i=index" [formGroup]="item">
         <div style="padding-left:2vw; padding-right:2vw;" class="card" id="stopCard">
           <br>
           <div class="row">
@@ -106,20 +106,20 @@
             </div>
             <div class="col-sm-1">
               <br>
-              <a *ngIf="myJourneys.get('destinations').length != 1" (click)="myJourneys.get('destinations').removeAt(i)">
+              <a *ngIf="myJourney.get('destinations').length != 1" (click)="myJourney.get('destinations').removeAt(i)">
                 <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
             </div>
           </div>
           <br>
         </div>
-        <div id="circleBackground" *ngIf="myJourneys.get('destinations').length-1 !== i">
+        <div id="circleBackground" *ngIf="myJourney.get('destinations').length-1 !== i">
           <span><i class="fa fa-plane" aria-hidden="true"></i></span>
         </div>    
       </div>
     </fieldset>
     <br>
     <!-- <button type="button" class="button-rect button-blue" >Add Stop</button> -->
-    <button type="button" class="button-rect button-blue" (click)="addStop(myJourneys)"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
+    <button type="button" class="button-rect button-blue" (click)="addStop(myJourney)"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add Stop</button>
 
     <br>
     <br>
@@ -153,7 +153,7 @@
       </div>
     </div>
   </form>
-  <!-- <h6 class="mt-3">FormGroup Model (<code>myJourneys.value</code>)</h6>
-  <div><pre><code>{{ myJourneys?.value | json }}</code></pre></div> -->
+  <!-- <h6 class="mt-3">FormGroup Model (<code>myJourney.value</code>)</h6>
+  <div><pre><code>{{ myJourney?.value | json }}</code></pre></div> -->
 </div>
 <br>
