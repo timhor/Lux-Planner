@@ -12,6 +12,7 @@ import { NotificationsService } from 'angular2-notifications'
 })
 export class SignupComponent {
   account = new NewAccount('','','','','','');
+  public usernameTakenMsg: string = '';
 
   constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
 
@@ -38,6 +39,8 @@ export class SignupComponent {
                         this.router.navigate(['/login'])
                     }
                 )
+            } else {
+                this.usernameTakenMsg = this.account.username;
             }
         },
         (error) => {
