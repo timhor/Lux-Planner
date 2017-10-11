@@ -13,7 +13,8 @@
       <form (ngSubmit)="onSubmit()">
         <div class="alert alert-warning" [hidden]="(username.valid || username.pristine)
           && (password.valid || password.pristine) && (email.valid || email.pristine)
-          && ((account.password === account.confirmPassword) || confirmPassword.pristine)">
+          && ((account.password === account.confirmPassword) || confirmPassword.pristine)
+          && (usernameTakenMsg == '')">
           <div [hidden]="username.valid || username.pristine">
             Username is required
           </div>
@@ -25,6 +26,9 @@
           </div>
           <div [hidden]="email.valid || email.pristine">
             Email is required
+          </div>
+          <div [hidden]="usernameTakenMsg == ''">
+            <b>{{usernameTakenMsg}}</b> is taken.
           </div>
         </div>
         <div class="row">            

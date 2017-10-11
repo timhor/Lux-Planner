@@ -19,8 +19,21 @@ export class DashboardComponent implements OnInit {
   public loggedInService: LoggedInService;
   public journeyService: JourneyService;
   public journeyName: string = 'Journey1';
-  public stops = [{'name': 'Stop', 'arrival': '', 'departure': '', 'lat': 0, 'lng': 0, 'notes': ''}];
-  public allJourneys = [{'journey_name': 'Journey','start_location': 'Sydney', 'start': '01/01/2017', 'end': '01/02/2017', 'stops': []}];
+  public stops = [{'name': 'Stop',
+                  'arrival': '',
+                  'departure': '',
+                  'lat': 0,
+                  'lng': 0,
+                  'notes': ''
+                }];
+  public allJourneys = [{'journey_name': 'Journey',
+                        'start_location': 'Sydney',
+                        'start': '01/01/2017',
+                        'end': '01/02/2017',
+                        'lat': 0,
+                        'lng': 0,
+                        'stops': []
+                      }];
   public activeJourneyIndex: number = 0;
   public activeStopIndex: number = 0;
   public aboutText: string = "Loading Information...";
@@ -35,8 +48,8 @@ export class DashboardComponent implements OnInit {
   events: Array<any>;
   private bounds;
   private startingLocationName;
-  private startingLocationLatitude = -33.86514;
-  private startingLocationLongitude = 151.20990;
+  // private startingLocationLatitude = -33.86514;
+  // private startingLocationLongitude = 151.20990;
   
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
@@ -86,7 +99,7 @@ export class DashboardComponent implements OnInit {
     this.events = new Array<any>();
     let startDate;
     let endDate;
-    this.startingLocationName;
+    // this.startingLocationName;
 
     startDate = this.allJourneys[this.activeJourneyIndex].start;
     endDate = this.allJourneys[this.activeJourneyIndex].end;
@@ -250,7 +263,9 @@ export class DashboardComponent implements OnInit {
         var marker = new google.maps.Marker({position: {lat: this.stops[i].lat, lng: this.stops[i].lng}});
         this.bounds.extend(marker.getPosition());
       }
-      var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      // var startMarker = new google.maps.Marker({position: {lat: -33.86514, lng: 151.20990}});
+      var currJourney = this.allJourneys[this.activeJourneyIndex];
+      var startMarker = new google.maps.Marker({position: {lat: currJourney.lat, lng: currJourney.lng}});
       this.bounds.extend(startMarker.getPosition());
     });
   }

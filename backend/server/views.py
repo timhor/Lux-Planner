@@ -195,7 +195,7 @@ def new_journey():
     else:
         # Dirty hack only
         user = models.User.query.filter_by(id=user_id).first()
-        journeys = models.Journey.query.filter_by(user_id=user.id).all()
+        journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
         j = journeys[body['isModifying']]
         j.journey_name = body['journeyName']
         j.start_location = body['initialLocation']
@@ -243,12 +243,15 @@ def get_all_journeys():
                 'notes': s.notes
             }
             s_payload.append(s_instance)
+        home_coord = call_cache(j.start_location, 'coord')
         j_item = {
             'journey_name': j.journey_name,
             'start_location': j.start_location,
             'start': j.start_date,
             'end': j.end_date,
-            'stops': s_payload
+            'stops': s_payload,
+            'lat': home_coord['lat'],
+            'lng': home_coord['lon']
             }
 
         payload.append(j_item)
@@ -274,7 +277,7 @@ def update_notes():
     body = json.loads(request.data)
     journeys = models.Journey.query.filter_by(user_id=user_id).all()
     j = journeys[body['jIndex']]
-    stops = models.Stop.query.filter_by(journey_id=j.id).all()
+    stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
     stops[body['sIndex']].notes = body['notes']
     db.session.commit()
     return jsonify({'message': 'success'})
@@ -288,7 +291,7 @@ def delete_journey():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
-    stops = models.Stop.query.filter_by(journey_id=j.id)
+    stops = models.Stop.query.filter_by(journey_id=j.id).all()
     for s in stops:
         db.session.delete(s)
     db.session.delete(j)
@@ -310,7 +313,7 @@ def get_account_details():
 @jwt_required()
 def get_all_journey_names():
     user = models.User.query.filter_by(id=current_identity[0]).first()
-    journeys = models.Journey.query.filter_by(user_id=user.id).all()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     names = []
     for j in journeys:
         names.append(j.journey_name)

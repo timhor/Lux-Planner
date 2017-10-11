@@ -206,8 +206,9 @@ export class JourneyComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       (error) => {
-        console.log("Unable to save journey")
-        this.invalidForm = !this.invalidForm;
+        this.exitWithMessage("Error saving journey.");
+        console.log("Unable to save journey (check if backend is running)");
+        this.invalidForm = true;
         window.scrollTo(0,0);
       }
     )
