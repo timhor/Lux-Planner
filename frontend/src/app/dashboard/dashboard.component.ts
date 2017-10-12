@@ -52,15 +52,15 @@ export class DashboardComponent implements OnInit {
   // private startingLocationLongitude = 151.20990;
   settings: WeatherSettings = {
     location: {
-      cityName: 'Szczecin'
+      cityName: 'Sydeny'
     },
-    backgroundColor: '#347c57',
-    color: '#ffffff',
-    width: '300px',
+    backgroundColor: 'transparent',
+    color: '#424242',
+    width: '100%',
     height: 'auto',
     showWind: false,
     scale: TemperatureScale.CELCIUS,
-    forecastMode: ForecastMode.DETAILED,
+    forecastMode: ForecastMode.GRID,
     showDetails: false,
     showForecast: true,
     layout: WeatherLayout.WIDE,
