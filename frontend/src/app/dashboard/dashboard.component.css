@@ -373,3 +373,9 @@ button:focus {
     font-size: 12px;
   }
 }
+
+#weatherHolder{
+  height: 200px;
+  /* vertical-align: middle; */
+  margin-top: 50px;
+}

@@ -50,22 +50,7 @@ export class DashboardComponent implements OnInit {
   public startingLocationName;
   // private startingLocationLatitude = -33.86514;
   // private startingLocationLongitude = 151.20990;
-  settings: WeatherSettings = {
-    location: {
-      cityName: 'Sydeny'
-    },
-    backgroundColor: 'transparent',
-    color: '#424242',
-    width: '100%',
-    height: 'auto',
-    showWind: false,
-    scale: TemperatureScale.CELCIUS,
-    forecastMode: ForecastMode.GRID,
-    showDetails: false,
-    showForecast: true,
-    layout: WeatherLayout.WIDE,
-    language: 'en'
-  };
+  settings: WeatherSettings;
   
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
@@ -166,6 +151,25 @@ export class DashboardComponent implements OnInit {
     );
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();
+    this.settings = {
+      location: {
+        latLng:{
+          lat: this.stops[this.activeStopIndex].lat,
+          lng: this.stops[this.activeStopIndex].lng
+        }
+      },
+      backgroundColor: 'transparent',
+      color: '#424242',
+      width: '100%',
+      height: '150px',
+      showWind: false,
+      scale: TemperatureScale.CELCIUS,
+      forecastMode: ForecastMode.GRID,
+      showDetails: false,
+      showForecast: true,
+      layout: WeatherLayout.WIDE,
+      language: 'en'
+    };
   }
 
   getJourneyLength() {
