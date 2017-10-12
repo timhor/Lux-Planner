@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
-  private startingLocationName;
+  public startingLocationName;
   // private startingLocationLatitude = -33.86514;
   // private startingLocationLongitude = 151.20990;
   
