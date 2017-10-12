@@ -256,7 +256,8 @@ textarea {
 .btn-circle {
   width: 30px;
   height: 30px;
-  padding: 4px 0px;
+  padding: 0px 0px;
+  vertical-align: middle;  
   font-size: 14px;
   line-height: 1.428571429;
   border-radius: 15px;
@@ -270,16 +271,24 @@ textarea {
 }
 
 .btn-circle:hover,
-.btn-circle:focus,
-.btn-circle:active {
+.btn-circle:focus{
   background-color: #f7544a;
+  border: solid white;
+  color: white;
+}
+
+.btn-circle-start:hover,
+.btn-circle-start:focus,
+.btn-circle-start:active {
+  background-color: #bed600;
   border: solid white;
 }
 
 .btn-circle-start {
   width: 30px;
   height: 30px;
-  padding: 4px 0px;
+  padding: 0px 0px;
+  vertical-align: middle;
   font-size: 14px;
   line-height: 1.428571429;
   border-radius: 15px;
@@ -290,7 +299,7 @@ textarea {
   border: solid #bed600;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   margin-bottom: 40px;
-  cursor: none;
+  cursor: pointer;
 }
 
 .line {
@@ -331,6 +340,7 @@ textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 button:focus {
@@ -353,6 +363,13 @@ button:focus {
 
   .stop-label, 
   .start-label {
+    font-size: 12px;
+  }
+}
+
+/* mobile-specific styles */
+@media (max-width: 1000px) {
+  #subHeading {
     font-size: 12px;
   }
 }

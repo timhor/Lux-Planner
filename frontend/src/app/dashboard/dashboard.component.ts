@@ -82,7 +82,6 @@ export class DashboardComponent implements OnInit {
             this.firstLoad = false;
             this.updateMap();
             this.setActiveJourney(this.journeyName);
-            this.newNotes = this.stops[this.activeStopIndex].notes;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -117,7 +116,7 @@ export class DashboardComponent implements OnInit {
     this.journeyName = journey;
     this.stops = this.allJourneys[this.activeJourneyIndex].stops;
     this.activeStopIndex = 0;
-
+    
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -128,7 +127,6 @@ export class DashboardComponent implements OnInit {
     this.updateMap();   
     this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
     // this.setTimelineWidth();
-    this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
   setActiveStop(stop:string) {
@@ -139,6 +137,11 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
+    if (this.stops[this.activeStopIndex].notes === undefined) {
+      this.newNotes = null;
+    } else {
+      this.newNotes = this.stops[this.activeStopIndex].notes;
+    }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -146,7 +149,6 @@ export class DashboardComponent implements OnInit {
     );
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();
-    this.newNotes = this.stops[this.activeStopIndex].notes;
   }
 
   getJourneyLength() {
