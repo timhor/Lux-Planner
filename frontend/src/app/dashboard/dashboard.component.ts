@@ -8,6 +8,7 @@ import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MapsAPILoader } from '@agm/core';
+import { WeatherSettings, TemperatureScale, ForecastMode, WeatherLayout } from 'angular-weather-widget';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,6 +50,22 @@ export class DashboardComponent implements OnInit {
   public startingLocationName;
   // private startingLocationLatitude = -33.86514;
   // private startingLocationLongitude = 151.20990;
+  settings: WeatherSettings = {
+    location: {
+      cityName: 'Szczecin'
+    },
+    backgroundColor: '#347c57',
+    color: '#ffffff',
+    width: '300px',
+    height: 'auto',
+    showWind: false,
+    scale: TemperatureScale.CELCIUS,
+    forecastMode: ForecastMode.DETAILED,
+    showDetails: false,
+    showForecast: true,
+    layout: WeatherLayout.WIDE,
+    language: 'en'
+  };
   
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
       public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {

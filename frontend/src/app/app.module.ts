@@ -39,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleModule, CalendarModule } from 'primeng/primeng';
 import { TooltipModule } from 'ngx-tooltip';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -97,7 +98,12 @@ export const serviceProviders = [
     ScheduleModule,
     CalendarModule,
     TooltipModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    AngularWeatherWidgetModule.forRoot({
+      key: '0bbc7feec8144680e2ed52ec0e0c67d5',
+      name: WeatherApiName.OPEN_WEATHER_MAP,
+      baseUrl: 'http://api.openweathermap.org/data/2.5'
+    })
   ],
   providers:
     serviceProviders
