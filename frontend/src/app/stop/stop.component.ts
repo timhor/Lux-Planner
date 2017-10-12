@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StopService } from './stop.service';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 
 @Component({
     selector: 'stop-info',

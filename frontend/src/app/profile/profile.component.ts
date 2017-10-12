@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
 

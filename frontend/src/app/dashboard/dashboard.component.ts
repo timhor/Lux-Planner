@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { StopComponent } from '../stop/stop.component';
 import { ItineraryComponent } from '../itinerary/itinerary.component';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -47,9 +47,7 @@ export class DashboardComponent implements OnInit {
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
-  public startingLocationName;
-  // private startingLocationLatitude = -33.86514;
-  // private startingLocationLongitude = 151.20990;
+  public startingLocationName: string;
   settings: WeatherSettings;
   
   constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 

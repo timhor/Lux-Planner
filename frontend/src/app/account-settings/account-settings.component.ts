@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
@@ -119,8 +119,6 @@ export class AccountSettingsComponent implements OnInit {
       },
         (error) => {console.log(`could not connect ${error}`)}
     );
-    //Add stuff here to send account details to backend
-    //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
   }
 
   notify() {

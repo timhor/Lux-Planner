@@ -7,7 +7,7 @@ import {} from '@types/googlemaps';
 import { StopComponent } from '../stop/stop.component';
 import { SearchComponent } from '../search/search.component'
 import { LoggedInService } from '../loggedIn.service';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { NotificationsService } from 'angular2-notifications';
 import { JourneyService } from'../journey.service';
 

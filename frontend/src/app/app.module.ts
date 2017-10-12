@@ -15,7 +15,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
 import { StopComponent } from './stop/stop.component';
-import { ConnectionComponent } from './connection/connection.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { JourneyComponent } from './journey/journey.component';
@@ -29,7 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 
 import { StopService } from './stop/stop.service';
-import { ConnectionService } from './connection/connection.service';
+import { ConnectionService } from './connection.service';
 import { LoggedInService } from './loggedIn.service';
 import { SearchService } from './search/search.service';
 import { JourneyService } from './journey.service';
@@ -69,7 +68,6 @@ export const serviceProviders = [
     LoginComponent,
    	SearchComponent,
    	StopComponent,
-    ConnectionComponent,
     SignupComponent,
     AboutComponent,
     ContactUsComponent,
