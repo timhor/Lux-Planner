@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit {
   private bounds;
   public startingLocationName: string;
   settings: WeatherSettings;
+  public isLoading: boolean = true;
   
   constructor(
     private connService: ConnectionService,
@@ -83,6 +84,7 @@ export class DashboardComponent implements OnInit {
             this.firstLoad = false;
             this.updateMap();
             this.setActiveJourney(this.journeyName);
+            this.isLoading = false;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
