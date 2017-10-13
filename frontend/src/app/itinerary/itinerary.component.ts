@@ -174,12 +174,14 @@ export class ItineraryComponent implements OnInit {
   public visibleAnimate = false;
 
   public show(val): void {
+    document.documentElement.setAttribute('style', 'overflow-y: hidden; margin-right:17px;');
     this.currStop = val;
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
 
   public hide(): void {
+    document.documentElement.setAttribute('style', 'overflow-y: scroll');
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }

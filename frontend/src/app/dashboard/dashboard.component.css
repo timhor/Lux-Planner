@@ -192,6 +192,8 @@ textarea {
 
 #notesTextEmpty {
   font-style: italic;
+  height: 200px;
+  margin-bottom: 34px;
 }
 
 .modal {

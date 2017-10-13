@@ -146,7 +146,7 @@
         <div class="well" *ngIf="!isLoading">
           <p id="subHeading">Notes</p>
           <div class="notesArea">
-            <p *ngIf="!isModifyingNotes" id="notesText">{{stops[activeStopIndex].notes}}</p>
+            <p *ngIf="stops[activeStopIndex].notes !== null && !isModifyingNotes" id="notesText">{{stops[activeStopIndex].notes}}</p>
             <p *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" id="notesTextEmpty">No existing notes found.</p>
             <textarea *ngIf="isModifyingNotes" class="form-control" rows="10" [(ngModel)]="newNotes" id="textArea"></textarea>
           </div>

@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
   public startingLocationName: string;
   settings: WeatherSettings;
   public isLoading: boolean = true;
-  
+
   constructor(
     private connService: ConnectionService,
     private loggedInService: LoggedInService, 
