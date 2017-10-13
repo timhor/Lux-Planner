@@ -185,12 +185,12 @@ export class JourneyComponent implements OnInit {
       return;
     }
 
-    this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
+    this.connectionService.getProtectedData('api/get_journeys_length').subscribe(
       res => {
         if (this.isModifying !== -1) {
           this.journeyService.activeJourneyIndex = this.isModifying;
         } else {
-          this.journeyService.activeJourneyIndex = res.journeys.length;
+          this.journeyService.activeJourneyIndex = res.length;
         }
       },
       (error) => {console.log(`could not connect ${error}`)}
