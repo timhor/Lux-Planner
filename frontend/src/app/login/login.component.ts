@@ -13,7 +13,10 @@ export class LoginComponent {
   public isChecked: boolean = true;
   public incorrectCredentials: boolean = false;
 
-  constructor(private loggedInService: LoggedInService, public router: Router, private notification: NotificationsService) {}
+  constructor(
+    private loggedInService: LoggedInService,
+    public router: Router, 
+    private notification: NotificationsService) {}
 
   setChecked() {
     this.isChecked = !this.isChecked;

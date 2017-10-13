@@ -16,12 +16,13 @@ export class ProfileComponent implements OnInit {
   public lastName: string;
   public dateJoined: string = "19/09/2017";
   public journeys; // I think this is an Array<any>?
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
+
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService,
+    public router: Router
+  ) {
 
     this.connService.getProtectedData('api/get_account_details/').subscribe(
         res => {

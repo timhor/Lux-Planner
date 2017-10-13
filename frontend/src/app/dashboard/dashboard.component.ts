@@ -16,9 +16,6 @@ import { WeatherSettings, TemperatureScale, ForecastMode, WeatherLayout } from '
   styleUrls: ['../app.component.css', './dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
-  public journeyService: JourneyService;
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop',
                   'arrival': '',
@@ -50,11 +47,16 @@ export class DashboardComponent implements OnInit {
   public startingLocationName: string;
   settings: WeatherSettings;
   
-  constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
-      public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
-    this.journeyService = _journeyService;
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService, 
+    private journeyService: JourneyService,
+    private notification: NotificationsService,
+    private mapsAPILoader: MapsAPILoader,
+    public sanitizer: DomSanitizer,
+    public router: Router
+  ) {
+
     this.firstLoad = true;
     this.mapsAPILoader.load().then(() => {this.bounds = new google.maps.LatLngBounds();})
 
@@ -68,7 +70,6 @@ export class DashboardComponent implements OnInit {
                 }, 500)
                 return;
             }
-            // this.activeJourneyIndex = res.active_journey;
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;

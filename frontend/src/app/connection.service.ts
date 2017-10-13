@@ -1,28 +1,27 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ConnectionService {
     private server: string = !isDevMode() ? 'https://seng2021-lux-api.herokuapp.com/': 'http://localhost:5000/';
-    private httpPoint: Http;
     private result: Array<any>;
 
     destinations:Array<any>;
     constructor(private http: Http, private authHttp: AuthHttp) {
-        this.httpPoint = http;
+        // this.httpPoint = http;
     }
 
     getServiceData(endpoint: String) {
-        console.log("Hello from service");
-        console.log(this.server + endpoint);
-        return this.httpPoint.get(this.server + endpoint).map(response => response.json());
+        // console.log("Hello from service");
+        // console.log(this.server + endpoint);
+        return this.http.get(this.server + endpoint).map(response => response.json());
     }
 
     getProtectedData(endpoint: String) {
-        console.log("Hello from protected");
-        console.log(this.server + endpoint);
+        // console.log("Hello from protected");
+        // console.log(this.server + endpoint);
         return this.authHttp.get(this.server + endpoint).map(response => response.json());
     }
 
@@ -55,9 +54,9 @@ export class ConnectionService {
     //     return stuff;
     // }
 
-    wikiSearch(search: String) {
-        var conn = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=" + search + "&callback=?";
-        console.log(conn);
-        return this.httpPoint.get(conn).map(response => response.json());
-    }
+    // wikiSearch(search: String) {
+    //     var conn = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=" + search + "&callback=?";
+    //     console.log(conn);
+    //     return this.http.get(conn).map(response => response.json());
+    // }
 }

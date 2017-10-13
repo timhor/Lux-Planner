@@ -22,8 +22,6 @@ export class AccountSettingsComponent implements OnInit {
   public password: string;
   public firstName: string;
   public lastName: string;
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
 
   public newAvatar: string;
   public newEmail: string;
@@ -34,10 +32,12 @@ export class AccountSettingsComponent implements OnInit {
 
   public submitted: boolean = false;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router,
-      private notification: NotificationsService) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService,
+    private notification: NotificationsService,
+    public router: Router
+  ) {
 
     this.connService.getProtectedData('api/get_account_details/').subscribe(
       res => {

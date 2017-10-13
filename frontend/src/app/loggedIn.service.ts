@@ -1,28 +1,28 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
+import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoggedInService {
   private server: string = !isDevMode() ? 'https://seng2021-lux-api.herokuapp.com/': 'http://localhost:5000/';
 
-  constructor(private http: Http, private authHttp: AuthHttp) {
+  constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
   }
 
   public login(username: String, password: String) {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
-     return this.http.post(this.server + 'auth', JSON.stringify({'username': username, 'password': password}),
-        options).map((res: Response) => res.json());
+     return this.http.post(this.server + 'auth', JSON.stringify({
+         'username': username,
+         'password': password
+        }), options).map((res: Response) => res.json());
   }
 
   public loggedIn() {
-        if (localStorage['id_token'])
-            return true;
-
-        return false;
+    return tokenNotExpired();
   }
 
   public signup(username: string, password: string, email: string, firstName: string, lastName: string) {
@@ -30,9 +30,13 @@ export class LoggedInService {
     let options: RequestOptions = new RequestOptions({
         headers: new Headers({'Content-Type': 'application/json'})
     });
-     return this.http.post(this.server + 'api/new_user', JSON.stringify({'username': username,
-        'password': password, 'email': email, 'firstName': firstName, 'lastName': lastName}),
-        options).map((res: Response) => res.json());
+     return this.http.post(this.server + 'api/new_user', JSON.stringify({
+        'username': username,
+        'password': password,
+        'email': email,
+        'firstName': firstName,
+        'lastName': lastName
+    }), options).map((res: Response) => res.json());
   }
 
   public changeDetails(payload: object) {
