@@ -213,6 +213,9 @@ export class DashboardComponent implements OnInit {
   modifyNotes() {
     this.isModifyingNotes = !this.isModifyingNotes;
     this.newNotes = this.stops[this.activeStopIndex].notes;
+    setTimeout(() => {
+      document.getElementById('textArea').focus()
+    },1);
   }
 
   cancelNotes() {
@@ -226,7 +229,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteNotes() {
-    // TODO - add warning
     this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
     this.pushNotes("deleted");

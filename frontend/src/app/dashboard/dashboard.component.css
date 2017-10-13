@@ -175,8 +175,19 @@ textarea {
   float: left !important;
 }
 
+.textarea {
+  overflow-y: auto;
+  height: 200px;
+}
+
+.notesArea {
+  overflow-y: auto;
+}
+
 #notesText {
   white-space: pre-wrap;
+  height: 200px;
+  margin-bottom: 34px;
 }
 
 #notesTextEmpty {
