@@ -347,6 +347,10 @@ button:focus {
   outline:0;
 }
 
+tooltip-content {
+  margin-top: 100px;
+}
+
 /* mobile-specific styles */
 @media (max-width: 767px) {
   #notesBtns {

@@ -265,6 +265,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  convertDate(date) {
+    return new Date(date).toLocaleDateString();
+  }
+
   // setTimelineWidth() {
   //   let element: HTMLElement = document.getElementById('timeline-buttons');
   //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);

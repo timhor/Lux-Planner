@@ -83,7 +83,7 @@ export class JourneyComponent implements OnInit {
           for (let i = 0; i < journey.stops.length; i++) {
             let stop = journey.stops[i];
             (<FormArray>this.myJourney.get('destinations')).push(
-              this.loadItem(stop.name, new Date(stop.arrival), new Date(stop.departure))
+              this.loadItem(stop.name, new Date(stop.departure), new Date(stop.arrival))
             );
           }
           this.modifyingCounter = 0;
@@ -191,7 +191,11 @@ export class JourneyComponent implements OnInit {
 
     this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
       res => {
-        this.journeyService.activeJourneyIndex = res.journeys.length;
+        if (this.isModifying !== -1) {
+          this.journeyService.activeJourneyIndex = this.isModifying;
+        } else {
+          this.journeyService.activeJourneyIndex = res.journeys.length;
+        }
       },
       (error) => {console.log(`could not connect ${error}`)}
     );

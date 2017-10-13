@@ -71,15 +71,17 @@
             </ul>
           </div> -->
         </div>
-        <div class="scroll-container">
-          <div class="btn-group btn-block" id="timeline-buttons"> 
-            <span class="line"></span>
-            <button class="btn-circle-start" (click)="resetFirstLoad()"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
-            <button class="btn-circle" *ngFor="let stop of stops; let i=index;" (click)="setActiveStop(stop.name)" >
+
+        <div class="btn-group btn-block" id="timeline-buttons"> 
+          <span class="line"></span>
+          <button class="btn-circle-start" (click)="resetFirstLoad()"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
+          <span *ngFor="let stop of stops; let i=index;">
+            <tooltip-content></tooltip-content>
+            <button class="btn-circle" (click)="setActiveStop(stop.name)" [tooltip]="convertDate(stop.arrival)" tooltipPlacement="top">
               {{i+1}}<label class="stop-label">{{shortStop(stop.name)}}</label>
             </button>
-            <button class="btn-circle-start" (click)="resetFirstLoad()"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
-          </div>
+          </span>
+          <button class="btn-circle-start" (click)="resetFirstLoad()"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
         </div>
       </div>
     </div>
