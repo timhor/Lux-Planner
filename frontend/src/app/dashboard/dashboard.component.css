@@ -290,6 +290,12 @@ textarea {
   color: white;
 }
 
+.activeButton {
+  background-color: #f7544a;
+  border: solid white;
+  color: white;
+}
+
 .btn-circle-start:hover,
 .btn-circle-start:focus,
 .btn-circle-start:active {

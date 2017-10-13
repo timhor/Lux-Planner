@@ -281,6 +281,13 @@ export class DashboardComponent implements OnInit {
     return diffDays;
   }
 
+  setActiveButton(index:number) {
+    for (let i = 0; i < this.stops.length; i++) {
+      document.getElementById('stopButton'+i.toString()).setAttribute('class', 'btn-circle');
+    }
+    document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeButton');
+  }
+
   // setTimelineWidth() {
   //   let element: HTMLElement = document.getElementById('timeline-buttons');
   //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
