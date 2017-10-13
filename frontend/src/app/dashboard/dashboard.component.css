@@ -257,7 +257,7 @@ textarea {
   width: 30px;
   height: 30px;
   padding: 0px 0px;
-  vertical-align: middle;  
+  vertical-align: middle;
   font-size: 14px;
   line-height: 1.428571429;
   border-radius: 15px;
@@ -271,7 +271,7 @@ textarea {
 }
 
 .btn-circle:hover,
-.btn-circle:focus{
+.btn-circle:focus {
   background-color: #f7544a;
   border: solid white;
   color: white;
@@ -317,7 +317,7 @@ textarea {
 
 .stop-label {
   position: absolute;
-  text-shadow: 0 2px 4px rgba(145, 92, 182, .3);  
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .3);
   color: #424242;
   cursor: pointer;
   padding-top: 38px;
@@ -331,7 +331,7 @@ textarea {
 
 .start-label {
   position: absolute;
-  text-shadow: 0 2px 4px rgba(145, 92, 182, .3);  
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .3);
   color: #424242;
   padding-top: 38px;
   margin-left: -58px;
@@ -344,45 +344,16 @@ textarea {
 }
 
 button:focus {
-  outline:0;
+  outline: 0;
 }
 
-/* mobile-specific styles */
-@media (max-width: 767px) {
-  #notesBtns {
-    width: 100px;
-  }
-  
-  .button-rect {
-    margin-top: 8px;
-  }
-
-  .line {
-    top: 17px;
-  }
-
-  .stop-label, 
-  .start-label {
-    font-size: 12px;
-  }
-}
-
-/* mobile-specific styles */
-@media (max-width: 1000px) {
-  #subHeading {
-    font-size: 12px;
-  }
-}
-
-#weatherHolder{
+#weatherHolder {
   height: 200px;
-  /* vertical-align: middle; */
   margin-top: 50px;
 }
 
+/* progress bar */
 
-
-/* Progress Bar */
 .progress {
   position: relative;
   height: 4px;
@@ -392,76 +363,147 @@ button:focus {
   border-radius: 2px;
   background-clip: padding-box;
   margin: 0.5rem 0 1rem 0;
-  overflow: hidden; }
-  .progress .determinate {
-    position: absolute;
-    background-color: inherit;
-    top: 0;
-    bottom: 0;
-    background-color: #26a69a;
-    transition: width .3s linear; }
-  .progress .indeterminate {
-    background-color: #26a69a; }
-    .progress .indeterminate:before {
-      content: '';
-      position: absolute;
-      background-color: inherit;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      will-change: left, right;
-      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-              animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }
-    .progress .indeterminate:after {
-      content: '';
-      position: absolute;
-      background-color: inherit;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      will-change: left, right;
-      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-              animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-      -webkit-animation-delay: 1.15s;
-              animation-delay: 1.15s; }
+  overflow: hidden;
+}
+
+.progress .determinate {
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  bottom: 0;
+  background-color: #26a69a;
+  transition: width .3s linear;
+}
+
+.progress .indeterminate {
+  background-color: #26a69a;
+}
+
+.progress .indeterminate:before {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.progress .indeterminate:after {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -webkit-animation-delay: 1.15s;
+  animation-delay: 1.15s;
+}
 
 @-webkit-keyframes indeterminate {
   0% {
     left: -35%;
-    right: 100%; }
+    right: 100%;
+  }
   60% {
     left: 100%;
-    right: -90%; }
+    right: -90%;
+  }
   100% {
     left: 100%;
-    right: -90%; } }
+    right: -90%;
+  }
+}
+
 @keyframes indeterminate {
   0% {
     left: -35%;
-    right: 100%; }
+    right: 100%;
+  }
   60% {
     left: 100%;
-    right: -90%; }
+    right: -90%;
+  }
   100% {
     left: 100%;
-    right: -90%; } }
+    right: -90%;
+  }
+}
+
 @-webkit-keyframes indeterminate-short {
   0% {
     left: -200%;
-    right: 100%; }
+    right: 100%;
+  }
   60% {
     left: 107%;
-    right: -8%; }
+    right: -8%;
+  }
   100% {
     left: 107%;
-    right: -8%; } }
+    right: -8%;
+  }
+}
+
 @keyframes indeterminate-short {
   0% {
     left: -200%;
-    right: 100%; }
+    right: 100%;
+  }
   60% {
     left: 107%;
-    right: -8%; }
+    right: -8%;
+  }
   100% {
     left: 107%;
-    right: -8%; } }
+    right: -8%;
+  }
+}
+
+#progressBar {
+  padding: 50px;
+  transform: translateY(16vh);
+}
+
+#progressBar > h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+/* mobile-specific styles */
+
+@media (max-width: 767px) {
+  #notesBtns {
+    width: 100px;
+  }
+
+  .button-rect {
+    margin-top: 8px;
+  }
+
+  .line {
+    top: 17px;
+  }
+
+  .stop-label,
+  .start-label {
+    font-size: 12px;
+  }
+
+  #progressBar {
+    padding: 50px;
+    transform: translateY(6vh);
+  }
+}
+
+@media (max-width: 1000px) {
+  #subHeading {
+    font-size: 12px;
+  }
+}

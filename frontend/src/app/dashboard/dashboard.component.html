@@ -33,10 +33,9 @@
 </app-confirm>
 <div class="container">
   <div class="row">
-    <div *ngIf="isLoading" style="padding-top:15%;"></div>
     <div class="col-sm-12" style="width:calc(100% - 1%);">
-      <div class="well" *ngIf="isLoading">
-          <h3>Loading</h3>
+      <div id="progressBar" class="well" *ngIf="isLoading">
+          <h3>Loading...</h3>
           <div class="progress">
             <div class="indeterminate"></div>
           </div>
