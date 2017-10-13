@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 import { TooltipModule } from "ngx-tooltip";
 import { NotificationsService } from 'angular2-notifications';
+import { JourneyService } from './journey.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,12 @@ export class AppComponent {
   public title = 'LUX: Holiday Planner';
   public username: string = 'Username';
 
-  constructor(private loggedInService: LoggedInService, public router: Router, private notifications: NotificationsService ) {}
+  constructor(
+    private loggedInService: LoggedInService, 
+    public router: Router, 
+    private notifications: NotificationsService,
+    private journeyService: JourneyService
+  ) {}
 
   public isLoggedIn() {
     try {
@@ -30,6 +36,7 @@ export class AppComponent {
 
   public logout() {
     localStorage.removeItem('id_token');
+    this.journeyService.activeJourneyIndex = 0;
     this.notifications.success(
       this.username,
       "Logged out successfully"

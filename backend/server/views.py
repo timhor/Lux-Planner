@@ -249,6 +249,16 @@ def get_all_journeys():
     # Think about how to handle a user without a journey
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
+@app.route('/api/get_journeys_length', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_journeys_length():
+    id = current_identity[0]
+    user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
+    payload = []
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    length = len(journeys)
+    return jsonify({'length': length})
 
 @app.route('/api/switch_journey/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
