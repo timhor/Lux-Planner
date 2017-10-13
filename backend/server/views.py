@@ -395,7 +395,7 @@ def convert_time(time_string):
     print(time_string)
     # 2017-09-26T10:05:56.000Z
     try:
-        python_time = datetime.strptime(time_string, '%Y-%m-%dT%h:%m:%S')
+        python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S.000Z')
     except:
         python_time = datetime.utcnow()
     return python_time
