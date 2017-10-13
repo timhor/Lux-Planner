@@ -13,11 +13,18 @@ import { NotificationsService } from 'angular2-notifications'
 export class SignupComponent {
   account = new NewAccount('','','','','','');
   public usernameTakenMsg: string = '';
+  public completedRequiredFields = 1;
 
   constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
 
   onSubmit() {
-    if (this.account.password.length < 8) {
+    this.completedRequiredFields = 1;
+    if (this.account.username == '' || this.account.password == '' || this.account.email == '' || this.account.confirmPassword == '') {
+        this.completedRequiredFields = 0;
+        //this.warn();
+        return;
+    }
+    if (this.account.password.length < 8 || this.account.password != this.account.confirmPassword) {
         return;
     }
     let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName);
@@ -55,6 +62,12 @@ export class SignupComponent {
       "Account created successfully",
     );
   }
+
+ // warn() {
+ //   this.notification.warn(
+ //       "All required fields must be filled in, in order to sign up",
+ //   );
+ // }
 
   // For debugging
   get diagnostic() { return JSON.stringify(this.account); }
