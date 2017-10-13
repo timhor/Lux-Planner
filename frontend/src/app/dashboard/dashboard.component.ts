@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit {
   }
 
   shortAbout() {
-    let sentences = this.aboutText.match(/^(.*?\..*?)\.(\s|<\/p>)/); // get first two sentences from aboutText
+    let sentences = this.aboutText.match(/^(.*?\..*?)(\.|\s|<\/p>)/); // get first two sentences from aboutText
     if (sentences) {
       let text = sentences[0]; // only want the first match
       return text;
