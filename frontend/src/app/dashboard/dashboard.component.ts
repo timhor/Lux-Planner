@@ -162,7 +162,7 @@ export class DashboardComponent implements OnInit {
       backgroundColor: 'transparent',
       color: '#424242',
       width: '100%',
-      height: '150px',
+      height: '130px',
       showWind: false,
       scale: TemperatureScale.CELCIUS,
       forecastMode: ForecastMode.GRID,

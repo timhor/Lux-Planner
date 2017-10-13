@@ -335,7 +335,7 @@ textarea {
   color: #424242;
   padding-top: 38px;
   margin-left: -58px;
-  /* Truncate long text */
+  /* truncate long text */
   width: 100px;
   white-space: nowrap;
   overflow: hidden;
@@ -348,8 +348,40 @@ button:focus {
 }
 
 #weatherHolder {
-  height: 200px;
-  margin-top: 50px;
+  height: 162px;
+  margin-top: 35px;
+  margin-bottom: 5px;
+}
+
+/* current weather - position within well */
+:host ::ng-deep .current {
+  margin-left: -25px;
+}
+
+/* weather icon for current weather */
+:host ::ng-deep .current > weather-icon.big {
+  font-size: 3.5em;
+}
+
+/* temperature for current weather */
+:host ::ng-deep .current > weather-current-temperature.big {
+  font-size: 2em;
+}
+
+/* forecast div height */
+:host ::ng-deep .info.wide {
+  height: fit-content; /* prevent scrollbars */
+  margin-top: -42px;
+}
+
+/* forecast icons and text */
+:host ::ng-deep .forecast > weather-forecast > weather-forecast-simple-grid {
+  font-size: initial;
+}
+
+/* hide refresh button */
+:host ::ng-deep weather-widget > weather-actions {
+  display: none;
 }
 
 /* progress bar */
