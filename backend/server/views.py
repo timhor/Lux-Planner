@@ -8,6 +8,7 @@ from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime, timedelta
+from Crypto.Cipher import AES
 import pickle
 import json
 import re
@@ -25,7 +26,9 @@ def authenticate(username, password):
     user = models.User.query.filter_by(username=username).first()
     try:
         print(user)
-        if user.password == password:
+        obj2 = AES.new(b'This is a key123', AES.MODE_CBC, b'This is an IV456')
+        checkPassword = obj2.decrypt(user.password)
+        if checkPassword == password:
             return user
     except AttributeError:
         return None
@@ -118,7 +121,9 @@ def new_user():
             'message': username + " is taken."
         })
 
-    password = body['password']
+    obj = AES.new(b'This is a key123', AES.MODE_CBC, b'This is an IV456')
+    password = obj.encrypt(body['password'])
+   # password = body['password']
     email = body['email']
     first_name = body['firstName']
     last_name = body['lastName']
