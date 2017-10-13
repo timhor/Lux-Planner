@@ -196,9 +196,15 @@ export class DashboardComponent implements OnInit {
   }
 
   shortAbout() {
-    let sentences = this.aboutText.match(/^(.*?\..*?)(\.|\s|<\/p>)/); // get first two sentences from aboutText
+    // get first two sentences from aboutText
+    let sentences = this.aboutText.match(/.*?\.[^\d]/g);
     if (sentences) {
-      let text = sentences[0]; // only want the first match
+      // regex replace is to account for numbers with decimal in the text
+      // e.g. "around 7.2 million" in the aboutText for Hong Kong
+      let text = sentences[0].replace(/<$/, "");
+      if (sentences.length > 1) {
+        text += sentences[1].replace(/<$/, "");
+      }
       return text;
     } else {
       return "<em>No information found.</em>"
