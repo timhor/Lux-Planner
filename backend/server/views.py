@@ -21,10 +21,8 @@ def authenticate(username, password):
         @return: the user that matches both username and password
             else return None
     """
-    print('hello auth')
     user = models.User.query.filter_by(username=username).first()
     try:
-        print(user)
         if user.password == password:
             return user
     except AttributeError:
@@ -33,7 +31,6 @@ def authenticate(username, password):
 
 def identity(payload):
     """ Provides an identity of the user """
-    print(payload['identity'])
     return payload['identity']  # identity payload => current_identity (global var)
 
 
@@ -109,9 +106,7 @@ def google_places():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
     body = json.loads(request.data)
-    #print(data)
     username = body['username']
-    print(username)
     search_username = models.User.query.filter_by(username=username).first()
     if search_username:
         return jsonify({
@@ -131,7 +126,6 @@ def new_user():
 
 @app.route('/api/new_place', methods=['POST'])
 def new_place():
-    print(request)
     name = request.form['name']
     search_name = models.Place.query.filter_by(place_name=name).first()
     if search_name:
@@ -147,7 +141,6 @@ def new_place():
 
 @app.route('/api/new_stop', methods=['POST'])
 def new_stop():
-    print(request)
     name = request.form['name']
     search_name = models.Stop.query.filter_by(stop_name=name).first()
     if search_name:
@@ -165,7 +158,6 @@ def new_stop():
 def new_journey():
     user_id = current_identity[0]
     body = json.loads(request.data)
-    print(body)
     if body['isModifying'] == -1:
         j_start = convert_time(body['initialDeparture'])
         j_end = convert_time(body['initialArrival'])
@@ -230,7 +222,6 @@ def get_all_journeys():
     journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     for j in journeys:
         stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
-        print(stops)
         s_payload = []
         for s in stops:
             location = call_cache(s.stop_name, 'coord')
@@ -256,7 +247,6 @@ def get_all_journeys():
 
         payload.append(j_item)
     # Think about how to handle a user without a journey
-    print(payload)
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
 
@@ -324,10 +314,8 @@ def get_all_journey_names():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def change_user_details():
-    print("hello")
     user = models.User.query.filter_by(id=current_identity[0]).first()
     body = json.loads(request.data)
-    print(body)
     for key in body:
         if key == 'password':
             user.password = body['password']
@@ -375,7 +363,6 @@ def call_cache(search, data_type):
                                                 cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()
-    print(data)
     return data
 
 
@@ -392,7 +379,6 @@ def api_caller(search, data_type):
 
 
 def convert_time(time_string):
-    print(time_string)
     # 2017-09-26T10:05:56.000Z
     try:
         python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S.000Z')

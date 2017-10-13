@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
 
@@ -16,12 +16,13 @@ export class ProfileComponent implements OnInit {
   public lastName: string;
   public dateJoined: string = "19/09/2017";
   public journeys; // I think this is an Array<any>?
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
+
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService,
+    public router: Router
+  ) {
 
     this.connService.getProtectedData('api/get_account_details/').subscribe(
         res => {
@@ -29,14 +30,12 @@ export class ProfileComponent implements OnInit {
           this.email = res.email;
           this.firstName = res.first_name;
           this.lastName = res.last_name;
-          console.log('Success getting account details');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
     this.connService.getProtectedData('api/get_all_journey_names/').subscribe(
       res => {
           this.journeys = res.names;
-          console.log('Success getting journeys');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );

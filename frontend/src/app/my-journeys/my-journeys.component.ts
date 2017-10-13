@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { Router } from '@angular/router';
@@ -12,21 +12,19 @@ import { NotificationsService } from 'angular2-notifications'
 })
 export class MyJourneysComponent implements OnInit {
   public allJourneys = [{'journey_name': 'Journey', 'stops': []}];
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
-  public journeyService: JourneyService;
   public modalJourney: string;
   public modalIndex: number;
   public notifysuccess: number;
   public notifyfailure: number;
   public success: number;
 
-  constructor(_connectionService: ConnectionService, _loggedinService: LoggedInService, _journeyService: JourneyService,
-      public router: Router,  private notification: NotificationsService) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
-    this.journeyService = _journeyService;
-  }
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService,
+    private journeyService: JourneyService,
+    public router: Router,
+    private notification: NotificationsService
+  ) {}
 
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
@@ -47,21 +45,16 @@ export class MyJourneysComponent implements OnInit {
   }
 
   deleteJourney() {
-      // this.notifysuccess = 0;
-      // this.notifyfailure = 0;
+
       this.loggedInService.deleteJourney(JSON.stringify({'delete': this.modalIndex})).subscribe(
           (res) => {
-            // this.router.navigate(['/my-journeys'])
             this.notifyDelete();
             this.getJourneyList();
             if (this.modalIndex === this.allJourneys.length-1) {
               window.scrollTo(0,window.scrollY-this.allJourneys[this.modalIndex].stops.length*100-50);
             }
-            // this.notifysuccess = 1;
-            console.log("Success deleting journey");
           },
           (error) => {
-            // this.notifyfailure = 1;
             console.log("Could not delete");
           }
       )
@@ -71,7 +64,7 @@ export class MyJourneysComponent implements OnInit {
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
             if (res.journeys.length == 0) {
-              // No journeys, direct them to make a journey :)
+              // No journeys, direct them to make a journey
               this.notifyRedirect();
               setTimeout(() => {
                 this.router.navigate(['/journey']);
@@ -79,7 +72,6 @@ export class MyJourneysComponent implements OnInit {
               return;
             }
             this.allJourneys = res.journeys;
-            console.log('Success getting journeys');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );

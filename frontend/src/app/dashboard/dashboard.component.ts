@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { StopComponent } from '../stop/stop.component';
 import { ItineraryComponent } from '../itinerary/itinerary.component';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { JourneyService } from '../journey.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -16,9 +16,6 @@ import { WeatherSettings, TemperatureScale, ForecastMode, WeatherLayout } from '
   styleUrls: ['../app.component.css', './dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
-  public journeyService: JourneyService;
   public journeyName: string = 'Journey1';
   public stops = [{'name': 'Stop',
                   'arrival': '',
@@ -47,31 +44,20 @@ export class DashboardComponent implements OnInit {
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
-  public startingLocationName;
-  // private startingLocationLatitude = -33.86514;
-  // private startingLocationLongitude = 151.20990;
-  settings: WeatherSettings = {
-    location: {
-      cityName: 'Sydeny'
-    },
-    backgroundColor: 'transparent',
-    color: '#424242',
-    width: '100%',
-    height: 'auto',
-    showWind: false,
-    scale: TemperatureScale.CELCIUS,
-    forecastMode: ForecastMode.GRID,
-    showDetails: false,
-    showForecast: true,
-    layout: WeatherLayout.WIDE,
-    language: 'en'
-  };
+  public startingLocationName: string;
+  settings: WeatherSettings;
+  public isLoading: boolean = true;
   
-  constructor(_connectionService: ConnectionService, public sanitizer: DomSanitizer, _loggedinService: LoggedInService, 
-      public router: Router, _journeyService: JourneyService, private notification: NotificationsService, private mapsAPILoader: MapsAPILoader) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
-    this.journeyService = _journeyService;
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService, 
+    private journeyService: JourneyService,
+    private notification: NotificationsService,
+    private mapsAPILoader: MapsAPILoader,
+    public sanitizer: DomSanitizer,
+    public router: Router
+  ) {
+
     this.firstLoad = true;
     this.mapsAPILoader.load().then(() => {this.bounds = new google.maps.LatLngBounds();})
 
@@ -85,7 +71,6 @@ export class DashboardComponent implements OnInit {
                 }, 500)
                 return;
             }
-            // this.activeJourneyIndex = res.active_journey;
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
@@ -99,6 +84,7 @@ export class DashboardComponent implements OnInit {
             this.firstLoad = false;
             this.updateMap();
             this.setActiveJourney(this.journeyName);
+            this.isLoading = false;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -166,6 +152,25 @@ export class DashboardComponent implements OnInit {
     );
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();
+    this.settings = {
+      location: {
+        latLng:{
+          lat: this.stops[this.activeStopIndex].lat,
+          lng: this.stops[this.activeStopIndex].lng
+        }
+      },
+      backgroundColor: 'transparent',
+      color: '#424242',
+      width: '100%',
+      height: '130px',
+      showWind: false,
+      scale: TemperatureScale.CELCIUS,
+      forecastMode: ForecastMode.GRID,
+      showDetails: false,
+      showForecast: true,
+      layout: WeatherLayout.WIDE,
+      language: 'en'
+    };
   }
 
   getJourneyLength() {
@@ -227,7 +232,6 @@ export class DashboardComponent implements OnInit {
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {
           this.notifyUpdate(action);
-          console.log("pushed to server successfully");
         }
 
     )
@@ -272,8 +276,6 @@ export class DashboardComponent implements OnInit {
   // setTimelineWidth() {
   //   let element: HTMLElement = document.getElementById('timeline-buttons');
   //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-  //   console.log(timelineWidth);
-  //   console.log(0.65*window.screen.width);
   //   if (timelineWidth > 0.65*window.screen.width) {
   //     element.setAttribute('style', "width: " + timelineWidth + "px");
   //   } else {

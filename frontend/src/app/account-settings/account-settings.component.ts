@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
@@ -22,8 +22,6 @@ export class AccountSettingsComponent implements OnInit {
   public password: string;
   public firstName: string;
   public lastName: string;
-  public connService: ConnectionService;
-  public loggedInService: LoggedInService;
 
   public newAvatar: string;
   public newEmail: string;
@@ -34,10 +32,12 @@ export class AccountSettingsComponent implements OnInit {
 
   public submitted: boolean = false;
 
-  constructor( _connectionService: ConnectionService, _loggedinService: LoggedInService, public router: Router,
-      private notification: NotificationsService) {
-    this.connService = _connectionService;
-    this.loggedInService = _loggedinService;
+  constructor(
+    private connService: ConnectionService,
+    private loggedInService: LoggedInService,
+    private notification: NotificationsService,
+    public router: Router
+  ) {
 
     this.connService.getProtectedData('api/get_account_details/').subscribe(
       res => {
@@ -45,7 +45,6 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        console.log('Success getting account details');
       },
       (error) => {console.log(`could not connect ${error}`)}
   );
@@ -96,7 +95,6 @@ export class AccountSettingsComponent implements OnInit {
     let response = this.loggedInService.changeDetails(payload);
     response.subscribe(
       (data) => {
-        console.log(data.message);
         this.editAvatar = false;
         this.editPassword = false;
         this.editEmail = false;
@@ -115,12 +113,9 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        console.log('Success updating account details');
       },
         (error) => {console.log(`could not connect ${error}`)}
     );
-    //Add stuff here to send account details to backend
-    //this.newAvatar, this.newPassword, this.newPasswordConfirm, this.newEmail
   }
 
   notify() {

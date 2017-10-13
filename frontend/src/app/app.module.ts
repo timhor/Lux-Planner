@@ -15,7 +15,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'
 import { SearchComponent } from './search/search.component';
 import { StopComponent } from './stop/stop.component';
-import { ConnectionComponent } from './connection/connection.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { JourneyComponent } from './journey/journey.component';
@@ -29,14 +28,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 
 import { StopService } from './stop/stop.service';
-import { ConnectionService } from './connection/connection.service';
+import { ConnectionService } from './connection.service';
 import { LoggedInService } from './loggedIn.service';
 import { SearchService } from './search/search.service';
 import { JourneyService } from './journey.service';
 
 import { DropdownModule } from "ngx-dropdown";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ScheduleModule, CalendarModule } from 'primeng/primeng';
+import { ScheduleModule, CalendarModule, DialogModule, CheckboxModule, ButtonModule, InputTextModule } from 'primeng/primeng';
 import { TooltipModule } from 'ngx-tooltip';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
@@ -69,7 +68,6 @@ export const serviceProviders = [
     LoginComponent,
    	SearchComponent,
    	StopComponent,
-    ConnectionComponent,
     SignupComponent,
     AboutComponent,
     ContactUsComponent,
@@ -103,7 +101,11 @@ export const serviceProviders = [
       key: '0bbc7feec8144680e2ed52ec0e0c67d5',
       name: WeatherApiName.OPEN_WEATHER_MAP,
       baseUrl: 'http://api.openweathermap.org/data/2.5'
-    })
+    }),
+    DialogModule,
+    CheckboxModule,
+    ButtonModule, 
+    InputTextModule
   ],
   providers:
     serviceProviders

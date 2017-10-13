@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StopService } from './stop.service';
-import { ConnectionService } from '../connection/connection.service';
+import { ConnectionService } from '../connection.service';
 
 @Component({
     selector: 'stop-info',
@@ -13,7 +13,6 @@ export class StopComponent {
     public currStop: string = 'Tokyo';
     public stops: Array<any>;
     public bannerPhoto: string = "https://dummyimage.com/650x300/000000/baffef&text=No+Image+Available";
-    public connService: ConnectionService;
     public aboutText: string = "Loading Information...";
     public visible: boolean = false;
     public visibleAnimate: boolean = false;
@@ -21,16 +20,14 @@ export class StopComponent {
     public location_images: Array<any> = [];
 
     // Inject StopService and assign it to _stopService
-    constructor(_stopService: StopService, _connectionService: ConnectionService) {
+    constructor(_stopService: StopService, private connService: ConnectionService) {            
         // Utilize .get request from app/stop.service.ts to populate stops object
         this.stops = _stopService.getStops();
-        this.connService = _connectionService;
     }
 
-    getBannerPhoto() {
+    public getBannerPhoto() {
         this.connService.getServiceData('api/flickr/?search='+this.currStop+'%20Landmarks&results=0-9')
             .subscribe(res => this.location_images = res.images);
-        // console.log("Hello with " + this.bannerPhoto);
     }
 
     public show(stop): void {
@@ -42,16 +39,12 @@ export class StopComponent {
 
         this.connService.getServiceData('api/stop_information/?stop='+ this.currStop).subscribe(
             res => {
-                this.aboutText = res.info; 
-                // console.log("About text is " + this.aboutText);   
+                this.aboutText = res.info;   
             }        
         );
 
         this.connService.getServiceData('api/places/?place='+ this.currStop).subscribe(
             res => {
-                // res.forEach(place => {
-                //     console.log("Name is: " + place.name + "  --  Address is: " + place.address + "  --  Ratings : " + place.ratings+ "  --  Ratings : " + place.photo);
-                // });
                 this.attractions = res;
             }        
         );

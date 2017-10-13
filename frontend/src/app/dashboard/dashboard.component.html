@@ -33,8 +33,14 @@
 </app-confirm>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12" style="width:calc(100% - 1%)">
-      <div class="well">
+    <div class="col-sm-12" style="width:calc(100% - 1%);">
+      <div id="progressBar" class="well" *ngIf="isLoading">
+          <h3>Loading...</h3>
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+      </div>
+      <div class="well" *ngIf="!isLoading">
         <div class="dropdown">
           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"  id="currentJourneyHeader" *ngIf="getJourneyLength() !== 1">
             <p id="subHeading">{{ journeyName }}&nbsp;<span class="fa fa-caret-down"></span></p>
@@ -88,10 +94,10 @@
   </div>
   <div class="row">
     <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
-      <div class ="well">
+      <div class ="well" *ngIf="!isLoading">
         <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
       </div>
-      <div class="well" align="center">
+      <div class="well" align="center" *ngIf="!isLoading">
         <p id="subHeading">Itinerary</p>
         <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
           <div class="btn-group" align="center">
@@ -101,20 +107,20 @@
           </div>
         </div>
       </div>
-      <div class="well" id="aboutWell">
+      <div class="well" id="aboutWell" *ngIf="!isLoading">
         <p id="subHeading">About</p>
         <p [innerHtml]="shortAbout()"></p>
         <button type="button" class="button-rect button-blue pull-right" (click)="stop.show(getCurrStop())" id="findOutMoreBtn">Find Out More</button>
         <br><br>
       </div>
-      <div class="well">
+      <div class="well" *ngIf="!isLoading">
         <p id="subHeading">Calendar</p>
         <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=irjrjrntp2vjb11uoduhgl0ubg%40group.calendar.google.com&amp;color=%23AB8B00&amp;ctz=Australia%2FSydney"
           style="border:solid 1px #777" width="100%" height="250" frameborder="0" scrolling="no"></iframe>
       </div>
     </div>
     <div class="col-sm-3" *ngIf="activeStopIndex===-1">
-      <div class="well">
+      <div class="well" *ngIf="!isLoading">
         <p id="subHeading">Search for Flights</p>
         <iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/searchform/widget?wtt=1&tp1=1234&tp2=&lob=F&des=&sfs=5&wbi=13&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=C7C7C7&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2" 
           width="100%" height="450px" scrolling="no" frameborder="0"></iframe>
@@ -122,20 +128,23 @@
     </div>
     <div class="col-sm-9">
       <div class="col-sm-12" *ngIf="activeStopIndex!==-1">
-        <div class="well">
+        <div class="well" *ngIf="!isLoading">
             <p id="subHeading">{{stops[activeStopIndex].name}} Map</p>
             <agm-map [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng" [zoom]="10" [disableDoubleClickZoom]="false" [scrollwheel]="false">
             <agm-marker [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng"></agm-marker>
           </agm-map>
         </div>
-        <div class="well">
+        <div class="well" *ngIf="!isLoading">
           <!-- <div id="weather-forecast" *ngFor="let i of stops">
             <iframe id="weatherapp" *ngIf="i==stops[activeStopIndex]" width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl("https://forecast.io/embed/#lat=" + i.lat + "&lon=" + i.lng + "&name=" + i.name + "&units=uk&color=#000037")'
               allowfullscreen></iframe>
           </div> -->
-          <weather-widget [settings]="settings"></weather-widget>
+          <p id="subHeading">{{stops[activeStopIndex].name}} Weather Forecast</p>          
+          <div id="weatherHolder">
+              <weather-widget [settings]="settings"></weather-widget>              
+          </div>
         </div>
-        <div class="well">
+        <div class="well" *ngIf="!isLoading">
           <div class="well">
             <p id="subHeading">Notes</p>
             <textarea class="form-control" rows="10" [(ngModel)]="newNotes" #notes="ngModel"></textarea>
@@ -149,7 +158,7 @@
         </div>
       </div>
       <div class="col-sm-12" *ngIf="activeStopIndex===-1">
-        <div class="well">
+        <div class="well" *ngIf="!isLoading">
           <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
             allowfullscreen></iframe> -->
             <p id="subHeading">Journey Map</p>
