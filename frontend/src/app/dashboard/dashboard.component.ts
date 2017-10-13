@@ -75,7 +75,6 @@ export class DashboardComponent implements OnInit {
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
-            this.stops = res.journeys[this.activeStopIndex].stops;
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
                     this.aboutText = res.info;
@@ -84,7 +83,7 @@ export class DashboardComponent implements OnInit {
             this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
             this.updateMap();
-            this.setActiveJourney(this.journeyName);
+            this.setActiveJourney(this.activeJourneyIndex);
             this.isLoading = false;
         },
         (error) => {console.log(`could not connect ${error}`)}
@@ -105,21 +104,18 @@ export class DashboardComponent implements OnInit {
     return this.stops[i].name;
   }
 
-  setActiveJourney(journey:string) {
+  setActiveJourney(index:number) {
     if (!this.firstLoad) {
       this.firstLoad = true;
     }
 
-    for (let i=0; i < this.allJourneys.length; i++) {
-      if (journey === this.allJourneys[i].journey_name) {
-        this.activeJourneyIndex = i;
-        break;
-      }
-    }
+    this.activeJourneyIndex = index;
 
-    this.journeyName = journey;
-    this.stops = this.allJourneys[this.activeJourneyIndex].stops;
+    let journey = this.allJourneys[this.activeJourneyIndex];
+    this.journeyName = journey.journey_name
+    this.stops = journey.stops;
     this.activeStopIndex = 0;
+    this.startingLocationName = journey.start_location;    
     
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
@@ -129,23 +125,13 @@ export class DashboardComponent implements OnInit {
 
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();   
-    this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
     // this.setTimelineWidth();
   }
 
-  setActiveStop(stop:string) {
+  setActiveStop(index:number) {
     this.firstLoad = false;
-    for (let i=0; i < this.stops.length; i++) {
-      if (stop === this.stops[i].name) {
-        this.activeStopIndex = i;
-        break;
-      }
-    }
-    // if (this.stops[this.activeStopIndex].notes === undefined) {
-    //   this.newNotes = null;
-    // } else {
-    //   this.newNotes = this.stops[this.activeStopIndex].notes;
-    // }
+    this.activeStopIndex = index;
+
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
