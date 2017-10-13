@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit {
   public mapUrl: string = "Nothing";
   private toRefresh:boolean = false;
   private firstLoad:boolean;
+  private isModifyingNotes = false;
   private newNotes: string = "";
   events: Array<any>;
   private bounds;
@@ -140,11 +141,11 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-    if (this.stops[this.activeStopIndex].notes === undefined) {
-      this.newNotes = null;
-    } else {
-      this.newNotes = this.stops[this.activeStopIndex].notes;
-    }
+    // if (this.stops[this.activeStopIndex].notes === undefined) {
+    //   this.newNotes = null;
+    // } else {
+    //   this.newNotes = this.stops[this.activeStopIndex].notes;
+    // }
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -209,18 +210,25 @@ export class DashboardComponent implements OnInit {
     this.activeStopIndex = -1;
   }
 
-  cancelNotes() {
+  modifyNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.newNotes = this.stops[this.activeStopIndex].notes;
+  }
+
+  cancelNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
   }
 
   saveNotes() {
     this.stops[this.activeStopIndex].notes = this.newNotes;
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes("updated");
   }
 
   deleteNotes() {
+    // TODO - add warning
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
-    this.newNotes = null;
     this.pushNotes("deleted");
   }
 

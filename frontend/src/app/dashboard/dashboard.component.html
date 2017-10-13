@@ -146,13 +146,18 @@
         <div class="well" *ngIf="!isLoading">
           <div class="well">
             <p id="subHeading">Notes</p>
-            <textarea class="form-control" rows="10" [(ngModel)]="newNotes" #notes="ngModel"></textarea>
+            <p *ngIf="!isModifyingNotes" id="notesText">{{stops[activeStopIndex].notes}}</p>
+            <p *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" id="notesTextEmpty">No existing notes found.</p>
+            <textarea *ngIf="isModifyingNotes" class="form-control" rows="10" [(ngModel)]="newNotes"></textarea>
             <br>
-            <div class="btn-group" id="notesBtns" align="right">
+            <button *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Add Notes</button>
+            <button *ngIf="stops[activeStopIndex].notes !== null && !isModifyingNotes" type="button" class="button-rect button-blue pull-right" (click)="modifyNotes()">Modify Notes</button>
+            <div class="btn-group" *ngIf="isModifyingNotes" id="notesBtns" align="right">
               <button type="button" class="button-rect button-red" *ngIf="stops[activeStopIndex].notes !== null" id="notesDeleteBtn" (click)="confirm.show()">Delete</button>
-              <button type="button" class="button-rect button-orange" *ngIf="newNotes !== stops[activeStopIndex].notes" id="notesCancelBtn" (click)="cancelNotes()">Cancel</button>
-              <button type="button" class="button-rect button-green"  *ngIf="newNotes !== stops[activeStopIndex].notes" (click)="saveNotes()">Save</button>
+              <button type="button" class="button-rect button-orange" id="notesCancelBtn" (click)="cancelNotes()">Cancel</button>
+              <button type="button" class="button-rect button-green" (click)="saveNotes()">Save</button>
             </div>
+            <br><br>
           </div>
         </div>
       </div>
