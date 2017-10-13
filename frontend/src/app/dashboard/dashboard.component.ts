@@ -273,6 +273,12 @@ export class DashboardComponent implements OnInit {
     return new Date(date).toLocaleDateString();
   }
 
+  getDuration(end, start) {
+    let diff = Math.abs(new Date(end).valueOf() - new Date(start).valueOf());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    return diffDays;
+  }
+
   // setTimelineWidth() {
   //   let element: HTMLElement = document.getElementById('timeline-buttons');
   //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);

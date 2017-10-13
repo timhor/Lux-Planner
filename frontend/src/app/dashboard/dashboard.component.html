@@ -83,7 +83,7 @@
           <button class="btn-circle-start" (click)="resetFirstLoad()"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
           <span *ngFor="let stop of stops; let i=index;">
             <tooltip-content></tooltip-content>
-            <button class="btn-circle" (click)="setActiveStop(stop.name)" [tooltip]="convertDate(stop.arrival)" tooltipPlacement="top">
+            <button class="btn-circle" (click)="setActiveStop(stop.name)" [tooltip]="convertDate(stop.arrival) + ' ' + getDuration(stop.departure,stop.arrival) + ' days'" tooltipPlacement="top">
               {{i+1}}<label class="stop-label">{{shortStop(stop.name)}}</label>
             </button>
           </span>
