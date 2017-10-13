@@ -8,7 +8,7 @@ from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime, timedelta
-from Crypto.Cipher import AES
+from Crypto.Cipher import Salsa20
 import pickle
 import json
 import re
@@ -25,9 +25,9 @@ def authenticate(username, password):
     print('hello auth')
     user = models.User.query.filter_by(username=username).first()
     try:
-        print(user)
-        obj2 = AES.new(b'This is a key123', AES.MODE_CBC, b'This is an IV456')
-        checkPassword = obj2.decrypt(user.password)
+        nonce, password_bytes = user.password[:8], user.password[8:]
+        encryption = Salsa20.new(app.config['SECRET_KEY'].encode(), nonce)
+        checkPassword = encryption.decrypt(password_bytes).decode()
         if checkPassword == password:
             return user
     except AttributeError:
@@ -121,13 +121,12 @@ def new_user():
             'message': username + " is taken."
         })
 
-    obj = AES.new(b'This is a key123', AES.MODE_CBC, b'This is an IV456')
-    password = obj.encrypt(body['password'])
-   # password = body['password']
+    encryption = Salsa20.new(app.config['SECRET_KEY'].encode())
+    password_bytes = encryption.nonce + encryption.encrypt(body['password'].encode())
     email = body['email']
     first_name = body['firstName']
     last_name = body['lastName']
-    created_user = models.User(username=username, password=password, email=email,
+    created_user = models.User(username=username, password=password_bytes, email=email,
         first_name=first_name, last_name=last_name, active_journey_index=0)
     db.session.add(created_user)
     db.session.commit()
