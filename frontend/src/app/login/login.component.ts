@@ -40,7 +40,6 @@ export class LoginComponent {
   }
 
   setLoggedIn() {
-    console.log("Logged In=" + this.loggedInService.loggedIn);
   }
 
   notify() {

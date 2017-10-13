@@ -53,7 +53,6 @@ export class MyJourneysComponent implements OnInit {
             if (this.modalIndex === this.allJourneys.length-1) {
               window.scrollTo(0,window.scrollY-this.allJourneys[this.modalIndex].stops.length*100-50);
             }
-            console.log("Success deleting journey");
           },
           (error) => {
             console.log("Could not delete");
@@ -73,7 +72,6 @@ export class MyJourneysComponent implements OnInit {
               return;
             }
             this.allJourneys = res.journeys;
-            console.log('Success getting journeys');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );

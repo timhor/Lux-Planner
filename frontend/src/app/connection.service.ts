@@ -14,14 +14,10 @@ export class ConnectionService {
     }
 
     getServiceData(endpoint: String) {
-        // console.log("Hello from service");
-        // console.log(this.server + endpoint);
         return this.http.get(this.server + endpoint).map(response => response.json());
     }
 
     getProtectedData(endpoint: String) {
-        // console.log("Hello from protected");
-        // console.log(this.server + endpoint);
         return this.authHttp.get(this.server + endpoint).map(response => response.json());
     }
 
@@ -36,12 +32,8 @@ export class ConnectionService {
     //         (data) => {
     //             let token = data.access_token;
     //             localStorage.setItem('id_token', token);  // 'id_token' is the default location AuthHTTP looks for
-    //             console.log("Token saved successfully?");
 
     //             let jwtHelper: JwtHelper = new JwtHelper();
-    //             console.log(`expiration: ${jwtHelper.getTokenExpirationDate(token)}`);
-    //             console.log(`is expired: ${jwtHelper.isTokenExpired(token)}`);
-    //             console.log(`decoded: ${JSON.stringify(jwtHelper.decodeToken(token))}`);
     //         },
     //         (error) => console.log(`Sumting wong: ${error}`)
     //     )
@@ -50,13 +42,11 @@ export class ConnectionService {
 
     // flickrSearch() {
     //     var stuff = this.httpPoint.get(this.server + "api/flickr?search=Paris&results=1");
-    //     console.log(stuff);
     //     return stuff;
     // }
 
     // wikiSearch(search: String) {
     //     var conn = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&titles=" + search + "&callback=?";
-    //     console.log(conn);
     //     return this.http.get(conn).map(response => response.json());
     // }
 }

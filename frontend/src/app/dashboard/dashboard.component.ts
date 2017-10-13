@@ -232,7 +232,6 @@ export class DashboardComponent implements OnInit {
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {
           this.notifyUpdate(action);
-          console.log("pushed to server successfully");
         }
 
     )
@@ -273,8 +272,6 @@ export class DashboardComponent implements OnInit {
   // setTimelineWidth() {
   //   let element: HTMLElement = document.getElementById('timeline-buttons');
   //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-  //   console.log(timelineWidth);
-  //   console.log(0.65*window.screen.width);
   //   if (timelineWidth > 0.65*window.screen.width) {
   //     element.setAttribute('style', "width: " + timelineWidth + "px");
   //   } else {

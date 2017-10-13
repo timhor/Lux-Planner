@@ -30,14 +30,12 @@ export class ProfileComponent implements OnInit {
           this.email = res.email;
           this.firstName = res.first_name;
           this.lastName = res.last_name;
-          console.log('Success getting account details');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
     this.connService.getProtectedData('api/get_all_journey_names/').subscribe(
       res => {
           this.journeys = res.names;
-          console.log('Success getting journeys');
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
