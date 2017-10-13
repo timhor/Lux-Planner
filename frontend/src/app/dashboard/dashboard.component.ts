@@ -215,6 +215,14 @@ export class DashboardComponent implements OnInit {
   }
 
   saveNotes() {
+    if (this.stops[this.activeStopIndex].notes === this.newNotes) {
+      this.isModifyingNotes = !this.isModifyingNotes;
+      this.notification.warn(
+        "Notes unchanged",
+        "Notes were not saved"
+      )
+      return;
+    }
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes("updated");
