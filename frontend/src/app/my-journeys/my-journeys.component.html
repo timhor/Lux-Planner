@@ -24,30 +24,36 @@
 </div> -->
 <div id="body_div">
   <h1>My Journeys</h1>
-
+  <br>
   <div align="center" *ngFor="let journey of allJourneys; let i=index">
-    <br><br>
-    <h2>{{journey.journey_name}}</h2>
-    <table class="table table-striped" id="stopsTable">
-      <thead class="thead-normal">
-        <tr>
-          <th>Stops</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let stop of journey.stops; let j=index">
-          <th scope="row">{{j+1}}</th>
-          <td>{{stop.name}}</td>
-        </tr>
-      </tbody>
-    </table>
     <br>
-    <div class="btn-group">
-      <button type="button" class="button-rect button-green" (click)="viewJourney(i)" routerLink="/dashboard">View Journey</button>
-      <button type="button" class="button-rect button-blue" (click)="setModify(i)">Modify Journey</button>
-      <button type="button" class="button-rect button-red" (click)="sendData(journey.journey_name, i)" (click)="confirm.show()">Delete Journey</button>
+    <div style="padding-left:calc(2vw + 20px); padding-right:calc(2vw + 20px);" class="card">
+      <br>
+      <h2>{{journey.journey_name}}</h2>
+      <table class="table table-striped" id="stopsTable">
+        <thead class="thead-normal">
+          <tr>
+            <th>Stops</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stop of journey.stops; let j=index">
+            <th scope="row">{{j+1}}</th>
+            <td>{{stop.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="btn-group">
+        <button type="button" class="button-rect button-green" (click)="viewJourney(i)" routerLink="/dashboard">View Journey</button>
+        <button type="button" class="button-rect button-blue" (click)="setModify(i)">Modify Journey</button>
+        <button type="button" class="button-rect button-red" (click)="sendData(journey.journey_name, i)" (click)="confirm.show()">Delete Journey</button>
+      </div>
+      <br>
+      <br>
+      <br>
     </div>
-    <br><br>
+    <br>
   </div>
 </div>
 <br>

@@ -1,10 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 // import { EventService } from '../event.service';
+
 @Component({
   selector: 'app-itinerary',
   templateUrl: './itinerary.component.html',
   styleUrls: ['../app.component.css', './itinerary.component.css']
 })
+
+// Some of the script below was obtained from: http://primefaces.org/primeng/#/schedule, and modified according to our needs
 export class ItineraryComponent implements OnInit {
   public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore'];
   public currStop;
@@ -15,9 +18,7 @@ export class ItineraryComponent implements OnInit {
   dialogVisible: boolean = false;
   idGen: number = 100;
 
-  constructor(private cd: ChangeDetectorRef) { 
-
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     //TODO: Replace with dynamically populated events array from database
