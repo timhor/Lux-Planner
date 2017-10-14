@@ -303,10 +303,10 @@ export class DashboardComponent implements OnInit {
 
   setTimelineWidth() {
     let element: HTMLElement = document.getElementById('timeline-line');
-    let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-    if (timelineWidth > 0.65*window.screen.width) {
-      timelineWidth = timelineWidth - 660;
-      element.setAttribute('style', "width: " + timelineWidth + "px");
+    let timelineWidth = Math.round((window.screen.width*0.041)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
+    if (timelineWidth > 0.8*window.screen.width) {
+      timelineWidth = (timelineWidth/window.screen.width) * 100;
+      element.setAttribute('style', "width: " + timelineWidth + "vw");
     } else {
      element.setAttribute('style', "width: 100%");
     }
