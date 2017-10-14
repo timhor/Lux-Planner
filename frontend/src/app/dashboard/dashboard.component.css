@@ -269,10 +269,6 @@ textarea {
   overflow-x: auto;
 }
 
-.line-active{
-  margin-top: 5px;  
-}
-
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -302,9 +298,6 @@ textarea {
   background-color: #f7544a;
   border: solid white;
   color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
 }
 
 .btn-circle-start:hover {
@@ -320,7 +313,7 @@ textarea {
   vertical-align: middle;
   font-size: 14px;
   line-height: 1.428571429;
-  border-radius: 100%;
+  border-radius: 15px;
   margin-left: 5%;
   margin-right: 5%;
   text-align: center;

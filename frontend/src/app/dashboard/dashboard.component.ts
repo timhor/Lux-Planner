@@ -188,10 +188,10 @@ export class DashboardComponent implements OnInit {
 
   shortAbout() {
     // get first two sentences from aboutText
-    // [^\d] accounts for numbers with a decimal in the text, e.g. "around 7.2 million" appears in the aboutText for Hong Kong
     let sentences = this.aboutText.match(/.*?\.[^\d]/g);
     if (sentences) {
-      // regex replace removes trailing "<" which may be captured by [^\d]
+      // regex replace is to account for numbers with decimal in the text
+      // e.g. "around 7.2 million" in the aboutText for Hong Kong
       let text = sentences[0].replace(/<$/, "");
       if (sentences.length > 1) {
         text += sentences[1].replace(/<$/, "");
@@ -298,19 +298,14 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < this.stops.length; i++) {
       document.getElementById('stopButton'+i.toString()).setAttribute('class', 'btn-circle');
     }
-    if (this.activeStopIndex != -1){
-      document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');     
-      document.getElementById('timeline-line').setAttribute('class', 'line line-active');            
-    } else {
-      document.getElementById('timeline-line').setAttribute('class', 'line');      
-    }
+    document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
   }
 
   setTimelineWidth() {
     let element: HTMLElement = document.getElementById('timeline-line');
     let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-    if (timelineWidth > 0.70*window.screen.width) {
-      timelineWidth = timelineWidth - 340;
+    if (timelineWidth > 0.65*window.screen.width) {
+      timelineWidth = timelineWidth - 660;
       element.setAttribute('style', "width: " + timelineWidth + "px");
     } else {
      element.setAttribute('style', "width: 100%");
