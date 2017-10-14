@@ -9,25 +9,46 @@
   border-right-width: 1.2px;
   border-color: #3EB000;
   border-style: solid;
-  color: #000037;
+  color: #424242;
   height: 7vh;
   margin-top: 2.5px;
   margin-bottom: 2.5px;
   width: 74%;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+.stopButton:hover,
+.stopButton:focus,
+.stopButton:active {
+  border-color: #3EB000;
+  background-color: #3EB000;
+  color: white; 
 }
 
 .itineraryButton {
   border: 2.4px;
   border-color: #3EB000;
   border-style: solid;
-  color: #000037;
+  color: #424244;
   height: 7vh;
   margin-top: 2.5px;
   margin-bottom: 2.5px;
   width: 24%;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
+
+.itineraryButton:hover,
+.itineraryButton:focus,
+.itineraryButton:active {
+  border-color: #3EB000;
+  background-color: #3EB000;
+  color: white; 
+}
+
 
 button.btn-default:active,
 button.btn-default:focus,
@@ -74,7 +95,6 @@ img {
 
 #currentJourneyHeader {
   background-color: transparent;
-  width: 100%;
   text-align: left;
   margin-top: 30px;
   margin-bottom: -10px;
@@ -143,6 +163,7 @@ agm-map {
 
 .dropdown {
   margin-top: -40px;
+  width: 10%;
 }
 
 h4 {
