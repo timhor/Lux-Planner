@@ -183,10 +183,10 @@ export class DashboardComponent implements OnInit {
 
   shortAbout() {
     // get first two sentences from aboutText
+    // [^\d] accounts for numbers with a decimal in the text, e.g. "around 7.2 million" appears in the aboutText for Hong Kong
     let sentences = this.aboutText.match(/.*?\.[^\d]/g);
     if (sentences) {
-      // regex replace is to account for numbers with decimal in the text
-      // e.g. "around 7.2 million" in the aboutText for Hong Kong
+      // regex replace removes trailing "<" which may be captured by [^\d]
       let text = sentences[0].replace(/<$/, "");
       if (sentences.length > 1) {
         text += sentences[1].replace(/<$/, "");
