@@ -87,7 +87,7 @@
               {{i+1}}<label class="stop-label">{{shortStop(stop.name)}}</label>
             </button>
           </span>
-          <button class="btn-circle-start" (click)="resetFirstLoad()" [tooltip]="convertDate(allJourneys[activeJourneyIndex].end)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
+          <button class="btn-circle-start" (click)="resetFirstLoad()" (click)="setActiveButton(1)" [tooltip]="convertDate(allJourneys[activeJourneyIndex].end)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
         </div>
       </div>
     </div>
