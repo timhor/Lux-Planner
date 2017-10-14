@@ -82,14 +82,14 @@
           <div class="btn-group btn-block"> 
             <div class="line" id="timeline-line"></div>
             <div id="timeline-buttons">
-              <button class="btn-circle-start" (click)="resetFirstLoad()" [tooltip]="convertDate(allJourneys[activeJourneyIndex].start)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
+              <button class="btn-circle-start" (click)="resetFirstLoad()" (click)="setActiveButton(-1)" [tooltip]="convertDate(allJourneys[activeJourneyIndex].start)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
               <span *ngFor="let stop of stops; let i=index;">
                 <button class="btn-circle" (click)="setActiveStop(i)" [tooltip]="convertDate(stop.arrival) + ', ' + getDuration(stop.departure,stop.arrival) + ' days'" 
                     tooltipPlacement="top" id="{{'stopButton' + i}}" (click)="setActiveButton(i)">
                   {{i+1}}<label class="stop-label">{{shortStop(stop.name)}}</label>
                 </button>
               </span>
-              <button class="btn-circle-start" (click)="resetFirstLoad()" [tooltip]="convertDate(allJourneys[activeJourneyIndex].end)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
+              <button class="btn-circle-start" (click)="resetFirstLoad()" (click)="setActiveButton(-1)" [tooltip]="convertDate(allJourneys[activeJourneyIndex].end)" tooltipPlacement="top"><i class="fa fa-home" aria-hidden="true"></i><label class="start-label">{{shortStop(startingLocationName)}}</label></button>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
   <div class="row">
     <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
       <div class ="well" *ngIf="!isLoading">
-        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()" (click)="setActiveButton(1)"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
+        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()" (click)="setActiveButton(-1)"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
       </div>
       <div class="well" align="center" *ngIf="!isLoading">
         <p id="subHeading">Itinerary</p>
