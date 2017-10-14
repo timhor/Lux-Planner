@@ -20,7 +20,7 @@ export class ItineraryComponent implements OnInit {
   header: any;
   event: MyEvent;
   dialogVisible: boolean = false;
-  idGen: number = 100;
+  idGen: number;
 
   constructor(
       private cd: ChangeDetectorRef,
@@ -192,6 +192,13 @@ export class ItineraryComponent implements OnInit {
     this.currStop = stop;
     this.connService.getProtectedData(`api/get_itinerary/?journey=${this.journeyIndex}&stop=${this.stopIndex}`)
         .subscribe(res => {this.events = res});
+
+    if (this.events.length > 0) {
+        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;}));
+    } else {
+        this.idGen = 1;
+    }
+
     console.log(this.journeyIndex, this.stopIndex, this.currStop);
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
