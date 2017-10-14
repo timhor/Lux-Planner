@@ -85,6 +85,9 @@ export class DashboardComponent implements OnInit {
             this.updateMap();
             this.setActiveJourney(this.activeJourneyIndex);
             this.isLoading = false;
+            setTimeout(() => {
+              this.setTimelineWidth();
+            },1);
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -125,7 +128,9 @@ export class DashboardComponent implements OnInit {
 
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();   
-    // this.setTimelineWidth();
+    if (!this.isLoading) {
+      this.setTimelineWidth();
+    }
   }
 
   setActiveStop(index:number) {
@@ -296,13 +301,14 @@ export class DashboardComponent implements OnInit {
     document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
   }
 
-  // setTimelineWidth() {
-  //   let element: HTMLElement = document.getElementById('timeline-buttons');
-  //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-  //   if (timelineWidth > 0.65*window.screen.width) {
-  //     element.setAttribute('style', "width: " + timelineWidth + "px");
-  //   } else {
-  //     element.setAttribute('style', "width: 100%");
-  //   }
-  // }
+  setTimelineWidth() {
+    let element: HTMLElement = document.getElementById('timeline-line');
+    let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
+    if (timelineWidth > 0.65*window.screen.width) {
+      timelineWidth = timelineWidth - 660;
+      element.setAttribute('style', "width: " + timelineWidth + "px");
+    } else {
+     element.setAttribute('style', "width: 100%");
+    }
+  }
 }
