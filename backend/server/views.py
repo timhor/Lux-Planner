@@ -339,6 +339,38 @@ def change_user_details():
     return jsonify({'message': 'success'})
 
 
+@app.route('/api/get_itinerary/', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_itinerary():
+    journey_index = int(request.args.get('journey'))
+    stop_index = int(request.args.get('stop'))
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    j = journeys[journey_index]
+    stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
+    if stops[stop_index].itinerary is None:
+        return jsonify([])
+    return jsonify(pickle.loads(stops[stop_index].itinerary))
+
+
+@app.route('/api/update_itinerary', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def update_itinerary():
+    body = json.loads(request.data)
+    print(body)
+    journey_index = int(body['journey'])
+    stop_index = int(body['stop'])
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    j = journeys[journey_index]
+    stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
+    stops[stop_index].itinerary = pickle.dumps(body['events'])
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
+
 ################ Old stuff ####################
 @app.route('/')
 @app.route('/index')

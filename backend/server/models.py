@@ -21,7 +21,6 @@ class Journey(db.Model):
     start_location = db.Column(db.String(128), index=True)
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime, index=True)
-    # index = db.Column(db.Integer, index=True)
     stops = db.relationship('Stop', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -35,30 +34,30 @@ class Stop(db.Model):
     arrival_date = db.Column(db.DateTime, index=True)
     departure_date = db.Column(db.DateTime, index=True)
     notes = db.Column(db.Text, index=True)
-    # index = db.Column(db.Integer, index=True)
-    itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
+    itinerary = db.Column(db.LargeBinary)
+    # itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return "ID: {} | Stop: {}".format(self.id, self.stop_name)
 
-class Itinerary(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    stop_id = db.Column(db.Integer, db.ForeignKey('stop.id'))
-    day_of_event = db.Column(db.DateTime)
-    places = db.relationship('Place', backref='author', lazy='dynamic')
+# class Itinerary(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     stop_id = db.Column(db.Integer, db.ForeignKey('stop.id'))
+#     day_of_event = db.Column(db.DateTime)
+#     places = db.relationship('Place', backref='author', lazy='dynamic')
 
-    def __repr__(self):
-        return "ID: {} | Stop ID: {} | Day Of Event: {}".format(self.id, self.stop_id, self.day_of_event)
+#     def __repr__(self):
+#         return "ID: {} | Stop ID: {} | Day Of Event: {}".format(self.id, self.stop_id, self.day_of_event)
 
 
-class Place(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    itinerary_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'))
-    place_name = db.Column(db.String(128), index=True)
-    place_rating = db.Column(db.Float, index=True)
+# class Place(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     itinerary_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'))
+#     place_name = db.Column(db.String(128), index=True)
+#     place_rating = db.Column(db.Float, index=True)
 
-    def __repr__(self):
-        return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
+#     def __repr__(self):
+#         return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
 
 class CacheInformation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
