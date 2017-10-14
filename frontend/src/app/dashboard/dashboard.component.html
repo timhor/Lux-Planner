@@ -95,7 +95,7 @@
   <div class="row">
     <div class="col-sm-3" *ngIf="activeStopIndex!==-1">
       <div class ="well" *ngIf="!isLoading">
-        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
+        <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()" (click)="setActiveButton(1)"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
       </div>
       <div class="well" align="center" *ngIf="!isLoading">
         <p id="subHeading">Itinerary</p>
