@@ -69,6 +69,7 @@ img {
   font-size: 40px;
   font-weight: bolder;
   font-style: italic;
+  margin-bottom: 0px;
 }
 
 #currentJourneyHeader {
@@ -259,14 +260,17 @@ textarea {
   text-align: center;
   position: relative;
   z-index: 1;
+  width: 100%;
+  margin-top: 31px;
+  white-space: nowrap;
+}
+
+.outer-timeline-container {
+  overflow-x: auto;
 }
 
 .line-active{
   margin-top: 5px;  
-}
-.scroll-container {
-  /* overflow-x: auto; */
-  width: 100%;
 }
 
 .btn-circle {
@@ -284,9 +288,11 @@ textarea {
   border: solid #f7544a;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   margin-bottom: 40px;
+  float: none;
+  display: inline-block;
 }
 
-.btn-circle:hover{
+.btn-circle:hover {
   background-color: #f7544a;
   border: solid #f7544a;
   color: white;
@@ -323,13 +329,15 @@ textarea {
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   margin-bottom: 40px;
   cursor: pointer;
+  float: none;
+  display: inline-block;
 }
 
 .line {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   left: 0;
-  top: 15px;
+  top: 45px;
   height: 2px;
   width: 100%;
   background: #cccccc;
