@@ -261,6 +261,9 @@ textarea {
   z-index: 1;
 }
 
+.line-active{
+  margin-top: 5px;  
+}
 .scroll-container {
   /* overflow-x: auto; */
   width: 100%;
@@ -293,6 +296,9 @@ textarea {
   background-color: #f7544a;
   border: solid white;
   color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
 }
 
 .btn-circle-start:hover {
@@ -308,7 +314,7 @@ textarea {
   vertical-align: middle;
   font-size: 14px;
   line-height: 1.428571429;
-  border-radius: 15px;
+  border-radius: 100%;
   margin-left: 5%;
   margin-right: 5%;
   text-align: center;

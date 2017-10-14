@@ -293,7 +293,12 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < this.stops.length; i++) {
       document.getElementById('stopButton'+i.toString()).setAttribute('class', 'btn-circle');
     }
-    document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
+    if (this.activeStopIndex != -1){
+      document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');     
+      document.getElementById('timeline-Line').setAttribute('class', 'line line-active');            
+    } else {
+      document.getElementById('timeline-Line').setAttribute('class', 'line');      
+    }
   }
 
   // setTimelineWidth() {
