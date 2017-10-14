@@ -215,6 +215,14 @@ export class DashboardComponent implements OnInit {
   }
 
   saveNotes() {
+    if (this.stops[this.activeStopIndex].notes === this.newNotes) {
+      this.isModifyingNotes = !this.isModifyingNotes;
+      this.notification.warn(
+        "Notes unchanged",
+        "Notes were not saved"
+      )
+      return;
+    }
     this.stops[this.activeStopIndex].notes = this.newNotes;
     this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes("updated");
@@ -279,6 +287,13 @@ export class DashboardComponent implements OnInit {
     let diff = Math.abs(new Date(end).valueOf() - new Date(start).valueOf());
     let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
     return diffDays;
+  }
+
+  setActiveButton(index:number) {
+    for (let i = 0; i < this.stops.length; i++) {
+      document.getElementById('stopButton'+i.toString()).setAttribute('class', 'btn-circle');
+    }
+    document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
   }
 
   // setTimelineWidth() {

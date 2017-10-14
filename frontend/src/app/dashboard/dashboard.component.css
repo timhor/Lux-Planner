@@ -283,18 +283,22 @@ textarea {
   margin-bottom: 40px;
 }
 
-.btn-circle:hover,
-.btn-circle:focus {
+.btn-circle:hover{
+  background-color: #f7544a;
+  border: solid #f7544a;
+  color: white;
+}
+
+.activeBtn {
   background-color: #f7544a;
   border: solid white;
   color: white;
 }
 
-.btn-circle-start:hover,
-.btn-circle-start:focus,
-.btn-circle-start:active {
+.btn-circle-start:hover {
   background-color: #bed600;
-  border: solid white;
+  border: solid #bed600;
+  color: white
 }
 
 .btn-circle-start {
