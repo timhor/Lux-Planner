@@ -115,7 +115,10 @@ export class ItineraryComponent implements OnInit {
   public visibleAnimate = false;
 
   public show(journeyIndex: number, stopIndex: number, stop: number): void {
-    document.documentElement.setAttribute('style', 'overflow-y: hidden; margin-right:17px;');
+    document.documentElement.setAttribute('style', 'overflow-y: hidden;');
+    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
+    // "wrap" class is used for the main body of the page (between navbar and footer)
+    document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;    
     this.currStop = stop;
@@ -135,6 +138,8 @@ export class ItineraryComponent implements OnInit {
 
   public hide(): void {
     document.documentElement.setAttribute('style', 'overflow-y: scroll');
+    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
+    document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
