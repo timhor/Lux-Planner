@@ -11,7 +11,7 @@
           <div class="card">
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
             <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
-            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
+            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrag($event)" (onEventResize)="handleEventDrag($event)"></p-schedule>
             
             <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
               [style]="{'overflow':'visible'}" [resizable]="false">
@@ -35,7 +35,7 @@
               </div>
               <p-footer>
                   <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                      <button type="button" pButton icon="fa-close" (click)="deleteEvent()" label="Delete" [disabled]="!event?.id"></button>
+                      <button type="button" pButton icon="fa-close" (click)="deleteEvent()" label="Delete" [disabled]="event?.id !== 0 && !event?.id"></button>
                       <button type="button" pButton icon="fa-check" (click)="saveEvent()" label="Save" [disabled]="!event?.start"></button>
                   </div>
               </p-footer>
@@ -44,10 +44,10 @@
         </div>
         <br>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <ng-content select=".app-itinerary-footer"></ng-content>
         <br>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

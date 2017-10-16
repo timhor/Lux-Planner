@@ -34,7 +34,6 @@ export class StopComponent {
         if (stop === null || stop === undefined) {
             return;
         }
-        document.documentElement.setAttribute('style', 'overflow:hidden; margin-right:17px;');
         this.currStop = stop;
         this.getBannerPhoto();
 
@@ -55,7 +54,6 @@ export class StopComponent {
   
     public hide(): void {
         // Clear all data in vars
-        document.documentElement.setAttribute('style', 'overflow-y: scroll');
         this.location_images = [];
         this.attractions = [];
         this.aboutText = "Loading Information...";

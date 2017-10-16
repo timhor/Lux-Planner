@@ -64,11 +64,11 @@ export class ItineraryComponent implements OnInit {
       this.event.start = start.format();
       this.event.allDay = e.calEvent.allDay;
       this.dialogVisible = true;
-}
+    }
 
   saveEvent() {
       //update
-      if(this.event.id) {
+      if(this.event.id >= 0) {
           let index: number = this.findEventIndexById(this.event.id);
           if(index >= 0) {
               this.events[index] = this.event;
@@ -99,6 +99,40 @@ export class ItineraryComponent implements OnInit {
       
   }
 
+  handleEventDrag(e) {
+    this.updateEvent(e);
+
+    let index: number = this.findEventIndexById(this.event.id);
+    if(index >= 0) {
+        this.events[index] = this.event;
+    }
+
+    this.dialogVisible = false;
+    
+    this.updateBackend();
+  }
+
+  updateEvent(e) {
+    this.event = new MyEvent();
+    this.event.title = e.event.title;
+    
+    let start = e.event.start;
+    let end = e.event.end;
+    if(e.view.name === 'month') {
+        start.stripTime();
+    }
+    
+    if(end) {
+        end.stripTime();
+        this.event.end = end.format();
+    }
+
+    this.event.id = e.event.id;
+    this.event.start = start.format();
+    this.event.allDay = e.event.allDay;
+    this.dialogVisible = true;
+  }
+
   findEventIndexById(id: number) {
       let index = -1;
       for(let i = 0; i < this.events.length; i++) {
@@ -115,7 +149,6 @@ export class ItineraryComponent implements OnInit {
   public visibleAnimate = false;
 
   public show(journeyIndex: number, stopIndex: number, stop: number): void {
-    document.documentElement.setAttribute('style', 'overflow-y: hidden; margin-right:17px;');
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;    
     this.currStop = stop;
@@ -134,7 +167,6 @@ export class ItineraryComponent implements OnInit {
   }
 
   public hide(): void {
-    document.documentElement.setAttribute('style', 'overflow-y: scroll');
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
