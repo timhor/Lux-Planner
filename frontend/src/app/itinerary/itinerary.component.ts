@@ -31,7 +31,7 @@ export class ItineraryComponent implements OnInit {
     this.header = {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay,listDay,listWeek,listMonth,listYear'
+      right: 'month,agendaWeek,agendaDay,listMonth'
     };
     
     this.options = {
@@ -129,7 +129,7 @@ export class ItineraryComponent implements OnInit {
         .subscribe(res => {this.events = res});
 
     if (this.events.length > 0) {
-        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;}));
+        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;})) + 1;
     } else {
         this.idGen = 0;
     }

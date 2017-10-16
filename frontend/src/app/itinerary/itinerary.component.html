@@ -10,7 +10,7 @@
         <div class="container">
           <div class="card">
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
-            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
+            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="false"
             (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
             
             <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
