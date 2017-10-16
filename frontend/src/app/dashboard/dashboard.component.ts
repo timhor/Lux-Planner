@@ -43,11 +43,12 @@ export class DashboardComponent implements OnInit {
   private firstLoad:boolean;
   private isModifyingNotes = false;
   private newNotes: string = "";
-  events: Array<any>;
   private bounds;
   public startingLocationName: string;
   settings: WeatherSettings;
   public isLoading: boolean = true;
+  events: any[]; 
+  header: any;  
 
   constructor(
     private connService: ConnectionService,
@@ -96,7 +97,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
-    }    
+    }  
+    
+    this.header = {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    };
   }
 
   getCurrStop () {
@@ -130,6 +137,17 @@ export class DashboardComponent implements OnInit {
     this.updateMap();   
     if (!this.isLoading) {
       this.setTimelineWidth();
+    }
+    this.events = [];
+    for (let i = 0; i < this.stops.length; i++){
+      this.connService.getProtectedData(`api/get_itinerary/?journey=${this.activeJourneyIndex}&stop=${i}`)
+      .subscribe(res => {
+        res.forEach(event => {
+          event.title = '[' + this.stops[i].name.substring(0,3) + '] '+ event.title;
+        });
+        this.events = this.events.concat(res);
+        // console.log(res);
+      });
     }
   }
 
@@ -314,4 +332,6 @@ export class DashboardComponent implements OnInit {
      element.setAttribute('style', "width: 100%");
     }
   }
+
+
 }

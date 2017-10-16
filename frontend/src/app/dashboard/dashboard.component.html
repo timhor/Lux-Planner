@@ -49,7 +49,7 @@
             <p id="subHeading">{{ journeyName }}&nbsp;</p>
           </button>
           <ul class="dropdown-menu">
-            <li id="dropdownItem" *ngFor="let journey of allJourneys; let i=index" (click)="setActiveJourney(i)">
+            <li id="dropdownItem" *ngFor="let journey of allJourneys; let i=index" (click)="setActiveJourney(i)" style="font-size: calc(10px + 0.5vw); text-align: left;">
               {{ journey.journey_name }}
             </li>
           </ul>
@@ -186,6 +186,12 @@
               <agm-polyline-point [latitude]="allJourneys[activeJourneyIndex].lat" [longitude]="allJourneys[activeJourneyIndex].lng"></agm-polyline-point>
             </agm-polyline> 
           </agm-map>
+      </div>
+      <div class="well" *ngIf="activeStopIndex===-1">
+        <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
+          allowfullscreen></iframe> -->
+          <p id="subHeading">Journey Itinerary Overview</p>
+          <p-schedule [events]="events" [header]="header" [eventLimit]="4"></p-schedule>
         </div>
       </div>
     </div>

@@ -22,87 +22,18 @@ export class ItineraryComponent implements OnInit {
   dialogVisible: boolean = false;
   idGen: number;
 
-  constructor(
-      private cd: ChangeDetectorRef,
-      private connService: ConnectionService,
-      private loggedInService: LoggedInService
-    ) {}
+  constructor( private cd: ChangeDetectorRef, private connService: ConnectionService, private loggedInService: LoggedInService) {
+  }
 
   ngOnInit() {
-    //TODO: Replace with dynamically populated events array from database
     this.events = []
-    // this.events = [
-    // 	{
-    //     "id": 1,
-    // 		"title": "All Day Event",
-    // 		"start": "2017-10-01"
-    // 	},
-    // 	{
-    //     "id": 2,
-    // 		"title": "Long Event",
-    // 		"start": "2017-10-07",
-    // 		"end": "2017-10-10"
-    // 	},
-    // 	{
-    // 		"id": 3,
-    // 		"title": "Repeating Event",
-    // 		"start": "2017-10-09"
-    // 	},
-    // 	{
-    // 		"id": 4,
-    // 		"title": "Repeating Event",
-    // 		"start": "2017-10-16"
-    // 	},
-    // 	{
-    //     "id": 5,
-    // 		"title": "Conference",
-    // 		"start": "2017-10-11",
-    // 		"end": "2017-10-13"
-    // 	},
-    // 	{
-    //     "id": 6,
-    // 		"title": "Meeting",
-    // 		"start": "2017-10-12",
-    // 		"end": "2017-10-12"
-    // 	},
-    // 	{
-    //     "id": 7,
-    // 		"title": "Lunch",
-    // 		"start": "2017-10-12"
-    // 	},
-    // 	{
-    //     "id": 8,
-    // 		"title": "Meeting",
-    // 		"start": "2017-10-12"
-    // 	},
-    // 	{
-    //     "id": 9,
-    // 		"title": "Happy Hour",
-    // 		"start": "2017-10-12"
-    // 	},
-    // 	{
-    //     "id": 10,
-    // 		"title": "Dinner",
-    // 		"start": "2017-10-12"
-    // 	},
-    // 	{
-    //     "id": 11,
-    // 		"title": "Birthday Party",
-    // 		"start": "2017-10-13"
-    // 	},
-    // 	{
-    //     "id": 12,
-    // 		"title": "Click for Google",
-    // 		"url": "http://google.com/",
-    // 		"start": "2017-10-28"
-    // 	}
-    // ];
     
     this.header = {
       left: 'prev,next today',
       center: 'title',
       right: 'month,agendaWeek,agendaDay'
     };
+    
   }
 
   handleDayClick(event) {
@@ -112,7 +43,7 @@ export class ItineraryComponent implements OnInit {
       
       //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
       this.cd.detectChanges();
-  }
+}
 
   handleEventClick(e) {
       this.event = new MyEvent();
@@ -133,7 +64,7 @@ export class ItineraryComponent implements OnInit {
       this.event.start = start.format();
       this.event.allDay = e.calEvent.allDay;
       this.dialogVisible = true;
-  }
+}
 
   saveEvent() {
       //update
@@ -153,7 +84,6 @@ export class ItineraryComponent implements OnInit {
       }
       this.dialogVisible = false;
       
-      //TODO: Update data in database
       this.updateBackend();
 
   }
@@ -165,7 +95,6 @@ export class ItineraryComponent implements OnInit {
       }
       this.dialogVisible = false;
 
-      //TODO: Update data in database
       this.updateBackend();
       
   }
@@ -196,7 +125,7 @@ export class ItineraryComponent implements OnInit {
     if (this.events.length > 0) {
         this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;}));
     } else {
-        this.idGen = 1;
+        this.idGen = 0;
     }
 
     console.log(this.journeyIndex, this.stopIndex, this.currStop);

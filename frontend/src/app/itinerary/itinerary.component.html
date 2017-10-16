@@ -14,27 +14,10 @@
               <div class="col-sm-2" id="stopHeading">
                 {{currStop}}
               </div>
-              <div class="col-sm-1">
-                <label>Starting Date</label>
-              </div>
-              <div class="col-sm-2">
-                <input type="date" placeholder="Date" class="form-control">
-              </div>
-              <div class="col-sm-1">
-                <label>Departure Date</label>
-              </div>
-              <div class="col-sm-2">
-                <input type="date" placeholder="Date" class="form-control">
-              </div>
-              <div class="col-sm-1">
-              </div>
-              <div class="col-sm-3" align="right">
-                <button class="button-rect button-green">Enable Editing</button>
-              </div>
             </div>
             <br>
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
-            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [editable]="true"
+            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
             (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
             
             <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
