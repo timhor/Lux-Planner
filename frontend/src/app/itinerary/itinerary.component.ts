@@ -21,7 +21,7 @@ export class ItineraryComponent implements OnInit {
   event: MyEvent;
   dialogVisible: boolean = false;
   idGen: number;
-
+  options: any;
   constructor( private cd: ChangeDetectorRef, private connService: ConnectionService, private loggedInService: LoggedInService) {
   }
 
@@ -31,9 +31,12 @@ export class ItineraryComponent implements OnInit {
     this.header = {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month,agendaWeek,agendaDay,listMonth'
     };
     
+    this.options = {
+        showNonCurrentDates: 'true',
+    }
   }
 
   handleDayClick(event) {
@@ -149,6 +152,10 @@ export class ItineraryComponent implements OnInit {
   public visibleAnimate = false;
 
   public show(journeyIndex: number, stopIndex: number, stop: number): void {
+    document.documentElement.setAttribute('style', 'overflow-y: hidden;');
+    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
+    // "wrap" class is used for the main body of the page (between navbar and footer)
+    document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;    
     this.currStop = stop;
@@ -156,7 +163,7 @@ export class ItineraryComponent implements OnInit {
         .subscribe(res => {this.events = res});
 
     if (this.events.length > 0) {
-        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;}));
+        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;})) + 1;
     } else {
         this.idGen = 0;
     }
@@ -167,6 +174,9 @@ export class ItineraryComponent implements OnInit {
   }
 
   public hide(): void {
+    document.documentElement.setAttribute('style', 'overflow-y: scroll');
+    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
+    document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
