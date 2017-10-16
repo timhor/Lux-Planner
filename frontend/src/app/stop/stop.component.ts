@@ -34,6 +34,10 @@ export class StopComponent {
         if (stop === null || stop === undefined) {
             return;
         }
+        document.documentElement.setAttribute('style', 'overflow-y: hidden;');
+        document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
+        // "wrap" class is used for the main body of the page (between navbar and footer)
+        document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
         this.currStop = stop;
         this.getBannerPhoto();
 
@@ -53,7 +57,11 @@ export class StopComponent {
     }
   
     public hide(): void {
+        document.documentElement.setAttribute('style', 'overflow-y: scroll');
+        document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
+        document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
         // Clear all data in vars
+        document.documentElement.setAttribute('style', 'overflow-y: scroll');
         this.location_images = [];
         this.attractions = [];
         this.aboutText = "Loading Information...";
