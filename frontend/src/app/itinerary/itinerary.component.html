@@ -3,19 +3,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <ng-content select=".app-itinerary-header"></ng-content>
-        My itinerary
+        {{currStop}} Itinerary
       </div>
       <div class="modal-body">
         <ng-content select=".app-itinerary-body"></ng-content>
-        <div class="container" id="body_div">
-          <br>
-          <div class="well">
-            <div class="row">
-              <div class="col-sm-2" id="stopHeading">
-                {{currStop}}
-              </div>
-            </div>
-            <br>
+        <div class="container">
+          <div class="card">
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
             <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
             (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
@@ -48,8 +41,8 @@
               </p-footer>
             </p-dialog>
           </div>
-          <br>
         </div>
+        <br>
       </div>
       <div class="modal-footer">
         <ng-content select=".app-itinerary-footer"></ng-content>
