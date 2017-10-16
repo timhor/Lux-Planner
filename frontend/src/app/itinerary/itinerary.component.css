@@ -1,24 +1,20 @@
-.well {
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 2.5vh;
-  text-align: left;
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
-#stopHeading {
-  padding-left: 15px;
+.card:hover {
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.modal-header {
   font-size: 20px;
   font-weight: bold;
-  text-decoration: underline;
-}
-
-#body_div {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  padding-right: 5vw;
-  padding-left: 5vw;
-  min-width: 300px;
-  width: 85vw;
-  margin: 0 auto;
 }
 
 .modal {
@@ -33,12 +29,6 @@
 
 .modal-body {
   max-height: calc(100vh - 180px);
-  overflow-y: auto;
-  background-color: rgb(240, 245, 255)
-}
-
-.button-rect {
-  width: 160px;
-  min-width: 160px;
-  font-size: 14px;
+  background-color: rgb(240, 245, 255);
+  overflow-y: scroll;
 }
