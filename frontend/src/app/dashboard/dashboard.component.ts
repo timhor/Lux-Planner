@@ -138,17 +138,21 @@ export class DashboardComponent implements OnInit {
     if (!this.isLoading) {
       this.setTimelineWidth();
     }
-    this.events = [];
-    for (let i = 0; i < this.stops.length; i++){
-      this.connService.getProtectedData(`api/get_itinerary/?journey=${this.activeJourneyIndex}&stop=${i}`)
-      .subscribe(res => {
-        res.forEach(event => {
-          event.title = '[' + this.stops[i].name.substring(0,3) + '] '+ event.title;
-        });
-        this.events = this.events.concat(res);
-        // console.log(res);
-      });
-    }
+      this.refreshCalendar();
+  }
+
+  refreshCalendar() {
+      this.events = [];
+      for (let i = 0; i < this.stops.length; i++) {
+          this.connService.getProtectedData(`api/get_itinerary/?journey=${this.activeJourneyIndex}&stop=${i}`)
+              .subscribe(res => {
+                  res.forEach(event => {
+                      event.title = '[' + this.stops[i].name.substring(0, 3) + '] ' + event.title;
+                  });
+                  this.events = this.events.concat(res);
+                  // console.log(res);
+              });
+      }
   }
 
   setActiveStop(index:number) {
