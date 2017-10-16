@@ -21,7 +21,7 @@ export class ItineraryComponent implements OnInit {
   event: MyEvent;
   dialogVisible: boolean = false;
   idGen: number;
-
+  options: any;
   constructor( private cd: ChangeDetectorRef, private connService: ConnectionService, private loggedInService: LoggedInService) {
   }
 
@@ -31,9 +31,12 @@ export class ItineraryComponent implements OnInit {
     this.header = {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month,agendaWeek,agendaDay,listDay,listWeek,listMonth,listYear'
     };
     
+    this.options = {
+        showNonCurrentDates: 'true',
+    }
   }
 
   handleDayClick(event) {
