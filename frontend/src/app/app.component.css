@@ -107,6 +107,16 @@ img,
   text-align: left;
 }
 
+.well-content {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  width: 50vw;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
 /* progress bar */
 
 .progress {
