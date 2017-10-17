@@ -93,13 +93,17 @@ h4 {
   background-color: black;
 }
 
+.item img {
+  height: 50vh;
+}
+
 h2 {
   text-align: left;
 }
 
 #attraction_image {
-  width: 20vw;
-  height: 25vh;
+  width: 300px;
+  height: 200px;
 }
 
 #attraction_heading {
@@ -123,8 +127,13 @@ h2 {
   height: fit-content;
 }
 
-#colColor {
-  height: auto;
+#imgContainer {
+  height: 200px;
+  width: 400px;
+}
+
+#imgContainer img {
+  object-fit: cover;
 }
 
 .modal {
@@ -148,4 +157,18 @@ h2 {
   text-align: center;
   padding: 15px 0px 3px 18px;
   margin-bottom: -6px;
+}
+
+tr {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .carousel-inner {
+    height: 30vh;
+  }
+
+  .item img {
+    height: 30vh;
+  }
 }
