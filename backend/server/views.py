@@ -193,9 +193,7 @@ def new_journey():
         j.start_location = body['initialLocation']
         j.start_date = convert_time(body['initialDeparture'])
         j.end_date = convert_time(body['initialArrival'])
-        stops = models.Stop.query.filter_by(journey_id=j.id).all()
-        for i in stops:
-            db.session.delete(i)
+        stops = models.Stop.query.filter_by(journey_id=j.id).delete()
         db.session.commit()
 
         for s in body['destinations']:
@@ -249,6 +247,7 @@ def get_all_journeys():
     # Think about how to handle a user without a journey
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
+
 @app.route('/api/get_journeys_length', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
@@ -260,6 +259,7 @@ def get_journeys_length():
     length = len(journeys)
     return jsonify({'length': length})
 
+
 @app.route('/api/switch_journey/', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
@@ -268,6 +268,7 @@ def switch_journey():
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
+
 
 @app.route('/api/update_notes', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
@@ -291,9 +292,7 @@ def delete_journey():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
-    stops = models.Stop.query.filter_by(journey_id=j.id).all()
-    for s in stops:
-        db.session.delete(s)
+    stops = models.Stop.query.filter_by(journey_id=j.id).delete()
     db.session.delete(j)
     db.session.commit()
     return jsonify({'message': 'success'})
@@ -371,7 +370,6 @@ def update_itinerary():
     return jsonify({'message': 'success'})
 
 
-################ Old stuff ####################
 @app.route('/')
 @app.route('/index')
 def index():

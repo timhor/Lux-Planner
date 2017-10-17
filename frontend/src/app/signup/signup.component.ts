@@ -26,7 +26,8 @@ export class SignupComponent {
     if (this.account.password.length < 8 || this.account.password != this.account.confirmPassword) {
         return;
     }
-    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName);
+    let response = this.loggedInService.signup(this.account.username, this.account.password,
+        this.account.email, this.account.firstName, this.account.lastName);
     response.subscribe(
         (data) => {
             if (data.message == 'success') {
