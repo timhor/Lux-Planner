@@ -42,16 +42,9 @@ h4 {
   cursor: default;
 }
 
-#body_div {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  padding-right: 5vw;
-  padding-left: 5vw;
+.well {
   min-width: 715px;
   width: 60vw;
-  margin: 0 auto;
-  border-radius: 5vh;
 }
 
 #myCarousel {
@@ -68,7 +61,7 @@ h4 {
 
 #stopsTable {
   width: 100%;
-  max-width: 500px;  
+  max-width: 500px;
 }
 
 .button-rect {
@@ -153,7 +146,7 @@ td {
 /* mobile-specific styles */
 
 @media (max-width: 767px) {
-  #body_div {
+  .well {
     min-width: 300px;
     width: 90vw;
   }
@@ -170,162 +163,36 @@ td {
   }
 }
 
-/* progress bar */
+tooltip-content {
+  margin-top: 100px;
+}
 
-.progress {
-    position: relative;
-    height: 4px;
-    display: block;
-    width: 100%;
-    background-color: #acece6;
-    border-radius: 2px;
-    background-clip: padding-box;
-    margin: 0.5rem 0 1rem 0;
-    overflow: hidden;
+@media (max-width: 767px) {
+  #notesBtns {
+    width: 100px;
   }
-  
-  .progress .determinate {
-    position: absolute;
-    background-color: inherit;
-    top: 0;
-    bottom: 0;
-    background-color: #26a69a;
-    transition: width .3s linear;
+
+  .button-rect {
+    margin-top: 8px;
   }
-  
-  .progress .indeterminate {
-    background-color: #26a69a;
+
+  .line {
+    top: 17px;
   }
-  
-  .progress .indeterminate:before {
-    content: '';
-    position: absolute;
-    background-color: inherit;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    will-change: left, right;
-    -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+
+  .stop-label,
+  .start-label {
+    font-size: 12px;
   }
-  
-  .progress .indeterminate:after {
-    content: '';
-    position: absolute;
-    background-color: inherit;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    will-change: left, right;
-    -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-    animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-    -webkit-animation-delay: 1.15s;
-    animation-delay: 1.15s;
-  }
-  
-  @-webkit-keyframes indeterminate {
-    0% {
-      left: -35%;
-      right: 100%;
-    }
-    60% {
-      left: 100%;
-      right: -90%;
-    }
-    100% {
-      left: 100%;
-      right: -90%;
-    }
-  }
-  
-  @keyframes indeterminate {
-    0% {
-      left: -35%;
-      right: 100%;
-    }
-    60% {
-      left: 100%;
-      right: -90%;
-    }
-    100% {
-      left: 100%;
-      right: -90%;
-    }
-  }
-  
-  @-webkit-keyframes indeterminate-short {
-    0% {
-      left: -200%;
-      right: 100%;
-    }
-    60% {
-      left: 107%;
-      right: -8%;
-    }
-    100% {
-      left: 107%;
-      right: -8%;
-    }
-  }
-  
-  @keyframes indeterminate-short {
-    0% {
-      left: -200%;
-      right: 100%;
-    }
-    60% {
-      left: 107%;
-      right: -8%;
-    }
-    100% {
-      left: 107%;
-      right: -8%;
-    }
-  }
-  
+
   #progressBar {
     padding: 50px;
-    transform: translateY(16vh);
+    transform: translateY(6vh);
   }
-  
-  #progressBar > h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 0px;
+}
+
+@media (max-width: 1000px) {
+  #subHeading {
+    font-size: 12px;
   }
-  
-  tooltip-content {
-    margin-top: 100px;
-  }
-  
-  /* mobile-specific styles */
-  
-  @media (max-width: 767px) {
-    #notesBtns {
-      width: 100px;
-    }
-  
-    .button-rect {
-      margin-top: 8px;
-    }
-  
-    .line {
-      top: 17px;
-    }
-  
-    .stop-label,
-    .start-label {
-      font-size: 12px;
-    }
-  
-    #progressBar {
-      padding: 50px;
-      transform: translateY(6vh);
-    }
-  }
-  
-  @media (max-width: 1000px) {
-    #subHeading {
-      font-size: 12px;
-    }
-  }
+}

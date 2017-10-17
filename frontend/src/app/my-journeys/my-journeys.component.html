@@ -15,19 +15,20 @@
 </app-confirm>
 
 <div class="container">
-        <div class="row">
-          <div class="col-sm-12" style="width:calc(100% - 1%);">
-            <div id="progressBar" class="well" *ngIf="isLoading">
-                <h3>Loading...</h3>
-                <div class="progress">
-                    <div class="indeterminate">
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12" style="width:calc(100% - 1%);">
+      <div id="progressBar" class="well" *ngIf="isLoading">
+        <h3>Loading...</h3>
+        <div class="progress">
+          <div class="indeterminate">
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<div id="body_div" *ngIf="!isLoading">
+<div class="well well-content" *ngIf="!isLoading">
   <h1>My Journeys</h1>
   <br>
   <div align="center" *ngFor="let journey of allJourneys; let i=index">
