@@ -77,8 +77,15 @@ img {
   margin-right: -8px;
 }
 
+#dropdownItem {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 8px;
+}
+
 #dropdownItem:hover {
   background-color: rgba(67, 176, 0, 0.28);
+  border-radius: 5px;
 }
 
 #currentJourney {
@@ -153,7 +160,7 @@ agm-map {
   text-align: left;
   padding: 10px;
   font-size: 14px;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .dropdown {
