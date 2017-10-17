@@ -24,11 +24,19 @@
 }
 
 .modal-header {
+  background-color: white;
   font-size: 20px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 .modal-body {
-  max-height: calc(100vh - 180px);
-  background-color: rgb(240, 245, 255);
+  max-height: calc(108vh - 180px);
   overflow-y: scroll;
+  border-radius: 6px;
+}
+
+.modal-content {
+  background-color: rgb(240, 245, 255);
+  padding-bottom: 4px;
 }
