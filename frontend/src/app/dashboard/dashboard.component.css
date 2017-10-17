@@ -577,8 +577,16 @@ tooltip-content {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 992px) {
   #subHeading {
     font-size: 12px;
+  }
+
+  .stopButton {
+    width: 68%;
+  }
+
+  .itineraryButton {
+    width: 30%;
   }
 }
