@@ -25,8 +25,6 @@ def authenticate(username, password):
     """
     user = models.User.query.filter_by(username=username).first()
     checkPassword = base64.b64decode(user.password).decode()
-    print(checkPassword)
-    print(password)
     if checkPassword == password:
         return user
 
@@ -95,7 +93,6 @@ def wikipedia_search():
     """ Gets the stop information from Wikipedia """
     stop = request.args.get('stop', 'toyko')
     info = call_cache(stop, 'wiki')
-    print(info)
     return jsonify({'info': info})
 
 
@@ -154,7 +151,7 @@ def new_journey():
         j.start_location = body['initialLocation']
         j.start_date = convert_time(body['initialDeparture'])
         j.end_date = convert_time(body['initialArrival'])
-        stops = models.Stop.query.filter_by(journey_id=j.id).delete()
+        models.Stop.query.filter_by(journey_id=j.id).delete()
 
     # Commit the empty journey
     db.session.commit()
@@ -260,7 +257,7 @@ def delete_journey():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
-    stops = models.Stop.query.filter_by(journey_id=j.id).delete()
+    models.Stop.query.filter_by(journey_id=j.id).delete()
     db.session.delete(j)
     db.session.commit()
     return jsonify({'message': 'success'})
@@ -331,7 +328,6 @@ def get_itinerary():
 def update_itinerary():
     """ Overwrites the currently stored Itinerary data """
     body = json.loads(request.data)
-    print(body)
     journey_index = int(body['journey'])
     stop_index = int(body['stop'])
     user = models.User.query.filter_by(id=current_identity[0]).first()
@@ -341,6 +337,27 @@ def update_itinerary():
     stops[stop_index].itinerary = pickle.dumps(body['events'])
     db.session.commit()
     return jsonify({'message': 'success'})
+
+
+@app.route('/api/update_itinerary', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def delete_user():
+    """ Deletes the User after verifying password """
+    body = json.loads(request.data)
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    if user.password.decode() != body['password']:
+        message = "Incorrect password."
+    else:
+        journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+        for j in journeys:
+            models.Stop.query.filter_by(journey_id=j.id).delete()
+        models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).delete()
+        db.session.delete(user)
+        db.session.commit()
+        message = "Delete successful."
+    return jsonify({'message': message})
+
 
 
 @app.route('/')

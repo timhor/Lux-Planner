@@ -65,7 +65,6 @@ def get_wiki_summary(request):
         data = requests.get(
             f'https://en.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=&exsentences=10&format=json&redirects'
             ).json()
-        print(data)
         if '-1' in data['query']['pages']:
             if ',' not in request:
                 return 'No information found.'
