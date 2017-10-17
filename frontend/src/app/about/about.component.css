@@ -3,12 +3,7 @@ h1 {
   text-align: left;
 }
 
-div {
-  text-align: justify;
-}
-
-.content {
-  background-color: rgba(255, 255, 255, 0.8);
+.well {
   padding-top: 5vh;
   padding-bottom: 5vh;
   padding-right: 5vw;
@@ -16,7 +11,6 @@ div {
   width: 50vw;
   min-width: 300px;
   margin: 50px auto 0;
-  border-radius: 5vh;
   font-size: 1.3em;
 }
 
