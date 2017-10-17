@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
 @Injectable()
 export class LoggedInService {
   private server: string = !isDevMode() ? 'https://seng2021-lux-api.herokuapp.com/': 'http://localhost:5000/';
+  private options: RequestOptions = new RequestOptions({
+    headers: new Headers({'Content-Type': 'application/json'})
+    });
 
   constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
   }
 
-  public login(username: String, password: String) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
+  public login(username: string, password: string) {
      return this.http.post(this.server + 'auth', JSON.stringify({
          'username': username,
          'password': password
-        }), options).map((res: Response) => res.json());
+        }), this.options).map((res: Response) => res.json());
   }
 
   public loggedIn() {
@@ -26,57 +26,43 @@ export class LoggedInService {
   }
 
   public signup(username: string, password: string, email: string, firstName: string, lastName: string) {
-
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
      return this.http.post(this.server + 'api/new_user', JSON.stringify({
         'username': username,
         'password': password,
         'email': email,
         'firstName': firstName,
         'lastName': lastName
-    }), options).map((res: Response) => res.json());
+    }), this.options).map((res: Response) => res.json());
   }
 
   public changeDetails(payload: object) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
     return this.authHttp.post(this.server + 'api/change_user_details/', JSON.stringify(payload),
-    options).map((res: Response) => res.json());
+    this.options).map((res: Response) => res.json());
   }
 
   public postJourney(payload: string) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
      return this.authHttp.post(this.server + 'api/new_journey', payload,
-        options).map((res: Response) => res.json());
+        this.options).map((res: Response) => res.json());
   }
 
   public deleteJourney(payload: string) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
      return this.authHttp.post(this.server + 'api/delete_journey', payload,
-        options).map((res: Response) => res.json());
+        this.options).map((res: Response) => res.json());
   }
 
-  public updateNotes(payload:string) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
+  public updateNotes(payload: string) {
      return this.authHttp.post(this.server + 'api/update_notes', payload,
-        options).map((res: Response) => res.json());
+        this.options).map((res: Response) => res.json());
   }
 
-  public updateItinerary(payload:string) {
-    let options: RequestOptions = new RequestOptions({
-        headers: new Headers({'Content-Type': 'application/json'})
-    });
+  public updateItinerary(payload: string) {
      return this.authHttp.post(this.server + 'api/update_itinerary', payload,
-        options).map((res: Response) => res.json());
+        this.options).map((res: Response) => res.json());
+  }
+
+  public deleteAccount(payload: string) {
+    return this.authHttp.post(this.server + 'api/update_itinerary', payload,
+    this.options).map((res: Response) => res.json());
   }
 
 }

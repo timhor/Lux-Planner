@@ -38,8 +38,8 @@
     </div>
   </div>
   <br>
-  <div style="padding-left:2vw; padding-right:2vw;" class="card">  
-    <br>      
+  <div style="padding-left:2vw; padding-right:2vw;" class="card">
+    <br>
     <div class="row" id="text">
       <div class="col-sm-4">
         Password:
@@ -63,8 +63,8 @@
     </div>
   </div>
   <br>
-  <div style="padding-left:2vw; padding-right:2vw;" class="card">   
-    <br>      
+  <div style="padding-left:2vw; padding-right:2vw;" class="card">
+    <br>
     <div class="row" id="text">
       <div class="col-sm-4">
         E-mail:
@@ -80,8 +80,8 @@
     </div>
   </div>
   <br>
-  <div style="padding-left:2vw; padding-right:2vw;" class="card"> 
-    <br>      
+  <div style="padding-left:2vw; padding-right:2vw;" class="card">
+    <br>
     <div class="row" id="text">
       <div class="col-sm-4">
         First Name:
@@ -112,7 +112,10 @@
   <br>
   <br>
   <div align="right">
-      <button class="button-rect button-blue" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>      
-  </div>
+      <button class="button-rect button-blue" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
+    </div>
+    <div align="left">
+    <button class="button-rect button-red" (click)="deleteAccount()">Delete Account</button>
+    </div>
 </div>
 <br>

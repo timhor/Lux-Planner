@@ -55,10 +55,7 @@ export class AccountSettingsComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     //fetch account details from backend
-    //TODO: replace literals with details
     this.avatar = "https://dummyimage.com/250x250/000000/baffef&text=No+Image+Available";
-    //this.username = "Username";
-    //this.email = "userEmail@mail.com";
     this.password = "••••••••";
   }
 
@@ -80,6 +77,19 @@ export class AccountSettingsComponent implements OnInit {
 
   updateLastName() {
     this.editLastName = !this.editLastName;
+  }
+
+  public deleteAccount(password: string) {
+      this.loggedInService.deleteAccount(JSON.stringify({'password': password})).subscribe(
+          res => {
+              if (res.status) {
+                  // TODO show notification that delete is successful
+                this.router.navigate(['/']);
+              } else {
+                // TODO show notification that delete was unsuccessful.
+              }
+          }
+      )
   }
 
   onSubmit() {

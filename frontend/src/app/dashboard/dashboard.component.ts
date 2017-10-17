@@ -47,12 +47,12 @@ export class DashboardComponent implements OnInit {
   public startingLocationName: string;
   settings: WeatherSettings;
   public isLoading: boolean = true;
-  events: any[]; 
-  header: any;  
+  events: any[];
+  header: any;
 
   constructor(
     private connService: ConnectionService,
-    private loggedInService: LoggedInService, 
+    private loggedInService: LoggedInService,
     private journeyService: JourneyService,
     private notification: NotificationsService,
     private mapsAPILoader: MapsAPILoader,
@@ -97,8 +97,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
-    }  
-    
+    }
+
     this.header = {
       left: 'prev,next today',
       center: 'title',
@@ -125,8 +125,8 @@ export class DashboardComponent implements OnInit {
     this.journeyName = journey.journey_name
     this.stops = journey.stops;
     this.activeStopIndex = 0;
-    this.startingLocationName = journey.start_location;    
-    
+    this.startingLocationName = journey.start_location;
+
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
     );
 
     this.checkForOverview();  // Check if current page is overview
-    this.updateMap();   
+    this.updateMap();
     if (!this.isLoading) {
       this.setTimelineWidth();
     }
@@ -312,7 +312,7 @@ export class DashboardComponent implements OnInit {
 
   getDuration(end, start) {
     let diff = Math.abs(new Date(end).valueOf() - new Date(start).valueOf());
-    let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     return diffDays;
   }
 
@@ -323,7 +323,7 @@ export class DashboardComponent implements OnInit {
     if (index !== -1) {
       document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
     }
-    
+
   }
 
   setTimelineWidth() {

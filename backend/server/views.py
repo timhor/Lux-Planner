@@ -347,7 +347,7 @@ def delete_user():
     body = json.loads(request.data)
     user = models.User.query.filter_by(id=current_identity[0]).first()
     if user.password.decode() != body['password']:
-        message = "Incorrect password."
+        status = False
     else:
         journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
         for j in journeys:
@@ -355,8 +355,8 @@ def delete_user():
         models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).delete()
         db.session.delete(user)
         db.session.commit()
-        message = "Delete successful."
-    return jsonify({'message': message})
+        status = True
+    return jsonify({'status': status})
 
 
 
