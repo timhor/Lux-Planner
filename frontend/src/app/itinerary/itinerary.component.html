@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <ng-content select=".app-itinerary-header"></ng-content>
-        {{currStop}} Itinerary
+        Itinerary for {{currStop}}
       </div>
       <div class="modal-body">
         <ng-content select=".app-itinerary-body"></ng-content>
@@ -16,8 +16,9 @@
           </div>
           <div class="card" *ngIf="!isLoading">
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
-            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
-            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrag($event)" (onEventResize)="handleEventDrag($event)"></p-schedule>
+            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [fixedWeekCount]="false" [options]="options" [editable]="true" (onDayClick)="handleDayClick($event)" 
+                        (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrag($event)" (onEventResize)="handleEventDrag($event)">
+            </p-schedule>
             
             <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
               [style]="{'overflow':'visible'}" [resizable]="false">

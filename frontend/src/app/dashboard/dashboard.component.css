@@ -61,6 +61,7 @@ img {
 }
 
 #subHeading {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   font-weight: bold;
 }
@@ -71,13 +72,15 @@ img {
   letter-spacing: .08em;
 }
 
-#stopModalCloseButton {
-  padding: 6px 11px;
-  margin-right: -8px;
+#dropdownItem {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 8px;
 }
 
 #dropdownItem:hover {
   background-color: rgba(67, 176, 0, 0.28);
+  border-radius: 5px;
 }
 
 #currentJourney {
@@ -152,7 +155,7 @@ agm-map {
   text-align: left;
   padding: 10px;
   font-size: 14px;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .dropdown {
@@ -210,6 +213,16 @@ textarea {
   font-style: italic;
   height: 200px;
   margin-bottom: 34px;
+}
+
+#stopModalCloseButton {
+  padding: 6px 11px;
+  margin-right: -8px;
+}
+
+#itineraryModalCloseButton {
+  padding: 6px 11px;
+  margin-right: -8px;
 }
 
 .modal {
@@ -579,7 +592,7 @@ tooltip-content {
 
 @media (max-width: 992px) {
   #subHeading {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .stopButton {
