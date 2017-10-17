@@ -23,7 +23,7 @@ export class SignupComponent {
         this.completedRequiredFields = false;
         return;
     }
-    if (this.account.password.length < 0 || this.account.password != this.account.confirmPassword) {
+    if (this.account.password.length < 8 || this.account.password != this.account.confirmPassword) {
         return;
     }
     let response = this.loggedInService.signup(this.account.username, this.account.password,
