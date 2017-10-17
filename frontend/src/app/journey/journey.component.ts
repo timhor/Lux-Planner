@@ -32,7 +32,7 @@ export class JourneyComponent implements OnInit {
      requires each successive stop to have arrival time after departure time. Technically you 
      can fly back in time, e.g. Sydney to US or UK, which would be rejected by the app. This
      adds a 26 hour time tolerance to validation. */
-  private timeTolerance: number =   26  // hours
+  private timeTolerance: number =   24  // hours
                                 *   60  // minutes / hour
                                 *   60  // seconds / minute
                                 * 1000; // milliseconds / second 
