@@ -72,11 +72,6 @@ img {
   letter-spacing: .08em;
 }
 
-#stopModalCloseButton {
-  padding: 6px 11px;
-  margin-right: -8px;
-}
-
 #dropdownItem {
   height: 30px;
   line-height: 30px;
@@ -218,6 +213,16 @@ textarea {
   font-style: italic;
   height: 200px;
   margin-bottom: 34px;
+}
+
+#stopModalCloseButton {
+  padding: 6px 11px;
+  margin-right: -8px;
+}
+
+#itineraryModalCloseButton {
+  padding: 6px 11px;
+  margin-right: -8px;
 }
 
 .modal {
