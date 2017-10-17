@@ -1,6 +1,7 @@
 from server import db
 
 class User(db.Model):
+    """ User data schema """
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(128), index=True)
     last_name = db.Column(db.String(128), index=True)
@@ -10,11 +11,12 @@ class User(db.Model):
     active_journey_index = db.Column(db.Integer)
     journeys = db.relationship('Journey', backref='author', lazy='dynamic')
 
-    def __repr__(self):	
+    def __repr__(self):
         return "ID: {} | First Name: {} | Last Name: {} | Email: {} | Username: {} | Password: {}".format(self.id, self.first_name, self.last_name, self.email, self.username, self.password)
 
 
 class Journey(db.Model):
+    """ Journey data schema """
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     journey_name = db.Column(db.String(128), index=True)
@@ -28,6 +30,7 @@ class Journey(db.Model):
 
 
 class Stop(db.Model):
+    """ Stop data schema """
     id = db.Column(db.Integer, primary_key=True)
     journey_id = db.Column(db.Integer, db.ForeignKey('journey.id'))
     stop_name = db.Column(db.String(128), index=True)
@@ -35,48 +38,17 @@ class Stop(db.Model):
     departure_date = db.Column(db.DateTime, index=True)
     notes = db.Column(db.Text, index=True)
     itinerary = db.Column(db.LargeBinary)
-    # itineraries = db.relationship('Itinerary', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return "ID: {} | Stop: {}".format(self.id, self.stop_name)
 
-# class Itinerary(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     stop_id = db.Column(db.Integer, db.ForeignKey('stop.id'))
-#     day_of_event = db.Column(db.DateTime)
-#     places = db.relationship('Place', backref='author', lazy='dynamic')
-
-#     def __repr__(self):
-#         return "ID: {} | Stop ID: {} | Day Of Event: {}".format(self.id, self.stop_id, self.day_of_event)
-
-
-# class Place(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     itinerary_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'))
-#     place_name = db.Column(db.String(128), index=True)
-#     place_rating = db.Column(db.Float, index=True)
-
-#     def __repr__(self):
-#         return "ID: {} | Itinerary ID: {} | Place Name: {} | Rating: {}".format(self.id, self.itinerary_id, self.place_name, self.place_rating)
-
 class CacheInformation(db.Model):
+    """ Cached Information data schema """
     id = db.Column(db.Integer, primary_key=True)
     place_name = db.Column(db.String(128), index=True)
-    data_type = db.Column(db.String(128))    
+    data_type = db.Column(db.String(128))
     cached_data = db.Column(db.LargeBinary)
     expiry = db.Column(db.DateTime)
 
     def __repr__(self):
         return f"ID: {self.id} | place: {self.place_name} | expiry: {self.expiry}"
-    
-
-"""
-To add stuff:
-
->>> from server import db, models
->>> u = models.User(name='Bob', fav_fish='Tuna')
->>> db.session.add(u)
->>> db.session.commit()
->>> users = models.User.query.all()
->>> users
-"""

@@ -13,13 +13,15 @@ def search_flickr(request):
 
 
 def search_places(request):
+    """ Calls the Google Places API for name, addres, ratings, and photo """
     response = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={request}&key={places_key}")
-    # https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
     formatted = response.json()
     lat = formatted['results'][0]['geometry']['location']['lat']
     lng = formatted['results'][0]['geometry']['location']['lng']
     keyword = 'attraction'
-    response = requests.get(f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={places_key}&location={lat},{lng}&radius=5000&keyword={keyword}")
+    response = requests.get(
+        f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={places_key}&location={lat},{lng}&radius=5000&keyword={keyword}"
+        )
     data = response.json()['results']
     attractions = []
     for place in data[:12]:
@@ -44,6 +46,7 @@ def search_places(request):
 
 
 def search_places_coords(request):
+    """ Finds the coordinates of a place """
     response = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={request}&key={places_key}")
     # https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
     formatted = response.json()
@@ -57,9 +60,11 @@ def search_places_coords(request):
 
 
 def get_wiki_summary(request):
+    """ Searches for a Wikipedia summary """
     while 1:
-        # data = requests.get(f'https://simple.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=1&format=json&redirects').json()
-        data = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=&exsentences=10&format=json&redirects').json()
+        data = requests.get(
+            'https://en.wikipedia.org/w/api.php?action=query&titles={request}&prop=extracts&exintro=&exsentences=10&format=json&redirects'
+            ).json()
 
         if '-1' in data['query']['pages']:
             if ',' not in request:

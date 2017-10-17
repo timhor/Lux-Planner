@@ -1,5 +1,5 @@
 <br>
-<div id="body_div">    
+<div id="body_div">
   <div id="signUpHead">
     <h2>Sign up for a new account</h2>
   </div>
@@ -36,7 +36,7 @@
             <b>{{usernameTakenMsg}}</b> is taken.
           </div>
         </div>
-        <div class="row">            
+        <div class="row">
           <div class="form-group col-sm-12">
             <label for="username"><b>Username*</b></label>
             <input class="form-control" type="text" placeholder="Enter username" id="username" required
@@ -46,7 +46,7 @@
         <div class="row">
           <div class="form-group col-sm-6">
             <label for="password"><b>Password*</b></label>
-            <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="password" required 
+            <input class="form-control" type="password" minlength="8" placeholder="Enter password" id="password" required
               [(ngModel)]="account.password" name="password" #password="ngModel">
           </div>
           <div class="form-group col-sm-6">
@@ -68,7 +68,7 @@
               <label for="firstName"><b>First Name</b></label>
               <input class="form-control" type="firstName" placeholder="Enter first name" id="firstName"
                 [(ngModel)]="account.firstName" name="firstName" #firstName="ngModel">
-            </div>  
+            </div>
             <div class="form-group col-sm-6">
               <label for="lastName"><b>Last Name</b></label>
               <input class="form-control" type="lastName" placeholder="Enter last name" id="lastName"

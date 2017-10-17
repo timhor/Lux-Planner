@@ -24,18 +24,11 @@ def authenticate(username, password):
             else return None
     """
     user = models.User.query.filter_by(username=username).first()
-    try:
-        # nonce, password_bytes = user.password[:8], user.password[8:]
-        # encryption = Salsa20.new(app.config['SECRET_KEY'].encode(), nonce)
-        # checkPassword = encryption.decrypt(password_bytes).decode()
-        checkPassword = base64.b64decode(user.password).decode()
-        print(checkPassword)
-        print(password)
-        if checkPassword == password:
-            return user
-    except AttributeError:
-        print("uh what")
-        return None
+    checkPassword = base64.b64decode(user.password).decode()
+    print(checkPassword)
+    print(password)
+    if checkPassword == password:
+        return user
 
 
 def identity(payload):
@@ -99,6 +92,7 @@ def flickr(): # REST params: ([search], [results])
 
 @app.route('/api/stop_information/', methods=['GET'])
 def wikipedia_search():
+    """ Gets the stop information from Wikipedia """
     stop = request.args.get('stop', 'toyko')
     info = call_cache(stop, 'wiki')
     return jsonify({'info': info})
@@ -106,6 +100,7 @@ def wikipedia_search():
 
 @app.route('/api/places/', methods=['GET'])
 def google_places():
+    """ Gets nearby attractions from Google Places """
     place = request.args.get('place', 'toyko')
     data = call_cache(place, 'attractions')
     return jsonify(data)
@@ -114,6 +109,7 @@ def google_places():
 @app.route('/api/new_user', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
+    """ Creates a new user """
     body = json.loads(request.data)
     username = body['username']
     search_username = models.User.query.filter_by(username=username).first()
@@ -122,8 +118,6 @@ def new_user():
             'message': username + " is taken."
         })
 
-    # encryption = Salsa20.new(app.config['SECRET_KEY'].encode())
-    # password_bytes = encryption.nonce + encryption.encrypt(body['password'].encode())
     password_bytes = base64.b64encode(body['password'].encode())
     email = body['email']
     first_name = body['firstName']
@@ -135,68 +129,23 @@ def new_user():
     return jsonify({'message': 'success'})
 
 
-@app.route('/api/new_place', methods=['POST'])
-def new_place():
-    name = request.form['name']
-    search_name = models.Place.query.filter_by(place_name=name).first()
-    if search_name:
-        return jsonify({
-            'message': name + " already exists."
-        })
-
-    rating = request.form['rating']
-    created_place = models.Place(place_name=name, place_rating=rating)
-    db.session.add(created_place)
-    db.session.commit()
-
-
-@app.route('/api/new_stop', methods=['POST'])
-def new_stop():
-    name = request.form['name']
-    search_name = models.Stop.query.filter_by(stop_name=name).first()
-    if search_name:
-        return jsonify({
-            'message': name + " already exists."
-        })
-    created_stop = models.Stop(stop_name=name)
-    db.session.add(created_stop)
-    db.session.commit()
-
-
 @app.route('/api/new_journey', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def new_journey():
+    """ Creates a new Journey and its associated Stops """
     user_id = current_identity[0]
     body = json.loads(request.data)
     if body['isModifying'] == -1:
-        j_start = convert_time(body['initialDeparture'])
-        j_end = convert_time(body['initialArrival'])
-
-        created_journey = models.Journey(
+        j = models.Journey(
                 user_id=user_id,
                 journey_name=body['journeyName'],
                 start_location=body['initialLocation'],
-                start_date = j_start,
-                end_date = j_end
+                start_date = convert_time(body['initialDeparture']),
+                end_date = convert_time(body['initialArrival'])
             )
-        db.session.add(created_journey)
-        db.session.commit()
-        for s in body['destinations']:
-            s_start = convert_time(s['arrival'])
-            s_end = convert_time(s['departure'])
-            stop = models.Stop(
-                journey_id=created_journey.id,
-                stop_name=s['location'],
-                arrival_date=s_start,
-                departure_date=s_end
-            )
-            db.session.add(stop)
-
-        db.session.commit()
-        return jsonify({'message': 'OK'})
+        db.session.add(j)
     else:
-        # Dirty hack only
         user = models.User.query.filter_by(id=user_id).first()
         journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
         j = journeys[body['isModifying']]
@@ -205,26 +154,30 @@ def new_journey():
         j.start_date = convert_time(body['initialDeparture'])
         j.end_date = convert_time(body['initialArrival'])
         stops = models.Stop.query.filter_by(journey_id=j.id).delete()
-        db.session.commit()
 
-        for s in body['destinations']:
-            s_start = convert_time(s['arrival'])
-            s_end = convert_time(s['departure'])
-            stop = models.Stop(
-                journey_id=j.id,
-                stop_name=s['location'],
-                arrival_date=s_start,
-                departure_date=s_end
-            )
-            db.session.add(stop)
-        db.session.commit()
-        return jsonify({'message': 'OK'})
+    # Commit the empty journey
+    db.session.commit()
+
+    # Add the stops
+    for s in body['destinations']:
+        s_start = convert_time(s['arrival'])
+        s_end = convert_time(s['departure'])
+        stop = models.Stop(
+            journey_id=j.id,
+            stop_name=s['location'],
+            arrival_date=s_start,
+            departure_date=s_end
+        )
+        db.session.add(stop)
+    db.session.commit()
+    return jsonify({'message': 'OK'})
 
 
 @app.route('/api/get_all_journeys', methods=['GET'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_all_journeys():
+    """ Gets all Journeys associated with the User """
     id = current_identity[0]
     user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
     payload = []
@@ -255,7 +208,6 @@ def get_all_journeys():
             }
 
         payload.append(j_item)
-    # Think about how to handle a user without a journey
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
 
 
@@ -263,8 +215,9 @@ def get_all_journeys():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_journeys_length():
+    """ Gets number of Journeys made by the User """
     id = current_identity[0]
-    user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
+    user = models.User.query.filter_by(id=id).first()
     payload = []
     journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     length = len(journeys)
@@ -275,6 +228,7 @@ def get_journeys_length():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def switch_journey():
+    """ Switches the active Journey of the User """
     user = models.User.query.filter_by(current_identity[1])
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
@@ -285,6 +239,7 @@ def switch_journey():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def update_notes():
+    """ Updates the notes of a single Stop of a User """
     user_id = current_identity[0]
     body = json.loads(request.data)
     journeys = models.Journey.query.filter_by(user_id=user_id).all()
@@ -299,6 +254,7 @@ def update_notes():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def delete_journey():
+    """ Deletes a Journey and its associated Stops """
     body = json.loads(request.data)
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
@@ -313,6 +269,7 @@ def delete_journey():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_account_details():
+    """ Gets the user account details -- excluding password """
     user = models.User.query.filter_by(id=current_identity[0]).first()
     return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name,
                     'last_name': user.last_name})
@@ -322,6 +279,7 @@ def get_account_details():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_all_journey_names():
+    """ Gets the names of all Journeys for the User """
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     names = []
@@ -334,11 +292,12 @@ def get_all_journey_names():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def change_user_details():
+    """ Changes User details that are submitted """
     user = models.User.query.filter_by(id=current_identity[0]).first()
     body = json.loads(request.data)
     for key in body:
         if key == 'password':
-            user.password = body['password']
+            user.password = body['password'].encode()
         if key == 'email':
             user.email = body['email']
         if key == 'firstName':
@@ -353,6 +312,7 @@ def change_user_details():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def get_itinerary():
+    """ Gets the itinerary of a single Stop """
     journey_index = int(request.args.get('journey'))
     stop_index = int(request.args.get('stop'))
     user = models.User.query.filter_by(id=current_identity[0]).first()
@@ -368,6 +328,7 @@ def get_itinerary():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def update_itinerary():
+    """ Overwrites the currently stored Itinerary data """
     body = json.loads(request.data)
     print(body)
     journey_index = int(body['journey'])
@@ -389,14 +350,10 @@ def index():
 
 
 ##### Helper functions ####
-
-@app.route('/api/test')
-def test():
-    search = request.args.get('search', 'Sydney')
-    return jsonify(api_handler.get_wiki_summary(search))
-
-
 def call_cache(search, data_type):
+    """ Calls the cache for stored information to minimise latency
+        Stores data for at most 7 days
+    """
     query = models.CacheInformation.query.filter_by(place_name=search, data_type=data_type).first()
     if query:
         if query.expiry < datetime.utcnow():
@@ -410,14 +367,19 @@ def call_cache(search, data_type):
     else:
         data = api_caller(search, data_type)
         cache = pickle.dumps(data)
-        created_cache = models.CacheInformation(place_name=search, data_type=data_type,
-                                                cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
+        created_cache = models.CacheInformation(
+            place_name=search,
+            data_type=data_type,
+            cached_data=cache,
+            expiry=(datetime.utcnow() + timedelta(days=7))
+            )
         db.session.add(created_cache)
         db.session.commit()
     return data
 
 
 def api_caller(search, data_type):
+    """ Calls external API for the latest information """
     if data_type == 'attractions':
         data = api_handler.search_places(search)
     elif data_type == 'flickr':
@@ -430,6 +392,7 @@ def api_caller(search, data_type):
 
 
 def convert_time(time_string):
+    """ Converts TypeScript stringified string to Python DateTime """
     # 2017-09-26T10:05:56.000Z
     try:
         python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S.000Z')
