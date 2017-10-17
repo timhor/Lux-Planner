@@ -38,9 +38,7 @@ h4 {
   cursor: default;
 }
 
-#body_div {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
+#content {
   padding-right: 5vw;
   padding-left: 5vw;
   min-width: 300px;
