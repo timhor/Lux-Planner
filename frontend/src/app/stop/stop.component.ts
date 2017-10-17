@@ -38,6 +38,8 @@ export class StopComponent {
         document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
         // "wrap" class is used for the main body of the page (between navbar and footer)
         document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
+        document.getElementById('footerLinks').setAttribute('style', 'margin-right: 2px;');
+        document.getElementById('subText').setAttribute('style', 'margin-right: 2px;');
         this.currStop = stop;
         this.getBannerPhoto();
 
@@ -60,6 +62,8 @@ export class StopComponent {
         document.documentElement.setAttribute('style', 'overflow-y: scroll');
         document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
         document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
+        document.getElementById('footerLinks').setAttribute('style', 'margin-right: -15px;');
+        document.getElementById('subText').setAttribute('style', 'margin-right: -15px;');
         // Clear all data in vars
         document.documentElement.setAttribute('style', 'overflow-y: scroll');
         this.location_images = [];

@@ -156,6 +156,8 @@ export class ItineraryComponent implements OnInit {
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
     // "wrap" class is used for the main body of the page (between navbar and footer)
     document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
+    document.getElementById('footerLinks').setAttribute('style', 'margin-right: 2px;');
+    document.getElementById('subText').setAttribute('style', 'margin-right: 2px;');
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;    
     this.currStop = stop;
@@ -177,6 +179,8 @@ export class ItineraryComponent implements OnInit {
     document.documentElement.setAttribute('style', 'overflow-y: scroll');
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
     document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
+    document.getElementById('footerLinks').setAttribute('style', 'margin-right: -15px;');
+    document.getElementById('subText').setAttribute('style', 'margin-right: -15px;');
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
