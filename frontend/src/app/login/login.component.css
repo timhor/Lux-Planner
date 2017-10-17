@@ -6,15 +6,3 @@
 #loginForm {
   margin: 0 auto;
 }
-
-#body_div {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  padding-right: 5vw;
-  padding-left: 5vw;
-  width: 50vw;
-  min-width: 300px;
-  margin: 0 auto;
-  border-radius: 5vh;
-}
