@@ -44,6 +44,9 @@ h4 {
 
 .well {
   min-width: 715px;
+}
+
+.well-content {
   width: 60vw;
 }
 
