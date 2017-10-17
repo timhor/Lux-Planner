@@ -83,7 +83,7 @@ export class JourneyComponent implements OnInit {
           for (let i = 0; i < journey.stops.length; i++) {
             let stop = journey.stops[i];
             (<FormArray>this.myJourney.get('destinations')).push(
-              this.loadItem(stop.name, new Date(stop.arrival), new Date(stop.departure))
+              this.loadItem(stop.name, new Date(stop.departure), new Date(stop.arrival))
             );
           }
           this.modifyingCounter = 0;
@@ -121,7 +121,6 @@ export class JourneyComponent implements OnInit {
   submit() {
     this.updateVars();
     let payload = this.myJourney.getRawValue();
-    console.log(payload);
 
     // Check that all fields have been filled in
 
@@ -161,14 +160,12 @@ export class JourneyComponent implements OnInit {
 
       // If arriving at a stop before leaving the previous stop
       if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
-        console.log(`Bad arrival date ${curr_arr.getTime()} < ${curr_end.getTime()}`);
         this.exitWithMessage("Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.");
         return;
       }
 
       // If arriving at a stop before leaving (no time tolerance since same place)
       if (curr_arr.getTime() > curr_dep.getTime()) {
-        console.log(`Bad depature date ${curr_arr.getTime()} > ${curr_dep.getTime()}`);
         this.exitWithMessage("Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.");
         return;
       }
@@ -184,14 +181,17 @@ export class JourneyComponent implements OnInit {
 
     // If leaving the final stop after the journey has ended
     if (curr_end.getTime() > journey_end.getTime() + this.timeTolerance) {
-      console.log(`Bad finish date ${curr_end.getTime()} > ${journey_end.getTime()}`);
       this.exitWithMessage("Invalid entries: <strong>Journey End Date</strong> must be after the final stop's <strong>To</strong> date.");
       return;
     }
 
-    this.connectionService.getProtectedData('api/get_all_journeys').subscribe(
+    this.connectionService.getProtectedData('api/get_journeys_length').subscribe(
       res => {
-        this.journeyService.activeJourneyIndex = res.journeys.length;
+        if (this.isModifying !== -1) {
+          this.journeyService.activeJourneyIndex = this.isModifying;
+        } else {
+          this.journeyService.activeJourneyIndex = res.length;
+        }
       },
       (error) => {console.log(`could not connect ${error}`)}
     );
@@ -201,13 +201,11 @@ export class JourneyComponent implements OnInit {
     let handle = this.loggedInService.postJourney(myJourney);
     handle.subscribe(
       (res) => {
-        console.log("Successfully saved journey");
         this.notifySuccess();
         this.router.navigate(['/dashboard']);
       },
       (error) => {
         this.exitWithMessage("Error saving journey.");
-        console.log("Unable to save journey (check if backend is running)");
         this.invalidForm = true;
         window.scrollTo(0,0);
       }
@@ -237,7 +235,6 @@ export class JourneyComponent implements OnInit {
     for (let i = 0; i < d.length; i++) {
       (<FormGroup>(<FormArray>this.myJourney.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
     }
-    console.log("Form variables Updated!")
   }
 
   buildItem(val: string) {
@@ -279,7 +276,6 @@ export class JourneyComponent implements OnInit {
   saveInitialLocation() {
     let field = "initialLocation";
     this.myJourney.controls['initialLocation'].setValue((<HTMLInputElement>document.getElementById(field)).value);
-    console.log("Start Location Saved!");
   }
 
   getStop(i) {

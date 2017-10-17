@@ -13,14 +13,21 @@ import { NotificationsService } from 'angular2-notifications'
 export class SignupComponent {
   account = new NewAccount('','','','','','');
   public usernameTakenMsg: string = '';
+  public completedRequiredFields: boolean = true;
 
   constructor(private loggedInService: LoggedInService, public router: Router, public notification: NotificationsService) {}
 
   onSubmit() {
-    if (this.account.password.length < 8) {
+    this.completedRequiredFields = true;
+    if (this.account.username == '' || this.account.password == '' || this.account.email == '' || this.account.confirmPassword == '') {
+        this.completedRequiredFields = false;
         return;
     }
-    let response = this.loggedInService.signup(this.account.username, this.account.password, this.account.email, this.account.firstName, this.account.lastName);
+    if (this.account.password.length < 8 || this.account.password != this.account.confirmPassword) {
+        return;
+    }
+    let response = this.loggedInService.signup(this.account.username, this.account.password,
+        this.account.email, this.account.firstName, this.account.lastName);
     response.subscribe(
         (data) => {
             if (data.message == 'success') {

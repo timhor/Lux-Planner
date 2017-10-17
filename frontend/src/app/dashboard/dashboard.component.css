@@ -15,6 +15,18 @@
   margin-bottom: 2.5px;
   width: 74%;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+.stopButton:hover,
+.stopButton:focus,
+.stopButton:active {
+  border-color: #3EB000;
+  background-color: #3EB000;
+  color: white; 
 }
 
 .itineraryButton {
@@ -28,6 +40,15 @@
   width: 24%;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
 }
+
+.itineraryButton:hover,
+.itineraryButton:focus,
+.itineraryButton:active {
+  border-color: #3EB000;
+  background-color: #3EB000;
+  color: white; 
+}
+
 
 button.btn-default:active,
 button.btn-default:focus,
@@ -69,11 +90,11 @@ img {
   font-size: 40px;
   font-weight: bolder;
   font-style: italic;
+  margin-bottom: 0px;
 }
 
 #currentJourneyHeader {
   background-color: transparent;
-  width: 100%;
   text-align: left;
   margin-top: 30px;
   margin-bottom: -10px;
@@ -142,6 +163,7 @@ agm-map {
 
 .dropdown {
   margin-top: -40px;
+  width: 10%;
 }
 
 h4 {
@@ -175,12 +197,25 @@ textarea {
   float: left !important;
 }
 
+.textarea {
+  overflow-y: auto;
+  height: 200px;
+}
+
+.notesArea {
+  overflow-y: auto;
+}
+
 #notesText {
   white-space: pre-wrap;
+  height: 200px;
+  margin-bottom: 34px;
 }
 
 #notesTextEmpty {
   font-style: italic;
+  height: 200px;
+  margin-bottom: 34px;
 }
 
 .modal {
@@ -246,11 +281,13 @@ textarea {
   text-align: center;
   position: relative;
   z-index: 1;
+  width: 100%;
+  margin-top: 31px;
+  white-space: nowrap;
 }
 
-.scroll-container {
-  /* overflow-x: auto; */
-  width: 100%;
+.outer-timeline-container {
+  overflow-x: auto;
 }
 
 .btn-circle {
@@ -268,20 +305,26 @@ textarea {
   border: solid #f7544a;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   margin-bottom: 40px;
+  float: none;
+  display: inline-block;
 }
 
-.btn-circle:hover,
-.btn-circle:focus {
+.btn-circle:hover {
+  background-color: #f7544a;
+  border: solid #f7544a;
+  color: white;
+}
+
+.activeBtn {
   background-color: #f7544a;
   border: solid white;
   color: white;
 }
 
-.btn-circle-start:hover,
-.btn-circle-start:focus,
-.btn-circle-start:active {
-  background-color: #bed600;
-  border: solid white;
+.btn-circle-start:hover {
+  background-color: #3EB000;
+  border: solid #3EB000;
+  color: white
 }
 
 .btn-circle-start {
@@ -296,17 +339,19 @@ textarea {
   margin-right: 5%;
   text-align: center;
   background-color: white;
-  border: solid #bed600;
+  border: solid #3EB000;
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   margin-bottom: 40px;
   cursor: pointer;
+  float: none;
+  display: inline-block;
 }
 
 .line {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   left: 0;
-  top: 15px;
+  top: 45px;
   height: 2px;
   width: 100%;
   background: #cccccc;
@@ -335,7 +380,7 @@ textarea {
   color: #424242;
   padding-top: 38px;
   margin-left: -58px;
-  /* Truncate long text */
+  /* truncate long text */
   width: 100px;
   white-space: nowrap;
   overflow: hidden;
@@ -348,8 +393,40 @@ button:focus {
 }
 
 #weatherHolder {
-  height: 200px;
-  margin-top: 50px;
+  height: 162px;
+  margin-top: 35px;
+  margin-bottom: 5px;
+}
+
+/* current weather - position within well */
+:host ::ng-deep .current {
+  margin-left: -25px;
+}
+
+/* weather icon for current weather */
+:host ::ng-deep .current > weather-icon.big {
+  font-size: 3.5em;
+}
+
+/* temperature for current weather */
+:host ::ng-deep .current > weather-current-temperature.big {
+  font-size: 2em;
+}
+
+/* forecast div height */
+:host ::ng-deep .info.wide {
+  height: fit-content; /* prevent scrollbars */
+  margin-top: -42px;
+}
+
+/* forecast icons and text */
+:host ::ng-deep .forecast > weather-forecast > weather-forecast-simple-grid {
+  font-size: initial;
+}
+
+/* hide refresh button */
+:host ::ng-deep weather-widget > weather-actions {
+  display: none;
 }
 
 /* progress bar */
@@ -474,6 +551,10 @@ button:focus {
   text-align: center;
   margin-bottom: 20px;
   margin-top: 0px;
+}
+
+tooltip-content {
+  margin-top: 100px;
 }
 
 /* mobile-specific styles */

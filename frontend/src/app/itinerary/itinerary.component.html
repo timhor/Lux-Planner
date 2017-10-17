@@ -3,45 +3,51 @@
     <div class="modal-content">
       <div class="modal-header">
         <ng-content select=".app-itinerary-header"></ng-content>
-        My itinerary
+        {{currStop}} Itinerary
       </div>
       <div class="modal-body">
         <ng-content select=".app-itinerary-body"></ng-content>
-        <div class="container" id="body_div">
-          <br>
-          <div class="well">
-            <div class="row">
-              <div class="col-sm-2" id="stopHeading">
-                {{currStop}}
+        <div class="container">
+          <div class="card">
+            <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
+            <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
+            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrag($event)" (onEventResize)="handleEventDrag($event)"></p-schedule>
+            
+            <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
+              [style]="{'overflow':'visible'}" [resizable]="false">
+              <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-4"><label for="vin">Title</label></div>
+                      <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="event.title" /></div>
+                  </div>
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-4"><label for="start">Start</label></div>
+                      <div class="ui-grid-col-8"><p-calendar [(ngModel)]="event.start" dateFormat="yy-mm-dd" dataType="string"></p-calendar></div>
+                  </div>
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-4"><label for="end">End</label></div>
+                      <div class="ui-grid-col-8"><p-calendar [(ngModel)]="event.end" dateFormat="yy-mm-dd" dataType="string"></p-calendar></div>
+                  </div>
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-4"><label for="allday">All Day</label></div>
+                      <div class="ui-grid-col-8"><p-checkbox [(ngModel)]="event.allDay" binary="checkbox"></p-checkbox></div>
+                  </div>
               </div>
-              <div class="col-sm-1">
-                <label>Starting Date</label>
-              </div>
-              <div class="col-sm-2">
-                <input type="date" placeholder="Date" class="form-control">
-              </div>
-              <div class="col-sm-1">
-                <label>Departure Date</label>
-              </div>
-              <div class="col-sm-2">
-                <input type="date" placeholder="Date" class="form-control">
-              </div>
-              <div class="col-sm-1">
-              </div>
-              <div class="col-sm-3" align="right">
-                <button class="button-rect button-green">Enable Editing</button>
-              </div>
-            </div>
-            <br>
-            <p-schedule [events]="events" width="100%" [editable]="true"></p-schedule>
+              <p-footer>
+                  <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                      <button type="button" pButton icon="fa-close" (click)="deleteEvent()" label="Delete" [disabled]="event?.id !== 0 && !event?.id"></button>
+                      <button type="button" pButton icon="fa-check" (click)="saveEvent()" label="Save" [disabled]="!event?.start"></button>
+                  </div>
+              </p-footer>
+            </p-dialog>
           </div>
-          <br>
         </div>
-      </div>
-      <div class="modal-footer">
-        <ng-content select=".app-itinerary-footer"></ng-content>
         <br>
       </div>
+      <!-- <div class="modal-footer">
+        <ng-content select=".app-itinerary-footer"></ng-content>
+        <br>
+      </div> -->
     </div>
   </div>
 </div>

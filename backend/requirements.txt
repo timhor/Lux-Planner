@@ -6,5 +6,4 @@ flickrapi
 sqlalchemy-migrate
 gunicorn
 psycopg2
-alembic
 pycryptodome

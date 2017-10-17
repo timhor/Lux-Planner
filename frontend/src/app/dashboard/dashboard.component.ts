@@ -41,13 +41,15 @@ export class DashboardComponent implements OnInit {
   public mapUrl: string = "Nothing";
   private toRefresh:boolean = false;
   private firstLoad:boolean;
+  private isModifyingNotes = false;
   private newNotes: string = "";
-  events: Array<any>;
   private bounds;
   public startingLocationName: string;
   settings: WeatherSettings;
   public isLoading: boolean = true;
-  
+  events: any[]; 
+  header: any;  
+
   constructor(
     private connService: ConnectionService,
     private loggedInService: LoggedInService, 
@@ -74,7 +76,6 @@ export class DashboardComponent implements OnInit {
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
-            this.stops = res.journeys[this.activeStopIndex].stops;
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
                 res => {
                     this.aboutText = res.info;
@@ -83,8 +84,11 @@ export class DashboardComponent implements OnInit {
             this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
             this.updateMap();
-            this.setActiveJourney(this.journeyName);
+            this.setActiveJourney(this.activeJourneyIndex);
             this.isLoading = false;
+            setTimeout(() => {
+              this.setTimelineWidth();
+            },1);
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
@@ -93,7 +97,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (!this.loggedInService.loggedIn()) {
       this.router.navigate(['/login']);
-    }    
+    }  
+    
+    this.header = {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listMonth'
+    };
   }
 
   getCurrStop () {
@@ -104,21 +114,18 @@ export class DashboardComponent implements OnInit {
     return this.stops[i].name;
   }
 
-  setActiveJourney(journey:string) {
+  setActiveJourney(index:number) {
     if (!this.firstLoad) {
       this.firstLoad = true;
     }
 
-    for (let i=0; i < this.allJourneys.length; i++) {
-      if (journey === this.allJourneys[i].journey_name) {
-        this.activeJourneyIndex = i;
-        break;
-      }
-    }
+    this.activeJourneyIndex = index;
 
-    this.journeyName = journey;
-    this.stops = this.allJourneys[this.activeJourneyIndex].stops;
+    let journey = this.allJourneys[this.activeJourneyIndex];
+    this.journeyName = journey.journey_name
+    this.stops = journey.stops;
     this.activeStopIndex = 0;
+    this.startingLocationName = journey.start_location;    
     
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
@@ -128,23 +135,30 @@ export class DashboardComponent implements OnInit {
 
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();   
-    this.startingLocationName = this.allJourneys[this.activeJourneyIndex].start_location;    
-    // this.setTimelineWidth();
+    if (!this.isLoading) {
+      this.setTimelineWidth();
+    }
+      this.refreshCalendar();
   }
 
-  setActiveStop(stop:string) {
-    this.firstLoad = false;
-    for (let i=0; i < this.stops.length; i++) {
-      if (stop === this.stops[i].name) {
-        this.activeStopIndex = i;
-        break;
+  refreshCalendar() {
+      this.events = [];
+      for (let i = 0; i < this.stops.length; i++) {
+          this.connService.getProtectedData(`api/get_itinerary/?journey=${this.activeJourneyIndex}&stop=${i}`)
+              .subscribe(res => {
+                  res.forEach(event => {
+                      event.title = '[' + this.stops[i].name.substring(0, 3) + '] ' + event.title;
+                  });
+                  this.events = this.events.concat(res);
+                  // console.log(res);
+              });
       }
-    }
-    if (this.stops[this.activeStopIndex].notes === undefined) {
-      this.newNotes = null;
-    } else {
-      this.newNotes = this.stops[this.activeStopIndex].notes;
-    }
+  }
+
+  setActiveStop(index:number) {
+    this.firstLoad = false;
+    this.activeStopIndex = index;
+
     this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
       res => {
           this.aboutText = res.info;
@@ -162,7 +176,7 @@ export class DashboardComponent implements OnInit {
       backgroundColor: 'transparent',
       color: '#424242',
       width: '100%',
-      height: '150px',
+      height: '130px',
       showWind: false,
       scale: TemperatureScale.CELCIUS,
       forecastMode: ForecastMode.GRID,
@@ -195,9 +209,15 @@ export class DashboardComponent implements OnInit {
   }
 
   shortAbout() {
-    let sentences = this.aboutText.match(/^(.*?\..*?)\.(\s|<\/p>)/); // get first two sentences from aboutText
+    // get first two sentences from aboutText
+    let sentences = this.aboutText.match(/.*?\.[^\d]/g);
     if (sentences) {
-      let text = sentences[0]; // only want the first match
+      // regex replace is to account for numbers with decimal in the text
+      // e.g. "around 7.2 million" in the aboutText for Hong Kong
+      let text = sentences[0].replace(/<$/, "");
+      if (sentences.length > 1) {
+        text += sentences[1].replace(/<$/, "");
+      }
       return text;
     } else {
       return "<em>No information found.</em>"
@@ -209,18 +229,35 @@ export class DashboardComponent implements OnInit {
     this.activeStopIndex = -1;
   }
 
-  cancelNotes() {
+  modifyNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.newNotes = this.stops[this.activeStopIndex].notes;
+    setTimeout(() => {
+      document.getElementById('textArea').focus()
+    },1);
+  }
+
+  cancelNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
   }
 
   saveNotes() {
+    if (this.stops[this.activeStopIndex].notes === this.newNotes) {
+      this.isModifyingNotes = !this.isModifyingNotes;
+      this.notification.warn(
+        "Notes unchanged",
+        "Notes were not saved"
+      )
+      return;
+    }
     this.stops[this.activeStopIndex].notes = this.newNotes;
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.pushNotes("updated");
   }
 
   deleteNotes() {
+    this.isModifyingNotes = !this.isModifyingNotes;
     this.stops[this.activeStopIndex].notes = null;
-    this.newNotes = null;
     this.pushNotes("deleted");
   }
 
@@ -232,7 +269,6 @@ export class DashboardComponent implements OnInit {
     this.loggedInService.updateNotes(JSON.stringify(payload)).subscribe(
         (res) => {
           this.notifyUpdate(action);
-          console.log("pushed to server successfully");
         }
 
     )
@@ -270,15 +306,36 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // setTimelineWidth() {
-  //   let element: HTMLElement = document.getElementById('timeline-buttons');
-  //   let timelineWidth = Math.round((window.screen.width*0.05)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
-  //   console.log(timelineWidth);
-  //   console.log(0.65*window.screen.width);
-  //   if (timelineWidth > 0.65*window.screen.width) {
-  //     element.setAttribute('style', "width: " + timelineWidth + "px");
-  //   } else {
-  //     element.setAttribute('style', "width: 100%");
-  //   }
-  // }
+  convertDate(date) {
+    return new Date(date).toLocaleDateString();
+  }
+
+  getDuration(end, start) {
+    let diff = Math.abs(new Date(end).valueOf() - new Date(start).valueOf());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    return diffDays;
+  }
+
+  setActiveButton(index:number) {
+    for (let i = 0; i < this.stops.length; i++) {
+      document.getElementById('stopButton'+i.toString()).setAttribute('class', 'btn-circle');
+    }
+    if (index !== -1) {
+      document.getElementById('stopButton' + index.toString()).setAttribute('class', 'btn-circle activeBtn');
+    }
+    
+  }
+
+  setTimelineWidth() {
+    let element: HTMLElement = document.getElementById('timeline-line');
+    let timelineWidth = Math.round((window.screen.width*0.041)*2*(this.stops.length+2)) + 30*(this.stops.length+2);
+    if (timelineWidth > 0.8*window.screen.width) {
+      timelineWidth = (timelineWidth/window.screen.width) * 100;
+      element.setAttribute('style', "width: " + timelineWidth + "vw");
+    } else {
+     element.setAttribute('style', "width: 100%");
+    }
+  }
+
+
 }

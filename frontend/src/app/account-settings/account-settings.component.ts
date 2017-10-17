@@ -45,7 +45,6 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        console.log('Success getting account details');
       },
       (error) => {console.log(`could not connect ${error}`)}
   );
@@ -96,7 +95,6 @@ export class AccountSettingsComponent implements OnInit {
     let response = this.loggedInService.changeDetails(payload);
     response.subscribe(
       (data) => {
-        console.log(data.message);
         this.editAvatar = false;
         this.editPassword = false;
         this.editEmail = false;
@@ -115,7 +113,6 @@ export class AccountSettingsComponent implements OnInit {
         this.email = res.email;
         this.firstName = res.first_name;
         this.lastName = res.last_name;
-        console.log('Success updating account details');
       },
         (error) => {console.log(`could not connect ${error}`)}
     );

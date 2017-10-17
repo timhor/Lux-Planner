@@ -22,7 +22,6 @@ def authenticate(username, password):
         @return: the user that matches both username and password
             else return None
     """
-    print('hello auth')
     user = models.User.query.filter_by(username=username).first()
     try:
         nonce, password_bytes = user.password[:8], user.password[8:]
@@ -36,7 +35,6 @@ def authenticate(username, password):
 
 def identity(payload):
     """ Provides an identity of the user """
-    print(payload['identity'])
     return payload['identity']  # identity payload => current_identity (global var)
 
 
@@ -112,9 +110,7 @@ def google_places():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 def new_user():
     body = json.loads(request.data)
-    #print(data)
     username = body['username']
-    print(username)
     search_username = models.User.query.filter_by(username=username).first()
     if search_username:
         return jsonify({
@@ -135,7 +131,6 @@ def new_user():
 
 @app.route('/api/new_place', methods=['POST'])
 def new_place():
-    print(request)
     name = request.form['name']
     search_name = models.Place.query.filter_by(place_name=name).first()
     if search_name:
@@ -151,7 +146,6 @@ def new_place():
 
 @app.route('/api/new_stop', methods=['POST'])
 def new_stop():
-    print(request)
     name = request.form['name']
     search_name = models.Stop.query.filter_by(stop_name=name).first()
     if search_name:
@@ -169,7 +163,6 @@ def new_stop():
 def new_journey():
     user_id = current_identity[0]
     body = json.loads(request.data)
-    print(body)
     if body['isModifying'] == -1:
         j_start = convert_time(body['initialDeparture'])
         j_end = convert_time(body['initialArrival'])
@@ -205,9 +198,7 @@ def new_journey():
         j.start_location = body['initialLocation']
         j.start_date = convert_time(body['initialDeparture'])
         j.end_date = convert_time(body['initialArrival'])
-        stops = models.Stop.query.filter_by(journey_id=j.id).all()
-        for i in stops:
-            db.session.delete(i)
+        stops = models.Stop.query.filter_by(journey_id=j.id).delete()
         db.session.commit()
 
         for s in body['destinations']:
@@ -234,7 +225,6 @@ def get_all_journeys():
     journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     for j in journeys:
         stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
-        print(stops)
         s_payload = []
         for s in stops:
             location = call_cache(s.stop_name, 'coord')
@@ -260,8 +250,19 @@ def get_all_journeys():
 
         payload.append(j_item)
     # Think about how to handle a user without a journey
-    print(payload)
     return jsonify({'active_journey': user.active_journey_index, 'journeys': payload})
+
+
+@app.route('/api/get_journeys_length', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_journeys_length():
+    id = current_identity[0]
+    user = models.User.query.filter_by(id=id).first() # or models.User.query.get(1)
+    payload = []
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    length = len(journeys)
+    return jsonify({'length': length})
 
 
 @app.route('/api/switch_journey/', methods=['GET'])
@@ -272,6 +273,7 @@ def switch_journey():
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
+
 
 @app.route('/api/update_notes', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
@@ -295,9 +297,7 @@ def delete_journey():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).all()
     j = journeys[body['delete']]
-    stops = models.Stop.query.filter_by(journey_id=j.id).all()
-    for s in stops:
-        db.session.delete(s)
+    stops = models.Stop.query.filter_by(journey_id=j.id).delete()
     db.session.delete(j)
     db.session.commit()
     return jsonify({'message': 'success'})
@@ -328,10 +328,8 @@ def get_all_journey_names():
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def change_user_details():
-    print("hello")
     user = models.User.query.filter_by(id=current_identity[0]).first()
     body = json.loads(request.data)
-    print(body)
     for key in body:
         if key == 'password':
             user.password = body['password']
@@ -345,7 +343,38 @@ def change_user_details():
     return jsonify({'message': 'success'})
 
 
-################ Old stuff ####################
+@app.route('/api/get_itinerary/', methods=['GET'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def get_itinerary():
+    journey_index = int(request.args.get('journey'))
+    stop_index = int(request.args.get('stop'))
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    j = journeys[journey_index]
+    stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
+    if stops[stop_index].itinerary is None:
+        return jsonify([])
+    return jsonify(pickle.loads(stops[stop_index].itinerary))
+
+
+@app.route('/api/update_itinerary', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def update_itinerary():
+    body = json.loads(request.data)
+    print(body)
+    journey_index = int(body['journey'])
+    stop_index = int(body['stop'])
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    j = journeys[journey_index]
+    stops = models.Stop.query.filter_by(journey_id=j.id).order_by(models.Stop.id).all()
+    stops[stop_index].itinerary = pickle.dumps(body['events'])
+    db.session.commit()
+    return jsonify({'message': 'success'})
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -379,7 +408,6 @@ def call_cache(search, data_type):
                                                 cached_data=cache, expiry=(datetime.utcnow() + timedelta(days=7)))
         db.session.add(created_cache)
         db.session.commit()
-    print(data)
     return data
 
 
@@ -396,10 +424,9 @@ def api_caller(search, data_type):
 
 
 def convert_time(time_string):
-    print(time_string)
     # 2017-09-26T10:05:56.000Z
     try:
-        python_time = datetime.strptime(time_string, '%Y-%m-%dT%h:%m:%S')
+        python_time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S.000Z')
     except:
         python_time = datetime.utcnow()
     return python_time
