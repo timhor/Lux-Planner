@@ -1,9 +1,3 @@
-.well {
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 2.5vh;
-  text-align: left;
-}
-
 .stopButton {
   border: 2.4px;
   border-right-width: 1.2px;
@@ -583,8 +577,16 @@ tooltip-content {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 992px) {
   #subHeading {
     font-size: 12px;
+  }
+
+  .stopButton {
+    width: 68%;
+  }
+
+  .itineraryButton {
+    width: 30%;
   }
 }
