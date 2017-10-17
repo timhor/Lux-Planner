@@ -95,6 +95,7 @@ def wikipedia_search():
     """ Gets the stop information from Wikipedia """
     stop = request.args.get('stop', 'toyko')
     info = call_cache(stop, 'wiki')
+    print(info)
     return jsonify({'info': info})
 
 
