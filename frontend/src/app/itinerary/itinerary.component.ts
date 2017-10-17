@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 // import { EventService } from '../event.service';
@@ -175,7 +175,9 @@ export class ItineraryComponent implements OnInit {
     setTimeout(() => this.visibleAnimate = true, 100);
   }
 
+  @Output() onModalClose = new EventEmitter();
   public hide(): void {
+    this.onModalClose.emit(null)
     document.documentElement.setAttribute('style', 'overflow-y: scroll');
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
     document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
