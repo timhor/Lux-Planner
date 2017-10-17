@@ -48,8 +48,8 @@ h4 {
   padding-bottom: 5vh;
   padding-right: 5vw;
   padding-left: 5vw;
-  min-width: 300px;
-  width: 50vw;
+  min-width: 715px;
+  width: 60vw;
   margin: 0 auto;
   border-radius: 5vh;
 }
@@ -148,4 +148,24 @@ td {
 
 .card-start:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* mobile-specific styles */
+
+@media (max-width: 767px) {
+  #body_div {
+    min-width: 300px;
+    width: 90vw;
+  }
+
+  .button-red {
+    margin-top: 12px;
+    margin-bottom: -15px;
+  }
+}
+
+@media (max-width: 499px) {
+  .button-blue {
+    margin-top: 12px;
+  }
 }
