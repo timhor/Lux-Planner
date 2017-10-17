@@ -7,7 +7,7 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
-  styleUrls: ['./account-settings.component.css']
+  styleUrls: ['../app.component.css', './account-settings.component.css']
 })
 export class AccountSettingsComponent implements OnInit {
   public editAvatar:boolean = false;
