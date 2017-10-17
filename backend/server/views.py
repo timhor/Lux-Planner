@@ -12,6 +12,7 @@ from Crypto.Cipher import Salsa20
 import pickle
 import json
 import re
+import base64
 
 CORS(app)
 
@@ -24,12 +25,16 @@ def authenticate(username, password):
     """
     user = models.User.query.filter_by(username=username).first()
     try:
-        nonce, password_bytes = user.password[:8], user.password[8:]
-        encryption = Salsa20.new(app.config['SECRET_KEY'].encode(), nonce)
-        checkPassword = encryption.decrypt(password_bytes).decode()
+        # nonce, password_bytes = user.password[:8], user.password[8:]
+        # encryption = Salsa20.new(app.config['SECRET_KEY'].encode(), nonce)
+        # checkPassword = encryption.decrypt(password_bytes).decode()
+        checkPassword = base64.b64decode(user.password).decode()
+        print(checkPassword)
+        print(password)
         if checkPassword == password:
             return user
     except AttributeError:
+        print("uh what")
         return None
 
 
@@ -117,8 +122,9 @@ def new_user():
             'message': username + " is taken."
         })
 
-    encryption = Salsa20.new(app.config['SECRET_KEY'].encode())
-    password_bytes = encryption.nonce + encryption.encrypt(body['password'].encode())
+    # encryption = Salsa20.new(app.config['SECRET_KEY'].encode())
+    # password_bytes = encryption.nonce + encryption.encrypt(body['password'].encode())
+    password_bytes = base64.b64encode(body['password'].encode())
     email = body['email']
     first_name = body['firstName']
     last_name = body['lastName']
