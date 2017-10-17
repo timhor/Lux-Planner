@@ -17,6 +17,7 @@ export class MyJourneysComponent implements OnInit {
   public notifysuccess: number;
   public notifyfailure: number;
   public success: number;
+  public isLoading: boolean = true;
 
   constructor(
     private connService: ConnectionService,
@@ -72,6 +73,7 @@ export class MyJourneysComponent implements OnInit {
               return;
             }
             this.allJourneys = res.journeys;
+            this.isLoading = false;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
