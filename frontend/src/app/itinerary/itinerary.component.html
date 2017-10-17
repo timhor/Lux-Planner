@@ -8,7 +8,13 @@
       <div class="modal-body">
         <ng-content select=".app-itinerary-body"></ng-content>
         <div class="container">
-          <div class="card">
+          <div id="progressBar" class="card" *ngIf="isLoading">
+            <h3>Loading...</h3>
+            <div class="progress">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+          <div class="card" *ngIf="!isLoading">
             <!-- Following code was obtained from : http://primefaces.org/primeng/#/schedule -->
             <p-schedule [events]="events" [header]="header" [eventLimit]="4" [options]="options" [editable]="true"
             (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrag($event)" (onEventResize)="handleEventDrag($event)"></p-schedule>

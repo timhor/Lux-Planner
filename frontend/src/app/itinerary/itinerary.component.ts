@@ -15,6 +15,7 @@ export class ItineraryComponent implements OnInit {
   public journeyIndex: number;
   public stopIndex: number;  
   public currStop: number;
+  public isLoading: boolean = true;
 
   events: any[];
   header: any;
@@ -162,8 +163,10 @@ export class ItineraryComponent implements OnInit {
     this.stopIndex = stopIndex;    
     this.currStop = stop;
     this.connService.getProtectedData(`api/get_itinerary/?journey=${this.journeyIndex}&stop=${this.stopIndex}`)
-        .subscribe(res => {this.events = res});
-
+        .subscribe(res => {
+            this.events = res
+            this.isLoading = false;
+        });
     if (this.events.length > 0) {
         this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;})) + 1;
     } else {
@@ -178,6 +181,7 @@ export class ItineraryComponent implements OnInit {
   @Output() onModalClose = new EventEmitter();
   public hide(): void {
     this.onModalClose.emit(null)
+    this.isLoading = true;
     document.documentElement.setAttribute('style', 'overflow-y: scroll');
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
     document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
