@@ -32,7 +32,7 @@ export class JourneyComponent implements OnInit {
      requires each successive stop to have arrival time after departure time. Technically you 
      can fly back in time, e.g. Sydney to US or UK, which would be rejected by the app. This
      adds a 26 hour time tolerance to validation. */
-  private timeTolerance: number =   26  // hours
+  private timeTolerance: number =   24  // hours
                                 *   60  // minutes / hour
                                 *   60  // seconds / minute
                                 * 1000; // milliseconds / second 
@@ -157,7 +157,6 @@ export class JourneyComponent implements OnInit {
     for (let i = 0; i < payload.destinations.length; i++) {
       let curr_arr = new Date(payload.destinations[i].arrival);
       let curr_dep = new Date(payload.destinations[i].departure);
-
       // If arriving at a stop before leaving the previous stop
       if (curr_arr.getTime() + this.timeTolerance < curr_end.getTime()) {
         this.exitWithMessage("Invalid entries: each stop's <strong>From</strong> date must be after the previous stop's <strong>To</strong> date.");

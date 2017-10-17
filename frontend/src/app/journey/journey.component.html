@@ -58,14 +58,12 @@
       <div class="row">
         <div class="col-sm-5">
           <label for="initialDeparture">Journey Start Date</label>
-          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy, " showTime="showTime"
-            hourFormat="24" showButtonBar="true" showIcon="true">
+          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
         <div class="col-sm-5">
           <label for="initialArrival">Journey End Date</label>
-          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy, " showTime="showTime"
-            hourFormat="24" showButtonBar="true" showIcon="true">
+          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
           </p-calendar>
         </div>
       </div>
@@ -95,13 +93,13 @@
             <div class="col-sm-5 ui-state-hover">
               <label for="arrival" [attr.for]="'departure'+i">From</label>
               <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
-                          dateFormat="dd/mm/yy, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+                          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-5">
               <label for="departure" [attr.for]="'arrival'+i">To</label>
               <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
-                          dateFormat="dd/mm/yy, " showTime="showTime" hourFormat="24" showButtonBar="true" showIcon="true">
+                          dateFormat="dd/mm/yy" hourFormat="24" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-1">
