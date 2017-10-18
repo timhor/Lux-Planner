@@ -570,10 +570,6 @@ button:focus {
     margin-top: 8px;
   }
 
-  .line {
-    top: 17px;
-  }
-
   .stop-label,
   .start-label {
     font-size: 12px;
