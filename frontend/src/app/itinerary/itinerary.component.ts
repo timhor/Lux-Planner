@@ -15,6 +15,7 @@ export class ItineraryComponent implements OnInit {
   public journeyIndex: number;
   public stopIndex: number;  
   public currStop: number;
+  public start: any;
   public isLoading: boolean = true;
 
   events: any[];
@@ -152,7 +153,7 @@ export class ItineraryComponent implements OnInit {
   public visible = false;
   public visibleAnimate = false;
 
-  public show(journeyIndex: number, stopIndex: number, stop: number): void {
+  public show(journeyIndex: number, stopIndex: number, stop: number, start: any): void {
     document.documentElement.setAttribute('style', 'overflow-y: hidden;');
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
     // "wrap" class is used for the main body of the page (between navbar and footer)
@@ -162,6 +163,7 @@ export class ItineraryComponent implements OnInit {
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;    
     this.currStop = stop;
+    this.start = start;
     this.connService.getProtectedData(`api/get_itinerary/?journey=${this.journeyIndex}&stop=${this.stopIndex}`)
         .subscribe(res => {
             this.events = res

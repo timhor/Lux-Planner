@@ -104,6 +104,10 @@ export class DashboardComponent implements OnInit {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     };
+
+    // this.calendarOptions = {
+    //   visibleRange: {}
+    // }
   }
 
   getCurrStop () {
@@ -138,7 +142,7 @@ export class DashboardComponent implements OnInit {
     if (!this.isLoading) {
       this.setTimelineWidth();
     }
-      this.refreshCalendar();
+    this.refreshCalendar();
   }
 
   refreshCalendar() {
@@ -336,6 +340,4 @@ export class DashboardComponent implements OnInit {
      element.setAttribute('style', "width: 100%");
     }
   }
-
-
 }
