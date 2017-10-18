@@ -1,4 +1,21 @@
 <br>
+<app-confirm #confirm>
+  <div class="app-confirm-header">
+    <button type="button" class="btn btn-danger pull-right" (click)="confirm.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    Deletion Authentication
+  </div>
+  <div class="app-confirm-body">
+    <div class="form-group" align="center">
+      <!--<label for="passwordConfirmation"><b>Confirm Password</b></label>-->
+      <input class="form-control" type="password" placeholder="Confirm Password" name="passwordConfirmation" [(ngModel)]="passwordConfirmation" required style="width:50%">
+    </div>
+  </div>
+  <div class="app-confirm-footer">
+    <button type="button" class="button-rect button-orange" id="modal-button" (click)="confirm.hide()" style="width:30%">Cancel</button>
+    <button type="button" class="button-rect button-red" id="modal-button" (click)="deleteAccount(passwordConfirmation)" (click)="confirm.hide()" style="width:30%">Delete</button>
+  </div>
+</app-confirm>
+
 <div class="well well-content" align="center">
   <div id="headText">
     <h1>Account Settings</h1>
@@ -115,7 +132,7 @@
       <button class="button-rect button-blue" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
     </div>
     <div align="left">
-    <button class="button-rect button-red" (click)="deleteAccount()">Delete Account</button>
+    <button class="button-rect button-red" (click)="confirm.show()">Delete Account</button>
     </div>
 </div>
 <br>

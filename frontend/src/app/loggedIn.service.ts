@@ -61,7 +61,7 @@ export class LoggedInService {
   }
 
   public deleteAccount(payload: string) {
-    return this.authHttp.post(this.server + 'api/update_itinerary', payload,
+    return this.authHttp.post(this.server + 'api/delete_user', payload,
     this.options).map((res: Response) => res.json());
   }
 
