@@ -2,20 +2,18 @@
 <app-confirm #confirm>
   <div class="app-confirm-header">
     <button type="button" class="btn btn-danger pull-right" (click)="confirm.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
-    Deletion Authentication
+    Delete Account
   </div>
   <div class="app-confirm-body">
-    <div class="form-group" align="center">
-      <!--<label for="passwordConfirmation"><b>Confirm Password</b></label>-->
-      <input class="form-control" type="password" placeholder="Confirm Password" name="passwordConfirmation" [(ngModel)]="passwordConfirmation" required style="width:50%">
-    </div>
+    <p><strong>Warning:</strong> All content or information you have saved will be permanently erased. This cannot be undone.
+      If you are sure you want to delete your account, type your password to proceed.</p>
+    <input class="form-control" type="password" placeholder="Re-enter password" name="passwordConfirmation" [(ngModel)]="passwordConfirmation" align="center" required>
   </div>
   <div class="app-confirm-footer">
-    <button type="button" class="button-rect button-orange" id="modal-button" (click)="confirm.hide()" style="width:30%">Cancel</button>
-    <button type="button" class="button-rect button-red" id="modal-button" (click)="deleteAccount(passwordConfirmation)" (click)="confirm.hide()" style="width:30%">Delete</button>
+    <button type="button" class="button-rect button-orange" id="modal-button-left" (click)="confirm.hide()">Cancel</button>
+    <button type="button" class="button-rect button-red" id="modal-button" (click)="deleteAccount(passwordConfirmation)" (click)="confirm.hide()">Delete</button>
   </div>
 </app-confirm>
-
 <div class="well well-content" align="center">
   <div id="headText">
     <h1>Account Settings</h1>
