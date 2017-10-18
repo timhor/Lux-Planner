@@ -135,13 +135,13 @@ export class AccountSettingsComponent implements OnInit {
   notifyDeletion(status) {
     if (status) {
       this.notification.success(
+        this.username,
         "Account deleted successfully"
       )
     } else {
       this.notification.error(
         "Incorrect password",
         "Could not delete account"
-        
       )
     }
   }
@@ -149,7 +149,7 @@ export class AccountSettingsComponent implements OnInit {
   notify() {
     this.notification.success(
       this.username,
-      "Account updated successfully",
+      "Account updated successfully"
     );
   }
   get diagnostic() { return("Email: " + this.newEmail + " Password: " + this.newPassword) + " Confirm: " + this.newPasswordConfirm }
