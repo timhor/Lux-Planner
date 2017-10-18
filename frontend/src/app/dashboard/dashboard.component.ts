@@ -104,10 +104,6 @@ export class DashboardComponent implements OnInit {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     };
-
-    // this.calendarOptions = {
-    //   visibleRange: {}
-    // }
   }
 
   getCurrStop () {

@@ -58,24 +58,6 @@
           <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;</h1>
           <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;</h1>
           <br>
-          <!-- <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="currentJourneyHeader">
-              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex !== -1">{{ shortStop(stops[activeStopIndex].name) }}&nbsp;&nbsp;
-                <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
-              </h1>
-              <h1 id="currentJourney" align="center" *ngIf="activeStopIndex === -1">Overview&nbsp;&nbsp;
-                <span class="fa fa-caret-down" *ngIf="getJourneyLength() !== 1"></span>
-              </h1>
-            </button>
-            <ul class="dropdown-menu" *ngIf="getJourneyLength() !== 1">
-              <li id="dropdownItem" routerLink="/dashboard" (click)="resetFirstLoad()">
-                <h4>Overview</h4>
-              </li>
-              <li id="dropdownItem" *ngFor="let stop of stops" (click)="setActiveStop(i)">
-                <h4>{{ shortStop(stop.name) }}</h4>
-              </li>
-            </ul>
-          </div> -->
         </div>
         
         <div class="outer-timeline-container">
