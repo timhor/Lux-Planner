@@ -13,4 +13,5 @@ img {
   border-radius: 7px;
   display: block;
   margin: 30px auto 25px;
+  cursor: default;
 }
