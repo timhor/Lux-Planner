@@ -43,7 +43,6 @@
   color: white; 
 }
 
-
 button.btn-default:active,
 button.btn-default:focus,
 button.btn-default:target,
@@ -558,10 +557,6 @@ button:focus {
   text-align: center;
   margin-bottom: 20px;
   margin-top: 0px;
-}
-
-tooltip-content {
-  margin-top: 100px;
 }
 
 /* mobile-specific styles */
