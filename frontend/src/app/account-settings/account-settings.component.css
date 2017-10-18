@@ -37,38 +37,6 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.button-rect {
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  text-align: center;
-  text-transform: uppercase;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  -webkit-transition: background .1s ease-out, border-color .1s ease-out;
-  transition: background .1s ease-out, border-color .1s ease-out;
-  border: 1;
-  border-style: solid;
-  box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
-  display: inline-block;
-  letter-spacing: .1em;
-  font-size: calc(10px + 0.5vw);
-  width: 100%;
-  min-width: 200px;
-}
-
-.button-blue {
-  color: #2B8BF8;
-  background: #FFFFFF;
-  border-color: #2B8BF8;
-  width: 250px;  
-}
-
-.button-blue:hover {
-  background: #2B8BF8;
-  color: white;
-}
-
 button.btn-default:active,
 button.btn-default:focus,
 button.btn-default:target,
