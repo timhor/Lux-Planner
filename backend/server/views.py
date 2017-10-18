@@ -339,20 +339,21 @@ def update_itinerary():
     return jsonify({'message': 'success'})
 
 
-@app.route('/api/update_itinerary', methods=['POST'])
+@app.route('/api/delete_user', methods=['POST'])
 @cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
 @jwt_required()
 def delete_user():
     """ Deletes the User after verifying password """
     body = json.loads(request.data)
     user = models.User.query.filter_by(id=current_identity[0]).first()
-    if user.password.decode() != body['password']:
+    checkPassword = base64.b64decode(user.password).decode()
+    if checkPassword != body['password']:
         status = False
     else:
         journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
         for j in journeys:
             models.Stop.query.filter_by(journey_id=j.id).delete()
-        models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).delete()
+            models.Journey.query.filter_by(user_id=user.id).delete()
         db.session.delete(user)
         db.session.commit()
         status = True

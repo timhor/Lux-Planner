@@ -3,6 +3,7 @@ import { ConnectionService } from '../connection.service';
 import { LoggedInService } from '../loggedIn.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { JourneyService } from '../journey.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -36,6 +37,7 @@ export class AccountSettingsComponent implements OnInit {
     private connService: ConnectionService,
     private loggedInService: LoggedInService,
     private notification: NotificationsService,
+    private journeyService: JourneyService,
     public router: Router
   ) {
 
@@ -83,10 +85,12 @@ export class AccountSettingsComponent implements OnInit {
       this.loggedInService.deleteAccount(JSON.stringify({'password': password})).subscribe(
           res => {
               if (res.status) {
-                  // TODO show notification that delete is successful
+                localStorage.removeItem('id_token');
+                this.journeyService.activeJourneyIndex = 0;
+                this.notifyDeletion(res.status);
                 this.router.navigate(['/']);
               } else {
-                // TODO show notification that delete was unsuccessful.
+                this.notifyDeletion(res.status);
               }
           }
       )
@@ -126,6 +130,20 @@ export class AccountSettingsComponent implements OnInit {
       },
         (error) => {console.log(`could not connect ${error}`)}
     );
+  }
+
+  notifyDeletion(status) {
+    if (status) {
+      this.notification.success(
+        "Account deleted successfully"
+      )
+    } else {
+      this.notification.error(
+        "Incorrect password",
+        "Could not delete account"
+        
+      )
+    }
   }
 
   notify() {
