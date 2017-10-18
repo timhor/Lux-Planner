@@ -128,11 +128,15 @@
   </div>
   <br>
   <br>
-  <div align="right">
-      <button class="button-rect button-blue" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <button class="button-rect button-red" (click)="confirm.show()">Delete Account</button>
+      </div>
+      <div class="col-sm-6">
+        <button class="button-rect button-blue" *ngIf="editAvatar || editPassword || editEmail || editFirstName || editLastName" (click)="onSubmit()">Confirm Changes</button>
+      </div>
     </div>
-    <div align="left">
-    <button class="button-rect button-red" (click)="confirm.show()">Delete Account</button>
-    </div>
+  </div>
 </div>
 <br>
