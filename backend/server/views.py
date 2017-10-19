@@ -294,7 +294,7 @@ def change_user_details():
     body = json.loads(request.data)
     for key in body:
         if key == 'password':
-            user.password = body['password'].encode()
+            user.password = base64.b64encode(body['password'].encode())
         if key == 'email':
             user.email = body['email']
         if key == 'firstName':
