@@ -117,6 +117,12 @@ img,
   margin: 0 auto;
 }
 
+input {
+  border: auto;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+}
+
 /* progress bar */
 
 .progress {

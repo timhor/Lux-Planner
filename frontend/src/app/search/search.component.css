@@ -6,11 +6,6 @@
   min-width: 175px;
   border-width: 2px;
   border-color: #bed600;
+  border-radius: 20px;
   font-size: calc(10px + 1vw);
-}
-
-:host-context(#stopSearch) input {
-  border: auto;
-  border: solid 1px #ccc;
-  border-radius: 10px;
 }
