@@ -599,3 +599,9 @@ button:focus {
     width: 30%;
   }
 }
+
+@media (max-width: 1200px) {
+  #journeyOverview {
+    font-size: large;
+  }
+}
