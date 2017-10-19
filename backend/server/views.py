@@ -8,7 +8,6 @@ from flask import render_template, jsonify, request, current_app
 from flask_cors import CORS, cross_origin
 from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime, timedelta
-from Crypto.Cipher import Salsa20
 import pickle
 import json
 import re
