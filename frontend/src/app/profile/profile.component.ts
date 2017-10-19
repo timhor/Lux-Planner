@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   public lastName: string;
   public dateJoined: string = "19/09/2017";
   public journeys; // I think this is an Array<any>?
+  public isLoading: boolean = true;
 
 
   constructor(
@@ -36,10 +37,10 @@ export class ProfileComponent implements OnInit {
     this.connService.getProtectedData('api/get_all_journey_names/').subscribe(
       res => {
           this.journeys = res.names;
+          this.isLoading = false;
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
-
   }
 
   ngOnInit() {
