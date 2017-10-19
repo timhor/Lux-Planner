@@ -403,6 +403,10 @@ button:focus {
   outline: 0;
 }
 
+:host ::ng-deep .ui-inputtext {
+  border-radius: 0px !important;
+}
+
 #weatherHolder {
   height: 162px;
   margin-top: 35px;
