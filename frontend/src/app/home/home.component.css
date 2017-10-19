@@ -99,8 +99,8 @@
   font-size: calc(5px + 1vw);
   /* font-size: 1.5vw;  */
   text-align: center;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
 .iconFormat {
@@ -133,8 +133,8 @@
   border-radius: 5vh;
   border-style: solid;
   border-width: 0.5vh;
-  width: 225px;
-  height: 225px;
+  width: 250px;
+  height: auto;
   color: #3EB000;
   background: rgba(255, 255, 255, 0.75);
   border-color: #3EB000;
@@ -148,8 +148,8 @@
   border-radius: 5vh;
   border-style: solid;
   border-width: 0.5vh;
-  width: 225px;
-  height: 225px;
+  width: 250px;
+  height: auto;
   color: #2B8BF8;
   background: rgba(255, 255, 255, 0.75);
   border-color: #2B8BF8;
@@ -163,8 +163,8 @@
   border-radius: 5vh;
   border-style: solid;
   border-width: 0.5vh;
-  width: 225px;
-  height: 225px;
+  width: 250px;
+  height: auto;
   color: #f4c20d;
   background: rgba(255, 255, 255, 0.75);
   border-color: #f4c20d;
