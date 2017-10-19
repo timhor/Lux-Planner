@@ -1,5 +1,11 @@
 <br>
-<div class="well well-content">
+<div id="progressBar" class="well well-content" *ngIf="isLoading">
+  <h3>Loading...</h3>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</div>
+<div class="well well-content" *ngIf="!isLoading">
   <div id="headText">
     <h1>{{username}}</h1>
   </div>
