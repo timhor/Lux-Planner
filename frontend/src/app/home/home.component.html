@@ -5,9 +5,9 @@
   <div id="mainBlurb">
     Completely customise your journey and <br> make the most of it with <em>LUX</em>.
   </div>
-  <planner-search id="mainSearch"></planner-search>
-  <br><br>
-  <button class="button_primary" routerLink="/journey" (click)="sendQuery()"> New J<i class="fa fa-globe"></i>urney&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
+  <planner-search [hidden]="!loggedInService.loggedIn()" id="mainSearch"></planner-search>
+  <button *ngIf="!loggedInService.loggedIn()" class="button-primary button-orange" routerLink="/signup">Sign Up&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
+  <button *ngIf="loggedInService.loggedIn()" class="button-primary button-primary-green" routerLink="/journey" (click)="sendQuery()"> New J<i class="fa fa-globe"></i>urney&nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
 </div>
 
 <br>
