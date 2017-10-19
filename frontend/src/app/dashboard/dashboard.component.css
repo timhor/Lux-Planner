@@ -87,10 +87,11 @@ img {
 }
 
 #currentJourney {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bolder;
-  font-style: italic;
-  margin-bottom: 0px;
+  margin-bottom: -10px;
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #currentJourneyHeader {
