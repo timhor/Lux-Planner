@@ -39,7 +39,6 @@ export class MyJourneysComponent implements OnInit {
 
   viewJourney(i: number) {
     this.journeyService.activeJourneyIndex = i;
-    this.loggedInService.switchJourney(i).subscribe();
   }
 
   setModify(i: number) {

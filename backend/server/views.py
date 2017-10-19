@@ -226,7 +226,7 @@ def get_journeys_length():
 @jwt_required()
 def switch_journey():
     """ Switches the active Journey of the User """
-    user = models.User.query.filter_by(id=current_identity[0]).first()
+    user = models.User.query.filter_by(current_identity[1])
     user.active_journey_index = int(request.args.get('active', '0'))
     db.session.commit()
     return jsonify({'active': user.active_journey_index})
@@ -269,7 +269,7 @@ def get_account_details():
     """ Gets the user account details -- excluding password """
     user = models.User.query.filter_by(id=current_identity[0]).first()
     return jsonify({'username': user.username, 'email': user.email, 'first_name': user.first_name,
-                    'active': user.active_journey_index ,'last_name': user.last_name})
+                    'last_name': user.last_name})
 
 
 @app.route('/api/get_all_journey_names/', methods=['GET'])
