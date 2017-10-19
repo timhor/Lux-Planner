@@ -166,13 +166,13 @@ export class JourneyComponent implements OnInit {
 
       // If arriving at a stop before leaving (no time tolerance since same place)
       if (curr_arr.getTime() > curr_dep.getTime()) {
-        this.exitWithMessage("Invalid entries: <strong>To</strong> date and time for each stop must be after <strong>From</strong> date and time.");
+        this.exitWithMessage("Invalid entries: <strong>To</strong> date for each stop must be after <strong>From</strong> date.");
         return;
       }
 
       // If arriving at a stop after the journey has ended
       if (curr_arr.getTime() > journey_end.getTime()) {
-        this.exitWithMessage("Invalid entries: <strong>From</strong> date and time for each stop must be before <strong>Journey End Date</strong>.");
+        this.exitWithMessage("Invalid entries: <strong>From</strong> date for each stop must be before <strong>Journey End Date</strong>.");
         return;
       }
 
