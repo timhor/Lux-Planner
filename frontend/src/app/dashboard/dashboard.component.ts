@@ -63,6 +63,10 @@ export class DashboardComponent implements OnInit {
     this.firstLoad = true;
     this.mapsAPILoader.load().then(() => {this.bounds = new google.maps.LatLngBounds();})
 
+    this.connService.getProtectedData('api/get_account_details/').subscribe(
+        res => {this.activeJourneyIndex = res.active}
+    );
+
     this.connService.getProtectedData('api/get_all_journeys').subscribe(
         res => {
             if (res.journeys.length == 0) {
@@ -73,7 +77,8 @@ export class DashboardComponent implements OnInit {
                 }, 500)
                 return;
             }
-            this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
+            // this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
+            // this.activeJourneyIndex = res.
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
             this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
@@ -120,6 +125,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.activeJourneyIndex = index;
+    this.loggedInService.switchJourney(index).subscribe();
 
     let journey = this.allJourneys[this.activeJourneyIndex];
     this.journeyName = journey.journey_name
