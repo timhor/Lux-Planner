@@ -1,3 +1,7 @@
+:host ::ng-deep .agm-map-container-inner {
+  border-radius: 5px;
+}
+
 .stopButton {
   border: 2.4px;
   border-right-width: 1.2px;
