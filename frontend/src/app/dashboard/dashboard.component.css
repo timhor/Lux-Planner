@@ -150,7 +150,7 @@ agm-map {
 }
 
 .dropdown-menu {
-  width: 10%;
+  min-width: 200px;
   text-align: left;
   padding: 10px;
   font-size: 14px;
@@ -159,7 +159,7 @@ agm-map {
 
 .dropdown {
   margin-top: -40px;
-  width: 10%;
+  min-width: 200px;
 }
 
 h4 {
