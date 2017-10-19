@@ -189,8 +189,10 @@ export class JourneyComponent implements OnInit {
       res => {
         if (this.isModifying !== -1) {
           this.journeyService.activeJourneyIndex = this.isModifying;
+          this.loggedInService.switchJourney(res.length).subscribe();
         } else {
           this.journeyService.activeJourneyIndex = res.length;
+          this.loggedInService.switchJourney(this.isModifying).subscribe();
         }
       },
       (error) => {console.log(`could not connect ${error}`)}

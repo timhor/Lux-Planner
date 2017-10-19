@@ -65,4 +65,9 @@ export class LoggedInService {
     this.options).map((res: Response) => res.json());
   }
 
+  public switchJourney(index: number) {
+      return this.authHttp.get(this.server + `api/switch_journey/?active=${index}`,
+       this.options).map((res: Response) => res.json());
+  }
+
 }
