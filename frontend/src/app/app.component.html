@@ -11,7 +11,7 @@
                     <span tooltip="See an overview of your selected Journey">Dashboard</span>
                 </a>
             </li>
-            <li *ngIf="router.url != '/'">
+            <li>
                 <a class="grow" routerLink="/journey" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <i class="fa fa-plus"></i>&nbsp;
                     <span tooltip="Plan a new Journey from scratch">New Journey</span>

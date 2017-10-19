@@ -19,7 +19,7 @@
   margin-bottom: 5%;
 }
 
-.button_primary {
+.button-primary {
   padding-top: 2vh;
   padding-bottom: 2vh;
   text-align: center;
@@ -36,17 +36,23 @@
   font-size: calc(5px + 1.7vw);
   width: 30vw;
   min-width: 175px;
-  color: #000037;
   background: #FFFFFF;
-  border-color: #bed600;
-  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   box-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  margin-bottom: 10px;
 }
 
-.button_primary:hover {
-  background: #bed600;
+.button-primary-green {
+  border-color: #bed600;
+  color: #000037;
+  text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
+  margin-top: calc(0.5vh + 5%);
+  margin-bottom: 18px;
+}
+
+.button-primary-green:hover {
   color: #000086;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+  background: #bed600;
 }
 
 .jumbotron {
