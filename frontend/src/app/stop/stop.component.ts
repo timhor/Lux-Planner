@@ -5,7 +5,7 @@ import { ConnectionService } from '../connection.service';
 @Component({
     selector: 'stop-info',
     providers : [StopService, ConnectionService],
-    styleUrls: ['./stop.component.css'],
+    styleUrls: ['../app.component.css', './stop.component.css'],
     templateUrl: './stop.component.html',
 })
 export class StopComponent {
@@ -18,6 +18,7 @@ export class StopComponent {
     public visibleAnimate: boolean = false;
     public attractions: Array<any> = [];
     public location_images: Array<any> = [];
+    public isLoading: boolean = true;
 
     // Inject StopService and assign it to _stopService
     constructor(_stopService: StopService, private connService: ConnectionService) {            
@@ -52,6 +53,7 @@ export class StopComponent {
         this.connService.getServiceData('api/places/?place='+ this.currStop).subscribe(
             res => {
                 this.attractions = res;
+                this.isLoading = false;
             }        
         );
         this.visible = true;
