@@ -53,9 +53,9 @@ export class StopComponent {
         this.connService.getServiceData('api/places/?place='+ this.currStop).subscribe(
             res => {
                 this.attractions = res;
+                this.isLoading = false;
             }        
         );
-        this.isLoading = false;
         this.visible = true;
         setTimeout(() => this.visibleAnimate = true, 100);
     }
