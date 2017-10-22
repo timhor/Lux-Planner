@@ -13,7 +13,7 @@ import { LoggedInService } from '../loggedIn.service';
 export class ItineraryComponent implements OnInit {
   public stops: string[] = ['Tokyo', 'Hong Kong', 'Singapore'];
   public journeyIndex: number;
-  public stopIndex: number;  
+  public stopIndex: number;
   public currStop: number;
   public start: any;
   public isLoading: boolean = true;
@@ -29,13 +29,13 @@ export class ItineraryComponent implements OnInit {
 
   ngOnInit() {
     this.events = []
-    
+
     this.header = {
       left: 'prev,next today',
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     };
-    
+
     this.options = {
         showNonCurrentDates: 'true',
     }
@@ -45,7 +45,7 @@ export class ItineraryComponent implements OnInit {
       this.event = new MyEvent();
       this.event.start = event.date.format();
       this.dialogVisible = true;
-      
+
       //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
       this.cd.detectChanges();
 }
@@ -53,13 +53,13 @@ export class ItineraryComponent implements OnInit {
   handleEventClick(e) {
       this.event = new MyEvent();
       this.event.title = e.calEvent.title;
-      
+
       let start = e.calEvent.start;
       let end = e.calEvent.end;
       if(e.view.name === 'month') {
           start.stripTime();
       }
-      
+
       if(end) {
           end.stripTime();
           this.event.end = end.format();
@@ -82,13 +82,13 @@ export class ItineraryComponent implements OnInit {
       //new
       else {
           this.event.id = this.idGen++;
-          console.log(this.events.length);                    
+          console.log(this.events.length);
           this.events.push(this.event);
-          console.log(this.events.length);          
+          console.log(this.events.length);
           this.event = null;
       }
       this.dialogVisible = false;
-      
+
       this.updateBackend();
 
   }
@@ -101,7 +101,7 @@ export class ItineraryComponent implements OnInit {
       this.dialogVisible = false;
 
       this.updateBackend();
-      
+
   }
 
   handleEventDrag(e) {
@@ -113,20 +113,20 @@ export class ItineraryComponent implements OnInit {
     }
 
     this.dialogVisible = false;
-    
+
     this.updateBackend();
   }
 
   updateEvent(e) {
     this.event = new MyEvent();
     this.event.title = e.event.title;
-    
+
     let start = e.event.start;
     let end = e.event.end;
     if(e.view.name === 'month') {
         start.stripTime();
     }
-    
+
     if(end) {
         end.stripTime();
         this.event.end = end.format();
@@ -146,7 +146,7 @@ export class ItineraryComponent implements OnInit {
               break;
           }
       }
-      
+
       return index;
   }
 
@@ -161,19 +161,19 @@ export class ItineraryComponent implements OnInit {
     document.getElementById('footerLinks').setAttribute('style', 'margin-right: 2px;');
     document.getElementById('subText').setAttribute('style', 'margin-right: 2px;');
     this.journeyIndex = journeyIndex;
-    this.stopIndex = stopIndex;    
+    this.stopIndex = stopIndex;
     this.currStop = stop;
     this.start = start;
     this.connService.getProtectedData(`api/get_itinerary/?journey=${this.journeyIndex}&stop=${this.stopIndex}`)
         .subscribe(res => {
-            this.events = res
+            this.events = res;
             this.isLoading = false;
+            if (this.events.length > 0) {
+                this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;})) + 1;
+            } else {
+                this.idGen = 0;
+            }
         });
-    if (this.events.length > 0) {
-        this.idGen = Math.max.apply(this, this.events.map(function(o){return o.id;})) + 1;
-    } else {
-        this.idGen = 0;
-    }
 
     console.log(this.journeyIndex, this.stopIndex, this.currStop);
     this.visible = true;
