@@ -189,8 +189,16 @@ export class ItineraryComponent implements OnInit {
                 && curr.getFullYear() === today.getFullYear()))) {
                 cell[0].style.backgroundColor = "#DCDCDC";
             }
+            if (curr.getDate() === today.getDate() && curr.getMonth() === today.getMonth() 
+            && curr.getFullYear() === today.getFullYear()){
+                cell[0].style.backgroundColor = "#3A87AD"
+            }
         },
-        nowIndicator: true
+        nowIndicator: true,
+        validRange: {
+            start: start,
+            end: end
+        }
     }
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
