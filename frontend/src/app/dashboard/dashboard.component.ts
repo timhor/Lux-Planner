@@ -149,12 +149,12 @@ export class DashboardComponent implements OnInit {
         let end = new Date(this.options.endDate);
         let curr = new Date(date._d)
         let today = new Date()
-        if (curr.getDate() >= start.getDate() && curr.getDate() < end.getDate()
+        if (!(curr.getDate() >= start.getDate() && curr.getDate() < end.getDate()
             && curr.getMonth() >= start.getMonth() && curr.getMonth() <= end.getMonth()
             && curr.getFullYear() >= start.getFullYear() && curr.getFullYear() <= end.getFullYear()
-            && (curr.getDate() !== today.getDate() || curr.getMonth() !== today.getMonth() 
-            || curr.getFullYear() !== today.getFullYear())) {
-          cell[0].style.backgroundColor = "#CCFFE5";
+            || (curr.getDate() === today.getDate() && curr.getMonth() === today.getMonth() 
+            && curr.getFullYear() === today.getFullYear()))) {
+          cell[0].style.backgroundColor = "#DCDCDC";
         }
       },
       nowIndicator: true
