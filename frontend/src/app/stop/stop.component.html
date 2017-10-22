@@ -8,7 +8,13 @@
       </div>
       <div class="modal-body">
         <ng-content select=".stop-info-body"></ng-content>
-        <div class="container" id="content">
+        <div id="progressBar" class="container" *ngIf="isLoading">
+          <h3>Loading...</h3>
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+        <div class="container" id="content" *ngIf="!isLoading">
           <div>
             <div>
               <h1 align="center">{{currStop}}</h1>

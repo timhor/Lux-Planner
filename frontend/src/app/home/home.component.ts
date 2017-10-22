@@ -15,7 +15,7 @@ export class HomeComponent {
   constructor(
     private searchService: SearchService,
     private connService: ConnectionService,
-    private loggedInService: LoggedInService
+    public loggedInService: LoggedInService
   ) {
     this.connService.getServiceData('api/stop_information').subscribe();
   }

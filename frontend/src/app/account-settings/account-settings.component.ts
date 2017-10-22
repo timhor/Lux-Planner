@@ -32,6 +32,7 @@ export class AccountSettingsComponent implements OnInit {
   public newLastName: string;
 
   public submitted: boolean = false;
+  public passwordConfirmation: string;
 
   constructor(
     private connService: ConnectionService,
