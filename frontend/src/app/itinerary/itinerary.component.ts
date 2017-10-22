@@ -15,7 +15,6 @@ export class ItineraryComponent implements OnInit {
   public journeyIndex: number;
   public stopIndex: number;
   public currStop: number;
-  public start: any;
   public isLoading: boolean = true;
 
   events: any[];
@@ -153,7 +152,7 @@ export class ItineraryComponent implements OnInit {
   public visible = false;
   public visibleAnimate = false;
 
-  public show(journeyIndex: number, stopIndex: number, stop: number, start: any): void {
+  public show(journeyIndex: number, stopIndex: number, stop: number, start: any, end:any): void {
     document.documentElement.setAttribute('style', 'overflow-y: hidden;');
     document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
     // "wrap" class is used for the main body of the page (between navbar and footer)
@@ -163,7 +162,6 @@ export class ItineraryComponent implements OnInit {
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;
     this.currStop = stop;
-    this.start = start;
     this.connService.getProtectedData(`api/get_itinerary/?journey=${this.journeyIndex}&stop=${this.stopIndex}`)
         .subscribe(res => {
             this.events = res;
@@ -175,7 +173,25 @@ export class ItineraryComponent implements OnInit {
             }
         });
 
-    console.log(this.journeyIndex, this.stopIndex, this.currStop);
+    this.options = {
+        startDate: start,
+        endDate: end,
+        defaultDate: new Date(start),
+        dayRender: function(date, cell) {
+            let start = new Date(this.options.startDate);
+            let end = new Date(this.options.endDate);
+            let curr = new Date(date._d)
+            let today = new Date()
+            if (curr.getDate() >= start.getDate() && curr.getDate() < end.getDate()
+                && curr.getMonth() >= start.getMonth() && curr.getMonth() <= end.getMonth()
+                && curr.getFullYear() >= start.getFullYear() && curr.getFullYear() <= end.getFullYear()
+                && (curr.getDate() !== today.getDate() || curr.getMonth() !== today.getMonth() 
+                || curr.getFullYear() !== today.getFullYear())) {
+                cell[0].style.backgroundColor = "#CCFFE5";
+            }
+        },
+        nowIndicator: true
+    }
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
   }

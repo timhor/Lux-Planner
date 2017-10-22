@@ -143,19 +143,21 @@ export class DashboardComponent implements OnInit {
     this.calendarOptions = {
       startDate: this.allJourneys[this.activeJourneyIndex].start,
       endDate: this.allJourneys[this.activeJourneyIndex].end,
+      defaultDate: new Date(this.allJourneys[this.activeJourneyIndex].start),
       dayRender: function(date, cell) {
         let start = new Date(this.options.startDate);
         let end = new Date(this.options.endDate);
         let curr = new Date(date._d)
         let today = new Date()
-        if (curr.getDate() >= start.getDate() && curr.getDate() <= end.getDate()
+        if (curr.getDate() >= start.getDate() && curr.getDate() < end.getDate()
             && curr.getMonth() >= start.getMonth() && curr.getMonth() <= end.getMonth()
             && curr.getFullYear() >= start.getFullYear() && curr.getFullYear() <= end.getFullYear()
             && (curr.getDate() !== today.getDate() || curr.getMonth() !== today.getMonth() 
             || curr.getFullYear() !== today.getFullYear())) {
           cell[0].style.backgroundColor = "#CCFFE5";
         }
-      }
+      },
+      nowIndicator: true
     }
   }
 
