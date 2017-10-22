@@ -100,7 +100,7 @@ export const serviceProviders = [
     AngularWeatherWidgetModule.forRoot({
       key: '0bbc7feec8144680e2ed52ec0e0c67d5',
       name: WeatherApiName.OPEN_WEATHER_MAP,
-      baseUrl: 'http://api.openweathermap.org/data/2.5'
+      baseUrl: 'https://api.openweathermap.org/data/2.5'
     }),
     DialogModule,
     CheckboxModule,
