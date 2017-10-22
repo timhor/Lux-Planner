@@ -602,6 +602,11 @@ button:focus {
   .itineraryButton {
     width: 30%;
   }
+
+  #findOutMoreBtn {
+    width: 100%;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 1200px) {

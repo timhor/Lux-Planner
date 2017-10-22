@@ -91,38 +91,18 @@
             
             <h2>Popular Landmarks and Attractions</h2>
             <br>
-            <table>
-              <div *ngFor="let attraction of attractions;let i=index">
-                <tr id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-top:5vh; padding-bottom:1vh;">
-                  <td><div id="imgContainer">
+            <div *ngFor="let attraction of attractions;let i=index">
+              <div class="row" id="tableRow" align="center" *ngIf="i%3 === 0">
+                <div class="col-lg-3" style="margin: 30px">
+                  <div id="imgContainer">
                     <img id="attraction_image" src={{attractions[i].photo}}>
-                  </div></td>
-                  <td><div id="imgContainer">
-                    <img id="attraction_image" src={{attractions[i+1].photo}}>
-                  </div></td>
-                  <td><div id="imgContainer">
-                    <img id="attraction_image" src={{attractions[i+2].photo}}>
-                  </div></td>
-                </tr>
-                <tr id="rowColor" align="center" *ngIf="i%3 === 0" style="padding-bottom:1vh;">
-                  <td><div id="colColor">
+                  </div>
+                  <div id="headingContainer">
                     <p id="attraction_heading">
                       <b>{{attractions[i].name}}</b>
                     </p>
-                  </div></td>
-                  <td><div id="colColor">
-                    <p id="attraction_heading">
-                      <b>{{attractions[i+1].name}}</b>
-                    </p>
-                  </div></td>
-                  <td><div id="colColor">
-                    <p id="attraction_heading">
-                      <b>{{attractions[i+2].name}}</b>
-                    </p>
-                  </div></td>
-                </tr>
-                <tr id="rowColor" align="center" *ngIf="i%3 === 0">
-                  <td><div id="colColor" style="padding-bottom:5vh;">
+                  </div>
+                  <div style="padding-bottom:5vh;">
                     <div id="attraction_details">
                       <div style="padding-bottom:1vh;">
                         <b>Ratings: </b> <br> {{attractions[i].ratings}} <br>
@@ -131,8 +111,18 @@
                         <b>Address: </b> <br> {{attractions[i].address}}
                       </div>
                     </div>
-                  </div></td>
-                  <td><div id="colColor">
+                  </div>
+                </div>
+                <div class="col-lg-3" style="margin: 30px">
+                  <div id="imgContainer">
+                    <img id="attraction_image" src={{attractions[i+1].photo}}>
+                  </div>
+                  <div id="headingContainer">
+                    <p id="attraction_heading">
+                      <b>{{attractions[i+1].name}}</b>
+                    </p>
+                  </div>
+                  <div style="padding-bottom:5vh;">
                     <div id="attraction_details">
                       <div style="padding-bottom:1vh;">
                         <b>Ratings: </b> <br> {{attractions[i+1].ratings}} <br>
@@ -141,8 +131,18 @@
                         <b>Address: </b> <br> {{attractions[i+1].address}}
                       </div>
                     </div>
-                  </div></td>
-                  <td><div id="colColor">
+                  </div>
+                </div>
+                <div class="col-lg-3" style="margin: 30px">
+                  <div id="imgContainer">
+                    <img id="attraction_image" src={{attractions[i+2].photo}}>
+                  </div>
+                  <div id="headingContainer">
+                    <p id="attraction_heading">
+                      <b>{{attractions[i+2].name}}</b>
+                    </p>
+                  </div>
+                  <div style="padding-bottom:5vh;">
                     <div id="attraction_details">
                       <div style="padding-bottom:1vh;">
                         <b>Ratings: </b> <br> {{attractions[i+2].ratings}} <br>
@@ -151,10 +151,10 @@
                         <b>Address: </b> <br> {{attractions[i+2].address}}
                       </div>
                     </div>
-                  </div></td>
-                </tr>
+                  </div>
+                </div>
               </div>
-            </table>
+            </div>
           </div>
         </div>
         <br>

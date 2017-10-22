@@ -102,8 +102,8 @@ h2 {
 }
 
 #attraction_image {
-  width: 300px;
-  height: 200px;
+  width: 20vw;
+  height: 25vh;
 }
 
 #attraction_heading {
@@ -115,6 +115,11 @@ h2 {
   padding-right: 2vw;
 }
 
+#headingContainer {
+  height: calc(3*(7px + 2vh));
+  width: 25vw;
+}
+
 #attraction_details {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: calc(7px + 1vh);
@@ -123,13 +128,13 @@ h2 {
   padding-right: 2vw;
 }
 
-#rowColor {
+#tableRow {
   height: fit-content;
 }
 
 #imgContainer {
-  height: 200px;
-  width: 400px;
+  height: 25vh;
+  width: 25vw;
 }
 
 #imgContainer img {
@@ -163,6 +168,22 @@ tr {
   width: 100%;
 }
 
+@media (max-width: 992px) {
+  #imgContainer {
+    width: 50vw;
+    height: 35vh;
+  }
+
+  #attraction_image {
+    width: 50vw;
+    height: 35vh;
+  }
+
+  #headingContainer {
+    width: 50vw;
+  }
+}
+
 @media (max-width: 767px) {
   .carousel-inner {
     height: 30vh;
@@ -170,5 +191,19 @@ tr {
 
   .item img {
     height: 30vh;
+  }
+
+  #imgContainer {
+    width: 60vw;
+    height: 20vh;
+  }
+
+  #attraction_image {
+    width: 60vw;
+    height: 20vh;
+  }
+
+  #headingContainer {
+    width: 60vw;
   }
 }
