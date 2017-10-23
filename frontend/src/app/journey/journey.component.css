@@ -15,12 +15,6 @@ label {
   display: block;
 }
 
-.button-rect {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  width: 20vw;
-}
-
 #infoIcon {
   font-size: calc(15px + 1vw);
   color: #2B8BF8;
@@ -43,6 +37,12 @@ label {
   width: 100%;
 }
 
+.button-rect {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 20vw;
+}
+
 .button-blue {
   padding-top: 1vh;
   padding-bottom: 1vh;
@@ -57,6 +57,20 @@ label {
 
 .button-green {
   min-width: 150px;
+}
+
+.button-rect-confirm {
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  letter-spacing: normal;
+  min-width: 160px;
+  width: 100px;
+  font-size: 15px;
+  margin-left: 8px;
+}
+
+#modal-button {
+  width: 150px;
 }
 
 .grow:hover {
@@ -196,18 +210,3 @@ span {
 #alertDismissBtn {
   margin-top: -2px;
 }
-
-
-.button-rect-confirm {
-    padding-top: 1.3vh;
-    padding-bottom: 1.3vh;
-    letter-spacing: normal;
-    min-width: 160px;
-    width: 100px;
-    font-size: 15px;
-    margin-left: 8px;
-  }
-
-  #modal-button {
-    width: 150px;
-  }
