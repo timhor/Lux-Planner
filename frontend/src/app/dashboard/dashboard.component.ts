@@ -163,14 +163,17 @@ export class DashboardComponent implements OnInit {
 
   refreshCalendar() {
       this.events = [];
+      let colours = ["#3498DB", "#66BB6A", "#FFC300", "#FF5733"];
+      let colourIndex = 0;
       for (let i = 0; i < this.stops.length; i++) {
           this.connService.getProtectedData(`api/get_itinerary/?journey=${this.activeJourneyIndex}&stop=${i}`)
               .subscribe(res => {
                   res.forEach(event => {
                       event.title = '[' + this.stops[i].name.substring(0, 3) + '] ' + event.title;
+                      event.color = colours[colourIndex];
                   });
                   this.events = this.events.concat(res);
-                  // console.log(res);
+                  colourIndex = (colourIndex + 1)%4;
               });
       }
   }
