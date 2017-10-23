@@ -240,10 +240,10 @@ export class JourneyComponent implements OnInit {
 
   // get name of stop to delete
   // separate return statements to handle the case when stop is not yet defined (on initial page load)
-  getDeleteStopName(deleteIndex: number) {
-    let stop = this.myJourney.get('destinations').value[deleteIndex];
+  getDeleteStopName() {
+    let stop = document.getElementById('stopSearch' + this.deleteIndex);
     if (stop) {
-      return stop.location;
+      return (<HTMLInputElement>stop.children[0]).value;
     } else {
       return "this stop";
     }
