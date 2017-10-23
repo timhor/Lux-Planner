@@ -81,9 +81,7 @@ export class ItineraryComponent implements OnInit {
       //new
       else {
           this.event.id = this.idGen++;
-          console.log(this.events.length);
           this.events.push(this.event);
-          console.log(this.events.length);
           this.event = null;
       }
       this.dialogVisible = false;
@@ -196,8 +194,8 @@ export class ItineraryComponent implements OnInit {
         },
         nowIndicator: true,
         validRange: {
-            start: start,
-            end: end
+            start: new Date(start),
+            end: new Date(end)
         }
     }
     this.visible = true;
