@@ -249,8 +249,26 @@ export class JourneyComponent implements OnInit {
     }
   }
 
+  getDeleteStopLength() {
+    return (<HTMLInputElement>document.getElementById('stopSearch' + this.deleteIndex).children[0]).value.length;
+  }
+
   deleteStop() {
-    (<FormArray> this.myJourney.get('destinations')).removeAt(this.deleteIndex);
+    let stops = <FormArray>this.myJourney.get('destinations');
+
+    // to prevent ExpressionChangedAfterItHasBeenCheckedError
+    let nextIndex = this.deleteIndex + 1;
+    if (nextIndex < stops.length) {
+      // set the stop name of the card which was deleted to the stop name of the next card,
+      // since that stop replaces the position of the deleted stop
+      let nextStopName = (<HTMLInputElement>document.getElementById('stopSearch' + nextIndex).children[0]).value;
+      (<HTMLInputElement>document.getElementById('stopSearch' + this.deleteIndex).children[0]).value = nextStopName;
+    } else {
+      // set the stop name of the card which was deleted to be "this stop" - the default value assigned in getDeleteStopName
+      (<HTMLInputElement>document.getElementById('stopSearch' + this.deleteIndex).children[0]).value = "this stop";
+    }
+
+    stops.removeAt(this.deleteIndex);
   }
 
   buildItem(val: string) {

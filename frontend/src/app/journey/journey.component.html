@@ -96,8 +96,8 @@
           <br>
           <div class="row">
             <div class="col-sm-10">
-              <label for="stopSearch" [attr.for]="'location'+i">Next Location</label>
-              <planner-search class="searchComponent" id="stopSearch"></planner-search>
+              <label [attr.for]="'location'+i">Next Location</label>
+              <planner-search class="searchComponent" [attr.id]="'stopSearch' + i"></planner-search>
             </div>
             <div class="col-sm-1">
               <br>
@@ -120,7 +120,7 @@
             </div>
             <div class="col-sm-1">
               <br>
-              <a *ngIf="myJourney.get('destinations').length != 1" (click)="deleteIndex = i; confirm.show()">
+              <a *ngIf="myJourney.get('destinations').length != 1" (click)="deleteIndex = i" (click)="getDeleteStopLength() > 0 ? confirm.show() : deleteStop()">
                 <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
             </div>
           </div>
