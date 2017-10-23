@@ -10,8 +10,7 @@
   font-size: calc(10px + 1vw);
 }
 
-:host-context(#stopSearch) input {
-  border: auto;
+:host-context(.searchComponent) input {
   border: solid 1px #ccc;
   border-radius: 10px;
 }
