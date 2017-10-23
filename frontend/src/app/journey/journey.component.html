@@ -8,6 +8,21 @@
   </div>
 </stop-info>
 
+<app-confirm #confirm>
+    <div class="app-confirm-header">
+      <button type="button" class="btn btn-danger pull-right" (click)="confirm.hide()"><i class="fa fa-times" aria-hidden="true"></i></button>
+      Confirm
+    </div>
+    <div class="app-confirm-body">
+      <p>Are you sure you want to delete this Stop?<br>Please double check for date gaps in your Journey!</p>
+      <br>
+    </div>
+    <div class="app-confirm-footer">
+      <button type="button" class="button-rect button-rect-confirm button-orange" id="modal-button" (click)="confirm.hide()">Cancel</button>
+      <button type="button" class="button-rect button-rect-confirm button-red" id="modal-button" (click)="deleteStop()" (click)="confirm.hide()">Confirm</button>
+    </div>
+  </app-confirm>
+
 <br>
 
 <div class="well well-content">
@@ -21,10 +36,10 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
   </div>
   <br>
-  
+
   <div *ngIf="invalidForm" [innerHTML]="invalidInfo" class="alert alert-danger" role="alert"></div>
   <br *ngIf="invalidForm">
-  
+
   <div *ngIf="!isLoggedIn" class="alert alert-warning alert-dismissible" role="alert">
     You cannot save this journey without being logged in.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertDismissBtn"><span aria-hidden="true">&times;</span></button>
@@ -92,19 +107,19 @@
           <div class="row">
             <div class="col-sm-5 ui-state-hover">
               <label for="arrival" [attr.for]="'departure'+i">From</label>
-              <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true" 
+              <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true"
                           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-5">
               <label for="departure" [attr.for]="'arrival'+i">To</label>
-              <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true" 
+              <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true"
                           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
               </p-calendar>
             </div>
             <div class="col-sm-1">
               <br>
-              <a *ngIf="myJourney.get('destinations').length != 1" (click)="myJourney.get('destinations').removeAt(i)">
+              <a *ngIf="myJourney.get('destinations').length != 1" (click)="deleteIndex = i; confirm.show()">
                 <i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" id="minusIcon"></i></a>
             </div>
           </div>
@@ -112,7 +127,7 @@
         </div>
         <div id="circleBackground" *ngIf="myJourney.get('destinations').length-1 !== i">
           <span><i class="fa fa-plane" aria-hidden="true"></i></span>
-        </div>    
+        </div>
       </div>
     </fieldset>
     <br>
@@ -122,7 +137,7 @@
     <br>
     <br>
     <hr>
-    <br>  
+    <br>
 
     <div class="row">
       <div class="form-group" align="center">

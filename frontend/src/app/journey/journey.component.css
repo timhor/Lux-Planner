@@ -196,3 +196,18 @@ span {
 #alertDismissBtn {
   margin-top: -2px;
 }
+
+
+.button-rect-confirm {
+    padding-top: 1.3vh;
+    padding-bottom: 1.3vh;
+    letter-spacing: normal;
+    min-width: 160px;
+    width: 100px;
+    font-size: 15px;
+    margin-left: 8px;
+  }
+
+  #modal-button {
+    width: 150px;
+  }

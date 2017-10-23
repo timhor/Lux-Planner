@@ -27,6 +27,7 @@ export class JourneyComponent implements OnInit {
   public modifyingStops: Array<any> = [];
   public modifyingCounter: number;
   private sub:any;
+  public deleteIndex: number;
 
   /* The time picker does not take into account different time zones, but the app's validation
      requires each successive stop to have arrival time after departure time. Technically you 
@@ -235,6 +236,10 @@ export class JourneyComponent implements OnInit {
     for (let i = 0; i < d.length; i++) {
       (<FormGroup>(<FormArray>this.myJourney.controls['destinations']).at(i)).controls['location'].patchValue(this.myStops[i]);
     }
+  }
+
+  deleteStop() {
+    (<FormArray> this.myJourney.get('destinations')).removeAt(this.deleteIndex);
   }
 
   buildItem(val: string) {
