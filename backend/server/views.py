@@ -362,6 +362,36 @@ def delete_user():
     return jsonify({'status': status})
 
 
+@app.route('/api/append_stop', methods=['POST'])
+@cross_origin(headers=['Content-Type','Authorization']) # Send Access-Control-Allow-Headers workaround
+@jwt_required()
+def append_stop():
+    """ Appends a stop onto an existing Journey """
+    """
+        data = {
+            jIndex: int,
+            location: name
+            start: date,
+            end: date
+        }
+    """
+    body = json.loads(request.data)
+    user = models.User.query.filter_by(id=current_identity[0]).first()
+    journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
+    j = journeys[body['jIndex']]
+    j.end_date = convert_time(data['end'])
+    stop = models.Stop(
+        journey_id=j.id,
+        stop_name=data['location'],
+        arrival_date=convert_time(data['start']),
+        departure_date=convert_time(data['end'])
+    )
+    db.session.add(stop)
+    db.session.commit()
+    db.session.execute
+    return jsonify({'message': 'success'})
+
+
 
 @app.route('/')
 @app.route('/index')
