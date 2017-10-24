@@ -65,4 +65,13 @@ export class LoggedInService {
     this.options).map((res: Response) => res.json());
   }
 
+  public appendStop(jIndex, location, start, end) {
+      return this.authHttp.post(this.server + 'api/append_stop', JSON.stringify({
+          'jIndex': jIndex,
+          'location': location,
+          'start': start,
+          'end': end
+        }));
+  }
+
 }
