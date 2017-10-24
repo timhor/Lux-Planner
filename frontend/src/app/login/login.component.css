@@ -6,3 +6,10 @@
 #loginForm {
   margin: 0 auto;
 }
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5vh 0;
+}
