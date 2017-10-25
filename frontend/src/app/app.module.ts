@@ -39,6 +39,7 @@ import { ScheduleModule, CalendarModule, DialogModule, CheckboxModule, ButtonMod
 import { TooltipModule } from 'ngx-tooltip';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 export function authFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -105,7 +106,9 @@ export const serviceProviders = [
     DialogModule,
     CheckboxModule,
     ButtonModule, 
-    InputTextModule
+    InputTextModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers:
     serviceProviders

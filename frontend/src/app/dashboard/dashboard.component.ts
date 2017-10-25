@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
   events: any[];
   header: any;
   public calendarOptions: any;
+  public notesOptions: any;
 
   constructor(
     private connService: ConnectionService,
@@ -105,6 +106,14 @@ export class DashboardComponent implements OnInit {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     };
+    this.notesOptions = {
+      height: '200px',
+      toolbarButtons: 	['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|',
+                         'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
+                         'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters',
+                         'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help', 'html', '|',
+                         'undo', 'redo']
+    }
   }
 
   getCurrStop () {

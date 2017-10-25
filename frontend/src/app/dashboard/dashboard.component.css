@@ -174,10 +174,6 @@ h4 {
   padding-bottom: 1vh;
 }
 
-textarea {
-  resize: vertical;
-}
-
 #notesDeleteBtn {
   float: left;
 }
@@ -198,25 +194,15 @@ textarea {
   float: left !important;
 }
 
-.textarea {
-  overflow-y: auto;
-  height: 200px;
-}
-
-.notesArea {
-  overflow-y: auto;
-}
-
 #notesText {
   white-space: pre-wrap;
-  height: 200px;
-  margin-bottom: 34px;
+  height: 292px;
+  overflow-y: auto;
 }
 
 #notesTextEmpty {
   font-style: italic;
-  height: 200px;
-  margin-bottom: 34px;
+  height: 292px;
 }
 
 #stopModalCloseButton {
@@ -606,6 +592,14 @@ button:focus {
   #findOutMoreBtn {
     width: 100%;
     font-size: 13px;
+  }
+
+  #notesText {
+    height: 253px;
+  }
+  
+  #notesTextEmpty {
+    height: 253px;
   }
 }
 
