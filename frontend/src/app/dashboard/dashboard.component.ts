@@ -140,12 +140,6 @@ export class DashboardComponent implements OnInit {
     this.activeStopIndex = 0;
     this.startingLocationName = journey.start_location;
 
-    this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
-      res => {
-          this.aboutText = res.info;
-      }
-    );
-
     this.checkForOverview();  // Check if current page is overview
     this.updateMap();
     if (!this.isLoading) {
