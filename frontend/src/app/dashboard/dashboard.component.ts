@@ -113,7 +113,12 @@ export class DashboardComponent implements OnInit {
                          'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
                          'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters',
                          'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help', 'html', '|',
-                         'undo', 'redo']
+                         'undo', 'redo'],
+      events : {
+        'froalaEditor.initialized' : function(e, editor) {
+          editor.events.focus(true);
+        },
+      }
     }
   }
 
@@ -265,9 +270,6 @@ export class DashboardComponent implements OnInit {
   modifyNotes() {
     this.isModifyingNotes = !this.isModifyingNotes;
     this.newNotes = this.stops[this.activeStopIndex].notes;
-    setTimeout(() => {
-      document.getElementById('textArea').focus()
-    },1);
   }
 
   cancelNotes() {
