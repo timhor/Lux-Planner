@@ -28,6 +28,11 @@ export class JourneyComponent implements OnInit {
   public modifyingCounter: number;
   private sub:any;
   public deleteIndex: number;
+  public stopFromStart: Date;
+  public stopFromEnd: Date;
+  public startDate: Date;
+  public endDate: Date;
+  public tempDate: Date;  
 
   /* The time picker does not take into account different time zones, but the app's validation
      requires each successive stop to have arrival time after departure time. Technically you 
@@ -116,7 +121,22 @@ export class JourneyComponent implements OnInit {
   }
 
   addStop(myJourney: FormGroup) {
-    (<FormArray>this.myJourney.get('destinations')).push(this.buildItem(''));
+    var item;
+    item = this.buildItem('');
+    var i = (<FormArray>this.myJourney.controls['destinations']).length;
+    this.stopFromStart =  (<FormGroup>(<FormArray>this.myJourney.controls['destinations']).at(i-1)).controls['departure'].value;
+    this.stopFromStart.setDate(this.stopFromStart.getDate() + 1);
+    console.log(this.stopFromStart);   
+    (<FormArray>this.myJourney.get('destinations')).push(item);
+  }
+
+  setJourneyCalDates(){
+    this.stopFromStart.setDate(this.startDate.getDate()+1);
+  }
+
+  setFromEnd(){
+    // Sets stop date to 
+    // this.prevDate.setDate(this.prevDate.getDate() + 1);
   }
 
   submit() {
@@ -330,5 +350,4 @@ export class JourneyComponent implements OnInit {
       )
     }
   }
-  
 }
