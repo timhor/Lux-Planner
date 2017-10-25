@@ -81,11 +81,6 @@ export class DashboardComponent implements OnInit {
             this.activeJourneyIndex = this.journeyService.activeJourneyIndex;
             this.allJourneys = res.journeys;
             this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
-            this.connService.getServiceData('api/stop_information/?stop='+ this.getCurrStop()).subscribe(
-                res => {
-                    this.aboutText = res.info;
-                }
-            );
             this.checkForOverview();  // Check if current page is overview
             this.firstLoad = false;
             this.updateMap();
