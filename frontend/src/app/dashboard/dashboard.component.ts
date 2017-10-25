@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
   events: any[];
   header: any;
   public calendarOptions: any;
+  public quickEditActive: boolean = false;
 
   constructor(
     private connService: ConnectionService,
@@ -358,5 +359,9 @@ export class DashboardComponent implements OnInit {
     } else {
      element.setAttribute('style', "width: 100%");
     }
+  }
+
+  toggleQuickEdit() {
+    this.quickEditActive = !this.quickEditActive;
   }
 }

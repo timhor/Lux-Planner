@@ -43,10 +43,10 @@
       <div class="well" *ngIf="!isLoading">
         <div class="dropdown">
           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"  id="currentJourneyHeader" *ngIf="getJourneyLength() !== 1">
-            <p id="subHeading">{{ journeyName }}&nbsp;<span class="fa fa-caret-down"></span></p>
+            <p class="subHeading">{{ journeyName }}&nbsp;<span class="fa fa-caret-down"></span></p>
           </button>
           <button class="btn dropdown-toggle" type="button" id="singleJourneyHeader" *ngIf="getJourneyLength() === 1">
-            <p id="subHeading">{{ journeyName }}&nbsp;</p>
+            <p class="subHeading">{{ journeyName }}&nbsp;</p>
           </button>
           <ul class="dropdown-menu">
             <li id="dropdownItem" *ngFor="let journey of allJourneys; let i=index" (click)="setActiveJourney(i)" style="font-size: calc(10px + 0.5vw); text-align: left;">
@@ -84,25 +84,41 @@
       <h4 id="journeyOverview" align="center" (click)="resetFirstLoad()" (click)="setActiveButton(-1)"><span class="fa fa-caret-left"></span>&nbsp; Journey Overview</h4>
     </div>
     <div class="well" align="center">
-      <p id="subHeading">Stop(s)</p>
+      <p class="subHeading">Stops</p>
+      <div id="quickEditIcons">
+        <i class="glyphicon glyphicon-edit grow" aria-hidden="true" tooltip="Quick Edit" tooltipPlacement="bottom" *ngIf="!quickEditActive" (click)="toggleQuickEdit()"></i>
+        <i class="glyphicon glyphicon-remove-sign grow" aria-hidden="true" tooltip="Cancel" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="toggleQuickEdit()"></i>
+        <i class="glyphicon glyphicon-ok-sign grow" aria-hidden="true" tooltip="Save" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="toggleQuickEdit()"></i>
+      </div>
       <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
-        <div class="btn-group" align="center">
+        <div id="stopList" class="btn-group">
           <button type="button" class="btn btn-default btn-md truncate stopButton" *ngIf="i!==activeStopIndex" (click)="setActiveStop(i)" (click)="setActiveButton(i)" align="center"><span>{{shortStop(stop.name)}}</span></button>
           <button type="button" class="btn btn-default btn-md truncate active stopButton" *ngIf="i===activeStopIndex" (onload)="setActiveButton(i)" align="center"><span>{{shortStop(stop.name)}}</span></button>
-          <button type="button" class="btn btn-default btn-md itineraryButton" tooltip="Itinerary" tooltipPlacement="bottom" (click)="itinerary.show(activeJourneyIndex, i, getStop(i), stop.arrival, stop.departure)" align="center"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default btn-md itineraryButton" *ngIf="!quickEditActive" tooltip="Itinerary" tooltipPlacement="bottom" (click)="itinerary.show(activeJourneyIndex, i, getStop(i), stop.arrival, stop.departure)" align="center"><i class="fa fa-calendar" aria-hidden="true"></i></button>
         </div>
+        <a id="minusIcon" *ngIf="quickEditActive"><i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" tooltip="Delete Stop" tooltipPlacement="bottom"></i></a>
       </div>
-      <!-- <button type="button" class="btn btn-default btn-md itineraryButton" tooltip="New Stop" tooltipPlacement="bottom" (click)="itinerary.show(activeJourneyIndex, i, getStop(i), stop.arrival, stop.departure)" align="center"><i class="fa fa-plus-circle" aria-hidden="true"></i>New Stop</button> -->
+      <div id="newStopDetails" *ngIf="quickEditActive">
+        <planner-search></planner-search>
+        <label for="newArrival">From</label>
+        <p-calendar id="newArrival" selectOtherMonths="true" monthNavigator="true"
+          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
+        </p-calendar>
+        <label for="newDeparture">To</label>
+        <p-calendar id="newDeparture" selectOtherMonths="true" monthNavigator="true"
+          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
+        </p-calendar>
+      </div>
 
     </div>
     <div class="well" id="aboutWell" *ngIf="activeStopIndex!==-1">
-      <p id="subHeading">About</p>
+      <p class="subHeading">About</p>
       <p [innerHtml]="shortAbout()"></p>
       <button type="button" class="button-rect button-blue pull-right" (click)="stop.show(getCurrStop())" id="findOutMoreBtn">Find Out More</button>
       <br><br>
     </div>
     <div class="well" *ngIf="activeStopIndex===-1">
-      <p id="subHeading">Search for Flights</p>
+      <p class="subHeading">Search for Flights</p>
       <iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/searchform/widget?wtt=1&tp1=1234&tp2=&lob=F&des=&sfs=5&wbi=13&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=C7C7C7&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2"
       width="100%" height="450px" scrolling="no" frameborder="0"></iframe>
     </div>
@@ -110,7 +126,7 @@
   <div class="col-sm-9">
     <div class="col-sm-12" *ngIf="!isLoading">
       <div class="well" *ngIf="activeStopIndex!==-1">
-        <p id="subHeading">{{stops[activeStopIndex].name}} Map</p>
+        <p class="subHeading">{{stops[activeStopIndex].name}} Map</p>
         <agm-map [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng" [zoom]="10" [disableDoubleClickZoom]="false" [scrollwheel]="false">
           <agm-marker [latitude]="stops[activeStopIndex].lat" [longitude]="stops[activeStopIndex].lng"></agm-marker>
         </agm-map>
@@ -120,13 +136,13 @@
           <iframe id="weatherapp" *ngIf="i==stops[activeStopIndex]" width="100%" height="245" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl("https://forecast.io/embed/#lat=" + i.lat + "&lon=" + i.lng + "&name=" + i.name + "&units=uk&color=#000037")'
           allowfullscreen></iframe>
         </div> -->
-        <p id="subHeading">{{stops[activeStopIndex].name}} Weather Forecast</p>
+        <p class="subHeading">{{stops[activeStopIndex].name}} Weather Forecast</p>
         <div id="weatherHolder">
           <weather-widget [settings]="settings"></weather-widget>
         </div>
       </div>
       <div class="well" *ngIf="activeStopIndex!==-1">
-        <p id="subHeading">Notes</p>
+        <p class="subHeading">Notes</p>
         <div class="notesArea">
           <p *ngIf="stops[activeStopIndex].notes !== null && !isModifyingNotes" id="notesText">{{stops[activeStopIndex].notes}}</p>
           <p *ngIf="stops[activeStopIndex].notes === null && !isModifyingNotes" id="notesTextEmpty">No existing notes found.</p>
@@ -148,7 +164,7 @@
       <div class="well" *ngIf="activeStopIndex===-1">
         <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
           allowfullscreen></iframe> -->
-          <p id="subHeading">Journey Map</p>
+          <p class="subHeading">Journey Map</p>
           <agm-map [fitBounds]="bounds" [disableDoubleClickZoom]="false" [scrollwheel]="false">
             <agm-marker iconUrl="../assets/Marker.png" [latitude]="allJourneys[activeJourneyIndex].lat" [longitude]="allJourneys[activeJourneyIndex].lng"></agm-marker>
             <agm-marker *ngFor="let stop of stops; let i=index" [label]="(i+1).toString()" [latitude]="stop.lat" [longitude]="stop.lng"></agm-marker>
@@ -169,7 +185,7 @@
       <div class="well" *ngIf="activeStopIndex===-1">
         <!-- <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapUrl)'
           allowfullscreen></iframe> -->
-          <p id="subHeading">Journey Itinerary Overview</p>
+          <p class="subHeading">Journey Itinerary Overview</p>
           <p-schedule [events]="events" [header]="header" [eventLimit]="4" [fixedWeekCount]="false" [options]="calendarOptions"></p-schedule>
         </div>
       </div>
