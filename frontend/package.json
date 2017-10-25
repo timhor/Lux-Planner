@@ -33,6 +33,7 @@
     "@types/jquery": "^2.0.40",
     "@types/moment": "^2.13.0",
     "@types/node": "~6.0.60",
+    "angular-froala-wysiwyg": "^2.7.0-1",
     "angular-weather-widget": "^1.2.4",
     "angular2-jwt": "^0.1.28",
     "angular2-notifications": "^0.7.8",
