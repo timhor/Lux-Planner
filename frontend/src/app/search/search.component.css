@@ -14,3 +14,9 @@
   border: solid 1px #ccc;
   border-radius: 10px;
 }
+
+/* new location input field in Quick Edit (Dashboard -> Stops) */
+:host-context(#newStopDetails) input {
+  border: solid 1px #ccc;
+  border-radius: 10px;
+}

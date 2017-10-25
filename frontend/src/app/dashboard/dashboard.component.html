@@ -100,14 +100,28 @@
       </div>
       <div id="newStopDetails" *ngIf="quickEditActive">
         <planner-search id="newLocation"></planner-search>
-        <label for="newArrival">From</label>
-        <p-calendar id="newArrival" [(ngModel)]="newArrival" selectOtherMonths="true" monthNavigator="true"
-          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
-        </p-calendar>
-        <label for="newDeparture">To</label>
-        <p-calendar id="newDeparture" [(ngModel)]="newDeparture" selectOtherMonths="true" monthNavigator="true"
-          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
-        </p-calendar>
+        <table>
+          <tr>
+            <td>
+              <label for="newArrival">From</label>
+            </td>
+            <td>
+              <p-calendar id="newArrival" [(ngModel)]="newArrival" selectOtherMonths="true" monthNavigator="true"
+                dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
+              </p-calendar>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="newDeparture">To</label>
+            </td>
+            <td>
+              <p-calendar id="newDeparture" [(ngModel)]="newDeparture" selectOtherMonths="true" monthNavigator="true"
+                dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
+              </p-calendar>
+            </td>
+          </tr>
+        </table>
       </div>
 
     </div>
