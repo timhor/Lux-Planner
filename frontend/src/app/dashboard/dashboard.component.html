@@ -88,7 +88,7 @@
       <div id="quickEditIcons">
         <i class="glyphicon glyphicon-edit grow" aria-hidden="true" tooltip="Quick Edit" tooltipPlacement="bottom" *ngIf="!quickEditActive" (click)="toggleQuickEdit()"></i>
         <i class="glyphicon glyphicon-remove-sign grow" aria-hidden="true" tooltip="Cancel" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="toggleQuickEdit()"></i>
-        <i class="glyphicon glyphicon-ok-sign grow" aria-hidden="true" tooltip="Save" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="toggleQuickEdit()"></i>
+        <i class="glyphicon glyphicon-ok-sign grow" aria-hidden="true" tooltip="Save" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="saveQuickEdit()"></i>
       </div>
       <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
         <div id="stopList" class="btn-group">
@@ -99,13 +99,13 @@
         <a id="minusIcon" *ngIf="quickEditActive"><i class="glyphicon glyphicon-minus-sign grow icon-red" aria-hidden="true" tooltip="Delete Stop" tooltipPlacement="bottom"></i></a>
       </div>
       <div id="newStopDetails" *ngIf="quickEditActive">
-        <planner-search></planner-search>
+        <planner-search id="newLocation"></planner-search>
         <label for="newArrival">From</label>
-        <p-calendar id="newArrival" selectOtherMonths="true" monthNavigator="true"
+        <p-calendar id="newArrival" [(ngModel)]="newArrival" selectOtherMonths="true" monthNavigator="true"
           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
         </p-calendar>
         <label for="newDeparture">To</label>
-        <p-calendar id="newDeparture" selectOtherMonths="true" monthNavigator="true"
+        <p-calendar id="newDeparture" [(ngModel)]="newDeparture" selectOtherMonths="true" monthNavigator="true"
           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true">
         </p-calendar>
       </div>

@@ -52,6 +52,8 @@ export class DashboardComponent implements OnInit {
   public calendarOptions: any;
   public quickEditActive: boolean = false;
   public notesOptions: any;
+  public newArrival: Date;
+  public newDeparture: Date;
 
   constructor(
     private connService: ConnectionService,
@@ -374,5 +376,25 @@ export class DashboardComponent implements OnInit {
 
   toggleQuickEdit() {
     this.quickEditActive = !this.quickEditActive;
+  }
+
+  saveQuickEdit() {
+    console.log((<HTMLInputElement>document.getElementById('newLocation').children[0]).value);
+    console.log(this.newArrival);
+    console.log(this.newDeparture);
+    let location = (<HTMLInputElement>document.getElementById('newLocation').children[0]).value;
+    this.loggedInService.appendStop(this.activeJourneyIndex, location, this.newArrival, this.newDeparture).subscribe(
+        res => {
+            this.connService.getProtectedData('api/get_all_journeys').subscribe(
+                res => {
+                    this.allJourneys = res.journeys;
+                    this.journeyName = res.journeys[this.activeJourneyIndex].journey_name;
+                    this.setActiveJourney(this.activeJourneyIndex);
+                    this.toggleQuickEdit();
+                },
+                (error) => {console.log(`could not connect ${error}`)}
+            );
+        }
+    );
   }
 }

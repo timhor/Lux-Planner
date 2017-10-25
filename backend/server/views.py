@@ -379,12 +379,12 @@ def append_stop():
     user = models.User.query.filter_by(id=current_identity[0]).first()
     journeys = models.Journey.query.filter_by(user_id=user.id).order_by(models.Journey.id).all()
     j = journeys[body['jIndex']]
-    j.end_date = convert_time(data['end'])
+    j.end_date = convert_time(body['end'])
     stop = models.Stop(
         journey_id=j.id,
-        stop_name=data['location'],
-        arrival_date=convert_time(data['start']),
-        departure_date=convert_time(data['end'])
+        stop_name=body['location'],
+        arrival_date=convert_time(body['start']),
+        departure_date=convert_time(body['end'])
     )
     db.session.add(stop)
     db.session.commit()
