@@ -368,10 +368,12 @@ export class DashboardComponent implements OnInit {
   }
 
   saveQuickEdit() {
-    console.log((<HTMLInputElement>document.getElementById('newLocation').children[0]).value);
-    console.log(this.newArrival);
-    console.log(this.newDeparture);
+    // console.log((<HTMLInputElement>document.getElementById('newLocation').children[0]).value);
+    // console.log(this.newArrival);
+    // console.log(this.newDeparture);
     let location = (<HTMLInputElement>document.getElementById('newLocation').children[0]).value;
+    if (location === '' || location == null || this.newArrival == null || this.newDeparture == null) return;
+    
     this.loggedInService.appendStop(this.activeJourneyIndex, location, this.newArrival, this.newDeparture).subscribe(
         res => {
             this.connService.getProtectedData('api/get_all_journeys').subscribe(
