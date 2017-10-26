@@ -38,10 +38,10 @@
   padding-bottom: 4px;
 }
 
-:host ::ng-deep .ui-widget-content .ui-inputtext {
-  border: auto;
+:host ::ng-deep .ui-inputtext {
   border: solid 1px #ccc;
   border-radius: 10px;
+  width: 100%;
 }
 
 :host ::ng-deep .ui-grid-row {

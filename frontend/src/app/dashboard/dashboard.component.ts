@@ -87,9 +87,6 @@ export class DashboardComponent implements OnInit {
             this.updateMap();
             this.setActiveJourney(this.activeJourneyIndex);
             this.isLoading = false;
-            setTimeout(() => {
-              this.setTimelineWidth();
-            },1);
         },
         (error) => {console.log(`could not connect ${error}`)}
     );
