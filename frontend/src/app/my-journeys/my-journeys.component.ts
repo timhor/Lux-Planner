@@ -51,9 +51,6 @@ export class MyJourneysComponent implements OnInit {
           (res) => {
             this.notifyDelete();
             this.getJourneyList();
-            if (this.modalIndex === this.allJourneys.length-1) {
-              window.scrollTo(0,window.scrollY-this.allJourneys[this.modalIndex].stops.length*100-50);
-            }
           },
           (error) => {
             console.log("Could not delete");
