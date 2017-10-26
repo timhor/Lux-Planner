@@ -74,12 +74,12 @@
       <div class="row">
         <div class="col-sm-5">
           <label for="initialDeparture">Journey Start Date</label>
-          <p-calendar id="initialDeparture" formControlName="initialDeparture" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [(ngModel)]="startDate">
+          <p-calendar id="initialDeparture" formControlName="initialDeparture" [showOtherMonths]="false" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [(ngModel)]="startDate">
           </p-calendar>
         </div>
         <div class="col-sm-5">
           <label for="initialArrival">Journey End Date</label>
-          <p-calendar id="initialArrival" formControlName="initialArrival" selectOtherMonths="true" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [(ngModel)]="endDate">
+          <p-calendar id="initialArrival" formControlName="initialArrival" [showOtherMonths]="false" monthNavigator="true" dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [(ngModel)]="endDate">
           </p-calendar>
         </div>
       </div>
@@ -108,13 +108,13 @@
           <div class="row">
             <div class="col-sm-5 ui-state-hover">
               <label for="arrival" [attr.for]="'departure'+i">From</label>
-              <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" selectOtherMonths="true" monthNavigator="true"
+              <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" monthNavigator="true" [showOtherMonths]="false"
                           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="startDate" [maxDate]="endDate">
               </p-calendar>
             </div>
             <div class="col-sm-5">
               <label for="departure" [attr.for]="'arrival'+i">To</label>
-              <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" selectOtherMonths="true" monthNavigator="true"
+              <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" monthNavigator="true" [showOtherMonths]="false"
                           dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="startDate" [maxDate]="endDate">
               </p-calendar>
             </div>

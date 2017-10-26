@@ -110,7 +110,7 @@
               <label for="newArrival">From</label>
             </td>
             <td>
-              <p-calendar id="newArrival" [(ngModel)]="newArrival" selectOtherMonths="true" monthNavigator="true"
+              <p-calendar id="newArrival" [(ngModel)]="newArrival" monthNavigator="true" [showOtherMonths]="false"
                 dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="startDate">
               </p-calendar>
             </td>
@@ -120,8 +120,8 @@
               <label for="newDeparture">To</label>
             </td>
             <td>
-              <p-calendar id="newDeparture" [(ngModel)]="newDeparture" selectOtherMonths="true" monthNavigator="true"
-                dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="startDate">
+              <p-calendar id="newDeparture" [(ngModel)]="newDeparture" monthNavigator="true" [showOtherMonths]="false"
+                dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="newArrival">
               </p-calendar>
             </td>
           </tr>
