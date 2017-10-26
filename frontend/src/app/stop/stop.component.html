@@ -86,11 +86,9 @@
 
             <div class="card">
               <h2 id="subHeading">About</h2>
-              <br>
-              <div [innerHtml]="aboutText"></div>
+              <div id="about" [innerHtml]="aboutText"></div>
             </div>
 
-            <br>
             <br>
             
             <div class="card">
@@ -98,7 +96,7 @@
               <br>
               <div *ngFor="let attraction of attractions;let i=index">
                 <div class="row" id="tableRow" align="center" *ngIf="i%3 === 0">
-                  <div class="col-lg-3" style="margin: 30px">
+                  <div class="col-lg-3">
                     <div id="imgContainer">
                       <img id="attraction_image" src={{attractions[i].photo}}>
                     </div>
@@ -118,7 +116,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3" style="margin: 30px">
+                  <div class="col-lg-3">
                     <div id="imgContainer">
                       <img id="attraction_image" src={{attractions[i+1].photo}}>
                     </div>
@@ -138,7 +136,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3" style="margin: 30px">
+                  <div class="col-lg-3">
                     <div id="imgContainer">
                       <img id="attraction_image" src={{attractions[i+2].photo}}>
                     </div>
