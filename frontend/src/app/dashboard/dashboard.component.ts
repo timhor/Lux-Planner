@@ -108,8 +108,8 @@ export class DashboardComponent implements OnInit {
       height: '200px',
       toolbarButtons: 	['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|',
                          'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
-                         'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters',
-                         'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help', 'html', '|',
+                         'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'specialCharacters',
+                         'insertHR', 'clearFormatting', '|', 'print', 'spellChecker', 'help', 'html', '|',
                          'undo', 'redo'],
       events : {
         'froalaEditor.initialized' : function(e, editor) {
