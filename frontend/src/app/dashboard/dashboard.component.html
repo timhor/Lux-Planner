@@ -86,9 +86,8 @@
     <div class="well" align="center">
       <p class="subHeading">Stops</p>
       <div id="quickEditIcons">
-        <i class="glyphicon glyphicon-edit grow" aria-hidden="true" tooltip="Quick Edit" tooltipPlacement="bottom" *ngIf="!quickEditActive" (click)="toggleQuickEdit()"></i>
+        <i class="glyphicon glyphicon-plus grow" aria-hidden="true" tooltip="Quick Edit" tooltipPlacement="bottom" *ngIf="!quickEditActive" (click)="toggleQuickEdit()"></i>
         <i class="glyphicon glyphicon-remove-sign grow" aria-hidden="true" tooltip="Cancel" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="toggleQuickEdit()"></i>
-        <i class="glyphicon glyphicon-ok-sign grow" aria-hidden="true" tooltip="Save" tooltipPlacement="bottom" *ngIf="quickEditActive" (click)="saveQuickEdit()"></i>
       </div>
       <div class="row" *ngFor="let stop of stops; let i=index;" align="center" style="padding-left:0.5vw;">
         <div id="stopList" class="btn-group">
@@ -122,6 +121,10 @@
             </td>
           </tr>
         </table>
+        <div class="btn-group" id="quickEditButtons">
+          <button class="button-rect button-orange" style="margin-right: 5px;" (click)="toggleQuickEdit()">Cancel</button>
+          <button class="button-rect button-green" (click)="saveQuickEdit()">Save</button>
+        </div>
       </div>
 
     </div>
@@ -132,7 +135,7 @@
       <br><br>
     </div>
     <div class="well" *ngIf="activeStopIndex===-1">
-      <p class="subHeading">Search for Flights</p>
+      <p class="subHeading">Flight Search</p>
       <iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/searchform/widget?wtt=1&tp1=1234&tp2=&lob=F&des=&sfs=5&wbi=13&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=C7C7C7&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2"
       width="100%" height="450px" scrolling="no" frameborder="0"></iframe>
     </div>

@@ -18,8 +18,6 @@ label {
 #infoIcon {
   font-size: calc(15px + 1vw);
   color: #2B8BF8;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #FFFFFF;
   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   cursor: pointer;
 }
@@ -27,8 +25,6 @@ label {
 #minusIcon {
   font-size: calc(15px + 1vw);
   color: #DB0000;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #FFFFFF;
   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   cursor: pointer;
 }
@@ -74,7 +70,7 @@ label {
 }
 
 .grow:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 input,
