@@ -267,13 +267,13 @@ h4 {
 
 #notesText {
   white-space: pre-wrap;
-  height: 292px;
+  height: calc(292px - 2vh);
   overflow-y: auto;
 }
 
 #notesTextEmpty {
   font-style: italic;
-  height: 292px;
+  height: calc(292px - 2vh);
 }
 
 #stopModalCloseButton {
