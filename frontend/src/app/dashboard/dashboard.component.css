@@ -465,16 +465,6 @@ button:focus {
   outline: 0;
 }
 
-#quickEditButtons {
-  margin-top: 10px;
-  align-content: center;
-}
-
-#quickEditButtons button {
-  width: 47%;
-  font-size: 12px;
-}
-
 #weatherHolder {
   height: 162px;
   margin-top: 35px;
