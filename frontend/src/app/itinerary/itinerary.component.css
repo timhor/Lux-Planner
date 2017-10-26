@@ -37,3 +37,13 @@
   background-color: rgb(240, 245, 255);
   padding-bottom: 4px;
 }
+
+:host ::ng-deep .ui-widget-content .ui-inputtext {
+  border: auto;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .ui-grid-row {
+  margin-bottom: 2.5px;
+}

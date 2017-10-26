@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
   public notesOptions: any;
   public newArrival: Date;
   public newDeparture: Date;
+  public startDate: Date;
 
   constructor(
     private connService: ConnectionService,
@@ -165,6 +166,7 @@ export class DashboardComponent implements OnInit {
       },
       nowIndicator: true
     }
+    this.startDate = new Date(this.allJourneys[this.activeJourneyIndex].start);
   }
 
   refreshCalendar() {
