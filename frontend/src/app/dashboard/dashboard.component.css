@@ -466,13 +466,16 @@ button:focus {
 }
 
 #quickEditButtons {
-  margin-top: 10px;
-  align-content: center;
+  margin-top: 12px;
 }
 
-#quickEditButtons button {
+#quickEditButtons > button {
   width: 47%;
   font-size: 12px;
+}
+
+#quickEditCancel {
+  margin-right: 5px;
 }
 
 #weatherHolder {
@@ -669,6 +672,14 @@ button:focus {
 
   .itineraryButton {
     width: 30%;
+  }
+
+  #quickEditButtons > button {
+    width: 100%;
+  }
+
+  #quickEditCancel {
+    margin-bottom: 7px;
   }
 
   #findOutMoreBtn {
