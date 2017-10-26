@@ -16,14 +16,14 @@ label {
 }
 
 #infoIcon {
-  font-size: calc(15px + 1vw);
+  font-size: 28px;
   color: #2B8BF8;
   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   cursor: pointer;
 }
 
 #minusIcon {
-  font-size: calc(15px + 1vw);
+  font-size: 28px;
   color: #DB0000;
   text-shadow: 0 2px 4px rgba(145, 92, 182, .4);
   cursor: pointer;
@@ -105,7 +105,7 @@ input,
 }
 
 .glyphicon {
-  padding-top: 1vh;
+  padding-top: 6px;
 }
 
 .fa-plane {
