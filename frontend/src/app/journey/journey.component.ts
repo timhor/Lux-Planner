@@ -28,8 +28,6 @@ export class JourneyComponent implements OnInit {
   public modifyingCounter: number;
   private sub:any;
   public deleteIndex: number;
-  public startDate: Date;
-  public endDate: Date;
 
   /* The time picker does not take into account different time zones, but the app's validation
      requires each successive stop to have arrival time after departure time. Technically you 
