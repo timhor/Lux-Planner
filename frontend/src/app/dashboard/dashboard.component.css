@@ -18,8 +18,13 @@ img {
   display: inline-block;
 }
 
-#stopList {
+#stopList,
+#stopListEdit {
   display: block;
+}
+
+#stopListEdit > .stopButton {
+  width: 97%;
 }
 
 .stopButton {
@@ -70,16 +75,6 @@ img {
 .grow:hover {
   transform: scale(1.3);
   cursor: pointer;
-}
-
-#minusIcon {
-  font-size: calc(15px + 1vw);
-  color: #DB0000;
-  text-shadow: 0 1.5px 3px rgba(145, 92, 182, .4);
-  cursor: pointer;
-  margin-top: 1.2vh;
-  margin-right: 1.2vw;
-  float: right;
 }
 
 .icon-red:hover {
@@ -674,14 +669,6 @@ button:focus {
     width: 30%;
   }
 
-  #quickEditButtons > button {
-    width: 100%;
-  }
-
-  #quickEditCancel {
-    margin-bottom: 7px;
-  }
-
   #findOutMoreBtn {
     width: 100%;
     font-size: 13px;
@@ -699,5 +686,13 @@ button:focus {
 @media (max-width: 1200px) {
   #journeyOverview {
     font-size: large;
+  }
+
+  #quickEditButtons > button {
+    width: 100%;
+  }
+
+  #quickEditCancel {
+    margin-bottom: 7px;
   }
 }
