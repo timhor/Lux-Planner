@@ -109,13 +109,15 @@
             <div class="col-sm-5 ui-state-hover">
               <label for="arrival" [attr.for]="'departure'+i">From</label>
               <p-calendar id="arrival" [attr.id]="'departure'+i" formControlName="arrival" monthNavigator="true" [showOtherMonths]="false"
-                          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="myJourney.controls['initialDeparture'].value" [maxDate]="myJourney.controls['initialArrival'].value">
+                          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="myJourney.controls['initialDeparture'].value" [maxDate]="myJourney.controls['initialArrival'].value" 
+                          [disabled]="!(myJourney.controls['initialDeparture'].value && myJourney.controls['initialArrival'].value)">
               </p-calendar>
             </div>
             <div class="col-sm-5">
               <label for="departure" [attr.for]="'arrival'+i">To</label>
               <p-calendar id="departure" [attr.id]="'arrival'+i" formControlName="departure" monthNavigator="true" [showOtherMonths]="false"
-                          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="myJourney.controls['initialDeparture'].value" [maxDate]="myJourney.controls['initialArrival'].value">
+                          dateFormat="dd/mm/yy" showButtonBar="true" showIcon="true" [minDate]="myJourney.controls['initialDeparture'].value" [maxDate]="myJourney.controls['initialArrival'].value"
+                          [disabled]="!(myJourney.controls['initialDeparture'].value && myJourney.controls['initialArrival'].value)">
               </p-calendar>
             </div>
             <div class="col-sm-2">
