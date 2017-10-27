@@ -6,6 +6,14 @@ a.active {
   color: white !important;
 }
 
+#appLogo {
+  float: left;
+}
+
+#collapseButton {
+  margin-top: 15px;
+}
+
 img,
 .dropdown {
   cursor: pointer;
