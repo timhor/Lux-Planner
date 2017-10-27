@@ -48,13 +48,43 @@
   margin-bottom: 2.5px;
 }
 
-@media (min-width: 768px) {
-  /* fix calendar width for narrow desktop screens */
+/* fix calendar width for narrow desktop screens */
+@media (max-width: 1330px) {
   .card {
-    width: 82vw;
+    width: 85vw;
     overflow: hidden;
   }
+}
 
+@media (max-width: 1199px) {
+  .card {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1120px) {
+  .card {
+    width: 114vh;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1080px) {
+  .card {
+    width: 84vw;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 991px) {
+  .card {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
   /* only set modal width on wider desktop screens, otherwise default to auto width */
   .modal-dialog {
     width: 90vw;
