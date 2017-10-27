@@ -47,3 +47,16 @@
 :host ::ng-deep .ui-grid-row {
   margin-bottom: 2.5px;
 }
+
+@media (min-width: 768px) {
+  /* fix calendar width for narrow desktop screens */
+  .card {
+    width: 82vw;
+    overflow: hidden;
+  }
+
+  /* only set width on wider desktop screens, otherwise default to auto width */
+  .modal-dialog {
+    width: 90vw;
+  }
+}

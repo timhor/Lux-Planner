@@ -151,12 +151,14 @@ export class ItineraryComponent implements OnInit {
   public visibleAnimate = false;
 
   public show(journeyIndex: number, stopIndex: number, stop: number, start: any, end:any): void {
-    document.documentElement.setAttribute('style', 'overflow-y: hidden;');
-    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
-    // "wrap" class is used for the main body of the page (between navbar and footer)
-    document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
-    document.getElementById('footerLinks').setAttribute('style', 'margin-right: 2px;');
-    document.getElementById('subText').setAttribute('style', 'margin-right: 2px;');
+    if (window.screen.width >= 768) {
+        document.documentElement.setAttribute('style', 'overflow-y: hidden;');
+        document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 17px;');
+        // "wrap" class is used for the main body of the page (between navbar and footer)
+        document.getElementById('wrap').setAttribute('style', 'margin-right: 17px;');
+        document.getElementById('footerLinks').setAttribute('style', 'margin-right: 2px;');
+        document.getElementById('subText').setAttribute('style', 'margin-right: 2px;');
+    }
     this.journeyIndex = journeyIndex;
     this.stopIndex = stopIndex;
     this.currStop = stop;
@@ -206,11 +208,15 @@ export class ItineraryComponent implements OnInit {
   public hide(): void {
     this.onModalClose.emit(null)
     this.isLoading = true;
-    document.documentElement.setAttribute('style', 'overflow-y: scroll');
-    document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
-    document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
-    document.getElementById('footerLinks').setAttribute('style', 'margin-right: -15px;');
-    document.getElementById('subText').setAttribute('style', 'margin-right: -15px;');
+
+    if (window.screen.width >= 768) {
+        document.documentElement.setAttribute('style', 'overflow-y: scroll');
+        document.getElementsByClassName('navbar-right')[0].setAttribute('style', 'margin-right: 0;');
+        document.getElementById('wrap').setAttribute('style', 'margin-right: 0;');
+        document.getElementById('footerLinks').setAttribute('style', 'margin-right: -15px;');
+        document.getElementById('subText').setAttribute('style', 'margin-right: -15px;');
+    }
+    
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
