@@ -53,3 +53,10 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+@media screen and (max-width: 767px) {
+  body {
+    background-image: none;
+    background-color: #68a2e6;  
+  }
+}
