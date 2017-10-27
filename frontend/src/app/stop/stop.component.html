@@ -1,6 +1,6 @@
 <!-- Template obtained from: https://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog -->
 <div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-  <div class="modal-dialog" style="width:90vw;">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <ng-content select=".stop-info-header"></ng-content>

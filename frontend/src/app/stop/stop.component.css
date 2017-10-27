@@ -203,6 +203,13 @@ tr {
   margin: 0 5vw 5px 0px;
 }
 
+@media (min-width: 768px) {
+  /* only set modal width on wider desktop screens, otherwise default to auto width */
+  .modal-dialog {
+    width: 90vw;
+  }
+}
+
 @media (max-width: 992px) {
   #imgContainer {
     width: 50vw;

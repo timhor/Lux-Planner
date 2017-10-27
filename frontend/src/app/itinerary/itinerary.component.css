@@ -55,7 +55,7 @@
     overflow: hidden;
   }
 
-  /* only set width on wider desktop screens, otherwise default to auto width */
+  /* only set modal width on wider desktop screens, otherwise default to auto width */
   .modal-dialog {
     width: 90vw;
   }
