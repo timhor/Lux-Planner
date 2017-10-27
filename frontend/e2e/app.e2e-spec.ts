@@ -1,6 +1,6 @@
 import { Seng2021ProjectPage } from './app.po';
 
-describe('seng2021-project App', () => {
+describe('lux-planner App', () => {
   let page: Seng2021ProjectPage;
 
   beforeEach(() => {
